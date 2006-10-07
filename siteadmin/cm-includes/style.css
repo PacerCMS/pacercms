@@ -1,0 +1,155 @@
+
+/* HTML TAGS */
+body {background-color:#ffffff; margin:10px; color:#000000; font-family: sans-serif; font-size: 12px;}
+pre {margin: 0px; font-family: monospace;}
+a {background-color:transparent; color:#009; text-decoration:none;}
+h1 {font-size: 200% !important;}
+h2 {font-size: 150%; line-height: 1.5em; border-bottom: 2px solid #CCCCCC;}
+h3 {font-size: 125%; line-height: 1.5em; border-bottom: 1px solid #CCCCCC;}
+table {border:1px solid #000; border-collapse:collapse; margin: 10px; font-size:100%; width: 95%;}
+td, th {border:1px solid #000; border-collapse:collapse; vertical-align: middle; padding:7px;}
+th {background-color: #EFA72A; color:#fff;}
+ul {margin: 0; padding: 0;}
+fieldset {border: solid 1px #ccc; margin-bottom:10px;padding-bottom:10px;}
+fieldset p {margin-left:10px;} 
+fieldset ul {text-indent:10px;} 
+legend {font-weight: bold; border: solid 1px #ccc; padding: 5px;}
+label {font-weight:bold;}
+
+/* CLASSES */
+.actionMenu {margin-bottom: 15px; margin-top: 10px;}
+.actionMenu ul {margin:0; padding:0; list-style-type: none;}
+.actionMenu ul li {display: inline;}
+.actionMenu ul li a {border: solid 1px #000; padding: 5px; margin-right: 3px;}
+.actionMenu ul li a:hover {color: #fff; border: 1px outset #CCCCCC; background-color: #0B8193;}
+.actionMenu .selected {color: #fff; border: 1px outset #CCCCCC; background-color: #0B8193;}
+.sidebar {float:right;}
+.sidebar table {width:190px; text-size:100%; margin:10px;}
+.sidebar select {width:190px !important;}
+.sidebar input {width:190px !important;}
+.sidebar ul {list-style-type: none !important;}
+.sidebar ul li {list-style-type: none !important;}
+.sidebar input.checkbox {width: 20px !important;}
+.greyOut {color: #000; background-color: #eee;}
+
+.center {text-align: center;}
+.center table { margin-left: auto; margin-right: auto; text-align: left;}
+.systemMessage { text-align:center; font-weight:bold; background-color: #ffc; color: #000; padding: 5px; margin-top: 5px; margin-bottom: 5px;  border: 1px solid #ccc; }
+.isToday {	font-weight:bold; background-color: #0B8193; color: #fff; padding: 3px; text-align:center;}
+.notToday {	background-color: transparent; color: #000; padding: 3px; text-align:center;}
+
+/* DIV REGIONS */
+
+/* Header */
+#header {height:100px; clear: both; background-image: url(../cm-images/header.png); background-repeat: no-repeat; background-position: left center;}
+#header h1 {line-height: .75em; padding-top:10px; text-align:right;}
+#header h1 a:link, #header h1 a:visited {background-color: #fff; color: #ccc; text-decoration: none;}
+#header p {font-weight:bold; font-size:80%; text-align:right;}
+#header hr { display: none; margin: 0;}
+/* Main Menu */
+#mainmenu {float: left; width: 15%; margin-right:2%;}
+#mainmenu ul {list-style-type: none;}
+/* Content */
+#content {float: left; width: 80%; clear: right;}
+/* Footer */
+#footer {width: 95%; text-align:center; clear: both; margin-top:50px; padding:10px; border-top:solid 1px #ccc;}
+#footer ul {list-style-type: none;}
+#footer ul li {display: inline;}
+#footer ul li a {padding: 5px; margin-right: 3px;}
+#footer hr { display: none; margin: 0;}
+/* Hidden DIV */
+#deleteRecord {display:none;}
+
+/* -------------------------- Classes for ''article-edit.php'' Module -------------------------- */
+.article-edit-form select {width:40%}
+.article-edit-form input {width:50%}
+.article-edit-form input.button {width:20%;}
+.article-edit-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+
+/* -------------------------- Classes for ''issue-browse.php'' Module -------------------------- */
+.issue-browse-form select {width:40%}
+.issue-browse-form input {width:50%}
+.issue-browse-form input.button {width:20%;}
+.issue-browse-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+
+/* -------------------------- Classes for ''issue-edit.php'' Module -------------------------- */
+.issue-edit-form input {width:50%}
+.issue-edit-form input.button {width:20%;}
+.issue-edit-form input.radio {width:20px;}
+.issue-edit-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+
+/* -------------------------- Classes for 'article-media.php'' Module -------------------------- */
+.article-media-form select {width:40%}
+.article-media-form input {width:50%}
+.article-media-form input.button {width:20%;}
+.article-media-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+
+/* -------------------------- Classes for ''section-browse.php'' Module -------------------------- */
+
+/* -------------------------- Classes for ''section-edit.php'' Module -------------------------- */
+.section-edit-form select {width:40%}
+.section-edit-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+.section-edit-form input {width:50%}
+.section-edit-form input.button {width:20%;}
+
+/* -------------------------- Classes for ''staff-browse.php'' Module -------------------------- */
+
+/* -------------------------- Classes for ''staff-edit.php'' Module -------------------------- */
+.staff-edit-form select {width:40%}
+.staff-edit-form input {width:50%}
+.staff-edit-form input.button {width:20%;}
+.staff-edit-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+.staff-edit-delete label {font-weight:bold;}
+.staff-edit-delete input.button {width:140px;}
+
+/* -------------------------- Classes for ''staff-access.php'' Module -------------------------- */
+.staff-access-form select {width:40%}
+.staff-access-form input {width:50%}
+.staff-access-form input.button {width:20%;}
+.staff-access-form input.checkbox {width: 20px;}
+.staff-access-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+
+/* -------------------------- Classes for ''settings.php'' Module -------------------------- */
+.settings-form select {width:40%}
+.settings-form input {width:50%}
+.settings-form input.button {width:20%;}
+.settings-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+
+/* -------------------------- Classes for ''advertising-edit.php'' Module -------------------------- */
+.advertising-edit-form select {width:40%}
+.advertising-edit-form input {width:50%}
+.advertising-edit-form input.button {width:20%;}
+.advertising-edit-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+.advertising-edit-form input.checkbox {width: 20px;}
+
+/* -------------------------- Classes for ''advertising-edit.php'' Module -------------------------- */
+.advertising-clients-form select {width:40%}
+.advertising-clients-form input {width:50%}
+.advertising-clients-form input.button {width:20%;}
+.advertising-clients-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+.advertising-clients-form input.checkbox {width: 20px;}
+
+/* -------------------------- Classes for ''advertising-rates.php'' Module -------------------------- */
+.advertising-rates-form select {width:40%}
+.advertising-rates-form input {width:50%}
+.advertising-rates-form input.button {width:20%;}
+.advertising-rates-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+.advertising-rates-form input.checkbox {width: 20px;}
+
+/* -------------------------- Classes for ''staff-edit.php'' Module -------------------------- */
+.profile-form select {width:40%}
+.profile-form input {width:50%}
+.profile-form input.button {width:20%;}
+.profile-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+
+/* -------------------------- Classes for ''ipoll-browse.php'' Module -------------------------- */
+.poll-browse-form select {width:40%}
+.poll-browse-form input {width:50%}
+.poll-browse-form input.button {width:20%;}
+.poll-browse-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+
+/* -------------------------- Classes for ''poll-edit.php'' Module -------------------------- */
+.poll-edit-form input {width:50%}
+.poll-edit-form input.button {width:20%;}
+.poll-edit-form input.radio {width:20px;}
+.poll-edit-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
