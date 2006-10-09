@@ -3,13 +3,6 @@
 // Starting sessions
 session_start();
 
-include_once('classes.php'); // For other functions
-
-define("DB_HOSTNAME", "localhost");
-define("DB_DATABASE", "pacer");
-define("DB_USERNAME", "root");
-define("DB_PASSWORD", "");
-
 // Database Connection
 $CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
 mysql_select_db(DB_DATABASE, $CM_MYSQL);

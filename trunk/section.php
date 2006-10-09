@@ -1,5 +1,5 @@
 <?php
-include_once('includes/functions.php');
+include_once('includes/config.php');
 
 if ($_GET['id'] == 1) {;
 	// Go back to homepage.

@@ -1,5 +1,5 @@
 <?php
-require_once('includes/functions.php');
+require_once('includes/config.php');
 
 $string = strip_tags($_GET['s']);
 $index = strip_tags($_GET['index']);

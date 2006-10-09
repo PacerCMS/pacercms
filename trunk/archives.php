@@ -1,6 +1,6 @@
 <?php
 
-include_once('includes/functions.php');
+include_once('includes/config.php');
 
 $current_volume = current_issue('volume'); 
 

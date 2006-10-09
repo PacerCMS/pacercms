@@ -1,5 +1,6 @@
 <?php
-include_once('includes/functions.php');
+include_once('includes/config.php');
+
 if ($_GET['mode'] != "") {
 	$mode = $_GET['mode'];
 } else {;

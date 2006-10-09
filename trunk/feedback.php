@@ -1,5 +1,5 @@
 <?php
-include_once('includes/functions.php');
+include_once('includes/config.php');
 
 // If posted
 if (!empty($_POST['text'])) {
