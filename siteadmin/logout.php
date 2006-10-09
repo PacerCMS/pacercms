@@ -1,3 +1,3 @@
-<?php include('cm-includes/functions.php');
+<?php include('cm-includes/config.php');
 cm_logout();
 ?>

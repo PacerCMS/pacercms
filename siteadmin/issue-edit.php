@@ -1,4 +1,4 @@
-<?php include('cm-includes/functions.php'); ?>
+<?php include('cm-includes/config.php'); ?>
 <?php
 // Declare the current module
 $module = "issue-edit";

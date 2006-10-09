@@ -6,12 +6,18 @@ Reason: Packaged to fish for other developers
 
 == Helpless Instructions ==
 
-This file contains two folders, 'PacerCMS' and 'Database'. Place the 'PacerCMS' folder on a PHP/MySQL-enabled Web server. Import the database dump into MySQL as per your prefered method. Depending on your system, work with the 'cm_settings' table to reflect the paths to your testing server. Next, open two files ...
+This file contains two folders, 'PacerCMS' and 'Database'. Place the 'PacerCMS' folder on a PHP/MySQL-enabled Web server. Import the database dump into MySQL as per your prefered method. Depending on your system, work with the 'cm_settings' table to reflect the paths to your testing server. Next, open remove the "-sample" from these files ...
 
-./includes/functions.php
-./siteadmin/includes/functions.php
+./includes/config-sample.php
+./siteadmin/includes/config-sample.php
 
-... edit them to reflect your database logins and file paths. If you get this far, rename "rename_me.htaccess" to simply ".htaccess". My Mac refuses to handle it via Finder. It too may require some editing depending on your system.
+to
+
+./includes/config.php
+./siteadmin/includes/config.php
+
+
+... edit them to reflect your database logins and file paths. You will also want to open up the ./siteadmin/ folder in a Web browser and head to 'settings' to make sure your site links properly and not to my testing server. Your username and password are "admin." This should be the first thing you change, even on a testing account.
 
 == Further Helpless Help ==
 I can be reached at stephen.yeargin@gmail.com. I will be happy to help with coding level problems, but cannot do much for you in regards to design or configuration. I can explain what I was thinking when I developed a particular aspect of the system, but most were completed with a specific publication in mind. Your mileage may vary.

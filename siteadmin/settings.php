@@ -1,4 +1,4 @@
-<?php include('cm-includes/functions.php'); ?>
+<?php include('cm-includes/config.php'); ?>
 <?php
 $module = "settings";
 // SECURITY - User must be authenticated to view page //

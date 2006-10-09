@@ -1,5 +1,5 @@
 <?php
-require_once('includes/functions.php');
+require_once('includes/config.php');
 
 // Switch sections
 if (is_numeric($_GET['id'])) {

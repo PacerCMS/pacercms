@@ -1,5 +1,5 @@
 <?php
-include_once('includes/functions.php');
+include_once('includes/config.php');
 
 $section = 1;
 $issue = current_issue('id');

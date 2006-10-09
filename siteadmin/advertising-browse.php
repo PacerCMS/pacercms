@@ -1,4 +1,4 @@
-<?php include('cm-includes/functions.php'); ?>
+<?php include('cm-includes/config.php'); ?>
 <?php
 $module = "advertising-browse";
 $cmodule = "advertising-edit";

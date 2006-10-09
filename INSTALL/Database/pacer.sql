@@ -7,7 +7,7 @@
 -- Server version: 5.0.18
 -- PHP Version: 5.1.2
 -- 
--- Database: `pacer`
+-- Database: `pacercms`
 -- 
 
 -- --------------------------------------------------------
@@ -334,11 +334,11 @@ CREATE TABLE `cm_sections` (
 -- Dumping data for table `cm_sections`
 -- 
 
-INSERT INTO `cm_sections` VALUES (1, 'Cover', 'http://stephen-yeargins-mac-mini.local/pacer/', 'Stephen Yeargin', 'Executive Editor', 'pacer@utm.edu', '<a href="pdf/Page%201%20-%20Cover.pdf"><img src="templates/images/promo_pdf_cover.png" alt="Download the PDF of Page 1" /></a>', 10);
-INSERT INTO `cm_sections` VALUES (2, 'Viewpoints', 'http://stephen-yeargins-mac-mini.local/pacer/viewpoints/', 'Elizabeth Watts', 'Viewpoints Editor', 'pacer_opinions@utm.edu', '<strong>We want to hear from you! Submit a "<a href="submit.php?mode=letter">Letter to the Editor</a>" to share your thoughts on campus, local and national issues.</strong>', 20);
-INSERT INTO `cm_sections` VALUES (3, 'Campus News', 'http://stephen-yeargins-mac-mini.local/pacer/news/', 'Will York', 'News Editor', 'pacer_news@utm.edu', '<strong><a href="submit.php?mode=bboard">Announce your club meetings or events</a> in <em>The Pacer</em> Campus Bulletin Board. Send the time, date and location of your event, along with contact information to <a href="mailto:pacer_news@utm.edu">pacer_news@utm.edu</a> with "Bulletin Board" and your organization name in the subject.</strong>', 30);
-INSERT INTO `cm_sections` VALUES (4, 'Arts & Entertainment', 'http://stephen-yeargins-mac-mini.local/pacer/entertainment/', 'Rachel Rogers', 'Arts & Entertainment Editor', 'pacer_features@utm.edu', '<strong>Looking to be entertained? Check out the <a href="http://www.utm.edu/cgi-bin/calcium/Calcium37.pl?CalendarName=Arts_Events">UTM Fine Arts Calendar</a> or <a href="http://www.utm.edu/cgi-bin/calcium/Calcium37.pl?CalendarName=sac">events from the Student Activities Council</a>.</strong>', 40);
-INSERT INTO `cm_sections` VALUES (5, 'Sports', 'http://stephen-yeargins-mac-mini.local/pacer/sports/', 'Amy Eddings', 'Sports Editor', 'pacer_sports@utm.edu', '<strong>For up to the minute sports news and scores between issues, check out <a href="http://www.utmsports.com/">UTMSports.Com</a>, the home of Skyhawk Athletics.</strong>', 50);
+INSERT INTO `cm_sections` VALUES (1, 'Cover', 'http://localhost/pacercms/', 'Stephen Yeargin', 'Executive Editor', 'pacer@utm.edu', '<a href="pdf/Page%201%20-%20Cover.pdf"><img src="templates/images/promo_pdf_cover.png" alt="Download the PDF of Page 1" /></a>', 10);
+INSERT INTO `cm_sections` VALUES (2, 'Viewpoints', 'http://localhost/pacercms/viewpoints/', 'Elizabeth Watts', 'Viewpoints Editor', 'pacer_opinions@utm.edu', '<strong>We want to hear from you! Submit a "<a href="submit.php?mode=letter">Letter to the Editor</a>" to share your thoughts on campus, local and national issues.</strong>', 20);
+INSERT INTO `cm_sections` VALUES (3, 'Campus News', 'http://localhost/pacercms/news/', 'Will York', 'News Editor', 'pacer_news@utm.edu', '<strong><a href="submit.php?mode=bboard">Announce your club meetings or events</a> in <em>The Pacer</em> Campus Bulletin Board. Send the time, date and location of your event, along with contact information to <a href="mailto:pacer_news@utm.edu">pacer_news@utm.edu</a> with "Bulletin Board" and your organization name in the subject.</strong>', 30);
+INSERT INTO `cm_sections` VALUES (4, 'Arts & Entertainment', 'http://localhost/pacercms/entertainment/', 'Rachel Rogers', 'Arts & Entertainment Editor', 'pacer_features@utm.edu', '<strong>Looking to be entertained? Check out the <a href="http://www.utm.edu/cgi-bin/calcium/Calcium37.pl?CalendarName=Arts_Events">UTM Fine Arts Calendar</a> or <a href="http://www.utm.edu/cgi-bin/calcium/Calcium37.pl?CalendarName=sac">events from the Student Activities Council</a>.</strong>', 40);
+INSERT INTO `cm_sections` VALUES (5, 'Sports', 'http://localhost/pacercms/sports/', 'Amy Eddings', 'Sports Editor', 'pacer_sports@utm.edu', '<strong>For up to the minute sports news and scores between issues, check out <a href="http://www.utmsports.com/">UTMSports.Com</a>, the home of Skyhawk Athletics.</strong>', 50);
 
 -- --------------------------------------------------------
 
@@ -370,7 +370,7 @@ CREATE TABLE `cm_settings` (
 -- Dumping data for table `cm_settings`
 -- 
 
-INSERT INTO `cm_settings` VALUES (1, 'The Pacer', 'http://stephen-yeargins-mac-mini.local/pacer', 'user@example.xom', '314 Gooch Hall', 'Martin', 'Tennessee', '38238', '', '', 'Customize this message under the "Settings" menu item. It is displayed for every user that logs into the system.', 1, 2, 1, 3.75, 5.00);
+INSERT INTO `cm_settings` VALUES (1, 'The Pacer', 'http://localhost/pacercms', 'user@example.com', '314 Gooch Hall', 'Martin', 'Tennessee', '38238', '', '', 'Customize this message under the "Settings" menu item. It is displayed for every user that logs into the system.', 1, 2, 1, 3.75, 5.00);
 
 -- --------------------------------------------------------
 
