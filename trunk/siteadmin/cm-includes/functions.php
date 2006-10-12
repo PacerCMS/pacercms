@@ -531,6 +531,52 @@ function cm_get_settings($sel)
 	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
 };
 
+
+#==========================================#
+############# Managing Pages ############
+#==========================================#
+
+/*******************************************
+	Function:	cm_add_page
+*******************************************/
+function cm_add_page($title,$short_title,$text,$side_text,$slug,$edited)
+{;
+	$edited = date("Y-m-d h:i:s",time());
+	$query = "INSERT INTO cm_pages (page_title,page_short_title,page_text,page_side_text,page_slug,page_edited)";
+	$query .= " VALUES ('$title','$short_title','$text','$side_text','$slug','$edited')";
+	$stat = cm_run_query($query);
+	return $stat;
+};
+
+/*******************************************
+	Function:	cm_edit_page
+*******************************************/
+function cm_edit_page($title,$short_title,$text,$side_text,$slug,$edited,$id)
+{;
+	$edited = date("Y-m-d h:i:s",time());
+	$query = "UPDATE cm_pages SET";
+	$query .= " page_title = '$title',";
+	$query .= " page_short_title = '$short_title',";
+	$query .= " page_slug = '$slug',";
+	$query .= " page_text = '$text',";
+	$query .= " page_side_text = '$side_text',";
+	$query .= " page_edited = '$edited' ";
+	$query .= " WHERE id = $id";
+	$stat = cm_run_query($query);
+	return $stat;
+};
+
+/*******************************************
+	Function:	cm_delete_page
+*******************************************/
+function cm_delete_page($sel)
+{;	
+	$query = "DELETE FROM cm_pages WHERE id = '$sel';";
+	$stat = cm_run_query($query);
+	return $stat;
+};
+
+
 #==========================================#
 ############# Managing Articles ############
 #==========================================#
@@ -1204,6 +1250,8 @@ $restrict_section = cm_get_restrict('restrict_section', $_SESSION['cm_user_id'])
 
 $show_issue_browse = cm_get_access('issue-browse', $_SESSION['cm_user_id']);
 $show_issue_edit = cm_get_access('issue-edit', $_SESSION['cm_user_id']);
+$show_page_browse = cm_get_access('page-browse', $_SESSION['cm_user_id']);
+$show_page_edit = cm_get_access('page-edit', $_SESSION['cm_user_id']);
 $show_profile = cm_get_access('profile', $_SESSION['cm_user_id']);
 $show_section_browse = cm_get_access('section-browse', $_SESSION['cm_user_id']);
 $show_section_edit = cm_get_access('section-edit', $_SESSION['cm_user_id']);

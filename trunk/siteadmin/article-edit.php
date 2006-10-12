@@ -285,8 +285,8 @@ if ($mode != "new") {; ?>
 <h2><a name="preview"></a>Preview Article</h2>
 <fieldset class="<?php echo "$module-preview" ?>">
 <legend>Story Preview</legend>
-<h3><?php echo $title; ?></h3>
-<h4><?php echo $subtitle; ?></h4>
+<h2><?php echo $title; ?></h2>
+<h4><em><?php echo $subtitle; ?></em></h4>
 <p><?php echo $author; if ($author_title != "") {; echo ", $author_title"; }; ?></p>
 <?php echo autop($text); ?>
 </fieldset>

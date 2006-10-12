@@ -60,6 +60,8 @@ next_issue_date
 	echo "\n";
 	echo "$show_issue_browse\tshow_issue_browse\n";
 	echo "$show_issue_edit\tshow_issue_edit\n";
+	echo "$show_page_browse\tshow_page_browse\n";
+	echo "$show_page_browse\tshow_page_edit\n";
 	echo "$show_profile\tshow_profile\n";
 	echo "$show_section_browse\tshow_section_browse\n";
 	echo "$show_section_edit\tshow_section_edit\n";
