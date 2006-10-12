@@ -15,7 +15,9 @@ if ($_POST['user_id'] != "") {;
 	$article_media = $_POST['article-media'];
 	$index = $_POST['index'];
 	$issue_browse = $_POST['issue-browse'];
-	$issue_edit = $_POST['issue-edit'];
+	$issue_edit = $_POST['issue-edit'];	
+	$page_browse = $_POST['page-browse'];
+	$page_edit = $_POST['page-edit'];
 	$profile = $_POST['profile'];
 	$section_browse = $_POST['section-browse'];
 	$section_edit = $_POST['section-edit'];
@@ -52,6 +54,8 @@ if ($_POST['user_id'] != "") {;
 	$stat = cm_add_access($user_id,"module","section-edit",$section_edit);
 	$stat = cm_add_access($user_id,"module","server-info",$server_info);
 	$stat = cm_add_access($user_id,"module","settings",$settings);
+	$stat = cm_add_access($user_id,"module","page-browse",$page_browse);
+	$stat = cm_add_access($user_id,"module","page-edit",$page_edit);
 	$stat = cm_add_access($user_id,"module","staff-access",$staff_access);
 	$stat = cm_add_access($user_id,"module","staff-browse",$staff_browse);
 	$stat = cm_add_access($user_id,"module","staff-edit",$staff_edit);
@@ -182,6 +186,17 @@ if ($user_id == "") {;
     </p>
     <p>
       <input type="checkbox" name="issue-edit" id="issue-edit" value="true" class="checkbox" <?php if (cm_get_access('issue-edit',$user_id) == "true") {; echo "checked"; }; ?> />
+      <label for="">Edit</label>
+    </p>
+  </div>
+<div>
+    <h4>Page Manager</h4>
+    <p>
+      <input type="checkbox" name="page-browse" id="page-browse" value="true" class="checkbox" <?php if (cm_get_access('page-browse',$user_id) == "true") {; echo "checked"; };  ?> />
+      <label for="">Browse</label>
+    </p>
+    <p>
+      <input type="checkbox" name="page-edit" id="page-edit" value="true" class="checkbox" <?php if (cm_get_access('page-edit',$user_id) == "true") {; echo "checked"; }; ?> />
       <label for="">Edit</label>
     </p>
   </div>

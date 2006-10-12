@@ -136,13 +136,25 @@ label {font-weight:bold;}
 .advertising-rates-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
 .advertising-rates-form input.checkbox {width: 20px;}
 
+/* -------------------------- Classes for ''page-browse.php'' Module -------------------------- */
+.page-browse-form select {width:40%}
+.page-browse-form input {width:50%}
+.page-browse-form input.button {width:20%;}
+.page-browse-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+
+/* -------------------------- Classes for ''page-edit.php'' Module -------------------------- */
+.page-edit-form input {width:50%}
+.page-edit-form input.button {width:20%;}
+.page-edit-form input.radio {width:20px;}
+.page-edit-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
+
 /* -------------------------- Classes for ''staff-edit.php'' Module -------------------------- */
 .profile-form select {width:40%}
 .profile-form input {width:50%}
 .profile-form input.button {width:20%;}
 .profile-form textarea {width:50%; font-family: sans-serif; font-size:100%;}
 
-/* -------------------------- Classes for ''ipoll-browse.php'' Module -------------------------- */
+/* -------------------------- Classes for ''poll-browse.php'' Module -------------------------- */
 .poll-browse-form select {width:40%}
 .poll-browse-form input {width:50%}
 .poll-browse-form input.button {width:20%;}

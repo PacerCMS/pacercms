@@ -7,6 +7,7 @@
 	$show_staff_browse = cm_get_access('staff-browse', $_SESSION['cm_user_id']);
 	$show_article_browse = cm_get_access('article-browse', $_SESSION['cm_user_id']);
 	$show_submitted_browse = cm_get_access('submitted-browse', $_SESSION['cm_user_id']);
+	$show_page_browse = cm_get_access('page-browse', $_SESSION['cm_user_id']);
 	$show_poll_browse = cm_get_access('poll-browse', $_SESSION['cm_user_id']);
 	$show_advertising_browse = cm_get_access('advertising-browse', $_SESSION['cm_user_id']);
 ?>
@@ -20,6 +21,7 @@
     <?php if ($show_submitted_browse == "true") {; echo "<li><a href=\"submitted-browse.php\">Submitted</a></li>"; }; ?>
     <?php if ($show_poll_browse == "true") {; echo "<li><a href=\"poll-browse.php\">Polls</a></li>"; }; ?>
     <?php if ($show_advertising_browse == "true") {; echo "<li><a href=\"advertising-browse.php\">Advertising</a></li>"; }; ?>
+    <?php if ($show_page_browse == "true") {; echo "<li><a href=\"page-browse.php\">Pages</a></li>"; }; ?>
   </ul>
   <?php }; ?>
 <?php if ($show_section_browse == "true" || $show_staff_browse == "true" || $show_settings == "true") {; ?>
