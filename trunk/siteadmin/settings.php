@@ -8,6 +8,7 @@ if ($_POST['id'] != "") {;
 	// Get posted data
 	$id = $_POST['id'];
 	$name = $_POST['name'];
+	$description = $_POST['description'];
 	$url = $_POST['url'];
 	$email = $_POST['email'];
 	$address = $_POST['address'];
@@ -18,7 +19,7 @@ if ($_POST['id'] != "") {;
 	$fax = $_POST['fax'];
 	$announce = $_POST['announce'];	
 	// Run function
-	$stat = cm_edit_settings($name,$url,$email,$address,$city,$state,$zipcode,$telephone,$fax,$announce,$id);
+	$stat = cm_edit_settings($name,$description,$url,$email,$address,$city,$state,$zipcode,$telephone,$fax,$announce,$id);
 	if ($stat == 1) {
 		header("Location: $module.php?msg=updated");
 		exit;
@@ -51,6 +52,7 @@ $totalRows_CM_Array = mysql_num_rows($CM_Array);
 do {;
 	$id = $row_CM_Array['id'];
 	$name = $row_CM_Array['site_name'];
+	$description = $row_CM_Array['site_description'];
 	$url = $row_CM_Array['site_url'];
 	$email = $row_CM_Array['site_email'];
 	$address = $row_CM_Array['site_address'];
@@ -71,6 +73,11 @@ do {;
     <br />
     <input type="text" name="name" id="name" value="<?php echo $name; ?>"/>
   </p>
+  <p>
+    <label for="name">Tagline</label>
+    <br />
+    <input type="text" name="description" id="description" value="<?php echo $description; ?>"/>
+  </p>  
   <p>
     <label for="url">Web Site URL</label>
     <br />

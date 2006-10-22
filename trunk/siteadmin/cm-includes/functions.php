@@ -1148,10 +1148,11 @@ function cm_edit_ad_rates($local_rate,$national_rate,$id=1)
 /*******************************************
 	Function:	cm_edit_settings
 *******************************************/
-function cm_edit_settings($name,$url,$email,$address,$city,$state,$zipcode,$telephone,$fax,$announce,$id)
+function cm_edit_settings($name,$description,$url,$email,$address,$city,$state,$zipcode,$telephone,$fax,$announce,$id)
 {;
 	$query = "UPDATE cm_settings SET";
 	$query .= " site_name = '$name',";
+	$query .= " site_description = '$description',";
 	$query .= " site_url = '$url',";
 	$query .= " site_email = '$email',";
 	$query .= " site_address = '$address',";

@@ -29,31 +29,7 @@ CREATE TABLE `cm_access` (
 -- Dumping data for table `cm_access`
 -- 
 
-INSERT INTO `cm_access` VALUES (1594, 1, 'string', 'restrict_issue', 'false');
-INSERT INTO `cm_access` VALUES (1593, 1, 'string', 'restrict_section', 'false');
-INSERT INTO `cm_access` VALUES (1592, 1, 'module', 'advertising-rates', 'true');
-INSERT INTO `cm_access` VALUES (1591, 1, 'module', 'advertising-edit', 'true');
-INSERT INTO `cm_access` VALUES (1590, 1, 'module', 'advertising-clients', 'true');
-INSERT INTO `cm_access` VALUES (1588, 1, 'module', 'poll-edit', 'true');
-INSERT INTO `cm_access` VALUES (1589, 1, 'module', 'advertising-browse', 'true');
-INSERT INTO `cm_access` VALUES (1587, 1, 'module', 'poll-browse', 'true');
-INSERT INTO `cm_access` VALUES (1586, 1, 'module', 'submitted-edit', 'true');
-INSERT INTO `cm_access` VALUES (1585, 1, 'module', 'submitted-browse', 'true');
-INSERT INTO `cm_access` VALUES (1584, 1, 'module', 'staff-edit', 'true');
-INSERT INTO `cm_access` VALUES (1583, 1, 'module', 'staff-browse', 'true');
-INSERT INTO `cm_access` VALUES (1582, 1, 'module', 'staff-access', 'true');
-INSERT INTO `cm_access` VALUES (1581, 1, 'module', 'settings', 'true');
-INSERT INTO `cm_access` VALUES (1580, 1, 'module', 'server-info', 'true');
-INSERT INTO `cm_access` VALUES (1579, 1, 'module', 'section-edit', 'true');
-INSERT INTO `cm_access` VALUES (1578, 1, 'module', 'section-browse', 'true');
-INSERT INTO `cm_access` VALUES (1577, 1, 'module', 'profile', 'true');
-INSERT INTO `cm_access` VALUES (1576, 1, 'module', 'issue-edit', 'true');
-INSERT INTO `cm_access` VALUES (1575, 1, 'module', 'issue-browse', 'true');
-INSERT INTO `cm_access` VALUES (1574, 1, 'module', 'index', 'true');
-INSERT INTO `cm_access` VALUES (1573, 1, 'module', 'article-media', 'true');
-INSERT INTO `cm_access` VALUES (1572, 1, 'module', 'article-edit', 'true');
-INSERT INTO `cm_access` VALUES (1571, 1, 'module', 'article-browse', 'true');
-
+INSERT INTO `cm_access` VALUES (1, 1, 'string', 'restrict_issue', 'false');INSERT INTO `cm_access` VALUES (2, 1, 'string', 'restrict_section', 'false');INSERT INTO `cm_access` VALUES (3, 1, 'module', 'advertising-rates', 'true');INSERT INTO `cm_access` VALUES (4, 1, 'module', 'advertising-edit', 'true');INSERT INTO `cm_access` VALUES (5, 1, 'module', 'advertising-browse', 'true');INSERT INTO `cm_access` VALUES (6, 1, 'module', 'advertising-clients', 'true');INSERT INTO `cm_access` VALUES (7, 1, 'module', 'poll-edit', 'true');INSERT INTO `cm_access` VALUES (8, 1, 'module', 'poll-browse', 'true');INSERT INTO `cm_access` VALUES (9, 1, 'module', 'submitted-browse', 'true');INSERT INTO `cm_access` VALUES (10, 1, 'module', 'submitted-edit', 'true');INSERT INTO `cm_access` VALUES (11, 1, 'module', 'staff-edit', 'true');INSERT INTO `cm_access` VALUES (12, 1, 'module', 'staff-browse', 'true');INSERT INTO `cm_access` VALUES (13, 1, 'module', 'staff-access', 'true');INSERT INTO `cm_access` VALUES (14, 1, 'module', 'page-edit', 'true');INSERT INTO `cm_access` VALUES (15, 1, 'module', 'page-browse', 'true');INSERT INTO `cm_access` VALUES (16, 1, 'module', 'settings', 'true');INSERT INTO `cm_access` VALUES (17, 1, 'module', 'server-info', 'true');INSERT INTO `cm_access` VALUES (18, 1, 'module', 'section-edit', 'true');INSERT INTO `cm_access` VALUES (19, 1, 'module', 'section-browse', 'true');INSERT INTO `cm_access` VALUES (20, 1, 'module', 'profile', 'true');INSERT INTO `cm_access` VALUES (21, 1, 'module', 'issue-edit', 'true');INSERT INTO `cm_access` VALUES (22, 1, 'module', 'issue-browse', 'true');INSERT INTO `cm_access` VALUES (23, 1, 'module', 'index', 'true');INSERT INTO `cm_access` VALUES (24, 1, 'module', 'article-media', 'true');INSERT INTO `cm_access` VALUES (25, 1, 'module', 'article-edit', 'true');INSERT INTO `cm_access` VALUES (26, 1, 'module', 'article-browse', 'true');
 -- --------------------------------------------------------
 
 -- 
