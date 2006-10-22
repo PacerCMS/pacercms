@@ -22,7 +22,7 @@ if ($_POST['username'] != "" && $_POST['password'] != "") {
 ?>
 <html>
 <head>
-<title>Content Manager &raquo; <?php echo cm_get_settings('site_name'); ?></title>
+<title>PacerCMS &raquo; <?php echo cm_get_settings('site_name'); ?></title>
 <style type="text/css">
 <!--
 body {
@@ -55,7 +55,7 @@ input {font-size: 15pt;width: 300px;}
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <fieldset>
-<legend><img src="cm-images/header.png" alt="ContentManager" /></legend>
+<legend><img src="cm-images/header.png" alt="PacerCMS" /></legend>
 <h2><a href="<?php echo cm_get_settings('site_url'); ?>"><?php echo cm_get_settings('site_name'); ?></a></h2>
 <p><label for="username">Username</label><input type="text" name="username" id="username" /></p>
 <p><label for="password">Password</label><input type="password" name="password" id="password" /></p>
