@@ -1,6 +1,6 @@
 <?php
 	header("Content-type: text/html; charset=UTF-8");
-	if ($topBar == "") { $topBar = "<em><strong>Serving the University of Tennessee at Martin since 1928</strong></em>"; };
+	if ($topBar == "") { $topBar = "<em><strong><?php echo site_info('name'); ?> Online Edition</strong></em>"; };
 ?>
 <?php echo "<" . "?xml version=\"1.0\" encoding=\"utf-8\"?" . ">"; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,23 +12,16 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Pragma" content="no-cache" />
-<meta name="keywords" content="UTM, The Pacer, Student Newspaper, Campus Newspaper, University of Tennessee at Martin" />
-<meta name="description" content="The Pacer is an editorially independent, student-run newspaper published weekly and distributed free to the student body of the University of Tennessee at Martin." />
-<meta name="geo.position" content="36.15;-88.45" />
-<meta name="geo.region" content="US-TN" />
-<meta name="geo.placename" content="Martin, Tennessee" />
-<meta name="dmoz.id" content="Top/News/Colleges_and_Universities/Newspapers/United_States/Tennessee/" />
+<meta name="keywords" content="<?php echo site_info('name'); ?>, Student Newspaper, Campus Newspaper" />
+<meta name="description" content="<?php echo site_info('description'); ?>" />
+<meta name="generator" content="PacerCMS" />
 
 <link href="<?php echo site_info('url'); ?>/favicon.ico" rel="shortcut icon" type="image/icon" title="Shortcut Icon" />
 
 <link href="<?php echo site_info('url'); ?>/templates/style-screen.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="<?php echo site_info('url'); ?>/templates/style-print.css" rel="stylesheet" type="text/css" media="print" />
 
-<link href="<?php echo site_info('url'); ?>/rss.xml" rel="alternate" type="application/rss+xml" title="The Pacer - Headlines (RSS)" />
-<link href="<?php echo site_info('url'); ?>/viewpoints/rss.xml" rel="alternate" type="application/rss+xml" title="The Pacer - Viewpoints (RSS)" />
-<link href="<?php echo site_info('url'); ?>/news/rss.xml" rel="alternate" type="application/rss+xml" title="The Pacer - Campus News (RSS)" />
-<link href="<?php echo site_info('url'); ?>/entertainment/rss.xml" rel="alternate" type="application/rss+xml" title="The Pacer - Arts &amp; Entertainment (RSS)" />
-<link href="<?php echo site_info('url'); ?>/sports/rss.xml" rel="alternate" type="application/rss+xml" title="The Pacer - Sports (RSS)" />
+<link href="<?php echo site_info('url'); ?>/rss.xml" rel="alternate" type="application/rss+xml" title="<?php echo site_info('name'); ?> - Headlines (RSS)" />
 
 <script src="<?php echo site_info('url'); ?>/includes/functions.js" type="text/javascript"></script>
 

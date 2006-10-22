@@ -10,7 +10,8 @@ if (is_numeric($_GET['id'])) {
 
 // Other Settings
 $issue = current_issue('id');
-$feed_tagline = "News as it happens from the student newspapaer at the University of Tennessee at Martin.";
+$feed_tagline = site_info('description');
+$feed_image = site_info('url') . "/templates/images/feed_logo.png";
 
 // Database Connection
 $CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
@@ -36,7 +37,7 @@ echo "<?xml version=\"1.0\" ?><rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc
 	<language>en-us</language> 
 	<link><?php echo site_info('url'); ?></link> 
 	<image>
-		<url>http://pacer.utm.edu/images/channel_image.gif</url>
+		<url><?php echo $feed_image; ?></url>
 		<title><?php echo site_info('name'); ?></title>
 		<link><?php echo site_info('url'); ?></link>
 		<height>88</height>

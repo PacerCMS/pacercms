@@ -24,9 +24,13 @@ I can be reached at stephen.yeargin@gmail.com. I will be happy to help with codi
 
 *** E-mail that says "I can't get my site to work" will likely be ignored. Help me help you ***
 
+== Upgrade Fix ==
+If you are upgrading, please find the proper database query to run in the 'Database' folder.
+
 
 === RELEASE OF CODE ===
 
 This application is released under the GNU General Public License (Version 2, June 1991). For a copy of this rather long and boring legal document, please visit http://www.gnu.org/licenses/gpl.txt
+
 
 [/END]
