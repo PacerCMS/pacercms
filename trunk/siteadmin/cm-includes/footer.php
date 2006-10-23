@@ -10,7 +10,7 @@ $show_server_info = cm_get_access('server-info', $_SESSION['cm_user_id']);
   </ul>
 <ul>
   <li><a href="http://pacercms.sourceforge.net/">PacerCMS</a></li>
-  <li><a href="http://sourceforge.net/tracker/?group_id=157723">Report a Bug</a></li>
+  <li><a href="http://code.google.com/p/pacercms/issues/list">Report a Bug</a></li>
   <?php if ($show_server_info == "true") {; ?><li><a href="server-info.php">Server Information</a></li><?php }; ?>
 </ul>
 </div>
