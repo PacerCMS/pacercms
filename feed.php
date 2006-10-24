@@ -51,7 +51,7 @@ do {
 	$section_id = $row_CM_Array['section_id'];
 	$title = $row_CM_Array['article_title'];
 	$section = section_info('name', $section_id);
-	$link = site_info('url') . "/$id.htm";
+	$link = site_info('url') . "/article.php?id=$id";
 	$summary = $row_CM_Array['article_summary'];
 	$published = $row_CM_Array['nice_date'];
 ?>

@@ -11,6 +11,15 @@ function get_sidebar() {; include_once(SITE_ROOT . '/sidebar.php'); };
 function get_summaries() {; include_once(SITE_ROOT . '/summaries.php'); };
 
 /*******************************************
+	Function:	cm_error
+*******************************************/
+function cm_error($msg)
+{
+	echo $msg;
+	exit;
+}
+
+/*******************************************
 	Function:	site_info
 *******************************************/
 function site_info($field)
@@ -301,7 +310,7 @@ function section_headlines($section=1,$issue,$limit=5)
 	do {
 		$id = $row_CM_Array['id'];
 		$title = $row_CM_Array['article_title'];
-		$link = site_info('url') . "/$id.htm";
+		$link = site_info('url') . "/article.php?id=$id";
 		
 		echo "<li><a href=\"$link\" title=\"$title\">$title</a></li>\n";
 	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));

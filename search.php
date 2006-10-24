@@ -119,7 +119,7 @@ if ($totalRows_CM_Array > 0) {
 		$word_count = $row_CM_Array['article_word_count'];
 		
 		echo "<tr>";
-		echo "<td><a href=\"" . site_info('url') .  "/$id.htm\">$title</a></td>";
+		echo "<td><a href=\"" . site_info('url') .  "/article.php?id=$id\">$title</a></td>";
 		echo "<td>$author</td>";
 		echo "<td>$published</td>";
 		echo "<td>$word_count</td>";
@@ -132,7 +132,7 @@ if ($totalRows_CM_Array > 0) {
 };
 ?>
       </table>
-      <p>Returned <?php echo $totalRows_CM_Array; ?> rows.</p>
+      <p>You search found <?php echo $totalRows_CM_Array; ?> article<?php if ($totalRows_CM_Array != 1) {echo "s";}; ?>.</p>
     </div>
   </div>
 </div>

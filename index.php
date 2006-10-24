@@ -22,7 +22,7 @@ $totalRows_topStory = mysql_num_rows($CM_Array);
 $query_CM_Array = "SELECT * FROM cm_articles";	
 $query_CM_Array .= " WHERE section_id = '1' AND issue_id = '$issue'";
 $query_CM_Array .= " ORDER BY article_priority ASC";
-$query_CM_Array .= " LIMIT 1,99;";
+$query_CM_Array .= " LIMIT 1,25;";
 
 // Run Query
 $CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
@@ -30,7 +30,8 @@ $row_topMore = mysql_fetch_assoc($CM_Array);
 $totalRows_topMore = mysql_num_rows($CM_Array);
 
 /* Header Configuration */
-$pageTitle = " - UTM's Student Newspaper";
+$pageTitle = " - Serving the Campus Community";
+$topBar = "<strong>News and Information for " . date('l, F d, Y') . "</strong>";
 ?>
 <?php get_header($topBar,$pageTitle,$sectionTitle); ?>
 
@@ -41,14 +42,15 @@ $pageTitle = " - UTM's Student Newspaper";
 	$summary = $row_topStory['article_summary'];
 	$author = $row_topStory['article_author'];
 	$author_title = $row_topStory['article_author_title'];
-	$link = site_info('url') . "/$id.htm";
+	$link = site_info('url') . "/article.php?id=$id";
 	$issue_id = $row_topStory['issue_id'];
 	$published = $row_topStory['article_publish'];
 	$issue_date = issue_info("date",$issue_id) . " 00:00:00";
 	if ($published > $issue_date) { $is_breaking = "true"; } else { unset($is_breaking); };
 ?>
 
-<?php if (image_media_count($id) > 0) {; ?>
+<?php if ($totalRows_topStory > 0) {; ?>
+<?php if (image_media_count($id) > 0) {; // Has images ?>
 
   <div class="topStory">
     <div class="biggerCol">
@@ -79,7 +81,7 @@ $pageTitle = " - UTM's Student Newspaper";
       </div>
     </div>
 
-	<?php  } else {; ?>
+	<?php  } else {; //No images ?>
 
   <div class="topStory">
     <div class="fullCol">
@@ -98,17 +100,19 @@ $pageTitle = " - UTM's Student Newspaper";
 	?>
     </div>
 
-	<?php }; ?>
+	<?php }; // No images ?>
+	<?php }; // No stories ?>
 	
     <hr />
     <div class="colWrap">
       <div class="bigCol">
+        <?php if ($totalRows_topMore > 0) {; ?>
         <?php
     do {
 		$id = $row_topMore['id'];
 		$title = $row_topMore['article_title'];
 		$summary = $row_topMore['article_summary'];
-		$link = site_info('url') . "/$id.htm";
+		$link = site_info('url') . "/article.php?id=$id";
 	    echo "<div class=\"otherStory\">\n";
 		echo "<h3><a href=\"$link\" title=\"$title\">$title</a></h3>\n";
 		echo "<p class=\"summary\">$summary</p>\n";
@@ -117,6 +121,10 @@ $pageTitle = " - UTM's Student Newspaper";
 		
 } while ($row_topMore = mysql_fetch_assoc($CM_Array));
 ?>
+	  <?php } else { echo "&nbsp;"; }; ?>
+
+	  
+	  
       </div>
       <div class="smallCol">
         <div class="homeSidebar">
@@ -140,7 +148,7 @@ if ($active_poll > 0) {;
 
 ?>
           <form action="poll.php" method="post" class="sitePoll">
-            <h4>&mdash;&nbsp;Pacer&nbsp;Poll&nbsp;&mdash;</h4>
+            <h4>&mdash;&nbsp;Web&nbsp;Poll&nbsp;&mdash;</h4>
             <p class="question"><strong> <?php echo $question; ?> </strong></p>
             <ul>
               <?php if ($r1 != "") {; ?>

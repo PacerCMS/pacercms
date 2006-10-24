@@ -38,7 +38,7 @@ $row_topMore = mysql_fetch_assoc($CM_Array);
 $totalRows_topMore = mysql_num_rows($CM_Array);
 
 /* Header Configuration */
-$pageTitle = " - UTM's Student Newspaper";
+$pageTitle = " - " . section_info('name', $section);
 ?>
 <?php get_header($topBar,$pageTitle,$section); ?>
 
@@ -52,7 +52,7 @@ $pageTitle = " - UTM's Student Newspaper";
 	$id = $row_topStory['id'];
 	$title = $row_topStory['article_title'];
 	$summary = $row_topStory['article_summary'];
-		$link = site_info('url') . "/$id.htm";
+		$link = site_info('url') . "/article.php?id=$id";
 	$author = $row_topStory['article_author'];
 	$author_title = $row_topStory['article_author_title'];
 	
@@ -81,7 +81,7 @@ $pageTitle = " - UTM's Student Newspaper";
 		$id = $row_topMore['id'];
 		$title = $row_topMore['article_title'];
 		$summary = $row_topMore['article_summary'];
-		$link = site_info('url') . "/$id.htm";
+		$link = site_info('url') . "/article.php?id=$id";
 	    echo "<div class=\"otherStory\">\n";
 		echo "<h3><a href=\"$link\" title=\"$title\">$title</a></h3>\n";
 		echo "<p class=\"summary\">$summary</p>\n";

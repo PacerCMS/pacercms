@@ -33,7 +33,7 @@ if (isset($_POST['recipient-email'])) {
 	$sender = $_POST['sender'];
 	$sender_email = $_POST['sender-email'];
 	$recipient = $_POST['recipient-email'];
-	$link = site_info('url') . "/$id.htm";
+	$link = site_info('url') . "/article.php?id=$id";
 	$header = "From: $sender_email";
 	$subject = stripslashes(site_info('name') . " - $title");
 	$message = "\n ";
@@ -84,7 +84,7 @@ $sectionTitle = $section;
 	<p>========================================</p>
 	<p><?php echo $summary; ?></p>
 	<p>========================================</p>
-	<p>Link: <?php echo site_info('url') . "/$id.htm"; ?></p>
+	<p>Link: <?php echo site_info('url') . "/article.php?id=$id"; ?></p>
 	<p>-</p>
 	<p>NOTE: You have received this e-mail because a visitor used a utility found on our Web site (<?php echo site_info('url'); ?>) to forward you this article summary and link. At no time was your e-mail address stored on our server. Please visit our site to learn more about our privacy policies.</p>
 	</blockquote>
