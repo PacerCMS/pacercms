@@ -106,7 +106,7 @@ if ($totalRows_ListArticles > 0) {;
 		$word_count = $row_ListArticles['article_word_count'];
 		
 		echo "<tr>";
-		echo "<td><a href=\"" . site_info('url') . "/$id.htm\">$title</a></td>";
+		echo "<td><a href=\"" . site_info('url') . "/article.php?id=$id\">$title</a></td>";
 		echo "<td>$author</td>";
 		echo "<td>" . htmlentities($section) . "</td>";
 		echo "<td>$word_count</td>";
@@ -143,7 +143,7 @@ if ($totalRows_ListIssues > 0) {;
 		
 		echo "<tr>";
 		echo "<td>$number</td>";
-		echo "<td><a href=\"" . site_info('url') . "/$date.htm\">$nice_date</a></td>";
+		echo "<td><a href=\"" . site_info('url') . "/archives.php?issue=$date\">$nice_date</a></td>";
 		echo "</tr>\n";
 		
 	} while ($row_ListIssues = mysql_fetch_assoc($CM_ListIssues));
@@ -159,7 +159,7 @@ do {;
 	$volume = $row_ListVolumes['issue_volume'];
 	$count = $row_ListVolumes['issue_count'];
 	
-	echo "<li><a href=\"" . site_info('url') . "/archives/?volume=$volume\">Vol. $volume</a> ($count issues)</li>";
+	echo "<li><a href=\"" . site_info('url') . "/archives.php?volume=$volume\">Vol. $volume</a> ($count issues)</li>";
 
 } while ($row_ListVolumes = mysql_fetch_assoc($CM_ListVolumes));
 ?>

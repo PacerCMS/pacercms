@@ -16,7 +16,7 @@ if (!empty($_POST['text'])) {
 	$recipient = site_info('email');
 	$header = "From: $email";
 	$subject = stripslashes("[[" . site_info('name') . "]] Web site feedback from $name");
-	$message = stripslashes(\n$text\n);
+	$message = stripslashes("\n$text\n");
 	
 	// Send the e-mail notification
 	$sendit = mail($recipient, $subject, $message, $header);
@@ -58,10 +58,9 @@ if ($msg == "disabled") {; echo "<p class=\"systemMessage\">Content submissions 
       <h3>Before you complete this form ...</h3>
       <p>We receive hundreds of e-mails every day. Unfortunately, this means we cannot guarantee individual response. Take a look at the links below to make sure your question is not answered elsewhere on the Web site.</p>
       <ul>
-      <li>Send a <a href="<?php echo site_info('url') . "/write/letters/"; ?>">''Letter to the Editor''</a>.</li>
-      <li>Send a <a href="<?php echo site_info('url') . "/write/article/"; ?>">story or press release</a>.</li>
-      <li>Send a <a href="<?php echo site_info('url') . "/write/event/"; ?>">''Bulletin Board'' item</a>.</li>
-      <li>Learn about <a href="<?php echo site_info('url') . "/advertise/"; ?>">advertising with the newspaper</a>.</li>
+      <li>Send a <a href="<?php echo site_info('url') . "/submit.php?mode=letter"; ?>">''Letter to the Editor''</a>.</li>
+      <li>Send a <a href="<?php echo site_info('url') . "/submit.php?mode=article"; ?>">story or press release</a>.</li>
+      <li>Send a <a href="<?php echo site_info('url') . "/submit.php?mode=bboard"; ?>">''Bulletin Board'' item</a>.</li>
       </ul>
       </div>
       <div class="rightCol">

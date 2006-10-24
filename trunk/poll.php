@@ -81,7 +81,7 @@ $vTotal = $v1 + $v2 + $v3 + $v4 + $v5 + $v6 + $v7 + $v8 + $v9 + $v10;
 
 <?php } else { echo "<h2>No votes have been recorded!</h2>"; }; ?>
 
-<p>"Pacer Poll" is not scientific and reflects the opinions of only those Internet users who have chosen to participate. The results cannot be assumed to represent the opinions of Internet users in general, the public as a whole, nor the students or faculty of University of Tennssee at Martin.</p>
+<p>Our Web poll is not scientific and reflects the opinions of only those Internet users who have chosen to participate. The results cannot be assumed to represent the opinions of Internet users in general, the public as a whole, nor the students or faculty of our university.</p>
 
   </div>
   

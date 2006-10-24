@@ -35,7 +35,7 @@ if (!empty($_POST['text'])) {
 
 
 /* Header Configuration */
-$pageTitle = " - UTM's Student Newspaper";
+$pageTitle = " - Submissions";
 $sectionTitle = "Submissions";
 ?>
 <?php get_header($topBar,$pageTitle,$sectionTitle); ?>
@@ -56,11 +56,11 @@ if ($msg == "disabled") {; echo "<p class=\"systemMessage\">Content submissions 
         <label for="keyword">Choose your submission type</label>
         <br />
         <select name="keyword" id="keyword" onChange="MM_jumpMenu('parent',this,0)" style="width: 250px;">
-          <option value="<?php echo site_info('url') . "/write/letter/"; ?>" <?php if ($mode=="letter") { echo "selected "; }; ?>>Letter
+          <option value="<?php echo site_info('url') . "/submit.php?mode=letter"; ?>" <?php if ($mode=="letter") { echo "selected "; }; ?>>Letter
           to the Editor</option>
-          <option value="<?php echo site_info('url') . "/write/article/"; ?>" <?php if ($mode=="article") { echo "selected "; }; ?>>Article
+          <option value="<?php echo site_info('url') . "/submit.php?mode=article"; ?>" <?php if ($mode=="article") { echo "selected "; }; ?>>Article
           or Press Release</option>
-          <option value="<?php echo site_info('url') . "/write/event/"; ?>" <?php if ($mode=="bboard") { echo "selected "; }; ?>>Bulletin
+          <option value="<?php echo site_info('url') . "/submit.php?mode=bboard"; ?>" <?php if ($mode=="bboard") { echo "selected "; }; ?>>Bulletin
           Board Item</option>
         </select>
       </p>
@@ -82,7 +82,7 @@ if ($msg == "disabled") {; echo "<p class=\"systemMessage\">Content submissions 
       <?php }; ?>
       <?php if ($mode=="bboard") {; ?>
       <p class="finePrint"><strong>Submission Guidelines:</strong> Announce your
-        club meetings or events in <em><?php echo site_info('name'); ?></em> Campus Bulletin Board.
+        club meetings or events in <em><?php echo site_info('name'); ?></em>'s Campus Bulletin Board.
         Send the time, date and location of your event along with contact information
         for the person in charge of the event. Submissions must be sent at least
         a week in advance of the event date. We will continue to run the notice
