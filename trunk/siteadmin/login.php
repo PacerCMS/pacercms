@@ -79,6 +79,7 @@ $msg = $_GET['msg'];
 if ($msg == "login-failed") {; echo "<p class=\"systemMessage\">Your username or password were incorrect.</p>"; };
 if ($msg == "password-reset") {; echo "<p class=\"systemMessage\">You new password has been e-mailed.</p>"; };
 if ($msg == "not-found") {; echo "<p class=\"systemMessage\">Could not find matching username and e-mail address.</p>"; };
+if ($msg == "logout") {; echo "<p class=\"systemMessage\">Your session has ended.</p>"; };
 ?>
 <p><label for="username">Username</label><input type="text" name="username" id="username" /></p>
 <p><label for="password">Password</label><input type="password" name="password" id="password" /></p>
