@@ -29,6 +29,7 @@ function cm_error($msg)
 ######## Security-Related Functions ########
 #==========================================#
 
+
 /*******************************************
 	Function:	cm_auth_user
 *******************************************/
@@ -47,6 +48,62 @@ function cm_auth_user($username,$password,$dest)
 	if ($totalRows_CM_Array == 1) {
 		$_SESSION['cm_user_id'] = $row_CM_Array['id'];
 		$_SESSION['cm_user_fullname'] = $row_CM_Array['user_first_name'] . " " . $row_CM_Array['user_last_name'];
+	};
+	return $totalRows_CM_Array;
+};
+
+
+/*******************************************
+	Function:	cm_reset_pass
+*******************************************/
+function cm_reset_pass($username,$email)
+{;
+	// Database Connection
+	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
+	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
+	// Database Query
+	$query = "SELECT * FROM cm_users";
+	$query .= " WHERE user_login = '$username' AND user_email = '$email'";
+	$query .= " LIMIT 1;";	
+	// Run Query
+	$CM_Array  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
+	$totalRows_CM_Array = mysql_num_rows($CM_Array);
+
+	$id = $row_CM_Array['id'];
+	
+	if ($id != "") {
+		
+		// $username
+		$salt = "abchefghjkmnpqrstuvwxyz23456789"; 
+  		srand((double)microtime()*1000000); 
+      	$i = 0; 
+      	while ($i <= 7) { 
+            $num = rand() % 33; 
+            $tmp = substr($salt, $num, 1); 
+            $password = $password . $tmp; 
+            $i++; 
+      	} 
+      	
+      	// Change to MD5 Hash of random password
+      	$enc_password = md5($password);
+      	$query = "UPDATE cm_users SET";
+		$query .= " user_password = '$enc_password'";
+		$query .= " WHERE id = $id";
+		$ChangePassword  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+      	
+      	// E-mail new password to user
+      	$subject = "PacerCMS - Your new username and password";
+		$message = "\n ";
+		$message .= "Your username and password:\n";
+		$message .= "========================================\n";
+		$message .= "Username:\t $username\n";
+		$message .= "Password:\t $password\n ";
+		$message .= "========================================\n";
+		
+		// Send the e-mail notification
+		$sendit = mail($email, $subject, $message);      	
+
 	};
 	return $totalRows_CM_Array;
 };
