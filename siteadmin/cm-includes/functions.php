@@ -149,11 +149,7 @@ function cm_logout()
 	   setcookie(session_name(), '', time()-42000, '/');
 	};
 	session_destroy();
-	get_cm_header();
-	echo "<h2>Session Closed</h2>";
-	echo "<p>Your Content Manager session has been closed.</p>";
-	echo "<p><a href=\"" . cm_get_settings('site_url') . "\">Back to Public Site</a></p>";
-	get_cm_footer();
+	header("Location: login.php?msg=logout");
 };
 
 /*******************************************
