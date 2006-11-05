@@ -86,7 +86,7 @@ CREATE TABLE `cm_articles` (
 -- Dumping data for table `cm_articles`
 -- 
 
-INSERT INTO `cm_articles` VALUES (38, 1, 1, 'PacerCMS Team', 'Developers', 'Welcome to PacerCMS!', '', 'If you are seeing this message, it means your site is up and running. Congratulations! Now, simply log into the administration panel to get started.', 'If you are seeing this message, it means your site is up and running. Congratulations! Now, simply log into the administration panel to get started.\r\n\r\n<strong><a href="siteadmin/">Site Administrator</a> - Bookmark this link</strong>', 1, 'welcome, pacercms', now(), now(), 30);
+INSERT INTO `cm_articles` VALUES (1, 1, 1, 'PacerCMS Team', 'Developers', 'Welcome to PacerCMS!', '', 'If you are seeing this message, it means your site is up and running. Congratulations! Now, simply log into the administration panel to get started.', 'If you are seeing this message, it means your site is up and running. Congratulations! Now, simply log into the administration panel to get started.\r\n\r\n<strong><a href="siteadmin/">Site Administrator</a> - Bookmark this link</strong>', 1, 'welcome, pacercms', now(), now(), 30);
 
 
 -- --------------------------------------------------------
@@ -156,6 +156,12 @@ CREATE TABLE `cm_media` (
 -- --------------------------------------------------------
 
 -- 
+-- Dumping data for table `cm_media`
+-- 
+
+INSERT INTO `cm_media` VALUES (1, 1, 'PacerCMS', 'http://pacercms.sourceforge.net/wp-content/uploads/2006/10/PacerCMS_300x213.png', 'png', 'Welcome to PacerCMS!', 'PacerCMS Development Team');INSERT INTO `cm_media` VALUES (2, 1, 'PacerCMS Official Web Site', 'http://pacercms.sourceforge.net/', 'url', 'This would be a good site to bookmark.', 'PacerCMS Development Team');
+
+-- 
 -- Table structure for table `cm_pages`
 -- 
 
@@ -174,7 +180,7 @@ CREATE TABLE `cm_pages` (
 -- Dumping data for table `cm_pages`
 -- 
 
-INSERT INTO `cm_pages` VALUES (1, 'About <em>The Pacer</em>', 'About Us', 'This is where you would put a short blurb about your history or editorial policies', '<h4>Our Staff</h4>\r\n\r\nStaff list', now(), 'about-us');
+INSERT INTO `cm_pages` VALUES (1, 'About Our Newspaper', 'About Us', 'This is where you would put a short blurb about your history or editorial policies', '<h4>Our Staff</h4>\r\n\r\nStaff list', now(), 'about-us');
 INSERT INTO `cm_pages` VALUES (2, 'Advertising Rates', 'Advertising', 'This is where you would post your rate card and advertising policies', '<h4>Contact Us</h4>\r\n\r\nAddress and phone numbers', now(), 'advertise');
 
 -- --------------------------------------------------------
