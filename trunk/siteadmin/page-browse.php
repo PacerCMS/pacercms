@@ -17,12 +17,15 @@ $totalRows_CM_Array = mysql_num_rows($CM_Array);
 <?php get_cm_header(); ?>
 <?php get_cm_menu(); ?>
 
-<h2>Poll Manager</h2>
+<h2>Page Manager</h2>
 <?php $msg = $_GET['msg'];
 if ($msg == "added") {; echo "<p class=\"systemMessage\">Page added.</p>"; };
 if ($msg == "updated") {; echo "<p class=\"systemMessage\">Page updated.</p>"; };
 if ($msg == "deleted") {; echo "<p class=\"systemMessage\">Page deleted.</p>"; };
 ?>
+
+<?php if ($totalRows_CM_Array > 0) {; // If there are any pages ?>
+
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-table"; ?>">
   <legend>Page Browser</legend>
@@ -32,7 +35,7 @@ if ($msg == "deleted") {; echo "<p class=\"systemMessage\">Page deleted.</p>"; }
   </ul></div>
   <table>
     <tr>
-      <th>Question</th>
+      <th>Title</th>
       <th>Edited</th>
       <th>Tools</th>
     </tr>
@@ -56,7 +59,12 @@ do {;
       </td>
     </tr>
     <? } while ($row_CM_Array = mysql_fetch_assoc($CM_Array)); ?>
-  </table>
+  </table> 
   </fieldset>
 </form>
+
+<?php } else {; ?>
+	<p>You are not currently using pages. Why not <a href="<?php echo "$cmodule.php?action=add"; ?>">add one</a> now?</p>
+<?php }; ?>
+
 <?php get_cm_footer(); ?>
