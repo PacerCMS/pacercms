@@ -179,7 +179,7 @@ if ($mode == "edit") {; ?>
   <form action="<?php echo "$module.php?action=delete"; ?>" method="post">
     <fieldset class="<?php echo "$module-delete" ?>">
     <legend>Confirm Delete</legend>
-    <p>Are you sure you want to delete thispage?</p>
+    <p>Are you sure you want to delete this page?</p>
     <input type="submit" name="submit-delete" id="submit-delete" value="Yes" class="button" />
     <input type="button" name="cancel-delete" id="cancel-delete" value="Cancel" onClick="javascript:toggleLayer('deleteRecord');" class="button" />
     <input type="hidden" name="delete-id" id="delete-id" value="<?php echo $id; ?>" />
