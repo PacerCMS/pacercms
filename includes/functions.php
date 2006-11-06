@@ -5,10 +5,10 @@ $CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_erro
 mysql_select_db(DB_DATABASE, $CM_MYSQL);
 
 // File handling for templates
-function get_header($topBar,$pageTitle,$sectionTitle) {; include_once(SITE_ROOT . '/header.php'); };
-function get_footer() {; include_once(SITE_ROOT . '/footer.php'); };
-function get_sidebar() {; include_once(SITE_ROOT . '/sidebar.php'); };
-function get_summaries() {; include_once(SITE_ROOT . '/summaries.php'); };
+function get_header($topBar,$pageTitle,$sectionTitle) {; include_once(SITE_TEMPLATE_ROOT . '/header.php'); };
+function get_footer() {; include_once(SITE_TEMPLATE_ROOT . '/footer.php'); };
+function get_sidebar() {; include_once(SITE_TEMPLATE_ROOT . '/sidebar.php'); };
+function get_summaries() {; include_once(SITE_TEMPLATE_ROOT . '/summaries.php'); };
 
 /*******************************************
 	Function:	cm_error
