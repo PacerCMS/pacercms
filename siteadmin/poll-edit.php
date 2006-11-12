@@ -13,6 +13,20 @@ if ($_GET["action"] != "") {;
 	$mode = $_GET["action"];
 };
 
+// If action is delete, call delete function
+if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {; 
+	$id = $_POST['delete-id'];
+	// Run function
+	$stat = cm_delete_poll($id);
+	if ($stat == 1) {
+		header("Location: $pmodule.php?msg=deleted");
+		exit;
+	} else {;
+		cm_error("Error in 'cm_delete_poll' function.");
+		exit;
+	};	
+};
+
 // Default value for 'volume' field
 $volume = $_COOKIE['issue-browse-volume'];
 
@@ -49,7 +63,7 @@ if ($_GET['action'] == "edit") {;
 };
 
 // If action is new, call add function
-if ($_GET['action'] == "new" && $_POST['question'] != "") {; 
+if ($_GET['action'] == "add" && $_POST['question'] != "") {; 
 	// Get posted data
 	$question = $_POST['question'];
 	$r1 = $_POST['r1'];
@@ -178,7 +192,7 @@ if ($mode == "edit") {;
     <input type="text" name="r10" id="r10" value="<?php echo $r10; ?>" />
   </p>
   <p>
-    <?php if ($mode == "new") {; ?>
+    <?php if ($mode == "add") {; ?>
     <input type="submit" value="Add Poll" name="submit" id="submit" class="button" />
     <?php }; if ($mode == "edit") {; ?>
     <input type="submit" value="Update Poll" name="update" id="update" class="button" />
@@ -188,4 +202,16 @@ if ($mode == "edit") {;
   </p>
   </fieldset>
 </form>
+<h2>Delete Poll <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
+<div id="deleteRecord">
+  <form action="<?php echo "$module.php?action=delete"; ?>" method="post">
+    <fieldset class="<?php echo "$module-delete" ?>">
+    <legend>Confirm Delete</legend>
+    <p>Are you sure you want to delete this poll and associated ballots?</p>
+    <input type="submit" name="submit-delete" id="submit-delete" value="Yes" class="button" />
+    <input type="button" name="cancel-delete" id="cancel-delete" value="Cancel" onClick="javascript:toggleLayer('deleteRecord');" class="button" />
+    <input type="hidden" name="delete-id" id="delete-id" value="<?php echo $id; ?>" />
+    </fieldset>
+  </form>
+</div>
 <?php get_cm_footer(); ?>

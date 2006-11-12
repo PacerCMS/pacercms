@@ -35,8 +35,10 @@ $totalRows_CM_Array = mysql_num_rows($CM_Array);
 <?php $msg = $_GET['msg'];
 if ($msg == "added") {; echo "<p class=\"systemMessage\">Poll question added.</p>"; };
 if ($msg == "updated") {; echo "<p class=\"systemMessage\">Poll question updated.</p>"; };
+if ($msg == "deleted") {; echo "<p class=\"systemMessage\">Poll question and ballots deleted.</p>"; };
 if ($msg == "active-updated") {; echo "<p class=\"systemMessage\">Active poll setting changed.</p>"; };
 ?>
+
 <form action="<?php echo "$module.php"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend>Active Poll</legend>
@@ -50,6 +52,9 @@ if ($msg == "active-updated") {; echo "<p class=\"systemMessage\">Active poll se
 	</p>
   </fieldset>
 </form>
+
+<?php if ($totalRows_CM_Array > 0) {; // If there are any pages ?>
+
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-table"; ?>">
   <legend>Active Poll</legend>
@@ -81,6 +86,7 @@ do {;
       <td class="actionMenu" nowrap><ul class="center">
           <li><a href="<?php echo "$cmodule.php?id=$id"; ?>">Edit</a></li>
           <li><a href="<?php echo "$cmodule.php?id=$id#results"; ?>">Results</a></li>
+          <li><a href="<?php echo "$cmodule.php?id=$id#delete"; ?>">Delete</a></li>
         </ul>
       </td>
     </tr>
@@ -88,4 +94,9 @@ do {;
   </table>
   </fieldset>
 </form>
+
+<?php } else {; ?>
+	<p>You are not currently using polls. Why not <a href="<?php echo "$cmodule.php?action=add"; ?>">add one</a> now?</p>
+<?php }; ?>
+
 <?php get_cm_footer(); ?>

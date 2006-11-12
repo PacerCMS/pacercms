@@ -899,6 +899,21 @@ function cm_edit_poll($question,$r1,$r2,$r3,$r4,$r5,$r6,$r7,$r8,$r9,$r10,$articl
 	return $stat;
 };
 
+/*******************************************
+	Function:	cm_delete_poll
+*******************************************/
+function cm_delete_poll($sel)
+{	
+	$query1 = "UPDATE cm_settings SET active_poll = 0;";
+	$stat = cm_run_query($query1); // Disables polls
+	$query2 = "DELETE FROM cm_poll_ballot WHERE poll_id = '$sel';";
+	$stat = cm_run_query($query2); // Deletes associated ballots
+	$query3 = "DELETE FROM cm_poll_questions WHERE id = '$sel';";
+	$stat = cm_run_query($query3); // Deletes questions
+	return $stat;	
+};
+
+
 
 /*******************************************
 	Function:	cm_poll_results
