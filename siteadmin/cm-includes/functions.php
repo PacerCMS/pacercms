@@ -434,32 +434,6 @@ function cm_poll_list($sel)
 	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
 };
 
-/*******************************************
-	Function:	cm_client_list
-*******************************************/
-function cm_client_list($sel)
-{;
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	$query_CM_Array = "SELECT * FROM cm_clients ORDER BY client_active ASC, client_name ASC;";	
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));;
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	do {;
-		$id = $row_CM_Array['id'];
-		$name = htmlentities($row_CM_Array['client_name']);
-		$active = $row_CM_Array['client_active'];
-		echo "\t<option value=\"$id\"";
-		if ($sel == $id) {;
-			echo " selected";;	
-		};
-		if ($active == 'Y') {
-			echo ">$name</option>\n";
-		} else {;
-			echo ">[Closed] $name</option>\n";
-		};
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-};
 
 /*******************************************
 	Function:	cm_display_media
@@ -995,186 +969,6 @@ function cm_poll_delete_ballots($sel,$ipad)
 	return $stat;	
 };
 
-#==========================================#
-###########  Managing Advertising ##########
-#==========================================#
-
-/*******************************************
-	Function:	cm_add_advertising
-*******************************************/
-function cm_add_advertising($issue_id,$client_id,$size,$description,$cost,$notes,$sold_by,$page,$ledgered,$quickbooks,$billed,$payment)
-{;
-	$submitted = date("Y-m-d h:i:s",time());
-	$query = "INSERT INTO cm_advertising (issue_id,client_id,ad_size,ad_description,ad_cost,ad_notes,ad_sold_by,ad_page,ad_submitted,ad_ledgered,ad_quickbooks,ad_billed,ad_payment)";
-	$query .= " VALUES ('$issue_id','$client_id','$size','$description','$cost','$notes','$sold_by','$page','$submitted','$ledgered','$quickbooks','$billed','$payment');";
-	$stat = cm_run_query($query);
-	return $stat;
-};
-
-/*******************************************
-	Function:	cm_edit_advertising
-*******************************************/
-function cm_edit_advertising($issue_id,$client_id,$size,$desc,$cost,$notes,$sold_by,$page,$ledgered,$quickbooks,$billed,$payment,$id)
-{;
-	$query = "UPDATE cm_advertising SET";
-	$query .= " issue_id = '$issue_id',";
-	$query .= " client_id = '$client_id',";
-	$query .= " ad_size = '$size',";
-	$query .= " ad_description = '$desc',";
-	$query .= " ad_cost = '$cost',";
-	$query .= " ad_notes = '$notes',";
-	$query .= " ad_sold_by = '$sold_by',";
-	$query .= " ad_page = '$page',";
-	$query .= " ad_ledgered = '$ledgered',";
-	$query .= " ad_quickbooks = '$quickbooks',";
-	$query .= " ad_billed = '$billed',";
-	$query .= " ad_payment = '$payment'";
-	$query .= " WHERE id = $id;";
-	$stat = cm_run_query($query);
-	return $stat;
-};
-
-/*******************************************
-	Function:	cm_delete_advertising
-*******************************************/
-function cm_delete_advertising($sel)
-{;	
-	$query = "DELETE FROM cm_advertising WHERE id = '$sel';";
-	$stat = cm_run_query($query);
-	return $stat;	
-};
-
-/*******************************************
-	Function:	cm_issue_sales
-*******************************************/
-function cm_issue_sales($sel)
-{;
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	$query_CM_Array = "SELECT SUM(ad_cost) AS myvalue";	
-	$query_CM_Array .= " FROM cm_advertising";
-	$query_CM_Array .= " WHERE issue_id = '$sel'";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array );
-	$value = $row_CM_Array['myvalue'];
-	if ($value == '') {; $value = "0.00"; };
-	return $value;
-
-};
-
-/*******************************************
-	Function:	cm_issue_paid
-*******************************************/
-function cm_issue_paid($sel)
-{;
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	$query_CM_Array = "SELECT SUM(ad_cost) AS myvalue";	
-	$query_CM_Array .= " FROM cm_advertising";
-	$query_CM_Array .= " WHERE issue_id = '$sel'";
-	$query_CM_Array .= " AND ad_payment > '0000-00-00 00:00:00';";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array );
-	$value = $row_CM_Array['myvalue'];
-	if ($value == '') {; $value = "0.00"; };
-	return $value;
-};
-
-/*******************************************
-	Function:	cm_client_sales
-*******************************************/
-function cm_client_sales($sel)
-{;
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	$query_CM_Array = "SELECT SUM(ad_cost) AS myvalue";	
-	$query_CM_Array .= " FROM cm_advertising";
-	$query_CM_Array .= " WHERE client_id = '$sel'";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array );	
-	$value = $row_CM_Array['myvalue'];
-	if ($value == '') {; $value = "0.00"; };
-	return $value;
-};
-
-/*******************************************
-	Function:	cm_client_paid
-*******************************************/
-function cm_client_paid($sel)
-{;
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	$query_CM_Array = "SELECT SUM(ad_cost) AS myvalue";	
-	$query_CM_Array .= " FROM cm_advertising";
-	$query_CM_Array .= " WHERE client_id = '$sel'";
-	$query_CM_Array .= " AND ad_payment > '0000-00-00 00:00:00';";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array );
-	$value = $row_CM_Array['myvalue'];
-	if ($value == '') {; $value = "0.00"; };
-	return $value;
-};
-
-/*******************************************
-	Function:	cm_get_price
-*******************************************/
-function cm_get_price($col,$in,$sched)
-{;
-
-	$local_rate = cm_get_settings('local_rate');
-	$national_rate = cm_get_settings('national_rate');
-
-	if ($sched == "L" || $sched == "l") { $rate = $local_rate;	};
-	if ($sched == "N" || $sched == "n") { $rate = $national_rate; };
-	$ci = $col * $in;
-	$price = $ci * $rate;
-	echo number_format($price,2);
-	return;
-};
-
-#==========================================#
-#############  Managing Clients ############
-#==========================================#
-
-/*******************************************
-	Function:	cm_add_client
-*******************************************/
-function cm_add_client($name,$type,$contact,$address,$city,$state,$zipcode,$telephone,$fax,$email,$active,$notes)
-{;
-	$query = " INSERT INTO cm_clients (client_name,client_type,client_contact,client_address,client_city,client_state,client_zipcode,client_telephone,client_fax,client_email,client_active,client_notes)";
-	$query .= " VALUES ('$name','$type','$contact','$address','$city','$state','$zipcode','$telephone','$fax','$email','$active','$client_notes')";
-	$stat = cm_run_query($query);
-	return $stat;
-};
-
-
-/*******************************************
-	Function:	cm_edit_client
-*******************************************/
-function cm_edit_client($name,$type,$contact,$address,$city,$state,$zipcode,$telephone,$fax,$email,$active,$notes,$id)
-{;
-	$query = "UPDATE cm_clients SET";
-	$query .= " client_name = '$name',";
-	$query .= " client_type = '$type',";
-	$query .= " client_contact = '$contact',";
-	$query .= " client_address = '$address',";
-	$query .= " client_state = '$state',";
-	$query .= " client_zipcode = '$zipcode',";
-	$query .= " client_telephone = '$telephone',";
-	$query .= " client_fax = '$fax',";
-	$query .= " client_email = '$email',";
-	$query .= " client_active = '$active',";
-	$query .= " client_notes = '$notes'";
-	$query .= " WHERE id = $id;";
-	$stat = cm_run_query($query);
-	return $stat;
-};
-
-
 
 #==========================================#
 ##############  Site Settings ##############
@@ -1203,15 +997,6 @@ function cm_edit_poll_settings($active_poll,$id=1)
 	return $stat;
 };
 
-/*******************************************
-	Function:	cm_edit_ad_rates
-*******************************************/
-function cm_edit_ad_rates($local_rate,$national_rate,$id=1)
-{;
-	$query = "UPDATE cm_settings SET local_rate = '$local_rate', national_rate = '$national_rate' WHERE id = $id";
-	$stat = cm_run_query($query);
-	return $stat;
-};
 
 /*******************************************
 	Function:	cm_edit_settings
@@ -1337,8 +1122,4 @@ $show_submitted_browse = cm_get_access('submitted-browse', $_SESSION['cm_user_id
 $show_submitted_edit = cm_get_access('submitted-edit', $_SESSION['cm_user_id']);
 $show_poll_browse = cm_get_access('poll-browse', $_SESSION['cm_user_id']);
 $show_poll_edit = cm_get_access('poll-edit', $_SESSION['cm_user_id']);
-$show_advertising_browse = cm_get_access('advertising-browse', $_SESSION['cm_user_id']);
-$show_advertising_edit = cm_get_access('advertising-edit', $_SESSION['cm_user_id']);
-$show_advertising_clients = cm_get_access('advertising-clients', $_SESSION['cm_user_id']);
-$show_advertising_rates = cm_get_access('advertising-rates', $_SESSION['cm_user_id']);
 ?>

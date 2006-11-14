@@ -30,10 +30,6 @@ if ($_POST['user_id'] != "") {;
 	$submitted_edit = $_POST['submitted-edit'];
 	$poll_browse = $_POST['poll-browse'];
 	$poll_edit = $_POST['poll-edit'];
-	$advertising_browse = $_POST['advertising-browse'];
-	$advertising_edit = $_POST['advertising-edit'];
-	$advertising_clients = $_POST['advertising-clients'];		
-	$advertising_rates = $_POST['advertising-rates'];		
 	$restrict_issue = $_POST['restrict-issue'];
 	$restrict_section = $_POST['restrict-section'];
 
@@ -63,10 +59,6 @@ if ($_POST['user_id'] != "") {;
 	$stat = cm_add_access($user_id,"module","submitted-edit",$submitted_edit);
 	$stat = cm_add_access($user_id,"module","poll-browse",$poll_browse);
 	$stat = cm_add_access($user_id,"module","poll-edit",$poll_edit);
-	$stat = cm_add_access($user_id,"module","advertising-browse",$advertising_browse);
-	$stat = cm_add_access($user_id,"module","advertising-clients",$advertising_clients);
-	$stat = cm_add_access($user_id,"module","advertising-edit",$advertising_edit);
-	$stat = cm_add_access($user_id,"module","advertising-rates",$advertising_rates);
 	$stat = cm_add_access($user_id,"string","restrict_section",$restrict_section);
 	$stat = cm_add_access($user_id,"string","restrict_issue",$restrict_issue);
 	if ($stat == 1) {
@@ -157,25 +149,6 @@ if ($user_id == "") {;
     <p>
       <input type="checkbox" name="poll-edit" id="poll-edit" value="true" class="checkbox" <?php if (cm_get_access('poll-edit',$user_id) == "true") {; echo "checked"; }; ?> />
       <label for="poll-edit">Edit</label>
-    </p>
-  </div>
-  <div>
-    <h4>Advertising Manager</h4>
-    <p>
-      <input type="checkbox" name="advertising-browse" id="advertising-browse" value="true" class="checkbox" <?php if (cm_get_access('advertising-browse',$user_id) == "true") {; echo "checked"; };  ?> />
-      <label for="advertising-browse">Browse</label>
-    </p>
-    <p>
-      <input type="checkbox" name="advertising-edit" id="advertising-edit" value="true" class="checkbox" <?php if (cm_get_access('advertising-edit',$user_id) == "true") {; echo "checked"; }; ?> />
-      <label for="advertising-edit">Edit</label>
-    </p>
-    <p>
-      <input type="checkbox" name="advertising-clients" id="advertising-clients" value="true" class="checkbox" <?php if (cm_get_access('advertising-clients',$user_id) == "true") {; echo "checked"; }; ?> />
-      <label for="advertising-clients">Clients</label>
-    </p>
-	    <p>
-      <input type="checkbox" name="advertising-rates" id="advertising-rates" value="true" class="checkbox" <?php if (cm_get_access('advertising-rates',$user_id) == "true") {; echo "checked"; }; ?> />
-      <label for="advertising-rates">Rates</label>
     </p>
   </div>
   <div>

@@ -23,38 +23,13 @@ CREATE TABLE `cm_access` (
   `access_option` varchar(100) NOT NULL default '',
   `access_value` varchar(100) NOT NULL default '',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1595 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Grants users access to each module';
 
 -- 
 -- Dumping data for table `cm_access`
 -- 
 
-INSERT INTO `cm_access` VALUES (1, 1, 'string', 'restrict_issue', 'false');INSERT INTO `cm_access` VALUES (2, 1, 'string', 'restrict_section', 'false');INSERT INTO `cm_access` VALUES (3, 1, 'module', 'advertising-rates', 'true');INSERT INTO `cm_access` VALUES (4, 1, 'module', 'advertising-edit', 'true');INSERT INTO `cm_access` VALUES (5, 1, 'module', 'advertising-browse', 'true');INSERT INTO `cm_access` VALUES (6, 1, 'module', 'advertising-clients', 'true');INSERT INTO `cm_access` VALUES (7, 1, 'module', 'poll-edit', 'true');INSERT INTO `cm_access` VALUES (8, 1, 'module', 'poll-browse', 'true');INSERT INTO `cm_access` VALUES (9, 1, 'module', 'submitted-browse', 'true');INSERT INTO `cm_access` VALUES (10, 1, 'module', 'submitted-edit', 'true');INSERT INTO `cm_access` VALUES (11, 1, 'module', 'staff-edit', 'true');INSERT INTO `cm_access` VALUES (12, 1, 'module', 'staff-browse', 'true');INSERT INTO `cm_access` VALUES (13, 1, 'module', 'staff-access', 'true');INSERT INTO `cm_access` VALUES (14, 1, 'module', 'page-edit', 'true');INSERT INTO `cm_access` VALUES (15, 1, 'module', 'page-browse', 'true');INSERT INTO `cm_access` VALUES (16, 1, 'module', 'settings', 'true');INSERT INTO `cm_access` VALUES (17, 1, 'module', 'server-info', 'true');INSERT INTO `cm_access` VALUES (18, 1, 'module', 'section-edit', 'true');INSERT INTO `cm_access` VALUES (19, 1, 'module', 'section-browse', 'true');INSERT INTO `cm_access` VALUES (20, 1, 'module', 'profile', 'true');INSERT INTO `cm_access` VALUES (21, 1, 'module', 'issue-edit', 'true');INSERT INTO `cm_access` VALUES (22, 1, 'module', 'issue-browse', 'true');INSERT INTO `cm_access` VALUES (23, 1, 'module', 'index', 'true');INSERT INTO `cm_access` VALUES (24, 1, 'module', 'article-media', 'true');INSERT INTO `cm_access` VALUES (25, 1, 'module', 'article-edit', 'true');INSERT INTO `cm_access` VALUES (26, 1, 'module', 'article-browse', 'true');
--- --------------------------------------------------------
-
--- 
--- Table structure for table `cm_advertising`
--- 
-
-CREATE TABLE `cm_advertising` (
-  `id` int(11) NOT NULL auto_increment,
-  `issue_id` int(11) NOT NULL default '0',
-  `client_id` int(11) NOT NULL default '0',
-  `ad_size` varchar(30) NOT NULL default '',
-  `ad_description` varchar(200) NOT NULL default '',
-  `ad_cost` decimal(10,2) NOT NULL default '0.00',
-  `ad_notes` tinytext NOT NULL,
-  `ad_sold_by` int(11) NOT NULL default '0',
-  `ad_page` int(3) NOT NULL default '0',
-  `ad_submitted` datetime NOT NULL default '0000-00-00 00:00:00',
-  `ad_ledgered` datetime NOT NULL default '0000-00-00 00:00:00',
-  `ad_quickbooks` datetime NOT NULL default '0000-00-00 00:00:00',
-  `ad_billed` datetime NOT NULL default '0000-00-00 00:00:00',
-  `ad_payment` datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Advertising Databse' AUTO_INCREMENT=1 ;
-
-
+INSERT INTO `cm_access` VALUES (1, 1, 'string', 'restrict_issue', 'false');INSERT INTO `cm_access` VALUES (2, 1, 'string', 'restrict_section', 'false');INSERT INTO `cm_access` VALUES (3, 1, 'module', 'poll-edit', 'true');INSERT INTO `cm_access` VALUES (4, 1, 'module', 'poll-browse', 'true');INSERT INTO `cm_access` VALUES (5, 1, 'module', 'submitted-browse', 'true');INSERT INTO `cm_access` VALUES (6, 1, 'module', 'submitted-edit', 'true');INSERT INTO `cm_access` VALUES (7, 1, 'module', 'staff-edit', 'true');INSERT INTO `cm_access` VALUES (8, 1, 'module', 'staff-browse', 'true');INSERT INTO `cm_access` VALUES (9, 1, 'module', 'staff-access', 'true');INSERT INTO `cm_access` VALUES (10, 1, 'module', 'page-edit', 'true');INSERT INTO `cm_access` VALUES (11, 1, 'module', 'page-browse', 'true');INSERT INTO `cm_access` VALUES (12, 1, 'module', 'settings', 'true');INSERT INTO `cm_access` VALUES (13, 1, 'module', 'server-info', 'true');INSERT INTO `cm_access` VALUES (14, 1, 'module', 'section-edit', 'true');INSERT INTO `cm_access` VALUES (15, 1, 'module', 'section-browse', 'true');INSERT INTO `cm_access` VALUES (16, 1, 'module', 'profile', 'true');INSERT INTO `cm_access` VALUES (17, 1, 'module', 'issue-edit', 'true');INSERT INTO `cm_access` VALUES (18, 1, 'module', 'issue-browse', 'true');INSERT INTO `cm_access` VALUES (19, 1, 'module', 'index', 'true');INSERT INTO `cm_access` VALUES (20, 1, 'module', 'article-media', 'true');INSERT INTO `cm_access` VALUES (21, 1, 'module', 'article-edit', 'true');INSERT INTO `cm_access` VALUES (22, 1, 'module', 'article-browse', 'true');
 -- --------------------------------------------------------
 
 -- 
@@ -80,37 +55,13 @@ CREATE TABLE `cm_articles` (
   FULLTEXT KEY `article_author` (`article_author`),
   FULLTEXT KEY `article_keywords` (`article_keywords`),
   FULLTEXT KEY `article_text` (`article_text`,`article_title`,`article_subtitle`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Main Article Database' AUTO_INCREMENT=38 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Principle article database';
 
 -- 
 -- Dumping data for table `cm_articles`
 -- 
 
 INSERT INTO `cm_articles` VALUES (1, 1, 1, 'PacerCMS Team', 'Developers', 'Welcome to PacerCMS!', '', 'If you are seeing this message, it means your site is up and running. Congratulations! Now, simply log into the administration panel to get started.', 'If you are seeing this message, it means your site is up and running. Congratulations! Now, simply log into the administration panel to get started.\r\n\r\n<strong><a href="siteadmin/">Site Administrator</a> - Bookmark this link</strong>', 1, 'welcome, pacercms', now(), now(), 30);
-
-
--- --------------------------------------------------------
-
--- 
--- Table structure for table `cm_clients`
--- 
-
-CREATE TABLE `cm_clients` (
-  `id` int(11) NOT NULL auto_increment,
-  `client_name` varchar(150) NOT NULL default '',
-  `client_type` enum('On Campus','Local','National','Other') NOT NULL default 'Local',
-  `client_contact` varchar(100) NOT NULL default '',
-  `client_address` varchar(225) NOT NULL default '',
-  `client_city` varchar(40) NOT NULL default '',
-  `client_state` varchar(40) NOT NULL default '',
-  `client_zipcode` varchar(10) NOT NULL default '',
-  `client_telephone` varchar(40) NOT NULL default '',
-  `client_fax` varchar(40) NOT NULL default '',
-  `client_email` varchar(100) NOT NULL default '',
-  `client_active` enum('Y','N') NOT NULL default 'Y',
-  `client_notes` text NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Advertising Client Database' AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -127,7 +78,7 @@ CREATE TABLE `cm_issues` (
   `issue_circulation` int(5) NOT NULL default '0',
   `online_only` set('0','1') NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Lists each issue with volume information' AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Lists each issue with volume information';
 
 -- 
 -- Dumping data for table `cm_issues`
@@ -151,7 +102,7 @@ CREATE TABLE `cm_media` (
   `media_caption` tinytext NOT NULL,
   `media_credit` varchar(100) NOT NULL default '',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Media attachments for articles';
 
 -- --------------------------------------------------------
 
@@ -174,7 +125,7 @@ CREATE TABLE `cm_pages` (
   `page_edited` datetime NOT NULL default '0000-00-00 00:00:00',
   `page_slug` varchar(50) NOT NULL default '',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Static pages of information';
 
 -- 
 -- Dumping data for table `cm_pages`
@@ -196,7 +147,7 @@ CREATE TABLE `cm_poll_ballot` (
   `ballot_ip_address` varchar(20) NOT NULL default '',
   `ballot_hostname` varchar(225) NOT NULL default '',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Contains each ballot cast for the poll questions';
 
 
 -- --------------------------------------------------------
@@ -222,7 +173,7 @@ CREATE TABLE `cm_poll_questions` (
   `article_id` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   FULLTEXT KEY `question` (`poll_question`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Contains the poll questions';
 
 -- 
 -- Dumping data for table `cm_poll_questions`
@@ -246,7 +197,7 @@ CREATE TABLE `cm_sections` (
   `section_sidebar` text NOT NULL,
   `section_priority` int(5) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Newspaper section-specific data' AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Newspaper section-specific data';
 
 -- 
 -- Dumping data for table `cm_sections`
@@ -280,17 +231,15 @@ CREATE TABLE `cm_settings` (
   `current_issue` int(11) NOT NULL default '0',
   `next_issue` int(11) NOT NULL default '0',
   `active_poll` int(11) NOT NULL default '0',
-  `local_rate` decimal(10,2) NOT NULL default '0.00',
-  `national_rate` decimal(10,2) NOT NULL default '0.00',
-  `database_version` varchar(25) NOT NULL default '0.03',
+  `database_version` varchar(25) NOT NULL default '0.04',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Sets publication issue and status' AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Sets publication issue and other settings';
 
 -- 
 -- Dumping data for table `cm_settings`
 -- 
 
-INSERT INTO `cm_settings` VALUES (1, 'The Pacer', 'http://localhost/pacercms', 'user@example.com', '', '', '', '', '', '', 'Customize this message under the "Settings" menu item. It is displayed for every user that logs into the system.','Your student newspaper.', 1, 2, 1, 3.75, 5.00, '0.03');
+INSERT INTO `cm_settings` VALUES (1, 'The Pacer', 'http://localhost/pacercms', 'user@example.com', '', '', '', '', '', '', 'Customize this message under the "Settings" menu item. It is displayed for every user that logs into the system.','Your student newspaper.', 1, 2, 1, '0.03');
 
 -- --------------------------------------------------------
 
@@ -313,14 +262,8 @@ CREATE TABLE `cm_submitted` (
   `submitted_words` int(5) NOT NULL default '0',
   `issue_id` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Submitted Articles' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Contains submitted articles via web submission';
 
--- 
--- Dumping data for table `cm_submitted`
--- 
-
-
--- --------------------------------------------------------
 
 -- 
 -- Table structure for table `cm_users`
@@ -347,7 +290,7 @@ CREATE TABLE `cm_users` (
   `user_im_jabber` varchar(40) NOT NULL default '',
   `user_profile` text NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Principle user table' AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Principle user table';
 
 -- 
 -- Dumping data for table `cm_users`
