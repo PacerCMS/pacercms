@@ -33,12 +33,6 @@ $totalRows_CM_Array = mysql_num_rows($CM_Array);
     <?php if ($show_poll_edit == "true") {; ?>
     <li><a href="poll-edit.php?action=new">Add a Poll Question</a></li>
     <?php }; ?>
-    <?php if ($show_advertising_browse == "true") {; ?>
-    <li><a href="advertising-browse.php">Manage Advertising</a></li>
-    <?php }; ?>
-    <?php if ($show_advertising_edit == "true") {; ?>
-    <li><a href="advertising-edit.php?action=new">Add an Insertion Order</a></li>
-    <?php }; ?>
   </ul>
 </div>
 <h3>Announcements</h3>
