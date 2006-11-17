@@ -7,49 +7,31 @@ cm_auth_module($module);
 <?php get_cm_header(); ?>
 <?php get_cm_menu(); ?>
 <h2>Session Variables Set by Server</h2>
+<p class="systemMessage">These are set when you login. Updates do not occur until you login again.</p>
 <?php
-/*
 
-cm_user_id
-cm_user_fullname
-
-
-*/
-	echo "<pre>";
+	echo "<pre>\n";
 	echo "cm_user_id:\t\t" . $_SESSION['cm_user_id'] . "\n";
 	echo "cm_user_fullname:\t" . $_SESSION['cm_user_fullname'] . "\n";
-	echo "</pre>"
+	echo "</pre>\n"
 ?>
 <h2>Cookies Set by Server</h2>
+<p class="systemMessage">Modules set cookies to keep everything easy to get to.</p>
 <?php
-/*
 
-article-browse-issue
-article-browse-section
-issue-browse-volume
-advertising-browse-issue
-
-
-*/
-	echo "<pre>";
+	echo "<pre>\n";
 	echo "article-browse-issue:\t\t" . $_COOKIE['article-browse-issue'] . "\n";
 	echo "article-browse-section:\t\t" . $_COOKIE['article-browse-section'] . "\n";
 	echo "issue-browse-volume:\t\t" . $_COOKIE['issue-browse-volume'] . "\n";
-	echo "advertising-browse-issue:\t" . $_COOKIE['advertising-browse-issue'] . "\n";
 	echo "submitted-browse-issue:\t\t" . $_COOKIE['submitted-browse-issue'] . "\n";
-	echo "</pre>"
+	echo "</pre>\n"
+
 ?>
 <h2>Persisting Variables</h2>
+<p class="systemMessage">These are set from the cm_access table entries.</p>
 <?php
-/*
 
-current_issue_id
-current_issue_date
-next_issue_id
-next_issue_date
-
-*/
-	echo "<pre>";
+	echo "<pre>\n";
 	echo "current_issue_id:\t$current_issue_id\n";
 	echo "current_issue_date:\t$current_issue_date\n";
 	echo "next_issue_id:\t\t$next_issue_id\n";
@@ -78,13 +60,10 @@ next_issue_date
 	echo "$show_submitted_edit\tshow_submitted_edit\n";
 	echo "$show_poll_browse\tshow_poll_browse\n";
 	echo "$show_poll_edit\tshow_poll_edit\n";
-	echo "$show_advertising_browse\tshow_advertising_browse\n";
-	echo "$show_advertising_edit\tshow_advertising_edit\n";
-	echo "$show_advertising_clients\tshow_advertising_clients\n";
-	echo "$show_advertising_rates\tshow_advertising_rates\n";
-	echo "</pre>"
+	echo "</pre>\n"
 ?>
 <h2>Your Access Rights</h2>
+<p class="systemMessage">This is the raw read-out of your cm_access entries.</p>
 <?php
 	$user_id = $_SESSION['cm_user_id'];
 	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
@@ -107,5 +86,6 @@ next_issue_date
 
 
 <h2>Server Information</h2>
+<p class="systemMessage">A phpinfo() instance. Might be helpful in debugging server errors.</p>
 <?php phpinfo(); ?>
 <?php get_cm_footer(); ?>
