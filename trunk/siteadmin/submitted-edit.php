@@ -8,7 +8,28 @@ $pmodule = "submitted-browse";
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
 
+// Change mode based on query string
+if ($_GET["action"] != "") {;
+	$mode = $_GET["action"];
+}
+
+// These will be changed later if needed, set defaults.
 $id = $_GET["id"];
+
+// If action is delete, call delete function
+if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {; 
+	$id = $_POST['delete-id'];
+	// Run function
+	$stat = cm_delete_submitted($id);
+	if ($stat == 1) {
+		header("Location: $pmodule.php?msg=deleted");
+		exit;
+	} else {;
+		cm_error("Error in 'cm_delete_submitted' function.");
+		exit;
+	};	
+};
+
 
 // Query
 $query_CM_Array = "SELECT * FROM cm_submitted ";
@@ -61,4 +82,22 @@ $words = $row_CM_Array['submitted_words'];
 <p><strong>Word Count:</strong> <?php echo $words; ?><br>
 <strong>Keyword:</strong> <?php echo $keyword; ?></p>
 </fieldset>
+
+<?php
+// Show preview if not an add form
+if ($show_submitted_delete == "true") {; ?>
+<h2>Delete Submitted Article <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
+<div id="deleteRecord">
+  <form action="<?php echo "$module.php?action=delete"; ?>" method="post">
+    <fieldset class="<?php echo "$module-delete" ?>">
+    <legend>Confirm Delete</legend>
+    <p>Are you sure you want to delete this submitted article?</p>
+    <input type="submit" name="submit-delete" id="submit-delete" value="Yes" class="button" />
+    <input type="button" name="cancel-delete" id="cancel-delete" value="Cancel" onClick="javascript:toggleLayer('deleteArticle');" class="button" />
+    <input type="hidden" name="delete-id" id="delete-id" value="<?php echo $id; ?>" />
+    </fieldset>
+  </form>
+</div>
+<?php }; ?>
+
 <?php get_cm_footer(); ?>

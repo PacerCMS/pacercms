@@ -71,6 +71,9 @@ do {;
     <td nowrap class="actionMenu">
       <ul class="center">
         <li class="command-preview"><a href="submitted-edit.php?id=<?php echo $id; ?>#preview">Preview</a></li>
+        <?php if ($show_submitted_delete == "true") {; ?>
+        <li class="command-preview"><a href="submitted-edit.php?id=<?php echo $id; ?>#delete">Delete</a></li>
+        <?php }; ?>
       </ul>
       <?php }; ?>
     </td>

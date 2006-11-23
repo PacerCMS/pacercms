@@ -37,9 +37,9 @@ $totalRows_CM_Array = mysql_num_rows($CM_Array);
 <h2>Submitted Article Manager</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "added") {; echo "<p class=\"systemMessage\">Article added.</p>"; };
-if ($msg == "updated") {; echo "<p class=\"systemMessage\">Article updated.</p>"; };
-if ($msg == "deleted") {; echo "<p class=\"systemMessage\">Article deleted.</p>"; };
+if ($msg == "added") {; echo "<p class=\"systemMessage\">Submitted article added.</p>"; };
+if ($msg == "updated") {; echo "<p class=\"systemMessage\">Submitted updated.</p>"; };
+if ($msg == "deleted") {; echo "<p class=\"systemMessage\">Submitted article deleted.</p>"; };
 ?>
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-form"; ?>">
@@ -89,12 +89,13 @@ do {;
     <td><a href="mailto:<?php echo $email; ?>"><?php echo $author; ?></a></td>
     <td><p><a href="submitted-edit.php?id=<?php echo $id; ?>#preview"><strong><?php echo $title; ?></strong></a> - <em><?php echo $keyword;?></em></p>
     </td>
-    <?php if ($show_submitted_edit == "true") {; ?>
     <td nowrap class="actionMenu">
       <ul class="center">
         <li class="command-preview"><a href="submitted-edit.php?id=<?php echo $id; ?>#preview">Preview</a></li>
+        <?php if ($show_submitted_delete == "true") {; ?>
+        <li class="command-preview"><a href="submitted-edit.php?id=<?php echo $id; ?>#delete">Delete</a></li>
+        <?php }; ?>
       </ul>
-      <?php }; ?>
     </td>
   </tr>
   <? } while ($row_CM_Array = mysql_fetch_assoc($CM_Array)); ?>
