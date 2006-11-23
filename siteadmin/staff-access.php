@@ -28,6 +28,7 @@ if ($_POST['user_id'] != "") {;
 	$staff_edit = $_POST['staff-edit'];
 	$submitted_browse = $_POST['submitted-browse'];
 	$submitted_edit = $_POST['submitted-edit'];
+	$submitted_delete = $_POST['submitted-delete'];
 	$poll_browse = $_POST['poll-browse'];
 	$poll_edit = $_POST['poll-edit'];
 	$restrict_issue = $_POST['restrict-issue'];
@@ -57,10 +58,12 @@ if ($_POST['user_id'] != "") {;
 	$stat = cm_add_access($user_id,"module","staff-edit",$staff_edit);
 	$stat = cm_add_access($user_id,"module","submitted-browse",$submitted_browse);
 	$stat = cm_add_access($user_id,"module","submitted-edit",$submitted_edit);
+	$stat = cm_add_access($user_id,"module","submitted-delete",$submitted_delete);
 	$stat = cm_add_access($user_id,"module","poll-browse",$poll_browse);
 	$stat = cm_add_access($user_id,"module","poll-edit",$poll_edit);
 	$stat = cm_add_access($user_id,"string","restrict_section",$restrict_section);
 	$stat = cm_add_access($user_id,"string","restrict_issue",$restrict_issue);
+
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=access-updated");
 		exit;
@@ -137,7 +140,11 @@ if ($user_id == "") {;
     </p>
     <p>
       <input type="checkbox" name="submitted-edit" id="submitted-edit" value="true" class="checkbox" <?php if (cm_get_access('submitted-edit',$user_id) == "true") {; echo "checked"; }; ?> />
-      <label for="submitted-edit">Edit</label>
+      <label for="submitted-edit">View</label>
+    </p>
+    <p>
+      <input type="checkbox" name="submitted-delete" id="submitted-delete" value="true" class="checkbox" <?php if (cm_get_access('submitted-delete',$user_id) == "true") {; echo "checked"; }; ?> />
+      <label for="submitted-delete">Delete</label>
     </p>
   </div>
   <div>

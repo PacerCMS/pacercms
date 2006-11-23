@@ -699,6 +699,22 @@ function cm_delete_media($module, $sel)
 	return $stat;
 };
 
+
+#==========================================#
+#######  Managing Submitted Articles #######
+#==========================================#
+
+/*******************************************
+	Function:	cm_delete_submitted
+*******************************************/
+function cm_delete_submitted($sel)
+{;	
+	$query = "DELETE FROM cm_submitted WHERE id = '$sel';";
+	$stat = cm_run_query($query);
+	return $stat;
+};
+
+
 #==========================================#
 #############  Managing Issues #############
 #==========================================#
@@ -1120,6 +1136,7 @@ $show_article_edit = cm_get_access('article-edit', $_SESSION['cm_user_id']);
 $show_article_browse = cm_get_access('article-browse', $_SESSION['cm_user_id']);
 $show_submitted_browse = cm_get_access('submitted-browse', $_SESSION['cm_user_id']);
 $show_submitted_edit = cm_get_access('submitted-edit', $_SESSION['cm_user_id']);
+$show_submitted_delete = cm_get_access('submitted-delete', $_SESSION['cm_user_id']);
 $show_poll_browse = cm_get_access('poll-browse', $_SESSION['cm_user_id']);
 $show_poll_edit = cm_get_access('poll-edit', $_SESSION['cm_user_id']);
 ?>

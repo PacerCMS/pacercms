@@ -58,6 +58,7 @@ cm_auth_module($module);
 	echo "$show_article_browse\tshow_article_browse\n";
 	echo "$show_submitted_browse\tshow_submitted_browse\n";
 	echo "$show_submitted_edit\tshow_submitted_edit\n";
+	echo "$show_submitted_delete\tshow_submitted_delete\n";
 	echo "$show_poll_browse\tshow_poll_browse\n";
 	echo "$show_poll_edit\tshow_poll_edit\n";
 	echo "</pre>\n"
