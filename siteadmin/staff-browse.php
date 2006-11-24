@@ -47,13 +47,15 @@ $email = $row_CM_Array['user_email'];
       <ul>
         <li><a href="staff-edit.php?id=<?php echo $id; ?>" title="Edit User">Edit</a></li>
         <li><a href="staff-access.php?id=<?php echo $id; ?>" title="Access">Access</a></li>
+        <?php if ($totalRows_CM_Array > 1) {; // Don't make it easy to delete last user ?>
         <li><a href="staff-edit.php?id=<?php echo $id; ?>#delete" title="Delete User">Delete</a></li>
+        <?php }; ?>
       </ul>
     </td>
   </tr>
   <? } while ($row_CM_Array = mysql_fetch_assoc($CM_Array)); ?>
   <tr>
-    <td class="center" colspan="3"><strong><a href="staff-edit.php?action=new">Add a User</a></strong></td>
+    <td class="center" colspan="3"><strong><a href="staff-edit.php?action=add">Add a User</a></strong></td>
     <td></td>
   </tr>
 </table>
