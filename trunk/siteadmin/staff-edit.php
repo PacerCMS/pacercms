@@ -75,8 +75,8 @@ if ($_GET['action'] == "edit") {;
 	};
 };
 
-// If action is new, call add function
-if ($_GET['action'] == "new" && $_POST['login'] != "") {; 
+// If action is add, call add function
+if ($_GET['action'] == "add" && $_POST['login'] != "") {; 
 	// Get posted data
 	$login = $_POST['login'];
 	$first_name = $_POST['first_name'];
@@ -104,8 +104,9 @@ if ($_GET['action'] == "new" && $_POST['login'] != "") {;
 		exit;
 	};	
 	$stat = cm_add_user($login,$password,$first_name,$middle_name,$last_name,$job_title,$email,$telephone,$mobile,$address,$city,$state,$zipcode,$im_aol,$im_msn,$im_yahoo,$im_jabber,$profile);
-	if ($stat == 1) {
-		header("Location: $pmodule.php?msg=added");
+	if ($stat == 1) {	
+		$user_id = mysql_insert_id();
+		header("Location: staff-access.php?id=$user_id&action=add");
 		exit;
 	} else {;
 		cm_error("Error in 'cm_add_user' function.");
@@ -161,7 +162,7 @@ if ($mode == "edit") {;
   <legend>Basic Profile</legend>
   <div class="sidebar">
     <?php
-if ($mode == "new") {;
+if ($mode == "add") {;
 ?>
     <p>
       <label for="login">Login</label>
@@ -277,19 +278,22 @@ if ($mode == "edit") {;
     <textarea name="profile" id="profile" rows="10"><?php echo $profile; ?></textarea>
   </p>
   <p>
-    <?php
-if ($mode == "new") {;
-?>
+
+<?php if ($mode == "add") {; ?>
+
+  <p>
     <input type="submit" value="Add User" name="submit" id="submit" class="button" />
-    <?php
-};
-if ($mode == "edit") {;
-?>
+    <input type="button" value="Cancel" name="cancel_add" id="cancel_add" class="button" onClick="javascript:history.back();" />
+  </p>
+  </fieldset>
+<form>
+
+<?php } else {; ?>
+<p>
     <input type="submit" value="Update Profile" name="update" id="update" class="button" />
     <input name="id" type="hidden" id="id" value="<?php echo $id; ?>" />
     <input type="hidden" name="login" id="login" value="<?php echo $login; ?>" />
     <input type="hidden" name="password" id="password" value="<?php echo $password; ?>" />
-    <?php }; ?>
     <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
   </p>
   </fieldset>
@@ -306,4 +310,6 @@ if ($mode == "edit") {;
     </fieldset>
   </form>
 </div>
+<?php }; ?>
+
 <?php get_cm_footer(); ?>

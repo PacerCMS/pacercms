@@ -780,6 +780,7 @@ function cm_add_user($user_login,$user_password,$user_first_name,$user_middle_na
 	$query = "INSERT INTO cm_users (user_login,user_password,user_first_name,user_middle_name,user_last_name,user_job_title,user_email,user_telephone,user_mobile,user_address,user_city,user_state,user_zipcode,user_im_aol,user_im_msn,user_im_yahoo,user_im_jabber,user_profile)";
 	$query .= " VALUES ('$user_login','$user_password','$user_first_name','$user_middle_name','$user_last_name','$user_job_title','$user_email','$user_telephone','$user_mobile','$user_address','$user_city','$user_state','$user_zipcode','$user_im_aol','$user_im_msn','$user_im_yahoo','$user_im_jabber','$user_profile');";
 	$stat = cm_run_query($query);
+		
 	return $stat;
 };
 

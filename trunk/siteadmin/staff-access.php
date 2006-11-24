@@ -5,7 +5,9 @@ $pmodule = "staff-browse";
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
 
+$mode = $_GET['action'];
 $user_id = $_GET['id'];
+
 
 if ($_POST['user_id'] != "") {;
 	// Get modules
@@ -78,21 +80,44 @@ if ($user_id == "") {;
 	exit;
 };
 
+$query_CM_Array = "SELECT * FROM cm_users ";
+$query_CM_Array .= " WHERE id = $user_id ";
+$query_CM_Array .= " LIMIT 1;";
+	
+// Run Query
+$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
+$row_CM_Array  = mysql_fetch_assoc($CM_Array);
+$totalRows_CM_Array = mysql_num_rows($CM_Array);
+	
+// If Array comes back empty, produce error
+if ($totalRows_CM_Array != 1) {;
+	cm_error("User $user_id doesn't exist, or you cannot edit access permisions.");
+	exit;
+};
+		
+// Define variables
+$id = $row_CM_Array['id'];
+$first_name = $row_CM_Array['user_first_name'];
+$last_name = $row_CM_Array['user_last_name'];
+$job_title = $row_CM_Array['user_job_title'];
+
+
 ?>
 <?php get_cm_header(); ?>
 <?php get_cm_menu(); ?>
 
 <h2><a href="<?php echo "$pmodule.php"?>">Staff Manager</a></h2>
+<p class="systemMessage"><?php echo "Setting user access for $first_name $last_name, $job_title"; ?></p>
 <form action="<?php echo "$module.php"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend>Module Access</legend>
   <h3>Basic</h3>
   <p>
-    <input type="checkbox" name="index" id="index" value="true" class="checkbox" <?php if(cm_get_access('index', $user_id) == "true") {; echo "checked"; }; ?> />
+    <input type="checkbox" name="index" id="index" value="true" class="checkbox" <?php if(cm_get_access('index', $user_id) == "true" || $mode == "add") {; echo "checked"; }; ?> />
     <label for="">Home Page</label>
   </p>
   <p>
-    <input type="checkbox" name="profile" id="profile" value="true" class="checkbox" <?php if(cm_get_access('profile',$user_id) == "true") {; echo "checked"; }; ?> />
+    <input type="checkbox" name="profile" id="profile" value="true" class="checkbox" <?php if(cm_get_access('profile',$user_id) == "true" || $mode == "add") {; echo "checked"; }; ?> />
     <label for="">User Profile</label>
   </p>
   <h3>Manage</h3>
