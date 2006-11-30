@@ -1,5 +1,6 @@
 <?php
-require_once('includes/config.php');
+// Loads everything needed to run PacerCMS
+include_once('includes/cm-header.php');
 
 $id = $_GET['id'];
 $next_issue = next_issue("id");

@@ -1,5 +1,6 @@
 <?php
-include_once('includes/config.php');
+// Loads everything needed to run PacerCMS
+include_once('includes/cm-header.php');
 
 if ($_GET['mode'] != "") {
 	$mode = $_GET['mode'];

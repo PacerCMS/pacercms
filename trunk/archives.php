@@ -1,6 +1,6 @@
 <?php
-
-include_once('includes/config.php');
+// Loads everything needed to run PacerCMS
+include_once('includes/cm-header.php');
 
 $current_volume = current_issue('volume'); 
 
