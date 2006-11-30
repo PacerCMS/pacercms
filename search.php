@@ -1,5 +1,6 @@
 <?php
-require_once('includes/config.php');
+// Loads everything needed to run PacerCMS
+include_once('includes/cm-header.php');
 
 $string = strip_tags($_GET['s']);
 $index = strip_tags($_GET['index']);
