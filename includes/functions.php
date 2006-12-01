@@ -5,10 +5,65 @@ $CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_erro
 mysql_select_db(DB_DATABASE, $CM_MYSQL);
 
 // File handling for templates
-function get_header($topBar,$pageTitle,$sectionTitle) {; include_once(SITE_TEMPLATE_ROOT . '/header.php'); };
-function get_footer() {; include_once(SITE_TEMPLATE_ROOT . '/footer.php'); };
-function get_sidebar() {; include_once(SITE_TEMPLATE_ROOT . '/sidebar.php'); };
-function get_summaries() {; include_once(SITE_TEMPLATE_ROOT . '/summaries.php'); };
+
+/*******************************************
+	Function:	get_header
+*******************************************/
+function get_header($topBar,$pageTitle,$sectionTitle)
+{
+	if (file_exists(SITE_TEMPLATE_ROOT . '/header.php'))
+	{
+		include_once(SITE_TEMPLATE_ROOT . '/header.php');
+		return;
+	} else {
+		echo "<h3 style=\"color:red\">Error: Missing the header template! Please check your settings.</h3>";
+	};
+};
+
+
+/*******************************************
+	Function:	get_footer
+*******************************************/
+function get_footer()
+{
+	if (file_exists(SITE_TEMPLATE_ROOT . '/footer.php'))
+	{
+		include_once(SITE_TEMPLATE_ROOT . '/footer.php');
+		return;
+	} else {
+		echo "<h3 style=\"color:red\">Error: Missing the footer template! Please check your settings.</h3>";
+	};
+};
+
+
+/*******************************************
+	Function:	get_sidebar
+*******************************************/
+function get_sidebar()
+{
+	if (file_exists(SITE_TEMPLATE_ROOT . '/sidebar.php'))
+	{
+		include_once(SITE_TEMPLATE_ROOT . '/sidebar.php');
+		return;
+	} else {
+		echo "<h3 style=\"color:red\">Error: Missing the sidebar template! Please check your settings.</h3>";
+	};
+};
+
+/*******************************************
+	Function:	get_summaries
+*******************************************/
+function get_summaries()
+{
+	if (file_exists(SITE_TEMPLATE_ROOT . '/summaries.php'))
+	{
+		include_once(SITE_TEMPLATE_ROOT . '/summaries.php');
+		return;
+	} else {
+		echo "<h3 style=\"color:red\">Error: Missing the summaries template! Please check your settings.</h3>";
+	};
+};
+
 
 /*******************************************
 	Function:	cm_error
