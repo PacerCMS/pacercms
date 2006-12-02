@@ -6,7 +6,10 @@ $id = $_GET['id'];
 $next_issue = next_issue("id");
 
 // Query
-$query_CM_Array = "SELECT * FROM cm_articles ";
+$query_CM_Array = "SELECT *, ";
+$query_CM_Array .= " DATE_FORMAT(article_publish, '%c/%e/%Y %l:%i %p') as article_publish_nice, ";
+$query_CM_Array .= " DATE_FORMAT(article_edit, '%c/%e/%Y %l:%i %p') as article_edit_nice ";
+$query_CM_Array .= " FROM cm_articles ";
 $query_CM_Array .= " WHERE id = $id AND issue_id < $next_issue;";
 
 // Run Query
@@ -26,8 +29,8 @@ $keywords = $row_CM_Array['article_keywords'];
 $author = $row_CM_Array['article_author'];
 $author_title = $row_CM_Array['article_author_title'];
 $priority = $row_CM_Array['article_priority']; 
-$published = $row_CM_Array['article_publish'];
-$edited = $row_CM_Array['article_edit'];
+$published = $row_CM_Array['article_publish_nice'];
+$edited = $row_CM_Array['article_edit_nice'];
 
 /* Header Configuration */
 $topBar = "<span class=\"floatLeft\"><strong>Published</strong> $published</span>";

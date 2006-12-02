@@ -22,16 +22,21 @@ if ($_GET['s_by'] == "keyword") {
 	$boolean = "true";
 };
 
-// Query
-$query_CM_Array = create_search_query($string,$index,$sort_by,$sort_dir,$boolean);
+$pageTitle = " - Searching for '" . htmlentities($string) . "'";
+$sectionTitle = "Search";
 
+// Query
+if (isset($_GET['s'])) {
+	$query_CM_Array = create_search_query($string,$index,$sort_by,$sort_dir,$boolean);
+} else {
+	$query_CM_Array = "SELECT *, DATE_FORMAT(article_publish, '%c/%e/%Y') as article_publish_nice ";
+	$query_CM_Array .= " FROM cm_articles ORDER BY article_publish DESC;";
+	$pageTitle = " - Search";
+}
 // Run Query
 $CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
 $row_CM_Array  = mysql_fetch_assoc($CM_Array);
 $totalRows_CM_Array = mysql_num_rows($CM_Array);
-
-$pageTitle = " - Searching for [" . htmlentities($string) . "]";
-$sectionTitle = "Search";
 
 ?>
 <?php get_header($topBar,$pageTitle,$sectionTitle); ?>
@@ -49,6 +54,7 @@ $sectionTitle = "Search";
         </p>
         <p>
           <input type="submit" name="search" value="Search" />
+          <input type="reset" name="reset" value="Reset" />
         </p>
       </div>
       <div class="smallerCol">
@@ -63,14 +69,12 @@ $sectionTitle = "Search";
         <p>
           <label for="sort_by">Sort by:</label>
           <select name="sort_by" id="sort_by">
-            <option value="article_publish" <?php if (!(strcmp("article_publish", "$sort_by"))) {echo "SELECTED";} ?>>Publish
-            Date</option>
-            <option value="article_edit" <?php if (!(strcmp("article_edit", "$sort_by"))) {echo "SELECTED";} ?>>Edited
-            Date</option>
-            <option value="article_title" <?php if (!(strcmp("article_title", "$sort_by"))) {echo "SELECTED";} ?>>Headline</option>
-            <option value="article_subtitle" <?php if (!(strcmp("article_subtitle", "$sort_by"))) {echo "SELECTED";} ?>>Sub-Headline</option>
-            <option value="article_author" <?php if (!(strcmp("article_author", "$sort_by"))) {echo "SELECTED";} ?>>Author
-            Name</option>
+            <option value="article_publish" <?php if (!(strcmp("article_publish", $sort_by))) {echo "SELECTED";} ?>>Publish Date</option>
+            <option value="article_edit" <?php if (!(strcmp("article_edit", $sort_by))) {echo "SELECTED";} ?>>Edited Date</option>
+            <option value="article_title" <?php if (!(strcmp("article_title", $sort_by))) {echo "SELECTED";} ?>>Headline</option>
+            <option value="article_subtitle" <?php if (!(strcmp("article_subtitle", $sort_by))) {echo "SELECTED";} ?>>Sub-Headline</option>
+            <option value="article_author" <?php if (!(strcmp("article_author", $sort_by))) {echo "SELECTED";} ?>>Author Name</option>
+            <option value="article_word_count" <?php if (!(strcmp("article_word_count", $sort_by))) {echo "SELECTED";} ?>>Word Count</option>
           </select>
           <select name="sort_dir" id="sort_dir">
             <option value="DESC" <?php if (!(strcmp("DESC", "$sort_dir"))) {echo "SELECTED";} ?>>Descending</option>
@@ -85,9 +89,6 @@ $sectionTitle = "Search";
             (Boolean)</option>
           </select>
         </p>
-        <p>
-          <input type="submit" name="search" value="Search" />
-        </p>
       </div>
     </form>
   </div>
@@ -101,7 +102,7 @@ $sectionTitle = "Search";
           <th>Words</th>
         </tr>
         <?php
-if ($totalRows_CM_Array > 0) {
+if ( $totalRows_CM_Array > 0 ) {
 	do {
 		// Define variables
 		$id = $row_CM_Array['id'];
@@ -115,8 +116,8 @@ if ($totalRows_CM_Array > 0) {
 		$author = $row_CM_Array['article_author'];
 		$author_title = $row_CM_Array['article_author_title'];
 		$priority = $row_CM_Array['article_priority']; 
-		$published = $row_CM_Array['article_publish'];
-		$edited = $row_CM_Array['article_edit'];
+		$published = $row_CM_Array['article_publish_nice'];
+		$edited = $row_CM_Array['article_edit_nice'];
 		$word_count = $row_CM_Array['article_word_count'];
 		
 		echo "<tr>";
@@ -129,11 +130,11 @@ if ($totalRows_CM_Array > 0) {
 	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
 	
 } else {;
-	echo "Nothing found for " . stripslashes(htmlentities($string)) . ".";
+	echo "<tr><td colspan=\"4\">Your search did not return any results.</td></tr>";
 };
 ?>
       </table>
-      <p>You search found <?php echo $totalRows_CM_Array; ?> article<?php if ($totalRows_CM_Array != 1) {echo "s";}; ?>.</p>
+      <p>Your search found <?php echo $totalRows_CM_Array; ?> article<?php if ($totalRows_CM_Array != 1) {echo "s";}; ?>.</p>
     </div>
   </div>
 </div>

@@ -9,7 +9,7 @@ mysql_select_db(DB_DATABASE, $CM_MYSQL);
 /*******************************************
 	Function:	get_header
 *******************************************/
-function get_header($topBar,$pageTitle,$sectionTitle)
+function get_header($topBar=null,$pageTitle=null,$sectionTitle=null)
 {
 	if (file_exists(SITE_TEMPLATE_ROOT . '/header.php'))
 	{
@@ -49,6 +49,7 @@ function get_sidebar()
 		echo "<h3 style=\"color:red\">Error: Missing the sidebar template! Please check your settings.</h3>";
 	};
 };
+
 
 /*******************************************
 	Function:	get_summaries
@@ -94,6 +95,7 @@ function site_info($field)
 	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
 }
 
+
 /*******************************************
 	Function:	section_info
 *******************************************/
@@ -114,6 +116,7 @@ function section_info($field,$sel=1)
 		return $myval;	
 	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
 }
+
 
 /*******************************************
 	Function:	issue_info
@@ -170,6 +173,7 @@ function section_list($disp='list', $sel=1)
 	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
 };
 
+
 /*******************************************
 	Function:	current_issue
 *******************************************/
@@ -194,6 +198,7 @@ function current_issue($format)
 	return $value;
 };
 
+
 /*******************************************
 	Function:	next_issue
 *******************************************/
@@ -217,6 +222,7 @@ function next_issue($format)
 	$value = $row_CM_Array['myvalue'];
 	return $value;
 };
+
 
 /*******************************************
 	Function:	display_media
@@ -243,6 +249,7 @@ function display_media($src,$type,$title='',$credit='',$caption='')
 		echo "</object>\n";
 	};
 };
+
 
 /*******************************************
 	Fuction: image_media
@@ -275,6 +282,7 @@ function image_media($sel)
 	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
 }
 
+
 /*******************************************
 	Fuction: image_media_count
 *******************************************/
@@ -293,6 +301,7 @@ function image_media_count($sel)
 	
 	return $totalRows_CM_Array;
 }
+
 
 /*******************************************
 	Fuction: related_media
@@ -325,6 +334,7 @@ function related_media($sel)
 	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
 }
 
+
 /*******************************************
 	Fuction: related_media_count
 *******************************************/
@@ -343,6 +353,7 @@ function related_media_count($sel)
 	
 	return $totalRows_CM_Array;
 }
+
 
 /*******************************************
 	Fuction: section_headlines
@@ -371,6 +382,7 @@ function section_headlines($section=1,$issue,$limit=5)
 	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
 }
 
+
 /*******************************************
 	Fuction: submit_story
 *******************************************/
@@ -396,6 +408,7 @@ function submit_story($title,$text,$keyword,$author,$author_email,$author_classi
 
 }
 
+
 /*******************************************
 	Fuction: create_search_query
 *******************************************/
@@ -403,6 +416,7 @@ function create_search_query($string,$index,$sort_by,$sort_dir,$boolean)
 {
 	// Clean up fields, strip html tags
 	$string = strip_tags($string);
+	$sort_by = str_replace(";", "", $sort_by);
 	$sort_dir = strtoupper(strip_tags($sort_dir));
 	
 	// Set search mode
@@ -411,10 +425,14 @@ function create_search_query($string,$index,$sort_by,$sort_dir,$boolean)
 	if ($index == "author") { $field = "article_author"; };
 	if ($index == "keyword") { $field = "article_keywords"; };
 	
-	$query = "SELECT * FROM cm_articles WHERE MATCH ($field) AGAINST ('$string'$mode) ORDER BY $sort_by $sort_dir;";
+	$query = "SELECT *, ";
+	$query .= " DATE_FORMAT(article_publish, '%c/%e/%Y') as article_publish_nice, ";
+	$query .= " DATE_FORMAT(article_edit, '%c/%e/%Y') as article_edit_nice ";
+	$query .= " FROM cm_articles WHERE MATCH ($field) AGAINST ('$string'$mode) ORDER BY $sort_by $sort_dir;";
 	
 	return $query;
 }
+
 
 /*******************************************
 	Function:	get_ballot
@@ -433,6 +451,7 @@ function get_ballot($field,$sel=0)
 	
 	return $myvalue;
 };
+
 
 /*******************************************
 	Function:	cast_ballot
@@ -457,6 +476,7 @@ function cast_ballot($sel)
 	};
 };
 
+
 /*******************************************
 	Function:	poll_results
 *******************************************/
@@ -475,6 +495,7 @@ function poll_results($field,$sel=0)
 	return $totalRows_CM_Array;
 	
 }
+
 
 /*******************************************
 	Function:	poll_cleanup
@@ -504,6 +525,7 @@ function poll_cleanup($sel)
 	
 };
 
+
 /*******************************************
 	Function:	poll_delete_ballots
 *******************************************/
@@ -516,6 +538,7 @@ function poll_delete_ballots($sel,$ipad)
 	$stat = run_query($query);
 	return $stat;	
 };
+
 
 /*******************************************
 	Function:	count_words
@@ -534,6 +557,7 @@ function count_words($string)
 	return($word_count);
 }
 
+
 /*******************************************
 	Function: run_query
 *******************************************/
@@ -549,8 +573,12 @@ function run_query($query)
 	return $CM_Array;
 };
 
+
 /*******************************************
-Function:	autop
+	Function:	autop
+	Credit:
+		Matthew Mullenweg of WordPress
+		http://photomatt.net/scripts/autop/
 *******************************************/
 function autop($pee, $br = 1) {
 	$pee = $pee . "\n"; // just to make things a little easier, pad the end
@@ -572,5 +600,4 @@ function autop($pee, $br = 1) {
 	$pee = preg_replace('/&([^#])(?![a-z]{1,8};)/', '&#038;$1', $pee);
 	return $pee;
 };
-
 ?>
