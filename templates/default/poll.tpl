@@ -1,0 +1,66 @@
+{include file="header.tpl"}
+
+<div id="content">
+    <h2 class="sectionNameplate">Poll Results</h2>
+    {if $smarty.request.msg eq 'counted'}<p class="systemMessage">Your vote was counted.</p>{/if}
+    {if $smarty.request.msg eq 'error'}<p class="systemMessage">Something was wrong with your ballot.</p>{/if}
+    <div id="pollResults">
+        
+        <h3>{$poll_question}</h3>
+        
+        {if $v_total != 0}
+        <table>
+            <tr>
+                <th>Poll Response</th>
+                <th>Result</th>
+            <tr>   
+            {if $poll_r1 ne ''}
+            <tr>
+                <td>{$poll_r1|escape 'html'}</td>
+                <td><strong>{$v_r1}</strong> ({math equation="(x/y)*100" x=$v_r1 y=$v_total format="%.2f"}%)</td>
+            <tr>
+            {/if}
+                {if $poll_r2 ne ''}
+            <tr>
+                <td>{$poll_r2|escape 'html'}</td>
+                <td><strong>{$v_r2}</strong> ({math equation="(x/y)*100" x=$v_r2 y=$v_total format="%.2f"}%)</td>
+            <tr>
+            {/if}
+            {if $poll_r3 ne ''}
+            <tr>
+                <td>{$poll_r3|escape 'html'}</td>
+                <td><strong>{$v_r3}</strong> ({math equation="(x/y)*100" x=$v_r3 y=$v_total format="%.2f"}%)</td>
+            <tr>
+            {/if}
+            {if $poll_r4 ne ''}
+            <tr>
+                <td>{$poll_r4|escape 'html'}</td>
+                <td><strong>{$v_r4}</strong> ({math equation="(x/y)*100" x=$v_r4 y=$v_total format="%.2f"}%)</td>
+            <tr>
+            {/if}
+            {if $poll_r5 ne ''}
+            <tr>
+                <td>{$poll_r5|escape 'html'}</td>
+                <td><strong>{$v_r5}</strong> ({math equation="(x/y)*100" x=$v_r5 y=$v_total format="%.2f"}%)</td>
+            <tr>
+            {/if}
+            <tr>
+                <td><strong>Total Votes:</strong></td>
+                <td>{$v_total}</td>
+            </tr>
+        </table>
+        
+        {else}
+        
+        <h4>No one has participated in this Web poll yet.</h4>
+        <p>Please go back to the home page to cast your ballot</p>
+        
+        {/if}
+        
+        <p>Our Web poll is not scientific and reflects the opinions of only those Internet users who have chosen to participate. The results cannot be assumed to represent the opinions of Internet users in general, the public as a whole, nor the students or faculty of our university.</p>
+    
+    </div>
+    
+</div>
+
+{include file="footer.tpl"}

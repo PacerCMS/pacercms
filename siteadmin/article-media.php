@@ -126,6 +126,7 @@ if ($totalRows_CM_Array == 1) {
       <option value="gif" <?php if ($type == 'gif') {; echo "SELECTED"; }; ?> >GIF Image</option>
       <option value="doc" <?php if ($type == 'doc') {; echo "SELECTED"; }; ?> >Word or RTF Document</option>
       <option value="pdf" <?php if ($type == 'pdf') {; echo "SELECTED"; }; ?> >PDF Document</option>
+      <option value="swf" <?php if ($type == 'swf') {; echo "SELECTED"; }; ?> >Flash (SWF)</option>
       <option value="url" <?php if ($type == 'url') {; echo "SELECTED"; }; ?> >Related Link</option>
 	</select> <strong>Determines display method.</strong>
   </p>
