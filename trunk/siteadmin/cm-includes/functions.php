@@ -450,7 +450,7 @@ function cm_display_media($src,$type,$title='')
 		echo "Media File: <a href=\"$src\">Play '$title' ($type)</a>.";
 	};
 	if ($type == "swf") {;
-		echo "<object type=\"application/x-shockwave-flash\" data=\"$src\">\n";
+		echo "<object type=\"application/x-shockwave-flash\" data=\"$src\" width=\"300\" height=\"250\">\n";
 		echo "\t<param name=\"movie\" value=\"$src\" />\n";
 		echo "</object>\n";
 	};
@@ -753,7 +753,7 @@ function cm_edit_issue($date,$volume,$number,$circulation,$online_only,$id)
 /*******************************************
 	Function:	cm_edit_section
 *******************************************/
-function cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$priority,$id)
+function cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority,$id)
 {;
 	$query = "UPDATE cm_sections SET";
 	$query .= " section_name = '$name',";
@@ -762,6 +762,7 @@ function cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar
 	$query .= " section_editor_email = '$editor_email',";
 	$query .= " section_url = '$url',";
 	$query .= " section_sidebar = '$sidebar',";
+	$query .= " section_feed_image = '$feed_image',";
 	$query .= " section_priority = '$priority'";
 	$query .= " WHERE id = $id";
 	$stat = cm_run_query($query);

@@ -67,8 +67,7 @@ cm_auth_module($module);
 <p class="systemMessage">This is the raw read-out of your cm_access entries.</p>
 <?php
 	$user_id = $_SESSION['cm_user_id'];
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
+	
 	$query_CM_Array = "SELECT * FROM cm_access";
 	$query_CM_Array .= " WHERE user_id = '$user_id'";
 	$query_CM_Array .= " ORDER BY access_option ASC;";
