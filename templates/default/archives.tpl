@@ -5,7 +5,7 @@
 <div class="colWrap">
 <div class="bigCol">
 
-<h3>Volume {$archive_volume_number}, Issue {$archive_issue_number}</h3>
+<h3>Volume {$issue_volume}, Issue {$issue_number}</h3>
 
 <table>
 <tr>
@@ -30,7 +30,7 @@
 </div>
 <div class="smallCol">
 
-<h3>Volume {$archive_volume_number}</h3>
+<h3>Volume {$issue_volume}</h3>
 <table>
 <tr>
 <th>Issue</th>

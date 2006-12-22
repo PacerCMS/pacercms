@@ -8,45 +8,45 @@
         
         <h3>{$poll_question}</h3>
         
-        {if $v_total != 0}
+        {if $poll_votes != 0}
         <table>
             <tr>
                 <th>Poll Response</th>
                 <th>Result</th>
-            <tr>   
+            </tr>   
             {if $poll_r1 ne ''}
             <tr>
-                <td>{$poll_r1|escape 'html'}</td>
-                <td><strong>{$v_r1}</strong> ({math equation="(x/y)*100" x=$v_r1 y=$v_total format="%.2f"}%)</td>
-            <tr>
+                <td>{$poll_r1|escape:'html'}</td>
+                <td><strong>{$poll_v1}</strong> ({math equation="(x/y)*100" x=$poll_v1 y=$poll_votes format="%.2f"}%)</td>
+            </tr>
             {/if}
                 {if $poll_r2 ne ''}
             <tr>
-                <td>{$poll_r2|escape 'html'}</td>
-                <td><strong>{$v_r2}</strong> ({math equation="(x/y)*100" x=$v_r2 y=$v_total format="%.2f"}%)</td>
-            <tr>
+                <td>{$poll_r2|escape:'html'}</td>
+                <td><strong>{$poll_v2}</strong> ({math equation="(x/y)*100" x=$poll_v2 y=$poll_votes format="%.2f"}%)</td>
+            </tr>
             {/if}
             {if $poll_r3 ne ''}
             <tr>
-                <td>{$poll_r3|escape 'html'}</td>
-                <td><strong>{$v_r3}</strong> ({math equation="(x/y)*100" x=$v_r3 y=$v_total format="%.2f"}%)</td>
-            <tr>
+                <td>{$poll_r3|escape:'html'}</td>
+                <td><strong>{$poll_v3}</strong> ({math equation="(x/y)*100" x=$poll_v3 y=$poll_votes format="%.2f"}%)</td>
+            </tr>
             {/if}
             {if $poll_r4 ne ''}
             <tr>
-                <td>{$poll_r4|escape 'html'}</td>
-                <td><strong>{$v_r4}</strong> ({math equation="(x/y)*100" x=$v_r4 y=$v_total format="%.2f"}%)</td>
-            <tr>
+                <td>{$poll_r4|escape:'html'}</td>
+                <td><strong>{$poll_v4}</strong> ({math equation="(x/y)*100" x=$poll_v4 y=$poll_votes format="%.2f"}%)</td>
+            </tr>
             {/if}
             {if $poll_r5 ne ''}
             <tr>
-                <td>{$poll_r5|escape 'html'}</td>
-                <td><strong>{$v_r5}</strong> ({math equation="(x/y)*100" x=$v_r5 y=$v_total format="%.2f"}%)</td>
-            <tr>
+                <td>{$poll_r5|escape:'html'}</td>
+                <td><strong>{$poll_v5}</strong> ({math equation="(x/y)*100" x=$poll_v5 y=$poll_votes format="%.2f"}%)</td>
+            </tr>
             {/if}
             <tr>
                 <td><strong>Total Votes:</strong></td>
-                <td>{$v_total}</td>
+                <td>{$poll_votes}</td>
             </tr>
         </table>
         

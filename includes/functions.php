@@ -1,77 +1,23 @@
 <?php 
 
 // Database Connection
-$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-mysql_select_db(DB_DATABASE, $CM_MYSQL);
+$db = ADONewConnection('mysql');
+$db->Connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
-// File handling for templates
-
-/*******************************************
-	Function:	get_header
-*******************************************/
-function get_header($topBar=null,$pageTitle=null,$sectionTitle=null)
-{
-	if (file_exists(SITE_TEMPLATE_ROOT . '/header.php'))
-	{
-		include_once(SITE_TEMPLATE_ROOT . '/header.php');
-		return;
-	} else {
-		echo "<h3 style=\"color:red\">Error: Missing the header template! Please check your settings.</h3>";
-	};
-};
-
-
-/*******************************************
-	Function:	get_footer
-*******************************************/
-function get_footer()
-{
-	if (file_exists(SITE_TEMPLATE_ROOT . '/footer.php'))
-	{
-		include_once(SITE_TEMPLATE_ROOT . '/footer.php');
-		return;
-	} else {
-		echo "<h3 style=\"color:red\">Error: Missing the footer template! Please check your settings.</h3>";
-	};
-};
-
-
-/*******************************************
-	Function:	get_sidebar
-*******************************************/
-function get_sidebar()
-{
-	if (file_exists(SITE_TEMPLATE_ROOT . '/sidebar.php'))
-	{
-		include_once(SITE_TEMPLATE_ROOT . '/sidebar.php');
-		return;
-	} else {
-		echo "<h3 style=\"color:red\">Error: Missing the sidebar template! Please check your settings.</h3>";
-	};
-};
-
-
-/*******************************************
-	Function:	get_summaries
-*******************************************/
-function get_summaries()
-{
-	if (file_exists(SITE_TEMPLATE_ROOT . '/summaries.php'))
-	{
-		include_once(SITE_TEMPLATE_ROOT . '/summaries.php');
-		return;
-	} else {
-		echo "<h3 style=\"color:red\">Error: Missing the summaries template! Please check your settings.</h3>";
-	};
-};
-
+// Start Template Engine
+$smarty = new Smarty_PacerCMS;
+$smarty->caching = USE_TEMPLATE_CACHE;
 
 /*******************************************
 	Function:	cm_error
 *******************************************/
-function cm_error($msg)
+function cm_error($error_message)
 {
-	echo $msg;
+	
+	global $smarty;
+	
+	$smarty->assign("error_message", $error_message );
+	$smarty->display("error.tpl");	
 	exit;
 }
 
@@ -80,19 +26,20 @@ function cm_error($msg)
 *******************************************/
 function site_info($field)
 {
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+
+    global $db;
+
+    // Column names not always prefixed
 	if ($field != "id" && $field != "active_poll") {;
 		$field = "site_" . $field;
 	};
-	$query_CM_Array = "SELECT $field AS myval FROM cm_settings;";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	do {;
-		$myval = $row_CM_Array['myval'];
-		return $myval;	
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
+	
+	$query = "SELECT $field AS myval FROM cm_settings;";
+
+    $result = $db->Execute($query);
+    
+    return $result->Fields('myval');
+
 }
 
 
@@ -101,20 +48,20 @@ function site_info($field)
 *******************************************/
 function section_info($field,$sel=1)
 {
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+    global $db;
+    
+    // Column names not always prefixed
 	if ($field != "id") {;
 		$field = "section_" . $field;
 	};
-	$query_CM_Array = "SELECT $field AS myval FROM cm_sections";
-	$query_CM_Array .= " WHERE id = '$sel';";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	do {;
-		$myval = $row_CM_Array['myval'];
-		return $myval;	
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
+	
+	$query = "SELECT $field AS myval FROM cm_sections";
+	$query .= " WHERE id = '$sel';";
+
+    $result = $db->Execute($query);
+    
+    return $result->Fields('myval');
+
 }
 
 
@@ -123,55 +70,44 @@ function section_info($field,$sel=1)
 *******************************************/
 function issue_info($field,$sel=1)
 {
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+    
+    global $db;
+
+    // Column names not always prefixed
 	if ($field != "id") {;
 		$field = "issue_" . $field;
 	};
-	$query_CM_Array = "SELECT $field AS myval FROM cm_issues";
-	$query_CM_Array .= " WHERE id = '$sel';";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	do {;
-		$myval = $row_CM_Array['myval'];
-		return $myval;	
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
+	
+	$query = "SELECT $field AS myval FROM cm_issues";
+	$query .= " WHERE id = '$sel';";
+
+    $result = $db->Execute($query);
+    
+    return $result->Fields('myval');
+    
 }
 
 
 /*******************************************
 	Function:	section_list
 *******************************************/
-function section_list($disp='list', $sel=1)
-{;
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	// Database Query
-	$query_CM_Array = "SELECT * FROM cm_sections ORDER BY section_priority ASC;";	
-	// Run Query
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);	
-	do {;	
-		$id = $row_CM_Array['id'];
-		$section_name = $row_CM_Array['section_name'];
-		$section_url = $row_CM_Array['section_url'];		
+function section_list($disp='array')
+{
 
-		if ($disp == "list") {;
-		echo "\t<li><a href=\"$section_url\">" . htmlentities($section_name) . "</a></li>\n";
-		};		
-		// If called from menu
-		if ($disp == "menu") {;
-			echo "\t<option value=\"$id\"";
-			if ($sel == $id) {;
-				echo " selected";;	
-			};
-			echo ">" . htmlentities($section_name) . "</option>\n";
-		};		
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-};
+    global $db;
+    
+    // Database Query
+    $query = "SELECT id, section_name, section_url ";
+    $query .= " FROM cm_sections ORDER BY section_priority ASC;";	
+       
+    // Rather than echo, just return value arrays
+    if ($disp == 'array')
+    {
+        $result = $db->Execute($query);        while ($array = $result->GetArray())
+        {            $section_list = $array;
+            return $section_list;        } 
+    }  
+}
 
 
 /*******************************************
@@ -179,23 +115,20 @@ function section_list($disp='list', $sel=1)
 *******************************************/
 function current_issue($format)
 {;	
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+    global $db;
+
 	if ($format != "id") {;
 		$format = "issue_" . $format;
 	};
-	if ($format == "issue_date") {;
-		$query_CM_Array = "SELECT DATE_FORMAT(cm_issues.$format, '%b. %e, %Y') AS myvalue";	
-	} else {;
-		$query_CM_Array = "SELECT cm_issues.$format AS myvalue";
-	};	
-	$query_CM_Array .= " FROM cm_issues, cm_settings";
-	$query_CM_Array .= " WHERE cm_settings.current_issue = cm_issues.id";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array );	
-	$value = $row_CM_Array['myvalue'];
-	return $value;
+
+	$query = "SELECT cm_issues.$format AS myval";
+	$query .= " FROM cm_issues, cm_settings";
+	$query .= " WHERE cm_settings.current_issue = cm_issues.id";
+		
+    $result = $db->Execute($query);
+       
+    return $result->Fields(myval);
+
 };
 
 
@@ -203,234 +136,44 @@ function current_issue($format)
 	Function:	next_issue
 *******************************************/
 function next_issue($format)
-{;	
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+{
+    global $db;
+
 	if ($format != "id") {;
 		$format = "issue_" . $format;
 	};
-	if ($format == "issue_date") {;
-		$query_CM_Array = "SELECT DATE_FORMAT(cm_issues.$format, '%b. %e, %Y') AS myvalue";	
-	} else {;
-		$query_CM_Array = "SELECT cm_issues.$format AS myvalue";
-	};	
-	$query_CM_Array .= " FROM cm_issues, cm_settings";
-	$query_CM_Array .= " WHERE cm_settings.next_issue = cm_issues.id";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array );	
-	$value = $row_CM_Array['myvalue'];
-	return $value;
-};
 
-
-/*******************************************
-	Function:	display_media
-*******************************************/
-function display_media($src,$type,$title='',$credit='',$caption='')
-{;
-	if ($type == "jpg" || $type == "png" || $type == "gif") {;
-		echo "<p class=\"image\"><img src=\"$src\" alt=\"$type\" /></p>\n";
-		if ($credit != "") {; echo "<p class=\"imageCredit\">$credit</p>\n"; };
-		if ($caption != "") {; echo "<p class=\"imageCaption\">$caption</p>\n"; };
-	};
-	if ($type == "pdf" || $type == "doc") {;
-		echo "<li class=\"mediaDocument\"><a href=\"$src\">$title ($type)</a></li>";
-	};
-	if ($type == "wav" || $type == "mp3") {;
-		echo "<li class=\"mediaAudio\"><a href=\"$src\">$title ($type)</a></li>";
-	};
-	if ($type == "url") {;
-		echo "<li class=\"mediaURL\"><a href=\"$src\">$title</a></li>";
-	};
-	if ($type == "swf") {;
-		echo "<object type=\"application/x-shockwave-flash\" data=\"$src\">\n";
-		echo "\t<param name=\"movie\" value=\"$src\" />\n";
-		echo "</object>\n";
-	};
-};
-
-
-/*******************************************
-	Fuction: image_media
-*******************************************/
-function image_media($sel)
-{
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	// Database Query
-	$query_CM_Array = "SELECT * FROM cm_media";	
-	$query_CM_Array .= " WHERE article_id = '$sel'";
-	$query_CM_Array .= " AND (media_type = 'jpg' OR media_type = 'png' OR media_type = 'gif' OR media_type = 'swf')";
-	$query_CM_Array .= " ORDER BY id ASC;";
-	// Run Query
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-
-	do {
-		$id = $row_CM_Array['id'];
-		$src = $row_CM_Array['media_src'];
-		$type = $row_CM_Array['media_type'];
-		$title = $row_CM_Array['media_title'];
-		$credit = $row_CM_Array['media_credit'];
-		$caption = $row_CM_Array['media_caption'];
+	$query = "SELECT cm_issues.$format AS myval";
+	$query .= " FROM cm_issues, cm_settings";
+	$query .= " WHERE cm_settings.next_issue = cm_issues.id";
 		
-		display_media($src,$type,$title,$credit,$caption);
-		
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-}
-
-
-/*******************************************
-	Fuction: image_media_count
-*******************************************/
-function image_media_count($sel)
-{
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	// Database Query
-	$query_CM_Array = "SELECT * FROM cm_media";	
-	$query_CM_Array .= " WHERE article_id = '$sel'";
-	$query_CM_Array .= " AND (media_type = 'jpg' OR media_type = 'png' OR media_type = 'gif' OR media_type = 'swf');";
-	// Run Query
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	
-	return $totalRows_CM_Array;
-}
-
-
-/*******************************************
-	Fuction: related_media
-*******************************************/
-function related_media($sel)
-{
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	// Database Query
-	$query_CM_Array = "SELECT * FROM cm_media";	
-	$query_CM_Array .= " WHERE article_id = '$sel'";
-	$query_CM_Array .= " AND (media_type = 'pdf' OR media_type = 'wav' OR media_type = 'url')";
-	$query_CM_Array .= " ORDER BY id ASC;";
-	// Run Query
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-
-	do {
-		$id = $row_CM_Array['id'];
-		$src = $row_CM_Array['media_src'];
-		$type = $row_CM_Array['media_type'];
-		$title = $row_CM_Array['media_title'];
-		$credit = $row_CM_Array['media_credit'];
-		$caption = $row_CM_Array['media_caption'];
-		
-		display_media($src,$type,$title,$credit,$caption);
-		
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-}
-
-
-/*******************************************
-	Fuction: related_media_count
-*******************************************/
-function related_media_count($sel)
-{
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	// Database Query
-	$query_CM_Array = "SELECT * FROM cm_media";	
-	$query_CM_Array .= " WHERE article_id = '$sel'";
-	$query_CM_Array .= " AND (media_type = 'pdf' OR media_type = 'wav' OR media_type = 'url');";
-	// Run Query
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	
-	return $totalRows_CM_Array;
+    $result = $db->Execute($query);
+       
+    return $result->Fields(myval);
 }
 
 
 /*******************************************
 	Fuction: section_headlines
 *******************************************/
-function section_headlines($section=1,$issue,$limit=5)
+function section_headlines($section=1,$issue,$disp='array')
 {
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	// Database Query
-	$query_CM_Array = "SELECT * FROM cm_articles";	
-	$query_CM_Array .= " WHERE section_id = '$section' AND issue_id = '$issue'";
-	$query_CM_Array .= " ORDER BY article_priority ASC";
-	$query_CM_Array .= " LIMIT 0,$limit;";
-	// Run Query
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
 
-	do {
-		$id = $row_CM_Array['id'];
-		$title = $row_CM_Array['article_title'];
-		$link = site_info('url') . "/article.php?id=$id";
-		
-		echo "<li><a href=\"$link\" title=\"$title\">$title</a></li>\n";
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-}
-
-
-/*******************************************
-	Fuction: submit_story
-*******************************************/
-function submit_story($title,$text,$keyword,$author,$author_email,$author_classification,$author_major,$author_city,$author_telephone)
-{
-	// strip html tags
-	$title = strip_tags($title);
-	$text = strip_tags($text);
-	$keyword = strip_tags($keyword);
-	$author = strip_tags($author);
-	$author_email = strip_tags($author_email);
-	$author_classification = strip_tags($author_classification);
-	$author_major = strip_tags($author_major);
-	$author_city = strip_tags($author_city);
-	$author_telephone = strip_tags($author_telephone);	
-	$sent = date("Y-m-d h:i:s",time());
-	$words = count_words($text);
-	$issue_id = next_issue('id');
-	$query = "INSERT INTO cm_submitted (submitted_title,submitted_text,submitted_keyword,submitted_author,submitted_author_email,submitted_author_classification,submitted_author_major,submitted_author_city,submitted_author_telephone,submitted_sent,submitted_words,issue_id) VALUES ('$title','$text','$keyword','$author','$author_email','$author_classification','$author_major','$author_city','$author_telephone','$sent','$words','$issue_id');";
-
-	$stat = run_query($query);
-	return $stat;
-
-}
-
-
-/*******************************************
-	Fuction: create_search_query
-*******************************************/
-function create_search_query($string,$index,$sort_by,$sort_dir,$boolean)
-{
-	// Clean up fields, strip html tags
-	$string = strip_tags($string);
-	$sort_by = str_replace(";", "", $sort_by);
-	$sort_dir = strtoupper(strip_tags($sort_dir));
-	
-	// Set search mode
-	if ($boolean == "true") { $mode = " IN BOOLEAN MODE"; };
-	if ($index == "article") { $field = "article_text,article_title,article_subtitle"; };
-	if ($index == "author") { $field = "article_author"; };
-	if ($index == "keyword") { $field = "article_keywords"; };
-	
-	$query = "SELECT *, ";
-	$query .= " DATE_FORMAT(article_publish, '%c/%e/%Y') as article_publish_nice, ";
-	$query .= " DATE_FORMAT(article_edit, '%c/%e/%Y') as article_edit_nice ";
-	$query .= " FROM cm_articles WHERE MATCH ($field) AGAINST ('$string'$mode) ORDER BY $sort_by $sort_dir;";
-	
-	return $query;
+    global $db;
+    
+    // Database Query
+	$query = "SELECT id, article_title, article_summary, article_author, article_author_title ";
+	$query .= " FROM cm_articles";	
+	$query .= " WHERE section_id = '$section' AND issue_id = '$issue'";
+	$query .= " ORDER BY article_priority ASC;";
+       
+    // Rather than echo, just return value arrays
+    if ($disp == 'array')
+    {
+        $result = $db->Execute($query);        while ($array = $result->GetArray())
+        {            $section_headlines = $array;
+            return $section_headlines;        } 
+    }  
 }
 
 
@@ -563,14 +306,12 @@ function count_words($string)
 *******************************************/
 function run_query($query)
 {
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	// Database Query
-	$query_CM_Array = $query;
-	// Run Query
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	return $CM_Array;
+    global $db;
+	
+    $result = $db->Execute($query);
+    
+    return $result;
+
 };
 
 

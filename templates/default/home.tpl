@@ -2,17 +2,18 @@
 <div id="content">
   <div class="topStory">
     <div class="biggerCol">
-    {if $top_article_publish gt $current_issue_date}
+    {section name="items" loop=$cover_articles start=0 max=1}
+    {if $cover_articles[items].publish gt $current_issue_date}
     <h5 class="breakingNews">Breaking News</h5>
     {else}
     <h5>&mdash; TOP STORY &mdash;</h5>
     {/if}
 
-	<h2><a href="{$site_url}/article.php?id={$top_article_id}" title="{$top_article_title|escape 'html'}">{$top_article_title|escape 'html'}</a></h2>
-	<p class="byline"><a href="{$site_url}/search.php?s={$top_article_author|escape:'url'}&amp;s_by=author"><strong>{$top_article_author}</strong></a>{if $top_article_author_title}, <em>{$top_article_author_title}</em>{/if}</p>
-	<p class="summary">{$top_article_summary|escape 'html'}</p>
-	<p class="moreLink"><a href="{$site_url}/article.php?id={$top_article_id}" title="{$top_article_title|escape 'html'}"><strong>Read More</strong></a></p>
-
+	<h2><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}">{$cover_articles[items].article_title|escape:'html'}</a></h2>
+	<p class="byline"><a href="{$site_url}/search.php?s={$cover_articles[items].article_author|escape:'url'}&amp;s_by=author"><strong>{$cover_articles[items].article_author|escape:'html'}</strong></a>{if $cover_articles[items].article_author_title ne ''}, <em>{$cover_articles[items].article_author_title|escape:'html'}</em>{/if}</p>
+	<p class="summary">{$cover_articles[items].article_summary|escape:'html'}</p>
+	<p class="moreLink"><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}"><strong>Read More</strong></a></p>
+    {/section}
     </div>
     <div class="smallerCol">
       <div class="mediaImage">
@@ -46,10 +47,10 @@
     <div class="colWrap">
       <div class="bigCol">
 
-	    {section name="items" loop=$other_articles}	    <div class="otherStory">
-		<h3><a href="{$site_url}/article.php?id={$other_articles[items].id}" title="$title">{$other_articles[items].article_title}</a></h3>
-		<p class="summary">{$other_articles[items].article_summary|escape 'html'}</p>
-		<p class="moreLink"><a href="{$site_url}/article.php?id={$other_articles[items].id}" title="{$other_articles[items].article_title|escape 'html'}">Read More</a></p>
+	    {section name="items" loop=$cover_articles start=1}	    <div class="otherStory">
+		<h3><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}">{$cover_articles[items].article_title|escape:'html'}</a></h3>
+		<p class="summary">{$cover_articles[items].article_summary|escape:'html'}</p>
+		<p class="moreLink"><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}">Read More</a></p>
 	    </div>
         {/section}
 	  
@@ -66,8 +67,7 @@
           <div class="divider">
             <hr />
           </div>
-          <p><a href="feed.php?id=$section" class="rssFeed">Top
-              Stories</a> <small>(What's this?)</small></p>
+          <p><a href="feed.php" class="rssFeed">Top Stories</a></p>
         </div>
       </div>
     </div>
