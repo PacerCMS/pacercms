@@ -13,5 +13,6 @@
       
       </div>
   </div>
+  {include file="section-summaries.tpl}
 </div>
 {include file="footer.tpl"}

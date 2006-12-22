@@ -2,91 +2,138 @@
 // Loads everything needed to run PacerCMS
 include_once('includes/cm-header.php');
 
-$id = $_GET['id'];
-$next_issue = next_issue("id");
-
-// Query
-$query_CM_Array = "SELECT *, ";
-$query_CM_Array .= " DATE_FORMAT(article_publish, '%c/%e/%Y %l:%i %p') as article_publish_nice, ";
-$query_CM_Array .= " DATE_FORMAT(article_edit, '%c/%e/%Y %l:%i %p') as article_edit_nice ";
-$query_CM_Array .= " FROM cm_articles ";
-$query_CM_Array .= " WHERE id = $id AND issue_id < $next_issue;";
-
-// Run Query
-$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	
-// Define variables
-$id = $row_CM_Array['id'];
-$section = $row_CM_Array['section_id'];
-$issue = $row_CM_Array['issue_id'];
-$title = $row_CM_Array['article_title'];
-$subtitle = $row_CM_Array['article_subtitle'];
-$summary = $row_CM_Array['article_summary'];
-$text = $row_CM_Array['article_text'];
-$keywords = $row_CM_Array['article_keywords'];
-$author = $row_CM_Array['article_author'];
-$author_title = $row_CM_Array['article_author_title'];
-$priority = $row_CM_Array['article_priority']; 
-$published = $row_CM_Array['article_publish_nice'];
-$edited = $row_CM_Array['article_edit_nice'];
-
-/* Header Configuration */
-$topBar = "<span class=\"floatLeft\"><strong>Published</strong> $published</span>";
-if ($published < $edited) {;
-	$topBar .= " <span class=\"floatRight\"><strong>Updated</strong> $edited</span>";
+/* If id is numeric, use it; else error */
+if (is_numeric($_GET['id'])) {
+	$article_id = $_GET['id'];
+} else {
+    // Error if not numeric
+    cm_error("Could not find article");
+	exit;
 };
-$pageTitle = " &raquo; $title";
-$sectionTitle = $section;
 
-?>
-<?php get_header($topBar,$pageTitle,$section); ?>
+$next_issue_id = next_issue("id");
+$current_issue_id = current_issue("id");
 
-<div id="content" class="fullStory">
-  <div class="colWrap">
-    <div class="fullCol">
-      <div class="inlineCol">
-        <div class="articleToolbar">
-          <ul>
-		    <li><strong>Tools:</strong></li>
-            <li><a href="javascript:window.print()" class="printArticle">Print</a></li>
-            <li><a href="send.php?id=<?php echo $id; ?>" class="emailArticle">E-mail</a></li>
-            <li><a href="javascript:w=window;d=document;var u;s='';ds=d.selection;if(ds&&ds!=u){if(ds.createRange()!=u){s=ds.createRange().text;}}else if(d.getSelection!=u){s=d.getSelection()+'';}else if(w.getSelection!=u){s=w.getSelection()+'';} if(s.length<2){h=String(w.location.href);if(h.length==0||h.substring(0,6)=='about:'){s=prompt('Technorati Realtime Search for:',s);}else{s=w.location.href;}}if(s!=null)w.location='http://technorati.com/search/'+escape(s)+'?sub=toolsearch';void(1);" class="discussArticle">Search for Blogs</a></li>
-          </ul>
-        </div>
-        <?php if (image_media_count($id) > 0) {; ?>
-        <div class="mediaImage">
-          <?php image_media($id); ?>
-        </div>
-        <?php }; ?>
-        <?php if (related_media_count($id) > 0) {; ?>
-        <div class="mediaRelated">
-          <h4>Related:</h4>
-          <ul>
-            <?php related_media($id); ?>
-          </ul>
-        </div>
-        <?php }; ?>
-        <div class="sectionHeadlines">
-          <h4><a href="<?php echo section_info('url',$section); ?>">More <?php echo htmlentities(section_info('name',$section)); ?> Headlines</a></h4>
-          <ul>
-            <?php section_headlines($section,$issue); ?>
-          </ul>
-        </div>
-      </div>
-      <h2><?php echo $title; ?></h2>
-      <?php if ($subtitle != "") {; echo "<h3>$subtitle</h3>"; }; ?>
-      <p class="byline">
-        <?php
-    echo "<a href=\"" . site_info('url') . "/search.php?s=" . urlencode($author) . "&amp;s_by=author\">";	
-	echo "<strong>" . htmlentities($author) . "</strong></a>";
-	if ($author_title != "") {;
-		echo ", <em>" . htmlentities($author_title) . "</em>";
-	};
-	?>
-      </p>
-      <?php echo autop($text); ?> </div>
-  </div>
-</div>
-<?php get_footer(); ?>
+
+/*=======================
+    Selected Article
+=======================*/
+$query = "SELECT * ";
+$query .= " FROM cm_articles ";
+$query .= " WHERE id = $article_id AND issue_id < $next_issue_id;";
+
+// Run query
+$result = $db->Execute($query);
+
+// Error if empty
+if (empty($result))
+{
+    cm_error("Could not find article");
+    exit;
+}
+
+// Define variables
+$article_id = $result->Fields(id);
+$article_title = $result->Fields(article_title);
+$article_summary = $result->Fields(article_summary);
+$article_text = autop($result->Fields(article_text));
+$article_author = $result->Fields(article_author);
+$article_author_title = $result->Fields(article_author_title);
+$article_publish = $result->Fields(article_publish);	
+$article_edit = $result->Fields(article_edit);
+
+// Used in later assignment
+$article_section_id = $result->Fields(section_id);
+$article_section_name = section_info('name', $article_section_id);
+$article_section_url = section_info('url', $article_section_id);
+
+// Assign variables
+$smarty->assign("page_title", $article_title );
+$smarty->assign("article_id", $article_id );
+$smarty->assign("article_title", $article_title );
+$smarty->assign("article_summary", $article_summary );
+$smarty->assign("article_text", $article_text );
+$smarty->assign("article_author", $article_author );
+$smarty->assign("article_author_title", $article_author_title );
+$smarty->assign("article_publish", $article_publish );	
+$smarty->assign("article_edit", $article_edit );
+$smarty->assign("article_section_name", section_info('name', $article_section_id) );
+$smarty->assign("article_section_url", section_info('url', $article_section_id) );
+$smarty->assign("section_name", section_info('name', $article_section_id) );
+$smarty->assign("section_url", section_info('url', $article_section_id) );
+
+
+/*=======================
+    Article
+=======================*/
+$query = "SELECT * ";
+$query .= " FROM cm_articles ";
+$query .= " WHERE section_id = $article_section_id AND issue_id = $current_issue_id;";
+
+// Run query
+$result = $db->Execute($query);
+while ($array = $result->GetArray()) {    $section_headlines = $array;}
+
+// Assign variables
+$smarty->assign("section_headlines", $section_headlines );
+
+
+/*=======================
+    Article Images
+=======================*/
+$query = "SELECT * FROM cm_media ";	
+$query .= " WHERE article_id = '$article_id' ";
+$query .= " AND (media_type = 'jpg' OR media_type = 'png' OR media_type = 'gif') ";
+$query .= " ORDER BY id ASC; ";
+
+// Run query
+$result = $db->Execute($query);while ($array = $result->GetArray()) {    $article_images = $array;}
+
+// Assign variables
+$smarty->assign("article_images", $article_images );
+
+
+/*=======================
+    Article SWFs
+=======================*/
+$query = "SELECT * FROM cm_media ";	
+$query .= " WHERE article_id = '$article_id' ";
+$query .= " AND (media_type = 'swf') ";
+$query .= " ORDER BY id ASC; ";
+
+// Run query
+$result = $db->Execute($query);while ($array = $result->GetArray()) {    $article_swfs = $array;}
+
+// Assign variables
+$smarty->assign("article_swfs", $article_swfs );
+
+
+/*=======================
+    Article Related
+=======================*/
+$query = "SELECT * FROM cm_media ";	
+$query .= " WHERE article_id = '$article_id' ";
+$query .= " AND (media_type = 'pdf' OR media_type = 'doc' OR media_type = 'wav' OR media_type = 'url') ";
+$query .= " ORDER BY id ASC; ";
+
+// Run query
+$result = $db->Execute($query);while ($array = $result->GetArray()) {    $article_related = $array;}
+
+// Assign variables
+$smarty->assign("article_related", $article_related );
+
+
+/*=======================
+    Section Summaries
+=======================*/
+foreach ( section_list('array') as $section_info )
+{
+    $id = $section_info[id];
+    $smarty->assign("section_name_$id", section_info('name', $id) );
+    $smarty->assign("section_url_$id", section_info('url', $id) );
+    $smarty->assign("section_summary_$id", section_headlines($id, $current_issue_id) );
+}
+
+
+// Render
+$smarty->display("article.tpl");
