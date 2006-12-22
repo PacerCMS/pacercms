@@ -76,6 +76,7 @@ if (isset($_POST['recipient-email'])) {
 	};
 }
 
+$smarty->assign("preview_email", autop($smarty->fetch("send-email.tpl")) );
 
 // Render
 $smarty->display("send.tpl");
