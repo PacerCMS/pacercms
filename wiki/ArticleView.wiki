@@ -1,0 +1,60 @@
+#summary Template reference for 'article.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$article_author} }}}
+    Author of the selected article.
+ * {{{ {$article_author_title} }}}
+    Title of the author of the selected article.
+ * {{{ {$article_edit} }}}
+    Date/Time of the last edit of the selected article.
+ * {{{ {$article_id} }}}
+    The unique ID number of the selected article.
+ * {{{ {$article_images} }}}
+    Associative array of image media (jpeg, gif, png) of the selected article.
+ * {{{ {$article_publish} }}}
+    Date/Time of the publication of the selected article.
+ * {{{ {$article_related} }}}
+    Associative array of related media (urls, doc, rtf, pdf) of the selected article.
+ * {{{ {$article_section_name} }}}
+    Name of the section in which the selected article is published.
+ * {{{ {$article_section_url} }}}
+    URL of the section in which the selected article is published.
+ * {{{ {$article_summary} }}}
+    Short summary of the selected article.
+ * {{{ {$article_swfs} }}}
+    Associative array of Flash media (swfs) of the selected article.   
+ * {{{ {$article_text} }}}
+    Full text of the selected article.
+ * {{{ {$page_title} }}}
+    Set to match {{{ {$article_title} }}}.
+ * {{{ {$section_headlines} }}}
+    Associative array of the headlines in the selected article's section in the current issue.
+ * {{{ {$section_name} }}}
+    Set to match {{{ {$article_section_name} }}}.
+ * {{{ {$section_name_[x]} }}}
+    Section name of each section, numbered by section ID.
+ * {{{ {$section_summary_[x]} }}}
+    Associative array of the headlines in the current issue for each section, numbered by section ID.
+ * {{{ {$section_url} }}}
+    Set to match {{{ {$article_section_url} }}}.
+ * {{{ {$section_url_[x]} }}}
+    Section URL of each section, numbered by section ID.    
+
+= File Dependency =
+
+== File Name ==
+ * article.php
+
+== Template Files ==
+ * article.tpl
+ * article-sidebar.tpl
+ * section-summaries.tpl
+ * header.tpl
+ * footer.tpl
+ * sidebar.tpl
+ * error.tpl
+
+
+
