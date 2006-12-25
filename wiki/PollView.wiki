@@ -1,0 +1,24 @@
+#summary Template reference for 'poll.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$poll_question} }}}
+    Question for the current poll set in the Poll Manager.
+ * {{{ {$poll_r[x]} }}}
+    Responses for each poll option, numbered 1-10, of the current poll.
+ * {{{ {$poll_v[x]} }}}
+    Votes vast for each poll option, numbered 1-10, of the current poll.
+ * {{{ {$poll_votes} }}}
+    Total votes cast for the current poll.
+
+= File Dependency =
+
+== File Name ==
+ * poll.php
+
+== Template Files ==
+ * poll.tpl
+ * header.tpl
+ * footer.tpl
+ * sidebar.tpl

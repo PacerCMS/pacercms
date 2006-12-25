@@ -1,0 +1,19 @@
+#summary Template reference for 'article.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$page_title} }}}
+    Assigned as "Feedback".
+
+= File Dependency =
+
+== File Name ==
+ * feedback.php
+
+== Template Files ==
+ * feedback.tpl
+ * feedback-email.tpl
+ * header.tpl
+ * footer.tpl
+ * sidebar.tpl

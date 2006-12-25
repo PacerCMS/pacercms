@@ -1,0 +1,25 @@
+#summary Template reference for 'page.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$page_short_title} }}}
+    Short title of the selected page.
+ * {{{ {$page_side_text} }}}
+    Side text (additional information) of the selected page.
+ * {{{ {$page_text} }}}
+    Full text to the selected page.
+ * {{{ {$page_title} }}}
+    Title of the selected page.
+    
+
+= File Dependency =
+
+== File Name ==
+ * article.php
+
+== Template Files ==
+ * page.tpl
+ * header.tpl
+ * footer.tpl
+ * sidebar.tpl

@@ -1,0 +1,23 @@
+#summary Template reference for 'search.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$article_list} }}}
+    Associative array of articles matching the search string.
+ * {{{ {$search_string} }}}
+    Posted search string.
+ * {{{ {$page_title} }}}
+    Set to "Search" if string empty "Search for {string}" if not empty.
+
+= File Dependency =
+
+== File Name ==
+ * search.php
+
+== Template Files ==
+ * search.tpl
+ * header.tpl
+ * footer.tpl
+ * sidebar.tpl
+ 

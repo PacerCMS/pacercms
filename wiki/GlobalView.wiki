@@ -1,0 +1,37 @@
+#summary Template tags available in any template
+#labels Phase-Design,Reference-TemplateEngine
+
+= Smarty Variables =
+These are pre-packaged with Smarty.
+
+ * {{{ {$SCRIPT_NAME} }}}
+    Generates the name of the applicable script (article.php, index.php, etc.)
+ * {{{ {$smarty} }}}
+    Universal variable to access a variety of objects (Sessions, Cookies, Requests, etc.). See Smarty documentation.
+
+= PacerCMS Config Variables =
+These are set by the pacercms.conf file in the {{{ ./includes/Smarty/configs/ }}} directory.
+
+ * {{{ {#language#} }}}
+    Language of the system, used in DOCTYPE declaration. Defaults to "en-US". * {{{ {#encoding#} }}}
+    Charachter set of the system, used in DOCTYPE declaration. Defaults to "utf-8". * {{{ {#screen_css#} }}}
+    Name of the Cascading Stylesheet for screen rendering. Defaults to "style-screen.css". * {{{ {#print_css#} }}}
+    Name of the Cascading Stylesheet for printer rendering. Defaults to "style-print.css".
+
+= PacerCMS Set Variables =
+These are set in the classes.php file in the {{{ ./includes/ }}} directory.
+
+ * {{{ {$site_name} }}}
+    Publlication name stored in the Settings module of the Site Administration system.
+ * {{{ {$site_url} }}}
+    Web address stored in the Settings module of the Site Administration system.
+ * {{{ {$site_description} }}}
+    Publlication tagline stored in the Settings module of the Site Administration system.
+ * {{{ {$site_sections} }}}
+    Associative array of the sections in the Sections module of the Site Administration system.
+ * {{{ {$site_template_folder} }}}
+    Value stored in the config.php file in the {{{ ./includes/ }}} folder. Typically "default" or "local".
+ * {{{ {$site_cm_version} }}}
+    Version of PacerCMS stored in the cm-header.php file in {{{ ./includes/ }}} folder.
+ * {{{ {$current_issue_date} }}}
+    Date in YYYY-MM-DD format of the issue marked "Current Issue".

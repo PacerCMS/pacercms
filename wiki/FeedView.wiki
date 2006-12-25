@@ -1,0 +1,17 @@
+#summary Template reference for 'feed.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$feed_items} }}}
+    Associative array of articles in the selected section.
+ * {{{ {$section_name} }}}
+    Name of the selected section.
+
+= File Dependency =
+
+== File Name ==
+ * feed.php
+
+== Template File ==
+ * feed.tpl

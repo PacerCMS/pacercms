@@ -1,0 +1,36 @@
+#summary Template reference for 'index.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$cover_articles} }}}
+    Associative array of all articles in the Cover section in the current issue.
+ * {{{ {$poll_question} }}}
+    Question for the current poll set in the Poll Manager.
+ * {{{ {$poll_r[x]} }}}
+    Responses for each poll option, numbered 1-10, of the current poll.
+ * {{{ {$section_name_[x]} }}}
+    Section name of each section, numbered by section ID.
+ * {{{ {$section_sidebar} }}}
+    Value set in the Section Manager for the Cover section.
+ * {{{ {$section_summary_[x]} }}}
+    Associative array of the headlines in the current issue for each section, numbered by section ID.
+ * {{{ {$section_url_[x]} }}}
+    Section URL of each section, numbered by section ID.    
+ * {{{ {$top_article_images} }}}
+    Associative array of images (jpeg, gif, png) assigned to the top story.
+ * {{{ {$top_article_swfs} }}}
+    Associative array of Flash files (swfs) assigned to the top story.   
+
+= File Dependency =
+
+== File Name ==
+ * home.php
+
+== Template Files ==
+ * home.tpl
+ * poll-form.tpl
+ * section-summaries.tpl
+ * header.tpl
+ * footer.tpl
+ * sidebar.tpl

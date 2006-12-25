@@ -1,0 +1,30 @@
+#summary Template reference for 'archives.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$article_list} }}}
+    Associative array of articles for the selected issue. Defaults to current issue.
+ * {{{ {$issue_list} }}}
+    Associative array of issues in the selected volume. Defaults to current volume.
+ * {{{ {$issue_number} }}}
+    Issue number of the selected issue. Defaults to current issue.
+ * {{{ {$issue_volume} }}}
+    Volume number of the selected issue. Defaults to current issue.
+ * {{{ {$page_title} }}}
+    Assigned as "Archives".
+ * {{{ {$section_name} }}}
+    Assigned as "Archives".
+ * {{{ {$volume_list} }}}
+    Associative array of all unique volume numbers appearing in the cm_issues table.
+    
+= File Dependency =
+== File Name ==
+ * archives.php
+
+== Template Files ==
+ * archive.tpl
+ * header.tpl
+ * footer.tpl
+ * sidebar.tpl
+ * error.tpl   

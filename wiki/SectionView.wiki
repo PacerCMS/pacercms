@@ -1,0 +1,32 @@
+#summary Template reference for 'section.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$section_articles} }}}
+    Associative array of all articles in the selected section in the current issue.
+ * {{{ {$section_name_[x]} }}}
+    Section name of each section, numbered by section ID.
+ * {{{ {$section_sidebar} }}}
+    Value set in the Section Manager for the selected section.
+ * {{{ {$section_summary_[x]} }}}
+    Associative array of the headlines in the current issue for each section, numbered by section ID.
+ * {{{ {$section_url_[x]} }}}
+    Section URL of each section, numbered by section ID.    
+ * {{{ {$top_article_images} }}}
+    Associative array of images (jpeg, gif, png) assigned to the top story.
+ * {{{ {$top_article_swfs} }}}
+    Associative array of Flash files (swfs) assigned to the top story.     
+
+= File Dependency =
+
+== File Name ==
+ * section.php
+
+== Template Files ==
+ * section.tpl
+ * section-summaries.tpl
+ * header.tpl
+ * footer.tpl
+ * sidebar.tpl
+ * error.tpl

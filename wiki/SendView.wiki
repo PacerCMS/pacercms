@@ -1,0 +1,44 @@
+#summary Template reference for 'send.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$article_author} }}}
+    Author of the selected article.
+ * {{{ {$article_author_title} }}}
+    Title of the author of the selected article.
+ * {{{ {$article_edit} }}}
+    Date/Time of the last edit of the selected article.
+ * {{{ {$article_id} }}}
+    The unique ID number of the selected article.
+ * {{{ {$article_publish} }}}
+    Date/Time of the publication of the selected article.
+ * {{{ {$article_section_name} }}}
+    Name of the section in which the selected article is published.
+ * {{{ {$article_section_url} }}}
+    URL of the section in which the selected article is published.
+ * {{{ {$article_summary} }}}
+    Short summary of the selected article.
+ * {{{ {$article_text} }}}
+    Full text of the selected article.
+ * {{{ {$page_title} }}}
+    Set to match {{{ {$article_title} }}}.
+ * {{{ {$section_name} }}}
+    Set to match {{{ {$article_section_name} }}}.
+ * {{{ {$section_url} }}}
+    Set to match {{{ {$article_section_url} }}}.
+
+
+= File Dependency =
+
+== File Name ==
+ * send.php
+
+== Template Files ==
+ * send.tpl
+ * send-email.tpl
+ * header.tpl
+ * footer.tpl
+ * sidebar.tpl
+ * error.tpl
+ 

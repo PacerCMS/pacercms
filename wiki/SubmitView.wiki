@@ -1,0 +1,19 @@
+#summary Template reference for 'submit.php'
+#labels Phase-Design,Reference-TemplateEngine
+
+= Template Tags =
+
+ * {{{ {$page_title} }}}
+    Assigned as "Submit".
+
+= File Dependency =
+
+== File Name ==
+ * submit.php
+
+== Template Files ==
+ * submit.tpl
+ * submit-email.tpl
+ * header.tpl
+ * footer.tpl
+ * sidebar.tpl
