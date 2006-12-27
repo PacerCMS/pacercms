@@ -76,32 +76,32 @@ $priority = $row_CM_Array['section_priority'];
   <p>
     <label for="name">Section Name</label>
     <br />
-    <input type="text" name="name" id="name" value="<?php echo $name; ?>" />
+    <input type="text" name="name" id="name" value="<?php echo $name; ?>" class="text" />
   </p>
   <p>
     <label for="url">URL</label>
     <br />
-    <input type="text" name="url" id="url" value="<?php echo $url; ?>" />
+    <input type="text" name="url" id="url" value="<?php echo $url; ?>" class="text" />
   </p>
   <p>
     <label for="editor">Editor Name</label>
     <br />
-    <input type="text" name="editor" id="editor" value="<?php echo $editor; ?>" />
+    <input type="text" name="editor" id="editor" value="<?php echo $editor; ?>" class="text" />
   </p>
   <p>
     <label for="editor_title">Editor Title</label>
     <br />
-    <input type="text" name="editor_title" id="editor_title" value="<?php echo $editor_title; ?>" />
+    <input type="text" name="editor_title" id="editor_title" value="<?php echo $editor_title; ?>" class="text" />
   </p>
   <p>
     <label for="editor_email">Editor Email</label>
     <br />
-    <input type="text" name="editor_email" id="editor_email" value="<?php echo $editor_email; ?>" />
+    <input type="text" name="editor_email" id="editor_email" value="<?php echo $editor_email; ?>" class="text" />
   </p>
   <p>
     <label for="feed_image">Feed Image URL</label>
     <br />
-    <input type="text" name="feed_image" id="feed_image" value="<?php echo $feed_image; ?>" />
+    <input type="text" name="feed_image" id="feed_image" value="<?php echo $feed_image; ?>" class="text" />
   </p>
   <p>
     <label for="sidebar">Sidebar Content</label>
@@ -111,7 +111,7 @@ $priority = $row_CM_Array['section_priority'];
   <p>
     <label for="priority">Section Priority</label>
     <br />
-    <input type="text" name="priority" id="priority" value="<?php echo $priority; ?>" />
+    <input type="text" name="priority" id="priority" value="<?php echo $priority; ?>" class="text" />
   </p>   
   <p>
     <input type="submit" value="Update Section" name="update" id="update" class="button" />

@@ -271,19 +271,21 @@ if ($issue_year == "") {; $issue_year = date('Y'); };
   <p>
     <label for="volume">Volume</label>
     <br />
-    <input type="text" name="volume" id="volume" value="<?php echo $volume; ?>" />
+    <input type="text" name="volume" id="volume" value="<?php echo $volume; ?>" class="text" />
   </p>
   <p>
     <label for="number">Issue Number</label>
     <br />
-    <input type="text" name="number" id="number" value="<?php echo $number; ?>" />
+    <input type="text" name="number" id="number" value="<?php echo $number; ?>" class="text" />
   </p>
   <p>
     <label for="circulation">Circulation</label>
     <br />
-    <input type="text" name="circulation" id="circulation" value="<?php echo $circulation; ?>" />
+    <input type="text" name="circulation" id="circulation" value="<?php echo $circulation; ?>" class="text" />
   </p>
-  <p> <strong>Online Only?</strong> <br />
+  <p>
+    <label for="online_only">Online Only?</label>
+    <br />
     <input type="radio" name="online_only" id="online_only_yes" value="1" class="radio" <?php if ($online_only == '1') {; echo "checked"; }; ?> />
     <label for="online_only_yes">Yes</label>
     <br />

@@ -30,7 +30,7 @@
             <ul>
                 <li>Send a <a href="{$site_url}/submit.php?mode=letter">''Letter to the Editor''</a>.</li>
                 <li>Send a <a href="{$site_url}/submit.php?mode=article">story or press release</a>.</li>
-                <li>Send a <a href="{$site_url}/submit.php?mode=bboard"">''Bulletin Board'' item</a>.</li>
+                <li>Send a <a href="{$site_url}/submit.php?mode=bboard">''Bulletin Board'' item</a>.</li>
             </ul>
         </div>
         <div class="rightCol">

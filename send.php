@@ -6,8 +6,7 @@ include_once('includes/cm-header.php');
 if (is_numeric($_GET['id'])) {
 	$article_id = $_GET['id'];
 } else {
-	$smarty->assign("error_message", "Could not find article");
-	$smarty->display("error.tpl");
+	cm_error("Could not find article");
 	exit;
 };
 

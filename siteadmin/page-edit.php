@@ -129,22 +129,26 @@ if ($mode == "edit") {;
   <p>
     <label for="title">Title</label>
     <br />
-    <input type="text" name="title" id="title" value="<?php echo $title; ?>" />
+    <input type="text" name="title" id="title" value="<?php echo $title; ?>" class="text" />
   </p>
   <p>
     <label for="short_title">Short Title</label>
     <br />
-    <input type="text" name="short_title" id="short_title" value="<?php echo $short_title; ?>" />
+    <input type="text" name="short_title" id="short_title" value="<?php echo $short_title; ?>" class="text" />
   </p>
   <p>
     <label for="text">Text</label>
     <br />
+    <span class="article-edit-tags"><script type="text/javascript">edToolbar();</script></span>
     <textarea name="text" rows="20" id="text"><?php echo $text; ?></textarea>
+    <script type="text/javascript">var edCanvas = document.getElementById('text');</script>
   </p>
     <p>
     <label for="side_text">Side Text</label>
     <br />
+    <span class="article-edit-tags"><script type="text/javascript">edToolbar();</script></span>
     <textarea name="side_text" rows="20" id="side_text"><?php echo $side_text; ?></textarea>
+    <script type="text/javascript">var edCanvas = document.getElementById('side_text');</script>
   </p>
   <p>
     <?php
