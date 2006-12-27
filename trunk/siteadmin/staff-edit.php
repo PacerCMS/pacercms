@@ -191,22 +191,22 @@ if ($mode == "edit") {;
   <p>
     <label for="first_name">First Name</label>
     <br />
-    <input type="text" name="first_name" id="first_name" value="<?php echo $first_name; ?>" />
+    <input type="text" name="first_name" id="first_name" value="<?php echo $first_name; ?>" class="text" />
   </p>
   <p>
     <label for="middle_name">Middle Name</label>
     <br />
-    <input type="text" name="middle_name" id="middle_name" value="<?php echo $middle_name; ?>" />
+    <input type="text" name="middle_name" id="middle_name" value="<?php echo $middle_name; ?>" class="text" />
   </p>
   <p>
     <label for="last_name">Last Name</label>
     <br />
-    <input type="text" name="last_name" id="last_name" value="<?php echo $last_name; ?>" />
+    <input type="text" name="last_name" id="last_name" value="<?php echo $last_name; ?>" class="text" />
   </p>
   <p>
     <label for="job_title">Job Title</label>
     <br />
-    <input type="text" name="job_title" id="job_title" value="<?php echo $job_title; ?>" />
+    <input type="text" name="job_title" id="job_title" value="<?php echo $job_title; ?>" class="text" />
   </p>
   </fieldset>
   <fieldset class="<?php echo "$module-form"; ?>">
@@ -216,58 +216,58 @@ if ($mode == "edit") {;
     <p>
       <label for="im_aol">AOL Instant Messenger</label>
       <br />
-      <input type="text" name="im_aol" id="im_aol" value="<?php echo $im_aol; ?>" />
+      <input type="text" name="im_aol" id="im_aol" value="<?php echo $im_aol; ?>" class="text" />
     </p>
     <p>
       <label for="im_msn">Microsoft Messenger</label>
       <br />
-      <input type="text" name="im_msn" id="im_msn" value="<?php echo $im_msn; ?>" />
+      <input type="text" name="im_msn" id="im_msn" value="<?php echo $im_msn; ?>" class="text" />
     </p>
     <p>
       <label for="im_yahoo">Yahoo! Messenger</label>
       <br />
-      <input type="text" name="im_yahoo" id="im_yahoo" value="<?php echo $im_yahoo; ?>" />
+      <input type="text" name="im_yahoo" id="im_yahoo" value="<?php echo $im_yahoo; ?>" class="text" />
     </p>
     <p>
       <label for="im_jabber">Jabber Services</label>
       <br />
-      <input type="text" name="im_jabber" id="im_jabber" value="<?php echo $im_jabber; ?>" />
+      <input type="text" name="im_jabber" id="im_jabber" value="<?php echo $im_jabber; ?>" class="text" />
     </p>
   </div>
   <p>
     <label for="email">Email</label>
     <br />
-    <input type="text" name="email" id="email" value="<?php echo $email; ?>" />
+    <input type="text" name="email" id="email" value="<?php echo $email; ?>" class="text" />
   </p>
   <p>
     <label for="telephone">Telephone (Local)</label>
     <br />
-    <input type="text" name="telephone" id="telephone" value="<?php echo $telephone; ?>" />
+    <input type="text" name="telephone" id="telephone" value="<?php echo $telephone; ?>" class="text" />
   </p>
   <p>
     <label for="mobile">Mobile</label>
     <br />
-    <input type="text" name="mobile" id="mobile" value="<?php echo $mobile; ?>" />
+    <input type="text" name="mobile" id="mobile" value="<?php echo $mobile; ?>" class="text" />
   </p>
   <p>
     <label for="address">Address</label>
     <br />
-    <input type="text" name="address" id="address" value="<?php echo $address; ?>" />
+    <input type="text" name="address" id="address" value="<?php echo $address; ?>" class="text" />
   </p>
   <p>
     <label for="City">City</label>
     <br />
-    <input type="text" name="city" id="city" value="<?php echo $city; ?>" />
+    <input type="text" name="city" id="city" value="<?php echo $city; ?>" class="text" />
   </p>
   <p>
     <label for="state">State</label>
     <br />
-    <input type="text" name="state" id="state" value="<?php echo $state; ?>" />
+    <input type="text" name="state" id="state" value="<?php echo $state; ?>" class="text" />
   </p>
   <p>
     <label for="zipcode">Zip Code</label>
     <br />
-    <input type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>" />
+    <input type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>" class="text" />
   </p>
   </fieldset>
   <fieldset class="<?php echo "$module-form"; ?>">

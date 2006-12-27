@@ -71,52 +71,52 @@ do {;
   <p>
     <label for="name">Publication Name</label>
     <br />
-    <input type="text" name="name" id="name" value="<?php echo $name; ?>"/>
+    <input type="text" name="name" id="name" value="<?php echo $name; ?>" class="text" />
   </p>
   <p>
     <label for="name">Tagline</label>
     <br />
-    <input type="text" name="description" id="description" value="<?php echo $description; ?>"/>
+    <input type="text" name="description" id="description" value="<?php echo $description; ?>" class="text" />
   </p>  
   <p>
     <label for="url">Web Site URL</label>
     <br />
-    <input type="text" name="url" id="url" value="<?php echo $url; ?>"/>
+    <input type="text" name="url" id="url" value="<?php echo $url; ?>" class="text" />
   </p>
   <p>
     <label for="email">Primary Email Address</label>
     <br />
-    <input type="text" name="email" id="email" value="<?php echo $email; ?>"/>
+    <input type="text" name="email" id="email" value="<?php echo $email; ?>" class="text" />
   </p>    
   <p>
     <label for="address">Address</label>
     <br />
-    <input type="text" name="address" id="address" value="<?php echo $address; ?>"/>
+    <input type="text" name="address" id="address" value="<?php echo $address; ?>" class="text" />
   </p> 
   <p>
     <label for="email">City</label>
     <br />
-    <input type="text" name="city" id="city" value="<?php echo $city; ?>"/>
+    <input type="text" name="city" id="city" value="<?php echo $city; ?>" class="text" />
   </p> 
   <p>
     <label for="state">State</label>
     <br />
-    <input type="text" name="state" id="state" value="<?php echo $state; ?>"/>
+    <input type="text" name="state" id="state" value="<?php echo $state; ?>" class="text" />
   </p> 
   <p>
     <label for="zipcode">Zip Code</label>
     <br />
-    <input type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>"/>
+    <input type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>" class="text" />
   </p>
   <p>
     <label for="telephone">Telephone</label>
     <br />
-    <input type="text" name="telephone" id="telephone" value="<?php echo $telephone; ?>"/>
+    <input type="text" name="telephone" id="telephone" value="<?php echo $telephone; ?>" class="text" />
   </p>
   <p>
     <label for="fax">Fax</label>
     <br />
-    <input type="text" name="fax" id="fax" value="<?php echo $fax; ?>"/>
+    <input type="text" name="fax" id="fax" value="<?php echo $fax; ?>" class="text" />
   </p>
     <p>
     <label for="announce">Announcement</label>

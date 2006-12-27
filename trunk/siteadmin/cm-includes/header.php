@@ -8,6 +8,7 @@
 <link href="cm-includes/style.css" rel="stylesheet" type="text/css" />
 <script src="cm-includes/functions.js" type="text/javascript"></script>
 <script src="cm-includes/prototype.js" type="text/javascript"></script>
+<script src="cm-includes/js_quicktags.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="header">

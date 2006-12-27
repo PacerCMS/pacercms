@@ -144,52 +144,52 @@ if ($mode == "edit") {;
   <p>
     <label for="r1">Option 1</label>
     <br />
-    <input type="text" name="r1" id="r1" value="<?php echo $r1; ?>" />
+    <input type="text" name="r1" id="r1" value="<?php echo $r1; ?>" class="text" />
   </p>
   <p>
     <label for="r2">Option 2</label>
     <br />
-    <input type="text" name="r2" id="r2" value="<?php echo $r2; ?>" />
+    <input type="text" name="r2" id="r2" value="<?php echo $r2; ?>" class="text" />
   </p>
   <p>
     <label for="r3">Option 3</label>
     <br />
-    <input type="text" name="r3" id="r3" value="<?php echo $r3; ?>" />
+    <input type="text" name="r3" id="r3" value="<?php echo $r3; ?>" class="text" />
   </p>
   <p>
     <label for="r4">Option 4</label>
     <br />
-    <input type="text" name="r4" id="r4" value="<?php echo $r4; ?>" />
+    <input type="text" name="r4" id="r4" value="<?php echo $r4; ?>" class="text" />
   </p>
   <p>
     <label for="r5">Option 5</label>
     <br />
-    <input type="text" name="r5" id="r5" value="<?php echo $r5; ?>" />
+    <input type="text" name="r5" id="r5" value="<?php echo $r5; ?>" class="text" />
   </p>
   <p>
     <label for="r6">Option 6</label>
     <br />
-    <input type="text" name="r6" id="r6" value="<?php echo $r6; ?>" />
+    <input type="text" name="r6" id="r6" value="<?php echo $r6; ?>" class="text" />
   </p>
   <p>
     <label for="r7">Option 7</label>
     <br />
-    <input type="text" name="r7" id="r7" value="<?php echo $r7; ?>" />
+    <input type="text" name="r7" id="r7" value="<?php echo $r7; ?>" class="text" />
   </p>
   <p>
     <label for="r8">Option 8</label>
     <br />
-    <input type="text" name="r8" id="r8" value="<?php echo $r8; ?>" />
+    <input type="text" name="r8" id="r8" value="<?php echo $r8; ?>" class="text" />
   </p>
   <p>
     <label for="r9">Option 9</label>
     <br />
-    <input type="text" name="r9" id="r9" value="<?php echo $r9; ?>" />
+    <input type="text" name="r9" id="r9" value="<?php echo $r9; ?>" class="text" />
   </p>
   <p>
     <label for="r10">Option 10</label>
     <br />
-    <input type="text" name="r10" id="r10" value="<?php echo $r10; ?>" />
+    <input type="text" name="r10" id="r10" value="<?php echo $r10; ?>" class="text" />
   </p>
   <p>
     <?php if ($mode == "add") {; ?>

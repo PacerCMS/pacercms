@@ -236,22 +236,22 @@ if ($mode == "edit") {;
   <p>
     <label for="title">Title</label>
     <br />
-    <input type="text" name="title" id="title" value="<?php echo $title; ?>" />
+    <input type="text" name="title" id="title" value="<?php echo $title; ?>" class="text" />
   </p>
   <p>
     <label for="subtitle">Subtitle</label>
     <br />
-    <input type="text" name="subtitle" id="subtitle" value="<?php echo $subtitle; ?>" />
+    <input type="text" name="subtitle" id="subtitle" value="<?php echo $subtitle; ?>" class="text" />
   </p>
   <p>
     <label for="author_id">Author</label>
     <br />
-    <input type="text" name="author" id="author" value="<?php echo $author; ?>" />
+    <input type="text" name="author" id="author" value="<?php echo $author; ?>" class="text" />
   </p>
   <p>
     <label for="author_title">Author Title</label>
     <br />
-    <input type="text" name="author_title" id="author_title" value="<?php echo $author_title; ?>" />
+    <input type="text" name="author_title" id="author_title" value="<?php echo $author_title; ?>" class="text" />
   </p>
   <p>
     <label for="summary">Summary</label>
@@ -261,7 +261,9 @@ if ($mode == "edit") {;
   <p>
     <label for="text">Text</label>
     <br />
+	<span class="article-edit-tags"><script type="text/javascript">edToolbar();</script></span>
     <textarea name="text" rows="20" id="text"><?php echo $text; ?></textarea>
+    <script type="text/javascript">var edCanvas = document.getElementById('text');</script>
   </p>
   <p>
     <?php
