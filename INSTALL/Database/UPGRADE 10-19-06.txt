@@ -1,10 +1,0 @@
-
-INSTALLED ON OR BEFORE 10-19-2006:
-
-Run the following query
-========================
-ALTER TABLE `cm_settings` ADD `site_description` TEXT NOT NULL AFTER `site_announcement` ;
-ALTER TABLE `cm_settings` ADD `database_version` VARCHAR( 5 ) NOT NULL AFTER `national_rate` ;
-UPDATE `cm_settings` SET `site_description` = 'News and information from your student newspaper.',`database_version` = '0.01' WHERE `id` =1 LIMIT 1 ;
-
-UPDATE `cm_settings` SET `site_description` = 'News and information from your student newspaper.',`database_version` = '0.03' WHERE `id` =1 LIMIT 1 ;

@@ -13,11 +13,16 @@ $smarty->caching = USE_TEMPLATE_CACHE;
 *******************************************/
 function cm_error($error_message)
 {
-	
 	global $smarty;
 	
-	$smarty->assign("error_message", $error_message );
-	$smarty->display("error.tpl");	
+	if (!empty($smarty)) {
+    	// Display the error template
+    	$smarty->assign("error_message", $error_message );
+    	$smarty->display("error.tpl");
+	} else {
+	   // If Smarty isn't configured
+	   echo "<h2>Error: $error_message</h2>";
+	}
 	exit;
 }
 
@@ -26,7 +31,6 @@ function cm_error($error_message)
 *******************************************/
 function site_info($field)
 {
-
     global $db;
 
     // Column names not always prefixed
@@ -38,7 +42,12 @@ function site_info($field)
 
     $result = $db->Execute($query);
     
-    return $result->Fields('myval');
+    if (empty($result))
+    {
+        cm_error("Database connection failed");
+    } else {    
+        return $result->Fields('myval');
+    }
 
 }
 
@@ -60,7 +69,12 @@ function section_info($field,$sel=1)
 
     $result = $db->Execute($query);
     
-    return $result->Fields('myval');
+    if (empty($result))
+    {
+        cm_error("Database connection failed");
+    } else {    
+        return $result->Fields('myval');
+    }
 
 }
 
@@ -83,7 +97,12 @@ function issue_info($field,$sel=1)
 
     $result = $db->Execute($query);
     
-    return $result->Fields('myval');
+    if (empty($result))
+    {
+        cm_error("Database connection failed");
+    } else {    
+        return $result->Fields('myval');
+    }
     
 }
 
@@ -127,7 +146,12 @@ function current_issue($format)
 		
     $result = $db->Execute($query);
        
-    return $result->Fields(myval);
+    if (empty($result))
+    {
+        cm_error("Database connection failed");
+    } else {    
+        return $result->Fields('myval');
+    }
 
 };
 
@@ -149,7 +173,12 @@ function next_issue($format)
 		
     $result = $db->Execute($query);
        
-    return $result->Fields(myval);
+    if (empty($result))
+    {
+        cm_error("Database connection failed");
+    } else {    
+        return $result->Fields('myval');
+    }
 }
 
 
@@ -158,7 +187,6 @@ function next_issue($format)
 *******************************************/
 function section_headlines($section=1,$issue,$disp='array')
 {
-
     global $db;
     
     // Database Query
@@ -182,17 +210,19 @@ function section_headlines($section=1,$issue,$disp='array')
 *******************************************/
 function get_ballot($field,$sel=0)
 {
-	$field = "poll_" . $field;
+    global $db;
 
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(mysql_error());
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	$query_CM_Array = "SELECT $field AS myvalue FROM cm_poll_questions WHERE id = '$sel';";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
+	$field = "poll_" . $field;
+	$query = "SELECT $field AS myval FROM cm_poll_questions WHERE id = '$sel';";
 	
-	$myvalue = $row_CM_Array['myvalue'];
+    $result = $db->Execute($query);
 	
-	return $myvalue;
+    if (empty($result))
+    {
+        return 0;
+    } else {    
+        return $result->Fields('myval');
+    }    
 };
 
 
@@ -206,8 +236,8 @@ function cast_ballot($sel)
 	$ip_address = $_SERVER['REMOTE_ADDR'];
 	$hostname = $_SERVER['HTTP_HOST'];
 	
-	// First, let's piss off ballot stuffers
-	$runIt = poll_cleanup($poll_id);
+	// This removes duplicates
+	$stat = poll_cleanup($poll_id);
 	
 	// Process the voting
 	if (!empty($ip_address) && !empty($vote)) {
@@ -225,17 +255,20 @@ function cast_ballot($sel)
 *******************************************/
 function poll_results($field,$sel=0)
 {
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+	global $db;
 
-	$query_CM_Array = "SELECT *";
-	$query_CM_Array .= " FROM cm_poll_ballot";
-	$query_CM_Array .= " WHERE poll_id = '$sel' AND ballot_response = '$field'";
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	
-	return $totalRows_CM_Array;
+	$query = "SELECT count(id) AS vote_count ";
+	$query .= " FROM cm_poll_ballot ";
+	$query .= " WHERE poll_id = '$sel' AND ballot_response = '$field'";
+
+    $result = $db->Execute($query);
+       
+    if (empty($result))
+    {
+        cm_error("Database connection failed");
+    } else {    
+        return $result->Fields('vote_count');
+    }
 	
 }
 
@@ -245,26 +278,26 @@ function poll_results($field,$sel=0)
 *******************************************/
 function poll_cleanup($sel)
 {
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+	global $db;
 
-	$query_CM_Array = "SELECT ballot_ip_address, COUNT(ballot_ip_address) AS ballots";
-	$query_CM_Array .= " FROM cm_poll_ballot";
-	$query_CM_Array .= " WHERE poll_id = '$sel'";
-	$query_CM_Array .= " GROUP BY ballot_ip_address";
-	$query_CM_Array .= " HAVING ballots > 1;";
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
+	$query = "SELECT ballot_ip_address, COUNT(ballot_ip_address) AS ballots";
+	$query .= " FROM cm_poll_ballot";
+	$query .= " WHERE poll_id = '$sel'";
+	$query .= " GROUP BY ballot_ip_address";
+	$query .= " HAVING ballots > 1;";
 	
-	if ($totalRows_CM_Array > 0) {;
-		do {
-			$ipad = $row_CM_Array['ballot_ip_address'];
-			poll_delete_ballots($sel,$ipad);
-		} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-	};
-	
-	return $totalRows_CM_Array;
+	$result = $db->Execute($query);
+       
+    if (empty($result))
+    {
+        // No overvotes
+        return;
+    } else {    
+        // Clean up overvotes
+        $ipad = $result->Fields('ballot_ip_address');
+		$stat = poll_delete_ballots($sel,$ipad);
+		return $stat;
+    }
 	
 };
 
@@ -310,7 +343,12 @@ function run_query($query)
 	
     $result = $db->Execute($query);
     
-    return $result;
+    if (empty($result))
+    {
+        cm_error("Database connection failed");
+    } else {    
+        return $result;;
+    }
 
 };
 

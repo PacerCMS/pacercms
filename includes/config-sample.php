@@ -1,17 +1,16 @@
 <?php
-/* Quick and dirty configuration file for the public site */
-define("DB_HOSTNAME", "yourhost");
-define("DB_DATABASE", "yourdb");
-define("DB_USERNAME", "youruser");
-define("DB_PASSWORD", "yourpass");
-define("TEMPLATES_FOLDER", "default"); // Switch to 'local' for custom templates
-define("SITE_URL", "http://www.example.com/pacercms"); // No trailing slash!
+/* Database and Template Settings */
+define("DB_HOSTNAME", "localhost");
+define("DB_DATABASE", "pacercms");
+define("DB_USERNAME", "username");
+define("DB_PASSWORD", "password");
+define("TEMPLATES_FOLDER", "default");
 
 
 /* Debug and Cache Settings */
 define("DEBUG_MODE", false);
 define("USE_TEMPLATE_CACHE", false);
-define("COMPILE_CHECK", true);
+define("COMPILE_CHECK", false);
 
 
 /* Below this line should work without customization */

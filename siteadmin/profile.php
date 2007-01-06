@@ -1,5 +1,7 @@
-<?php include('cm-includes/config.php'); ?>
 <?php
+// Loads everything needed to run PacerCMS
+include('cm-includes/cm-header.php');
+
 // Declare the current module
 $module = "profile";
 $mode = "edit"; // Locked.
@@ -161,37 +163,37 @@ if ($msg == "updated") {; echo "<p class=\"systemMessage\">Your user profile has
   <p>
     <label for="email">Email</label>
     <br />
-    <input type="text" name="email" id="email" value="<?php echo $email; ?>" />
+    <input type="text" name="email" id="email" value="<?php echo $email; ?>" class="text" />
   </p>
   <p>
     <label for="telephone">Telephone (Local)</label>
     <br />
-    <input type="text" name="telephone" id="telephone" value="<?php echo $telephone; ?>" />
+    <input type="text" name="telephone" id="telephone" value="<?php echo $telephone; ?>" class="text" />
   </p>
   <p>
     <label for="mobile">Mobile</label>
     <br />
-    <input type="text" name="mobile" id="mobile" value="<?php echo $mobile; ?>" />
+    <input type="text" name="mobile" id="mobile" value="<?php echo $mobile; ?>" class="text" />
   </p>
   <p>
     <label for="address">Address</label>
     <br />
-    <input type="text" name="address" id="address" value="<?php echo $address; ?>" />
+    <input type="text" name="address" id="address" value="<?php echo $address; ?>" class="text" />
   </p>
   <p>
     <label for="City">City</label>
     <br />
-    <input type="text" name="city" id="city" value="<?php echo $city; ?>" />
+    <input type="text" name="city" id="city" value="<?php echo $city; ?>" class="text" />
   </p>
   <p>
     <label for="state">State</label>
     <br />
-    <input type="text" name="state" id="state" value="<?php echo $state; ?>" />
+    <input type="text" name="state" id="state" value="<?php echo $state; ?>" class="text" />
   </p>
   <p>
     <label for="zipcode">Zip Code</label>
     <br />
-    <input type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>" />
+    <input type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>" class="text" />
   </p>
   </fieldset>
   <fieldset class="<?php echo "$module-form"; ?>">

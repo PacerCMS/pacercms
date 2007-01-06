@@ -1,6 +1,1 @@
-
-INSTALLED ON OR BEFORE 12-15-2006:
-
-Run the following query
-========================
 ALTER TABLE `cm_sections` ADD `section_feed_image` VARCHAR( 225 ) NOT NULL AFTER `section_sidebar` 

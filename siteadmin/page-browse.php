@@ -1,5 +1,7 @@
-<?php include('cm-includes/config.php'); ?>
 <?php
+// Loads everything needed to run PacerCMS
+include('cm-includes/cm-header.php');
+
 $module = "page-browse";
 $cmodule = "page-edit";
 // SECURITY - User must be authenticated to view page //
