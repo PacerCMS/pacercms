@@ -1,5 +1,6 @@
-<?php include('cm-includes/config.php'); ?>
 <?php
+// Loads everything needed to run PacerCMS
+include('cm-includes/cm-header.php');
 
 // Declare the current module
 $module = "submitted-edit";

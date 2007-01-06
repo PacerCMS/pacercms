@@ -5,7 +5,7 @@ session_start();
 
 // Database Connection
 $CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-mysql_select_db(DB_DATABASE, $CM_MYSQL);
+mysql_select_db(DB_DATABASE, $CM_MYSQL) or die(cm_error(mysql_error()));
 
 // File handling for templates
 function get_cm_header() {; include_once('header.php'); };
