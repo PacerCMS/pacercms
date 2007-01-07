@@ -1,11 +1,11 @@
 /*
-Template: The Pacer
-Description: Design created Spring 2006.
+Template: PacerCMS Default
+Description: Design created Winter 2006.
 Author: Stephen Yeargin
 URL: http://stephen.yeargin.com/
 */
 
-body { background: #8091C1; background-image: url(images/body_bg.png); background-repeat: repeat-y; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; font-size: 10pt;}
+body { background: rgb(0,102,179); background-image: url(images/body_bg.png); background-repeat: repeat-y; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; font-size: 10pt;}
 label {font-weight: bold;}
 h1, h2, h3, h4, h5, h6 {font-family: "Rockwell Bold", Rockwell, Arial, Helvetica, sans-serif;}
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {text-decoration: none;}
@@ -23,10 +23,18 @@ label {font-weight:bold;}
 
 /* header */
 #header { height: 92px; overflow: hidden; background-image: url(images/header_bg.png); background-repeat: repeat-x;}
+#header h1 { font-size: 300%; margin:15px; padding:0; color:#fff; } // Could be hidden instead; see below
 
 /* nameplate */
-#nameplate { float: left; height: 64px; width: 441px; margin: 10px; background-image: url(images/gifs/nameplate.gif); background-repeat: no-repeat;}
+
+// If you have a 441x61 pixel image, you can use it here instead. Be sure to uncomment out the
+// last section of this stylesheet if you want to use a transparent PNG as well for compliant browsers
+
+#nameplate { float: left; height: 64px; width: 441px; margin: 10px; }
+/*
+#nameplate { background-image: url(images/gifs/nameplate.gif); background-repeat: no-repeat;}
 #nameplate h1 { display: none; margin: 0;}
+*/
 
 /* sectionNameplate */
 #sectionNameplate {position: absolute; top: 40px; left: 460px; width: 300px; text-align: right; color: #fff; float: right;}
@@ -217,7 +225,12 @@ label {font-weight:bold;}
 .articleToolbar ul li a.discussArticle {padding-left: 20px; background: transparent url(images/gifs/tool-discuss.gif) no-repeat;}
 
 /* Tell CSS-compliant browsers to use PNG's on transparent images */
+
+// Uncomment this out if you have a transparent PNG available for the nameplate
+
+/*
 body[id=the-body] #nameplate { float: left; height: 64px; width: 441px; margin: 10px; background-image: url(images/nameplate.png); background-repeat: no-repeat;}
+*/
 body[id=the-body] #sideBar #utmLogo { background: url(images/utm_logo.png) no-repeat;}
 body[id=the-body] .sectionHeadlines li { background: transparent url(images/list_dot.png) 0 7px no-repeat; }
 body[id=the-body] .summaries li {background: transparent url(images/list_dot.png) 0 7px no-repeat; }
