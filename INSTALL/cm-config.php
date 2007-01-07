@@ -104,29 +104,52 @@ switch($step) {
     // We'll fail here if the values are no good.
 	$handle = fopen('../includes/config.php', 'w');
 
-    foreach ($configFile as $line) {
-        switch (substr($line,0,16)) {
-            case "define('DB_DATABASE'":
-                fwrite($handle, str_replace("pacercms", $dbname, $line));
+    echo "<blockquote><code>";
+
+    foreach ($configFile as $line_num => $line)
+    {
+        
+        switch (substr($line,0,19))
+        {
+            case 'define("DB_HOSTNAME':
+                $line = 'define("DB_HOSTNAME", "' . $dbhost . '");
+                ';
+                fwrite($handle, $line);
+                echo $line . "<br/>";
                 break;
-            case "define('DB_USERNAME'":
-                fwrite($handle, str_replace("'username'", "'$uname'", $line));
+            case 'define("DB_DATABASE':
+                $line = 'define("DB_DATABASE", "' . $dbname . '");
+                ';
+                fwrite($handle, $line);
+                echo $line . "<br/>";
                 break;
-            case "define('DB_PASSWORD":
-                fwrite($handle, str_replace("'password'", "'$passwrd'", $line));
+            case 'define("DB_USERNAME':
+                $line = 'define("DB_USERNAME", "' . $uname . '");
+                ';
+                fwrite($handle, $line);
+                echo $line . "<br>";
                 break;
-            case "define('DB_HOSTNAME'":
-                fwrite($handle, str_replace("localhost", $dbhost, $line));
+            case 'define("DB_PASSWORD':
+                $line = 'define("DB_PASSWORD", "' . $passwrd . '");
+                ';
+                fwrite($handle, $line);
+                echo $line . "<br/>";
                 break;
-            case "define('TEMPLATES_FOLDER'":
-                fwrite($handle, str_replace("default", $tplfld, $line));
+            case 'define("TEMPLATES_F':
+                $line = 'define("TEMPLATES_FOLDER", "' . $tplfld . '");
+                ';
+                fwrite($handle, $line);
+                echo $line . "<br/>";
                 break;
             default:
                 fwrite($handle, $line);
+                echo $line . "<br/>";
         }
     }
     fclose($handle);
 	chmod('../includes/config.php', 0666);
+
+    echo "</code></blockquote>";
 
 ?>
  

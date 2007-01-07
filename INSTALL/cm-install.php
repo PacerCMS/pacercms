@@ -1,14 +1,18 @@
 <?php
+
 define('CM_INSTALLING', true);
-if (!file_exists('../includes/config.php')) 
-    die("There doesn't seem to be a <code>config.php</code> file. I need this before we can get started. Need more help? <a href='http://wordpress.org/docs/faq/#cm-config'>We got it</a>. You can <a href='cm-config.php'>create a <code>config.php</code> file through a web interface</a>, but this doesn't work for all server setups. The safest way is to manually create the file.");
+
+if (!file_exists('../includes/config.php'))
+{ 
+    die("There doesn't seem to be a <code>config.php</code> file. I need this before we can get started. You can <a href='cm-config.php'>create a <code>config.php</code> file through a web interface</a>, but this doesn't work for all server setups. The safest way is to manually create the file.");
+}
 
 require_once('../includes/config.php');
 require_once('../includes/classes.php');
 require_once('../includes/functions.php');
 
 $schema = ( isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ) ? 'https://' : 'http://';
-$site_url = str_replace('INSTALL', '', $schema . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) );
+$site_url = str_replace('/INSTALL', '', $schema . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) );
 
 if (isset($_GET['step']))
 	$step = $_GET['step'];
@@ -19,11 +23,13 @@ header( 'Content-Type: text/html; charset=utf-8' );
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>PacerCMS &rsaquo; Installation</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	</head>
+<title>PacerCMS &rsaquo; Installation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
 <body>
-<h1 id="logo">PacerCMS Installer</h1>
+
+<h1>PacerCMS Installer</h1>
+
 <?php
 // Let's check to make sure WP isn't already installed.
 $installed = $db->Execute("SELECT * FROM cm_users;");
@@ -32,46 +38,49 @@ if ($installed) die('<h2>Already Installed</h2><p>You appear to have already ins
 switch($step) {
 
 	case 0:
+	
 ?>
 <p>Welcome to the PacerCMS installer. This utility will create the database structure needed to begin managing your online publication.  There are only three steps to get the system up and running, so let's get started.</p>
-	<h2 class="step"><a href="cm-install.php?step=1">First Step &raquo;</a></h2>
+<p><a href="cm-install.php?step=1">First Step &raquo;</a></p>
 <?php
+
 	break;
 
 	case 1:
 
 ?>
+
 <h2>First Step</h2>
 <p>Before we begin we need a little bit of information. Don't worry, you can always change these later.</p>
-
 <form id="setup" method="post" action="cm-install.php?step=2">
-<table width="100%">
-<tr>
-<th width="33%">Publication Name</th>
-<td><input name="site_name" type="text" id="site_name" size="25" /></td>
-</tr>
-<tr>
-<th>E-mail Address</th>
-<td><input name="site_email" type="text" id="site_email" size="25" /></td>
-</tr>
-</table>
-<p><em>Make sure your e-mail address is correct, because that is where we are sending your login information.</em></p>
-<h2 class="step">
-<input type="submit" name="Submit" value="Continue to Next Step" />
-</h2>
+    <table width="100%">
+        <tr>
+            <th width="33%">Publication Name</th>
+            <td><input name="site_name" type="text" id="site_name" size="25" /></td>
+        </tr>
+        <tr>
+            <th>E-mail Address</th>
+            <td><input name="site_email" type="text" id="site_email" size="25" /></td>
+        </tr>
+    </table>
+    <p><em>Make sure your e-mail address is correct, because that is where we are sending your login information.</em></p>
+    <p>
+        <input type="submit" name="Submit" value="Continue to Next Step" />
+    </p>
 </form>
 
 <?php
+
 	break;
 	case 2:
 
-// Fill in the data we gathered
-$site_name = stripslashes($_POST['site_name']);
-$site_email = stripslashes($_POST['site_email']);
-// check e-mail address
-if (empty($site_email)) {
-	die ('<strong>ERROR</strong>: Please type your e-mail address');
-}
+        // Fill in the data we gathered
+        $site_name = stripslashes($_POST['site_name']);
+        $site_email = stripslashes($_POST['site_email']);
+        // check e-mail address
+        if (empty($site_email)) {
+        	die ('<strong>ERROR</strong>: Please type your e-mail address');
+        }
 	
 ?>
 <h1>Second Step</h1>
@@ -376,11 +385,13 @@ Password: %2\$s
 
 Make sure you pick a new password that is easy to remember but hard to guess.
 
---The PacerCMS Team
+--
+PacerCMS Team
 http://pacercms.sourceforge.net/
 ", $site_url, $random_password);
 
-mail($site_email, 'Welcome to PacerCMS', $message, $message_headers);
+// Send message
+$sendit = mail($site_email, 'Welcome to PacerCMS', $message, $message_headers);
 
 ?>
 
@@ -389,16 +400,18 @@ mail($site_email, 'Welcome to PacerCMS', $message, $message_headers);
 <p><?php printf('Now you can <a href="%1$s">log in</a> with the <strong>username</strong> "<code>admin</code>" and <strong>password</strong> "<code>%2$s</code>".', '../siteadmin/', $random_password); ?></p>
 <p><strong><em>Note that password</em></strong> carefully! It is a <em>random</em> password that was generated just for you. If you lose it, you will have to delete the tables from the database yourself, and re-install PacerCMS. So to review:</p>
 <dl>
-<dt>Username</dt>
-<dd><code>admin</code></dd>
-<dt>Password</dt>
-<dd><code><?php echo $random_password; ?></code></dd>
-	<dt>Login Address</dt>
-<dd><a href="../siteadmin/">Site Administration</a></dd>
+    <dt>Username</dt>
+        <dd><code>admin</code></dd>
+    <dt>Password</dt>
+        <dd><code><?php echo $random_password; ?></code></dd>
+    <dt>Login Address</dt>
+        <dd><a href="../siteadmin/">Site Administration</a></dd>
 </dl>
 <p>Installation complete!</p>
 <?php
+
 	break;
+
 }
 ?>
 </body>
