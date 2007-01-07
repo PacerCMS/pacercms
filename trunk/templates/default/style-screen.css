@@ -51,10 +51,10 @@ label {font-weight:bold;}
 #siteUpdate p strong {font-family: "Arial Black", Rockwell, Arial, Helvetica, sans-serif; font-weight: normal; }
 
 /* lastUpdate */
-#lastUpdate { font-size: 100%; float: left; width: 380px; margin: 0 20px 0 0;}
-#lastUpdate p { margin:15px 0 0 0;}
-#lastUpdate .floatRight {float:right; color: #009;}
-#lastUpdate .floatLeft {float:left;}
+#topBar { font-size: 100%; float: left; width: 380px; margin: 0 20px 0 0;}
+#topBar p { margin:15px 0 0 0;}
+#topBar .floatRight {float:right; color: #009;}
+#topBar .floatLeft {float:left;}
 
 /* searchBox */
 #searchBox { font-size: 100%; float: left; text-align: right; width: 230px;}

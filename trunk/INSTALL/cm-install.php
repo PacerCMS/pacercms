@@ -25,10 +25,43 @@ header( 'Content-Type: text/html; charset=utf-8' );
 <head>
 <title>PacerCMS &rsaquo; Installation</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+body {
+	font-family: "Lucida Grande", Helvetica, Verdana, sans-serif;
+	font-size: 10pt;
+	line-height: 16pt;
+	text-align: left;
+	margin: 0;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding: 0;
+	color: rgb(0, 0, 0);
+}
+
+a, a:link, a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+img {
+	border: 0;
+}
+
+h1 {
+	font-size: 15pt;
+	font-weight: bold;
+}
+
+#footer {text-align:right;font-size:80%;line-height:2em;border-top:solid 1px #eee;}
+
+</style>
 </head>
 <body>
 
-<h1>PacerCMS Installer</h1>
+<h1><img src="../siteadmin/cm-images/header.png" alt="PacerCMS"></h1>
 
 <?php
 // Let's check to make sure WP isn't already installed.
@@ -40,7 +73,7 @@ switch($step) {
 	case 0:
 	
 ?>
-<p>Welcome to the PacerCMS installer. This utility will create the database structure needed to begin managing your online publication.  There are only three steps to get the system up and running, so let's get started.</p>
+<p>Welcome to the PacerCMS installer. This utility will create the database structure needed to begin managing your online publication.  There are only two steps to get the system up and running, so let's get started.</p>
 <p><a href="cm-install.php?step=1">First Step &raquo;</a></p>
 <?php
 
@@ -414,5 +447,8 @@ $sendit = mail($site_email, 'Welcome to PacerCMS', $message, $message_headers);
 
 }
 ?>
+
+<p id="footer">Install scripts modeled after <a href="http://wordpress.org">WordPress</a>'s simple but effective methods.</p>
+
 </body>
 </html>
