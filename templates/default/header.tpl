@@ -33,14 +33,21 @@
         {/if}
     {/if}
 </div>
-
 <div id="pageTop">
     <div id="siteUpdate">
         <p><strong>Last Edition: </strong><br />
         {$current_issue_date|date_format:"%B %e, %Y"}</p>
     </div>
-    <div id="lastUpdate">
-        <p>{if $top_bar ne ""}{$top_bar}{else}<strong>{$site_name} Online Edition{/if}</strong></p>
+    <div id="topBar">
+        {if $article_publish ne ""}
+        <p><strong>Published:</strong> {$article_publish|date_format:"%B %e, %Y"}
+        {if $article_edit > $article_publish}
+         <strong>Updated:</strong> {$article_edit|date_format:"%D %l:%m %p"}
+        {/if}
+        </p>
+        {else}
+        <p><strong>{$site_name|escape:'html'} Online Edition</strong></p>
+        {/if}
     </div>
     <div id="searchBox">
         <form action="search.php" method="get">

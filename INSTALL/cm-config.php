@@ -20,9 +20,42 @@ header( 'Content-Type: text/html; charset=utf-8' );
 <head>
 <title>PacerCMS &rsaquo; Setup Configuration File</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+body {
+	font-family: "Lucida Grande", Helvetica, Verdana, sans-serif;
+	font-size: 10pt;
+	line-height: 16pt;
+	text-align: left;
+	margin: 0;
+	margin-left: 10%;
+	margin-right: 10%;
+	padding: 0;
+	color: rgb(0, 0, 0);
+}
+
+a, a:link, a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+img {
+	border: 0;
+}
+
+h1 {
+	font-size: 15pt;
+	font-weight: bold;
+}
+
+#footer {text-align:right;font-size:80%;line-height:2em;border-top:solid 1px #eee;}
+
+</style>
 </head>
 <body>
-<h1>PacerCMS</h1>
+<h1><img src="../siteadmin/cm-images/header.png" alt="PacerCMS"></h1>
 <?php
 // Check if cm-config.php has been created
 if (file_exists('../includes/config.php'))
@@ -112,32 +145,27 @@ switch($step) {
         switch (substr($line,0,19))
         {
             case 'define("DB_HOSTNAME':
-                $line = 'define("DB_HOSTNAME", "' . $dbhost . '");
-                ';
+                $line = str_replace("localhost", $dbhost, $line);
                 fwrite($handle, $line);
                 echo $line . "<br/>";
                 break;
             case 'define("DB_DATABASE':
-                $line = 'define("DB_DATABASE", "' . $dbname . '");
-                ';
+                $line = str_replace("pacercms", $dbname, $line);
                 fwrite($handle, $line);
                 echo $line . "<br/>";
                 break;
             case 'define("DB_USERNAME':
-                $line = 'define("DB_USERNAME", "' . $uname . '");
-                ';
+                $line = str_replace("username", $uname, $line);
                 fwrite($handle, $line);
                 echo $line . "<br>";
                 break;
             case 'define("DB_PASSWORD':
-                $line = 'define("DB_PASSWORD", "' . $passwrd . '");
-                ';
+                $line = str_replace("password", $passwrd, $line);
                 fwrite($handle, $line);
                 echo $line . "<br/>";
                 break;
             case 'define("TEMPLATES_F':
-                $line = 'define("TEMPLATES_FOLDER", "' . $tplfld . '");
-                ';
+                $line = str_replace("default", $tplfld, $line);
                 fwrite($handle, $line);
                 echo $line . "<br/>";
                 break;
@@ -158,5 +186,9 @@ switch($step) {
 	break;
 }
 ?>
+
+<p id="footer">Install scripts modeled after <a href="http://wordpress.org">WordPress</a>'s simple but effective methods.</p>
+
+
 </body>
 </html>

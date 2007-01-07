@@ -10,7 +10,7 @@ define("TEMPLATES_FOLDER", "default");
 /* Debug and Cache Settings */
 define("DEBUG_MODE", false);
 define("USE_TEMPLATE_CACHE", false);
-define("COMPILE_CHECK", false);
+define("COMPILE_CHECK", true);
 
 
 /* Below this line should work without customization */
