@@ -29,7 +29,29 @@ CREATE TABLE `cm_access` (
 -- Dumping data for table `cm_access`
 -- 
 
-INSERT INTO `cm_access` VALUES (1, 1, 'string', 'restrict_issue', 'false');INSERT INTO `cm_access` VALUES (2, 1, 'string', 'restrict_section', 'false');INSERT INTO `cm_access` VALUES (3, 1, 'module', 'poll-edit', 'true');INSERT INTO `cm_access` VALUES (4, 1, 'module', 'poll-browse', 'true');INSERT INTO `cm_access` VALUES (5, 1, 'module', 'submitted-browse', 'true');INSERT INTO `cm_access` VALUES (6, 1, 'module', 'submitted-edit', 'true');INSERT INTO `cm_access` VALUES (7, 1, 'module', 'staff-edit', 'true');INSERT INTO `cm_access` VALUES (8, 1, 'module', 'staff-browse', 'true');INSERT INTO `cm_access` VALUES (9, 1, 'module', 'staff-access', 'true');INSERT INTO `cm_access` VALUES (10, 1, 'module', 'page-edit', 'true');INSERT INTO `cm_access` VALUES (11, 1, 'module', 'page-browse', 'true');INSERT INTO `cm_access` VALUES (12, 1, 'module', 'settings', 'true');INSERT INTO `cm_access` VALUES (13, 1, 'module', 'server-info', 'true');INSERT INTO `cm_access` VALUES (14, 1, 'module', 'section-edit', 'true');INSERT INTO `cm_access` VALUES (15, 1, 'module', 'section-browse', 'true');INSERT INTO `cm_access` VALUES (16, 1, 'module', 'profile', 'true');INSERT INTO `cm_access` VALUES (17, 1, 'module', 'issue-edit', 'true');INSERT INTO `cm_access` VALUES (18, 1, 'module', 'issue-browse', 'true');INSERT INTO `cm_access` VALUES (19, 1, 'module', 'index', 'true');INSERT INTO `cm_access` VALUES (20, 1, 'module', 'article-media', 'true');INSERT INTO `cm_access` VALUES (21, 1, 'module', 'article-edit', 'true');INSERT INTO `cm_access` VALUES (22, 1, 'module', 'article-browse', 'true');
+INSERT INTO `cm_access` VALUES (1, 1, 'string', 'restrict_issue', 'false');
+INSERT INTO `cm_access` VALUES (2, 1, 'string', 'restrict_section', 'false');
+INSERT INTO `cm_access` VALUES (3, 1, 'module', 'poll-edit', 'true');
+INSERT INTO `cm_access` VALUES (4, 1, 'module', 'poll-browse', 'true');
+INSERT INTO `cm_access` VALUES (5, 1, 'module', 'submitted-browse', 'true');
+INSERT INTO `cm_access` VALUES (6, 1, 'module', 'submitted-edit', 'true');
+INSERT INTO `cm_access` VALUES (7, 1, 'module', 'submitted-delete', 'true');
+INSERT INTO `cm_access` VALUES (8, 1, 'module', 'staff-edit', 'true');
+INSERT INTO `cm_access` VALUES (9, 1, 'module', 'staff-browse', 'true');
+INSERT INTO `cm_access` VALUES (10, 1, 'module', 'staff-access', 'true');
+INSERT INTO `cm_access` VALUES (11, 1, 'module', 'page-edit', 'true');
+INSERT INTO `cm_access` VALUES (12, 1, 'module', 'page-browse', 'true');
+INSERT INTO `cm_access` VALUES (13, 1, 'module', 'settings', 'true');
+INSERT INTO `cm_access` VALUES (14, 1, 'module', 'server-info', 'true');
+INSERT INTO `cm_access` VALUES (15, 1, 'module', 'section-edit', 'true');
+INSERT INTO `cm_access` VALUES (16, 1, 'module', 'section-browse', 'true');
+INSERT INTO `cm_access` VALUES (17, 1, 'module', 'profile', 'true');
+INSERT INTO `cm_access` VALUES (18, 1, 'module', 'issue-edit', 'true');
+INSERT INTO `cm_access` VALUES (19, 1, 'module', 'issue-browse', 'true');
+INSERT INTO `cm_access` VALUES (20, 1, 'module', 'index', 'true');
+INSERT INTO `cm_access` VALUES (21, 1, 'module', 'article-media', 'true');
+INSERT INTO `cm_access` VALUES (22, 1, 'module', 'article-edit', 'true');
+INSERT INTO `cm_access` VALUES (23, 1, 'module', 'article-browse', 'true');
 -- --------------------------------------------------------
 
 -- 
@@ -195,6 +217,7 @@ CREATE TABLE `cm_sections` (
   `section_editor_title` varchar(40) NOT NULL default '',
   `section_editor_email` varchar(100) NOT NULL default '',
   `section_sidebar` text NOT NULL,
+  `section_feed_image` VARCHAR(225) NOT NULL,
   `section_priority` int(5) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Newspaper section-specific data';
@@ -203,11 +226,11 @@ CREATE TABLE `cm_sections` (
 -- Dumping data for table `cm_sections`
 -- 
 
-INSERT INTO `cm_sections` VALUES (1, 'Cover', 'http://localhost/pacercms/', 'Samuel L. Clemens', 'Executive Editor', 'editor@example.com', 'Customize this space in the Sections setting.', 10);
-INSERT INTO `cm_sections` VALUES (2, 'Viewpoints', 'http://localhost/pacercms/section.php?id=2', 'Walter Winchell', 'Viewpoints Editor', 'viewpoints@example.com', 'Customize this space in the Sections setting.', 20);
-INSERT INTO `cm_sections` VALUES (3, 'Campus News', 'http://localhost/pacercms/section.php?id=3', 'Mathew Brady', 'News Editor', 'news@example.com', 'Customize this space in the Sections setting.', 30);
-INSERT INTO `cm_sections` VALUES (4, 'Arts & Entertainment', 'http://localhost/pacercms/section.php?id=4', 'Ernie Pyle', 'Arts & Entertainment Editor', 'features@example.com', 'Customize this space in the Sections setting.', 40);
-INSERT INTO `cm_sections` VALUES (5, 'Sports', 'http://localhost/pacercms/section.php?id=5', 'Terry Frei', 'Sports Editor', 'sports@example.com', 'Customize this space in the Sections setting.', 50);
+INSERT INTO `cm_sections` VALUES (1, 'Cover', 'http://localhost/pacercms/', 'Samuel L. Clemens', 'Executive Editor', 'editor@example.com', 'Customize this space in the Sections setting.', '', 10);
+INSERT INTO `cm_sections` VALUES (2, 'Viewpoints', 'http://localhost/pacercms/section.php?id=2', 'Walter Winchell', 'Viewpoints Editor', 'viewpoints@example.com', 'Customize this space in the Sections setting.', '', 20);
+INSERT INTO `cm_sections` VALUES (3, 'Campus News', 'http://localhost/pacercms/section.php?id=3', 'Mathew Brady', 'News Editor', 'news@example.com', 'Customize this space in the Sections setting.', '', 30);
+INSERT INTO `cm_sections` VALUES (4, 'Arts & Entertainment', 'http://localhost/pacercms/section.php?id=4', 'Ernie Pyle', 'Arts & Entertainment Editor', 'features@example.com', 'Customize this space in the Sections setting.', '', 40);
+INSERT INTO `cm_sections` VALUES (5, 'Sports', 'http://localhost/pacercms/section.php?id=5', 'Terry Frei', 'Sports Editor', 'sports@example.com', 'Customize this space in the Sections setting.', '', 50);
 
 -- --------------------------------------------------------
 
@@ -239,7 +262,7 @@ CREATE TABLE `cm_settings` (
 -- Dumping data for table `cm_settings`
 -- 
 
-INSERT INTO `cm_settings` VALUES (1, 'The Pacer', 'http://localhost/pacercms', 'user@example.com', '', '', '', '', '', '', 'Customize this message under the "Settings" menu item. It is displayed for every user that logs into the system.','Your student newspaper.', 1, 2, 1, '0.03');
+INSERT INTO `cm_settings` VALUES (1, 'The Pacer', 'http://localhost/pacercms', 'user@example.com', '', '', '', '', '', '', 'Customize this message under the "Settings" menu item. It is displayed for every user that logs into the system.','Your student newspaper.', 1, 2, 1, '0.5');
 
 -- --------------------------------------------------------
 

@@ -1,1 +1,1 @@
-ALTER TABLE `cm_sections` ADD `section_feed_image` VARCHAR( 225 ) NOT NULL AFTER `section_sidebar` 
+ALTER TABLE `cm_sections` ADD `section_feed_image` VARCHAR(225) NOT NULL AFTER `section_sidebar`;
