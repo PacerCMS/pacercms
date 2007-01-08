@@ -2,11 +2,11 @@
 define('CM_INSTALLING', true);
 
 if (!file_exists('../includes/config-sample.php'))
-    die('Sorry, I need a config-sample.php file to work from. Please re-upload this file from your PacerCMS installation.');
+    die('Sorry, I need a <tt>config-sample.php</tt> file to work from. Please re-upload this file from your PacerCMS installation.');
 
 $configFile = file('../includes/config-sample.php');
 
-if (!is_writable('../includes/')) die("Sorry, I can't write to the directory. You'll have to either change the permissions on your PacerCMS directory or create your config.php manually.");
+if (!is_writable('../includes/')) die("Sorry, I can't write to the <tt>./includes</tt> directory. You'll have to either change the permissions (<tt>chmod 777 includes/</tt>) on the directory or create your <tt>config.php</tt> manually.");
 
 
 if (isset($_GET['step']))
@@ -70,7 +70,8 @@ switch($step) {
   <li>Database name</li> 
   <li>Database username</li> 
   <li>Database password</li>
-  <li>Database host</li> 
+  <li>Database host</li>
+  <li>Template folder name</li> 
 </ol> 
 <p><strong>If for any reason this automatic file creation doesn't work, don't worry. All this does is fill in the database information to a configuration file. You may also simply open <code>config-sample.php</code> in a text editor, fill in your information, and save it as <code>config.php</code>. </strong></p>
 <p>In all likelihood, these items were supplied to you by your ISP. If you do not have this information, then you will need to contact them before you can continue. If you&#8217;re all ready, <a href="cm-config.php?step=1">let&#8217;s go</a>! </p>

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset={#encoding#}" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta name="description" content="{$site_description|escape:'html'}" />
-<meta name="generator" content="PacerCMS {$site_cm_ver}" />
+<meta name="generator" content="PacerCMS {$site_cm_version}" />
 
 <link href="{$site_url}/favicon.ico" rel="shortcut icon" type="image/icon" title="Shortcut Icon" />
 
