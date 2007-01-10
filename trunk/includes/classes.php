@@ -1,7 +1,7 @@
 <?php
 
-require('adodb_lite/adodb.inc.php'); // Database Layer
-require('Smarty/Smarty.class.php'); // Smarty Template Engine
+require( ADODB_DIR . '/adodb.inc.php'); // Database Layer
+require( SMARTY_DIR . '/Smarty.class.php'); // Smarty Template Engine
 
 
 /* Configure Smarty */
