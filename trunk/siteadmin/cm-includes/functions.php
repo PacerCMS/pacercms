@@ -8,22 +8,22 @@ $CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_erro
 mysql_select_db(DB_DATABASE, $CM_MYSQL) or die(cm_error(mysql_error()));
 
 // File handling for templates
-function get_cm_header() {; include_once('header.php'); };
-function get_cm_footer() {; include_once('footer.php'); };
-function get_cm_menu() {; include_once('menu.php'); };
+function get_cm_header() { include_once('header.php'); }
+function get_cm_footer() { include_once('footer.php'); }
+function get_cm_menu() { include_once('menu.php'); }
 
 /*******************************************
 	Function:	cm_error
 *******************************************/
 function cm_error($msg)
-{;
+{
 	get_cm_header();
 	echo "<h2>Error!</h2>";
 	echo autop($msg);
 	echo "<p><a href=\"javascript:history.back();\">Go Back</a>";
 	get_cm_footer();
 	exit;
-};
+}
 
 #==========================================#
 ######## Security-Related Functions ########
@@ -34,43 +34,44 @@ function cm_error($msg)
 	Function:	cm_auth_user
 *******************************************/
 function cm_auth_user($username,$password,$dest)
-{;
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
+{
+    global $CM_MYSQL;
+
+    $username = htmlentities($username);
+    $password = htmlentities($password);
+
 	// Database Query
-	$query_CM_Array = "SELECT * FROM cm_users";
-	$query_CM_Array .= " WHERE user_login = '$username' AND user_password = '$password';";	
+	$query = "SELECT * FROM cm_users";
+	$query .= " WHERE user_login = '$username' AND user_password = '$password';";	
 	// Run Query
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	if ($totalRows_CM_Array == 1) {
-		$_SESSION['cm_user_id'] = $row_CM_Array['id'];
-		$_SESSION['cm_user_fullname'] = $row_CM_Array['user_first_name'] . " " . $row_CM_Array['user_last_name'];
-	};
-	return $totalRows_CM_Array;
-};
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
+	if ($result_row_count == 1) {
+		$_SESSION['cm_user_id'] = $result_array['id'];
+		$_SESSION['cm_user_fullname'] = $result_array['user_first_name'] . " " . $result_array['user_last_name'];
+	}
+	return $result_row_count;
+}
 
 
 /*******************************************
 	Function:	cm_reset_pass
 *******************************************/
 function cm_reset_pass($username,$email)
-{;
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
+{
+    global $CM_MYSQL;
+    	
 	// Database Query
 	$query = "SELECT * FROM cm_users";
 	$query .= " WHERE user_login = '$username' AND user_email = '$email'";
 	$query .= " LIMIT 1;";	
 	// Run Query
-	$CM_Array  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
 
-	$id = $row_CM_Array['id'];
+	$id = $result_array['id'];
 	
 	if ($id != "") {
 		
@@ -104,100 +105,99 @@ function cm_reset_pass($username,$email)
 		// Send the e-mail notification
 		$sendit = mail($email, $subject, $message);      	
 
-	};
-	return $totalRows_CM_Array;
-};
+	}
+	return $result_row_count;
+}
 
 /*******************************************
 	Function:	cm_auth_module
 *******************************************/
 function cm_auth_module($module)
-{;
+{
 	if (!isset($_SESSION['cm_user_id'])) {
 		$dest = $_SERVER['REQUEST_URI'];
 		header("Location: login.php?dest=$dest");
 		exit;
-	};
+	}
 	$user_id = $_SESSION['cm_user_id'];
 	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
 	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	$query_CM_Array = "SELECT * FROM cm_access";
-	$query_CM_Array .= " WHERE user_id = '$user_id'";
-	$query_CM_Array .= " AND access_type = 'module'";
-	$query_CM_Array .= " AND access_option = '$module'";
-	$query_CM_Array .= " AND access_value = 'true'";
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);	
-	if ($totalRows_CM_Array > 0) {
+	$query = "SELECT * FROM cm_access";
+	$query .= " WHERE user_id = '$user_id'";
+	$query .= " AND access_type = 'module'";
+	$query .= " AND access_option = '$module'";
+	$query .= " AND access_value = 'true'";
+	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);	
+	if ($result_row_count > 0) {
 		return true;
-	} else {;
+	} else {
 		cm_error("You do not have permission to access this page.");
 		exit;
-	};
-};
+	}
+}
 
 /*******************************************
 	Function:	cm_logout
 *******************************************/
 function cm_logout()
-{;
+{
 	$cookiesSet = array_keys($_COOKIE);
 	for ($x=0;$x<count($cookiesSet);$x++) setcookie($cookiesSet[$x],"",time()-1);
 	$_SESSION = array();
 	if (isset($_COOKIE[session_name()])) {
 	   setcookie(session_name(), '', time()-42000, '/');
-	};
+	}
 	session_destroy();
 	header("Location: login.php?msg=logout");
-};
+}
 
 /*******************************************
 	Function:	cm_auth_restrict
 *******************************************/
 function cm_auth_restrict($sel)
-{;
+{
+    global $CM_MYSQL;
+
 	$user_id = $_SESSION['cm_user_id'];
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	$query_CM_Array = "SELECT * FROM cm_access";
-	$query_CM_Array .= " WHERE user_id = '$user_id'";
-	$query_CM_Array .= " AND access_type = 'string'";
-	$query_CM_Array .= " AND access_option = '$sel'";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);	
-	$myval = $row_CM_Array['access_value'];	
-	if ($totalRows_CM_Array > 0) {
+	$query = "SELECT * FROM cm_access";
+	$query .= " WHERE user_id = '$user_id'";
+	$query .= " AND access_type = 'string'";
+	$query .= " AND access_option = '$sel'";
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);	
+	$myval = $result_array['access_value'];	
+	if ($result_row_count > 0) {
 		return $myval;
-	} else {;
+	} else {
 		return false;
-	};
-};
+	}
+}
 
 /*******************************************
 	Function:	cm_get_restrict
 *******************************************/
 function cm_get_restrict($string,$sel)
 {
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+    global $CM_MYSQL;
+    
 	// Database Query
-	$query_CM_Array = "SELECT * FROM cm_access";
-	$query_CM_Array .= " WHERE user_id = '$sel'";
-	$query_CM_Array .= " AND access_type = 'string'";
-	$query_CM_Array .= " AND access_option = '$string'";
+	$query = "SELECT * FROM cm_access";
+	$query .= " WHERE user_id = '$sel'";
+	$query .= " AND access_type = 'string'";
+	$query .= " AND access_option = '$string'";
 	// Run Query
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);	
-	$myval = $row_CM_Array['access_value'];	
-	if ($totalRows_CM_Array > 0) {
+	$result = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);	
+	$myval = $result_array['access_value'];	
+	if ($result_row_count > 0) {
 		return $myval;
-	} else {;
+	} else {
 		return false;
-	};	
+	}	
 }
 
 ///// Working with the cm_access table /////
@@ -206,46 +206,45 @@ function cm_get_restrict($string,$sel)
 	Function:	cm_clear_access
 *******************************************/
 function cm_clear_access($sel)
-{;
+{
 	$query = "DELETE FROM cm_access WHERE user_id = $sel;";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_add_access
 *******************************************/
 function cm_add_access($sel,$type,$option,$value)
-{;
-	if ($value == "") { $value = "false"; };	
+{
+	if ($value == "") { $value = "false"; }	
 	$query = "INSERT INTO cm_access (user_id,access_type,access_option,access_value) VALUES ($sel,'$type','$option','$value');";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_get_access
 *******************************************/
 function cm_get_access($module,$sel)
 {
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+    global $CM_MYSQL;
+    
 	// Database Query
-	$query_CM_Array = "SELECT * FROM cm_access";
-	$query_CM_Array .= " WHERE user_id = '$sel'";
-	$query_CM_Array .= " AND access_type = 'module'";
-	$query_CM_Array .= " AND access_option = '$module'";
-	$query_CM_Array .= " AND access_value = 'true';";
+	$query = "SELECT * FROM cm_access";
+	$query .= " WHERE user_id = '$sel'";
+	$query .= " AND access_type = 'module'";
+	$query .= " AND access_option = '$module'";
+	$query .= " AND access_value = 'true';";
 	// Run Query
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	if ($totalRows_CM_Array > 0) {; 
+	$result = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
+	if ($result_row_count > 0) { 
 		$stat = "true";
-	} else {;
+	} else {
 		$stat = "false";
-	}; 
+	} 
 	return $stat;
 }
 
@@ -258,206 +257,203 @@ function cm_get_access($module,$sel)
 	Function:	cm_section_list
 *******************************************/
 function cm_section_list($module, $sel=1)
-{;
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
+{
+    global $CM_MYSQL;
+
 	// Database Query
-	$query_CM_Array = "SELECT * FROM cm_sections ORDER BY section_priority ASC;";	
+	$query = "SELECT * FROM cm_sections ORDER BY section_priority ASC;";	
 	// Run Query
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);	
-	do {;	
-		$id = $row_CM_Array['id'];
-		$section_name = $row_CM_Array['section_name'];
-		$section_url = $row_CM_Array['section_url'];		
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);	
+	do {	
+		$id = $result_array['id'];
+		$section_name = $result_array['section_name'];
+		$section_url = $result_array['section_url'];		
 		// If called from the Menu include
-		if ($module == "menu") {;
+		if ($module == "menu") {
 		echo "\t<li><a href=\"$section_url\">" . htmlentities($section_name) . "</a></li>\n";
-		};		
+		}		
 		// If called from "article-browse.php" module
-		if ($module == "article-browse") {;
+		if ($module == "article-browse") {
 			echo "\t<li><a href=\"$module.php?section=$id\"";
-			if ($sel == $id) {;
+			if ($sel == $id) {
 			echo " class=\"selected\"";;	
-		};
+		}
 			echo ">" . htmlentities($section_name) . "</a></li>\n";
-		};		
+		}		
 		// If called from "article-edit.php" module
-		if ($module == "article-edit" || $module == "staff-access") {;
+		if ($module == "article-edit" || $module == "staff-access") {
 			echo "\t<option value=\"$id\"";
-			if ($sel == $id) {;
+			if ($sel == $id) {
 				echo " selected";;	
-			};
+			}
 			echo ">" . htmlentities($section_name) . "</option>\n";
-		};		
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-};
+		}		
+	} while ($result_array = mysql_fetch_assoc($result));
+}
 
 /*******************************************
 	Function:	cm_issue_list
 *******************************************/
 function cm_issue_list($module, $sel)
-{;
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	$query_CM_Array = "SELECT * FROM cm_issues ORDER BY issue_date DESC;";	
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));;
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	do {;
-		$id = $row_CM_Array['id'];
-		$date = $row_CM_Array['issue_date'];
-		$volume = $row_CM_Array['issue_volume'];
-		$number = $row_CM_Array['issue_number'];
+{
+    global $CM_MYSQL;
+    
+	$query = "SELECT * FROM cm_issues ORDER BY issue_date DESC;";	
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
+	do {
+		$id = $result_array['id'];
+		$date = $result_array['issue_date'];
+		$volume = $result_array['issue_volume'];
+		$number = $result_array['issue_number'];
 		echo "\t<option value=\"$id\"";
-		if ($sel == $id) {;
+		if ($sel == $id) {
 			echo " selected";;	
-		};
+		}
 		echo ">$date (Vol. $volume, No. $number)</option>\n";
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-};
+	} while ($result_array = mysql_fetch_assoc($result));
+}
 
 /*******************************************
 	Function:	cm_volume_list
 *******************************************/
 function cm_volume_list($module, $sel=1)
-{;
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	$query_CM_Array = "SELECT DISTINCT(issue_volume) FROM cm_issues ORDER BY issue_volume DESC;";	
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));;
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	do {;
-		$volume = $row_CM_Array['issue_volume'];
-		if ($module == "issue-browse") {;
+{
+    global $CM_MYSQL;
+    
+	$query = "SELECT DISTINCT(issue_volume) FROM cm_issues ORDER BY issue_volume DESC;";	
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
+	do {
+		$volume = $result_array['issue_volume'];
+		if ($module == "issue-browse") {
 			echo "\t<option value=\"$volume\"";
-			if ($sel == $volume) {;
+			if ($sel == $volume) {
 			echo " selected";;	
-		};
+		}
 		echo ">Volume $volume</option>\n";
-		};
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-};
+		}
+	} while ($result_array = mysql_fetch_assoc($result));
+}
 
 /*******************************************
 	Function:	cm_list_media
 *******************************************/
 function cm_list_media($sel,$display=false)
-{;
+{
+    global $CM_MYSQL;
+
 	if ($display == true) {
-		$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-		mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-		$query_CM_Array = "SELECT * FROM cm_media WHERE article_id = '$sel';";	
-		$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));;
-		$row_CM_Array = mysql_fetch_assoc($CM_Array);
-		$totalRows_CM_Array = mysql_num_rows($CM_Array);
+		$query = "SELECT * FROM cm_media WHERE article_id = '$sel';";	
+		$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
+		$result_array = mysql_fetch_assoc($result);
+		$result_row_count = mysql_num_rows($result);
 		echo "<p><strong>Linked Media:</strong></p>";
-		if ($totalRows_CM_Array > 0) {;
-			do {;		
-				$id = $row_CM_Array['id'];
-				$title = $row_CM_Array['media_title'];
-				$src = $row_CM_Array['media_src'];
-				$type = $row_CM_Array['media_type'];
+		if ($result_row_count > 0) {
+			do {		
+				$id = $result_array['id'];
+				$title = $result_array['media_title'];
+				$src = $result_array['media_src'];
+				$type = $result_array['media_type'];
 				echo "<p>";
 				cm_display_media($src,$type,$title);
 				echo "</p>\n";
 				echo "<p class=\"systemMessage\"><a href=\"article-media.php?id=$id\">Edit '$title' ($type)</a> | <a href=\"article-media.php?id=$id#delete\">Delete</a></p>\n";
-			} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
+			} while ($result_array = mysql_fetch_assoc($result));
 			echo "<p><strong><a href=\"article-media.php?action=new&amp;article_id=$sel\">Add a file</a></strong></p>";
-		} else {;
+		} else {
 			echo "<p><em>No linked files. <a href=\"article-media.php?action=new&amp;article_id=$sel\">Add a file</a></em></p>";
-		};
-	} else {;
-		$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-		mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-		$query_CM_Array = "SELECT * FROM cm_media WHERE article_id = '$sel';";	
-		$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));;
-		$row_CM_Array = mysql_fetch_assoc($CM_Array);
-		$totalRows_CM_Array = mysql_num_rows($CM_Array);
-		if ($totalRows_CM_Array > 0) {;
-			do {;		
-				$id = $row_CM_Array['id'];
-				$title = $row_CM_Array['media_title'];
+		}
+	} else {	
+		$query = "SELECT * FROM cm_media WHERE article_id = '$sel';";	
+		$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
+		$result_array = mysql_fetch_assoc($result);
+		$result_row_count = mysql_num_rows($result);
+		if ($result_row_count > 0) {
+			do {		
+				$id = $result_array['id'];
+				$title = $result_array['media_title'];
 				echo "<li><a href=\"article-media.php?id=$id\">#$id: $title</a></li>\n";
-			} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-		} else {;
+			} while ($result_array = mysql_fetch_assoc($result));
+		} else {
 			echo "<li><em>No linked files.</em></li>";
-		};
-	};
-};
+		}
+	}
+}
 
 /*******************************************
 	Function:	cm_user_list
 *******************************************/
 function cm_user_list($sel)
-{;
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	$query_CM_Array = "SELECT * FROM cm_users ORDER BY user_last_name ASC, user_first_name ASC;";	
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));;
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	do {;
-		$id = $row_CM_Array['id'];
-		$last_name = $row_CM_Array['user_last_name'];
-		$first_name = $row_CM_Array['user_first_name'];
+{
+    global $CM_MYSQL;
+    	
+	$query = "SELECT * FROM cm_users ORDER BY user_last_name ASC, user_first_name ASC;";	
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
+	do {
+		$id = $result_array['id'];
+		$last_name = $result_array['user_last_name'];
+		$first_name = $result_array['user_first_name'];
 		echo "\t<option value=\"$id\"";
-		if ($sel == $id) {;
+		if ($sel == $id) {
 			echo " selected";;	
-		};
+		}
 		echo ">$last_name, $first_name</option>\n";
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-};
+	} while ($result_array = mysql_fetch_assoc($result));
+}
 
 /*******************************************
 	Function:	cm_poll_list
 *******************************************/
 function cm_poll_list($sel)
-{;
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	$query_CM_Array = "SELECT * FROM cm_poll_questions ORDER BY poll_created DESC, id DESC;";	
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));;
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	do {;
-		$id = $row_CM_Array['id'];
-		$question = trim_text($row_CM_Array['poll_question'], 50);
+{
+    global $CM_MYSQL;
+
+	$query = "SELECT * FROM cm_poll_questions ORDER BY poll_created DESC, id DESC;";	
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
+	do {
+		$id = $result_array['id'];
+		$question = trim_text($result_array['poll_question'], 50);
 		echo "\t<option value=\"$id\"";
-		if ($sel == $id) {;
+		if ($sel == $id) {
 			echo " selected";;	
-		};
+		}
 		echo ">$question</option>\n";
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-};
+	} while ($result_array = mysql_fetch_assoc($result));
+}
 
 
 /*******************************************
 	Function:	cm_display_media
 *******************************************/
 function cm_display_media($src,$type,$title='')
-{;
-	if ($type == "jpg" || $type == "png" || $type == "gif") {;
+{
+	if ($type == "jpg" || $type == "png" || $type == "gif") {
 		echo "<img src=\"$src\" alt=\"$type\" />";
-	};
-	if ($type == "pdf" || $type == "doc") {;
+	}
+	if ($type == "pdf" || $type == "doc") {
 		echo "Related Document: <a href=\"$src\">Dowload '$title' ($type)</a>.";
-	};
-	if ($type == "wav" || $type == "mp3") {;
+	}
+	if ($type == "wav" || $type == "mp3") {
 		echo "Media File: <a href=\"$src\">Play '$title' ($type)</a>.";
-	};
-	if ($type == "swf") {;
+	}
+	if ($type == "swf") {
 		echo "<object type=\"application/x-shockwave-flash\" data=\"$src\" width=\"300\" height=\"250\">\n";
 		echo "\t<param name=\"movie\" value=\"$src\" />\n";
 		echo "</object>\n";
-	};
-	if ($type == "url") {;
+	}
+	if ($type == "url") {
 		echo "Related: <a href=\"$src\">Open related link</a>.";
-	};
-};
+	}
+}
 
 
 #==========================================#
@@ -468,95 +464,95 @@ function cm_display_media($src,$type,$title='')
 	Function:	cm_current_issue
 *******************************************/
 function cm_current_issue($format)
-{;	
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	if ($format != "id") {;
+{	
+    global $CM_MYSQL;
+
+	if ($format != "id") {
 		$format = "issue_" . $format;
-	};	
-	$query_CM_Array = "SELECT cm_issues.$format AS myvalue";	
-	$query_CM_Array .= " FROM cm_issues, cm_settings";
-	$query_CM_Array .= " WHERE cm_settings.current_issue = cm_issues.id";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array );	
-	$value = $row_CM_Array['myvalue'];
+	}	
+	$query = "SELECT cm_issues.$format AS myvalue";	
+	$query .= " FROM cm_issues, cm_settings";
+	$query .= " WHERE cm_settings.current_issue = cm_issues.id";
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result );	
+	$value = $result_array['myvalue'];
 	return $value;
-};
+}
 /*******************************************
 	Function:	cm_next_issue	
 *******************************************/
 function cm_next_issue($format)
-{;	
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	if ($format != "id") {;
+{	
+    global $CM_MYSQL;
+
+	if ($format != "id") {
 	$format = "issue_" . $format;
-	};	
-	$query_CM_Array = "SELECT cm_issues.$format AS myvalue";	
-	$query_CM_Array .= " FROM cm_issues, cm_settings";
-	$query_CM_Array .= " WHERE cm_settings.next_issue = cm_issues.id";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array );	
-	$value = $row_CM_Array['myvalue'];
+	}	
+	$query = "SELECT cm_issues.$format AS myvalue";	
+	$query .= " FROM cm_issues, cm_settings";
+	$query .= " WHERE cm_settings.next_issue = cm_issues.id";
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result );	
+	$value = $result_array['myvalue'];
 	return $value;
-};
+}
 
 /*******************************************
 	Function:	cm_issue_info
 *******************************************/
 function cm_issue_info($format, $sel)
-{;	
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	$query_CM_Array = "SELECT $format AS myvalue";	
-	$query_CM_Array .= " FROM cm_issues";
-	$query_CM_Array .= " WHERE id = '$sel'";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array );
-	do {;	
-		$value = $row_CM_Array['myvalue'];
+{	
+    global $CM_MYSQL;
+
+	$query = "SELECT $format AS myvalue";	
+	$query .= " FROM cm_issues";
+	$query .= " WHERE id = '$sel'";
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result );
+	do {	
+		$value = $result_array['myvalue'];
 		return $value;
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-};
+	} while ($result_array = mysql_fetch_assoc($result));
+}
 
 /*******************************************
 	Function:	cm_section_info
 *******************************************/
 function cm_section_info($format, $sel)
-{;	
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	$query_CM_Array = "SELECT $format AS myvalue";	
-	$query_CM_Array .= " FROM cm_sections";
-	$query_CM_Array .= " WHERE id = '$sel'";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array );
-	do {;	
-		$value = $row_CM_Array['myvalue'];
+{	
+    global $CM_MYSQL;
+    
+	$query = "SELECT $format AS myvalue";	
+	$query .= " FROM cm_sections";
+	$query .= " WHERE id = '$sel'";
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result );
+	do {	
+		$value = $result_array['myvalue'];
 		return $value;
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-};
+	} while ($result_array = mysql_fetch_assoc($result));
+}
 
 /*******************************************
 	Function:	cm_get_settings
 *******************************************/
 function cm_get_settings($sel)
-{;
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
-	$query_CM_Array = "SELECT $sel AS myval FROM cm_settings;";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	do {;
-		$myval = $row_CM_Array['myval'];
+{
+    global $CM_MYSQL;
+
+	$query = "SELECT $sel AS myval FROM cm_settings;";
+	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
+	do {
+		$myval = $result_array['myval'];
 		return $myval;	
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-};
+	} while ($result_array = mysql_fetch_assoc($result));
+}
 
 
 #==========================================#
@@ -567,19 +563,19 @@ function cm_get_settings($sel)
 	Function:	cm_add_page
 *******************************************/
 function cm_add_page($title,$short_title,$text,$side_text,$slug,$edited)
-{;
+{
 	$edited = date("Y-m-d h:i:s",time());
 	$query = "INSERT INTO cm_pages (page_title,page_short_title,page_text,page_side_text,page_slug,page_edited)";
 	$query .= " VALUES ('$title','$short_title','$text','$side_text','$slug','$edited')";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_edit_page
 *******************************************/
 function cm_edit_page($title,$short_title,$text,$side_text,$slug,$edited,$id)
-{;
+{
 	$edited = date("Y-m-d h:i:s",time());
 	$query = "UPDATE cm_pages SET";
 	$query .= " page_title = '$title',";
@@ -591,17 +587,17 @@ function cm_edit_page($title,$short_title,$text,$side_text,$slug,$edited,$id)
 	$query .= " WHERE id = $id";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_delete_page
 *******************************************/
 function cm_delete_page($sel)
-{;	
+{	
 	$query = "DELETE FROM cm_pages WHERE id = '$sel';";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 
 #==========================================#
@@ -612,20 +608,20 @@ function cm_delete_page($sel)
 	Function:	cm_add_article
 *******************************************/
 function cm_add_article($title,$subtitle,$author,$author_title,$summary,$text,$keywords,$priority,$section,$issue,$published)
-{;
+{
 	$edited = date("Y-m-d h:i:s",time());
 	$word_count = count_words($text);
 	$query = "INSERT INTO cm_articles (article_title,article_subtitle,article_author,article_author_title,article_summary,article_text,article_keywords,article_priority,section_id,issue_id,article_publish,article_edit,article_word_count)";
 	$query .= " VALUES ('$title','$subtitle','$author','$author_title','$summary','$text','$keywords','$priority','$section','$issue','$published','$edited',$word_count)";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_edit_article
 *******************************************/
 function cm_edit_article($title,$subtitle,$author,$author_title,$summary,$text,$keywords,$priority,$section,$issue,$published,$id)
-{;
+{
 	$word_count = count_words($text);
 	$edited = date("Y-m-d h:i:s",time());
 	$query = "UPDATE cm_articles SET";
@@ -645,19 +641,19 @@ function cm_edit_article($title,$subtitle,$author,$author_title,$summary,$text,$
 	$query .= " WHERE id = $id";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_delete_article
 *******************************************/
 function cm_delete_article($sel)
-{;	
+{	
 	$query = "DELETE FROM cm_articles WHERE id = '$sel';";
 	$stat = cm_run_query($query);
 	$query = "DELETE FROM cm_media WHERE article_id = '$sel';";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 //// Media Module Portion of the System ////
 
@@ -665,18 +661,18 @@ function cm_delete_article($sel)
 	Function:	cm_add_media	
 *******************************************/
 function cm_add_media($article_id,$title,$src,$type,$caption,$credit)
-{;
+{
 	$query .= "INSERT INTO cm_media (article_id,media_title,media_src,media_type,media_caption,media_credit)";
 	$query .= " VALUES ('$article_id','$title','$src','$type','$caption','$credit');";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_edit_media
 *******************************************/
 function cm_edit_media($article_id,$title,$src,$type,$caption,$credit,$id)
-{;
+{
 	$query = "UPDATE cm_media SET";
 	$query .= " article_id = '$article_id',";
 	$query .= " media_title = '$title',";
@@ -687,17 +683,17 @@ function cm_edit_media($article_id,$title,$src,$type,$caption,$credit,$id)
 	$query .= " WHERE id = $id";	
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_delete_media
 *******************************************/
 function cm_delete_media($module, $sel)
-{;	
+{	
 	$query = "DELETE FROM cm_media WHERE id = '$sel';";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 
 #==========================================#
@@ -708,11 +704,11 @@ function cm_delete_media($module, $sel)
 	Function:	cm_delete_submitted
 *******************************************/
 function cm_delete_submitted($sel)
-{;	
+{	
 	$query = "DELETE FROM cm_submitted WHERE id = '$sel';";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 
 #==========================================#
@@ -723,18 +719,18 @@ function cm_delete_submitted($sel)
 	Function:	cm_add_issue
 *******************************************/
 function cm_add_issue($date,$volume,$number,$circulation,$online_only)
-{;
+{
 	$query = "INSERT INTO cm_issues (issue_date,issue_volume,issue_number,issue_circulation,online_only)";
 	$query .= " VALUES ('$date','$volume','$number','$circulation','$online_only');";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_edit_issue
 *******************************************/
 function cm_edit_issue($date,$volume,$number,$circulation,$online_only,$id)
-{;
+{
 	$query = "UPDATE cm_issues SET";
 	$query .= " issue_date = '$date',";
 	$query .= " issue_volume = '$volume',";
@@ -744,7 +740,7 @@ function cm_edit_issue($date,$volume,$number,$circulation,$online_only,$id)
 	$query .= " WHERE id = $id;";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 #==========================================#
 ############  Managing Sections ############
@@ -754,7 +750,7 @@ function cm_edit_issue($date,$volume,$number,$circulation,$online_only,$id)
 	Function:	cm_edit_section
 *******************************************/
 function cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority,$id)
-{;
+{
 	$query = "UPDATE cm_sections SET";
 	$query .= " section_name = '$name',";
 	$query .= " section_editor = '$editor',";
@@ -767,7 +763,7 @@ function cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar
 	$query .= " WHERE id = $id";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 #==========================================#
 ############## Managing Users ##############
@@ -777,19 +773,19 @@ function cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar
 	Function:	cm_add_user	
 *******************************************/
 function cm_add_user($user_login,$user_password,$user_first_name,$user_middle_name,$user_last_name,$user_job_title,$user_email,$user_telephone,$user_mobile,$user_address,$user_city,$user_state,$user_zipcode,$user_im_aol,$user_im_msn,$user_im_yahoo,$user_im_jabber,$user_profile)
-{;
+{
 	$query = "INSERT INTO cm_users (user_login,user_password,user_first_name,user_middle_name,user_last_name,user_job_title,user_email,user_telephone,user_mobile,user_address,user_city,user_state,user_zipcode,user_im_aol,user_im_msn,user_im_yahoo,user_im_jabber,user_profile)";
 	$query .= " VALUES ('$user_login','$user_password','$user_first_name','$user_middle_name','$user_last_name','$user_job_title','$user_email','$user_telephone','$user_mobile','$user_address','$user_city','$user_state','$user_zipcode','$user_im_aol','$user_im_msn','$user_im_yahoo','$user_im_jabber','$user_profile');";
 	$stat = cm_run_query($query);
 		
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_edit_user	
 *******************************************/
 function cm_edit_user($user_login,$user_password,$user_first_name,$user_middle_name,$user_last_name,$user_job_title,$user_email,$user_telephone,$user_mobile,$user_address,$user_city,$user_state,$user_zipcode,$user_im_aol,$user_im_msn,$user_im_yahoo,$user_im_jabber,$user_profile,$id)
-{;
+{
 	$query = "UPDATE cm_users SET";
 	$query .= " user_login = '$user_login',";
 	$query .= " user_password = '$user_password',";
@@ -812,18 +808,18 @@ function cm_edit_user($user_login,$user_password,$user_first_name,$user_middle_n
 	$query .= " WHERE id = $id;";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_delete_user
 *******************************************/
 function cm_delete_user($sel)
-{;	
+{	
 	$stat = cm_clear_access($sel); // Lock out user
 	$query = "DELETE FROM cm_users WHERE id = '$sel';";
 	$stat = cm_run_query($query);
 	return $stat;	
-};
+}
 #==========================================#
 ##########  Managing User Profiles #########
 #==========================================#
@@ -831,7 +827,7 @@ function cm_delete_user($sel)
 	Function:	cm_edit_profile	
 *******************************************/
 function cm_edit_profile($user_password,$user_email,$user_telephone,$user_mobile,$user_address,$user_city,$user_state,$user_zipcode,$user_im_aol,$user_im_msn,$user_im_yahoo,$user_im_jabber,$user_profile,$id)
-{;
+{
 	$query = "UPDATE cm_users SET";
 	$query .= " user_password = '$user_password',";
 	$query .= " user_email = '$user_email',";
@@ -849,7 +845,7 @@ function cm_edit_profile($user_password,$user_email,$user_telephone,$user_mobile
 	$query .= " WHERE id = $id;";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 #==========================================#
 ########## Managing Poll Questions #########
@@ -859,20 +855,20 @@ function cm_edit_profile($user_password,$user_email,$user_telephone,$user_mobile
 	Function:	cm_add_poll
 *******************************************/
 function cm_add_poll($question,$r1,$r2,$r3,$r4,$r5,$r6,$r7,$r8,$r9,$r10,$article)
-{;
+{
 	$created = date("Y-m-d h:i:s",time());
 	$query = "INSERT INTO ";
 	$query .= " cm_poll_questions (poll_created,poll_question,poll_response_1,poll_response_2,poll_response_3,poll_response_4,poll_response_5,poll_response_6,poll_response_7,poll_response_8,poll_response_9,poll_response_10,article_id)";
 	$query .= "  VALUES ('$created','$question','$r1','$r2','$r3','$r4','$r5','$r6','$r7','$r8','$r9','$r10','$article');";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_edit_poll
 *******************************************/
 function cm_edit_poll($question,$r1,$r2,$r3,$r4,$r5,$r6,$r7,$r8,$r9,$r10,$article,$id)
-{;
+{
 	$query = "UPDATE cm_poll_questions SET";
 	$query .= " poll_question = '$question',";
 	$query .= " poll_response_1 = '$r1',";
@@ -889,7 +885,7 @@ function cm_edit_poll($question,$r1,$r2,$r3,$r4,$r5,$r6,$r7,$r8,$r9,$r10,$articl
 	$query .= " WHERE id = '$id';";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_delete_poll
@@ -903,7 +899,7 @@ function cm_delete_poll($sel)
 	$query3 = "DELETE FROM cm_poll_questions WHERE id = '$sel';";
 	$stat = cm_run_query($query3); // Deletes questions
 	return $stat;	
-};
+}
 
 
 
@@ -912,38 +908,37 @@ function cm_delete_poll($sel)
 *******************************************/
 function cm_poll_results($sel)
 {
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+    global $CM_MYSQL;
 
-	$query_CM_Array = "SELECT COUNT(id) AS total";
-	$query_CM_Array .= " FROM cm_poll_ballot";
-	$query_CM_Array .= " WHERE poll_id = '$sel'";
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
+	$query = "SELECT COUNT(id) AS total";
+	$query .= " FROM cm_poll_ballot";
+	$query .= " WHERE poll_id = '$sel'";
+	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
 	
-	$total = $row_CM_Array['total'];
+	$total = $result_array['total'];
 
-	$query_CM_Array = "SELECT ballot_response AS response, COUNT(ballot_response) AS votes, COUNT(id) AS total";
-	$query_CM_Array .= " FROM cm_poll_ballot";
-	$query_CM_Array .= " WHERE poll_id = '$sel'";
-	$query_CM_Array .= " GROUP BY ballot_response;";
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
-	if ($total > 0) {;
+	$query = "SELECT ballot_response AS response, COUNT(ballot_response) AS votes, COUNT(id) AS total";
+	$query .= " FROM cm_poll_ballot";
+	$query .= " WHERE poll_id = '$sel'";
+	$query .= " GROUP BY ballot_response;";
+	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
+	if ($total > 0) {
 		echo "<ul>";
-		do {;
-			$response = $row_CM_Array['response'];
-			$votes = $row_CM_Array['votes'];
+		do {
+			$response = $result_array['response'];
+			$votes = $result_array['votes'];
 			$percent = (100 * ($votes / $total));
 			$percent = number_format($percent, 2, '.', '');
 			echo "<li><strong>Option $response:</strong> $votes votes ($percent%)</li>\n";	
-		} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
+		} while ($result_array = mysql_fetch_assoc($result));
 		echo "</ul>";
 		echo "<p><strong>Total votes:</strong> $total</p>";
-	} else {;
+	} else {
 	    echo "<p>No one has voted yet.</p>";
-	};
+	}
 }
 
 /*******************************************
@@ -951,28 +946,27 @@ function cm_poll_results($sel)
 *******************************************/
 function cm_poll_cleanup($sel)
 {
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+    global $CM_MYSQL;
 
-	$query_CM_Array = "SELECT ballot_ip_address, COUNT(ballot_ip_address) AS ballots";
-	$query_CM_Array .= " FROM cm_poll_ballot";
-	$query_CM_Array .= " WHERE poll_id = '$sel'";
-	$query_CM_Array .= " GROUP BY ballot_ip_address";
-	$query_CM_Array .= " HAVING ballots > 1;";
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
+	$query = "SELECT ballot_ip_address, COUNT(ballot_ip_address) AS ballots";
+	$query .= " FROM cm_poll_ballot";
+	$query .= " WHERE poll_id = '$sel'";
+	$query .= " GROUP BY ballot_ip_address";
+	$query .= " HAVING ballots > 1;";
+	$result = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
 	
-	if ($totalRows_CM_Array > 0) {;
+	if ($result_row_count > 0) {
 		do {
-			$ipad = $row_CM_Array['ballot_ip_address'];
+			$ipad = $result_array['ballot_ip_address'];
 			cm_poll_delete_ballots($sel,$ipad);
-		} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
-		echo "This poll had $totalRows_CM_Array multiple voter(s).<br /> All have been cleared.";
-	} else {;
+		} while ($result_array = mysql_fetch_assoc($result));
+		echo "This poll had $result_row_count multiple voter(s).<br /> All have been cleared.";
+	} else {
 		echo "Poll audit successful.<br /> No multiple-voters detected.";
-	};
-};
+	}
+}
 
 /*******************************************
 	Function:	cm_poll_delete_ballots
@@ -985,7 +979,7 @@ function cm_poll_delete_ballots($sel,$ipad)
 	$query .= " AND poll_id = '$sel'";
 	$stat = cm_run_query($query);
 	return $stat;	
-};
+}
 
 
 #==========================================#
@@ -996,31 +990,31 @@ function cm_poll_delete_ballots($sel,$ipad)
 	Function:	cm_edit_publish_settings
 *******************************************/
 function cm_edit_publish_settings($current_issue,$next_issue,$id=1)
-{;
+{
 	$query = "UPDATE cm_settings SET current_issue = $current_issue, next_issue = $next_issue WHERE id = $id";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 /*******************************************
 	Function:	cm_edit_poll_settings
 *******************************************/
 function cm_edit_poll_settings($active_poll,$id=1)
-{;
+{
 	if ($active_poll == "") {
 		$active_poll = 0;
 	}
 	$query = "UPDATE cm_settings SET active_poll = $active_poll WHERE id = $id";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 
 /*******************************************
 	Function:	cm_edit_settings
 *******************************************/
 function cm_edit_settings($name,$description,$url,$email,$address,$city,$state,$zipcode,$telephone,$fax,$announce,$id)
-{;
+{
 	$query = "UPDATE cm_settings SET";
 	$query .= " site_name = '$name',";
 	$query .= " site_description = '$description',";
@@ -1036,22 +1030,21 @@ function cm_edit_settings($name,$description,$url,$email,$address,$city,$state,$
 	$query .= " WHERE id = $id";
 	$stat = cm_run_query($query);
 	return $stat;
-};
+}
 
 #==========================================#
 ###########  Universal Functions ###########
 #==========================================#
 function cm_run_query($query)
 {
-	// Database Connection
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);
+    global $CM_MYSQL;
+    
 	// Database Query
-	$query_CM_Array = $query;
+	$query = $query;
 	// Run Query
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	return $CM_Array;
-};
+	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	return $result;
+}
 
 /*******************************************
 	Function:	autop
@@ -1073,9 +1066,9 @@ function autop($pee, $br = 1) {
 	if ($br) $pee = preg_replace('|(?<!<br />)\s*\n|', "<br />\n", $pee); // optionally make line breaks
 	$pee = preg_replace('!(</?(?:table|tr|td|th|div|dl|dd|dt|ul|ol|li|pre|select|form|blockquote|p|h[1-6])[^>]*>)\s*<br />!', "$1", $pee);
 	$pee = preg_replace('!<br />(\s*</?(?:p|li|div|th|pre|td|ul|ol)>)!', '$1', $pee);
-	$pee = preg_replace('/&([^#])(?![a-z]{1,8};)/', '&#038;$1', $pee);
+	$pee = preg_replace('/&([^#])(?![a-z]{1,8})/', '&#038;$1', $pee);
 	return $pee;
-};
+}
 
 /*******************************************
 	Function:	count_words
@@ -1099,12 +1092,12 @@ function count_words($string)
 *******************************************/
 function trim_text($text,$length)
 {
-	if (strlen($text) > $length) {;
+	if (strlen($text) > $length) {
 		$text = $text." ";
 		$text = substr($text,0,$length);
 		$text = substr($text,0,strrpos($text,' '));
 		$text = $text."...";
-	};
+	}
 	return $text;
 }
 
@@ -1141,4 +1134,3 @@ $show_submitted_edit = cm_get_access('submitted-edit', $_SESSION['cm_user_id']);
 $show_submitted_delete = cm_get_access('submitted-delete', $_SESSION['cm_user_id']);
 $show_poll_browse = cm_get_access('poll-browse', $_SESSION['cm_user_id']);
 $show_poll_edit = cm_get_access('poll-edit', $_SESSION['cm_user_id']);
-?>
