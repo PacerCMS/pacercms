@@ -1,9 +1,9 @@
 <?php
 /* Database and Template Settings */
 define("DB_HOSTNAME", "localhost");
-define("DB_DATABASE", "pacer");
-define("DB_USERNAME", "root");
-define("DB_PASSWORD", "");
+define("DB_DATABASE", "pacercms");
+define("DB_USERNAME", "username");
+define("DB_PASSWORD", "password");
 define("TEMPLATES_FOLDER", "default");
 
 
