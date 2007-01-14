@@ -6,7 +6,7 @@ $module = "settings";
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
 
-if ($_POST['id'] != "") {;
+if ($_POST['id'] != "") {
 	// Get posted data
 	$id = $_POST['id'];
 	$name = $_POST['name'];
@@ -25,11 +25,11 @@ if ($_POST['id'] != "") {;
 	if ($stat == 1) {
 		header("Location: $module.php?msg=updated");
 		exit;
-	} else {;
+	} else {
 		cm_error("Error in 'cm_edit_settings' function.");
 		exit;
-	};
-};
+	}
+}
 
 
 ?>
@@ -39,32 +39,32 @@ if ($_POST['id'] != "") {;
 <h2>Site Settings</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "updated") {; echo "<p class=\"systemMessage\">Site settings updated.</p>"; };
+if ($msg == "updated") { echo "<p class=\"systemMessage\">Site settings updated.</p>"; }
 ?>
 <?php
 
 // Database Query
-$query_CM_Array = "SELECT * FROM cm_settings;";
+$query = "SELECT * FROM cm_settings;";
 
 // Run Query
-$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-$totalRows_CM_Array = mysql_num_rows($CM_Array);
+$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result_array  = mysql_fetch_assoc($result);
+$result_row_count = mysql_num_rows($result);
 
-do {;
-	$id = $row_CM_Array['id'];
-	$name = $row_CM_Array['site_name'];
-	$description = $row_CM_Array['site_description'];
-	$url = $row_CM_Array['site_url'];
-	$email = $row_CM_Array['site_email'];
-	$address = $row_CM_Array['site_address'];
-	$city = $row_CM_Array['site_city'];
-	$state = $row_CM_Array['site_state'];
-	$zipcode = $row_CM_Array['site_zipcode'];
-	$telephone = $row_CM_Array['site_telephone'];
-	$fax = $row_CM_Array['site_fax'];
-	$announce = $row_CM_Array['site_announcement'];	
-} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
+do {
+	$id = $result_array['id'];
+	$name = $result_array['site_name'];
+	$description = $result_array['site_description'];
+	$url = $result_array['site_url'];
+	$email = $result_array['site_email'];
+	$address = $result_array['site_address'];
+	$city = $result_array['site_city'];
+	$state = $result_array['site_state'];
+	$zipcode = $result_array['site_zipcode'];
+	$telephone = $result_array['site_telephone'];
+	$fax = $result_array['site_fax'];
+	$announce = $result_array['site_announcement'];	
+} while ($result_array = mysql_fetch_assoc($result));
 
 ?>
 <form action="<?php echo "$module.php"; ?>" method="post">

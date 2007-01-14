@@ -11,16 +11,16 @@ $mode = "edit"; // Default
 cm_auth_module($module);
 
 // Change mode based on query string
-if ($_GET["action"] != "") {;
+if ($_GET["action"] != "") {
 	$mode = $_GET["action"];
-};
+}
 
 // Key variable
 $id = $_GET["id"];
 
 // If action is edit, call edit function
-if ($_GET['action'] == "edit") {; 
-	if ($_POST['id'] != "") {;
+if ($_GET['action'] == "edit") { 
+	if ($_POST['id'] != "") {
 		// Get posted data
 		$name = $_POST['name'];
 		$editor = $_POST['editor'];
@@ -36,15 +36,15 @@ if ($_GET['action'] == "edit") {;
 		if ($stat == 1) {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
-		} else {;
+		} else {
 			cm_error("Error in 'cm_edit_section' function.");
 			exit;
-		};
-	} else {;
+		}
+	} else {
 		cm_error("Did not have a section to load.");
 		exit;
-	};
-};
+	}
+}
 
 ?>
 <?php get_cm_header(); ?>
@@ -54,22 +54,22 @@ if ($_GET['action'] == "edit") {;
   <?php
 
 // Database Query
-$query_CM_Array = "SELECT * FROM cm_sections WHERE id = $id;";
+$query = "SELECT * FROM cm_sections WHERE id = $id;";
 
 // Run Query
-$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-$totalRows_CM_Array = mysql_num_rows($CM_Array);
+$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result_array  = mysql_fetch_assoc($result);
+$result_row_count = mysql_num_rows($result);
 
-$id = $row_CM_Array['id'];
-$name = $row_CM_Array['section_name'];
-$url = $row_CM_Array['section_url'];
-$editor = $row_CM_Array['section_editor'];
-$editor_title = $row_CM_Array['section_editor_title'];
-$editor_email = $row_CM_Array['section_editor_email'];
-$sidebar = $row_CM_Array['section_sidebar'];
-$feed_image = $row_CM_Array['section_feed_image'];
-$priority = $row_CM_Array['section_priority'];
+$id = $result_array['id'];
+$name = $result_array['section_name'];
+$url = $result_array['section_url'];
+$editor = $result_array['section_editor'];
+$editor_title = $result_array['section_editor_title'];
+$editor_email = $result_array['section_editor_email'];
+$sidebar = $result_array['section_sidebar'];
+$feed_image = $result_array['section_feed_image'];
+$priority = $result_array['section_priority'];
 	
 ?>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">

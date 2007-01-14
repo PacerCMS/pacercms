@@ -3,11 +3,11 @@
 include('cm-includes/cm-header.php');
 
 $mode = $_GET['action'];
-if ($mode == "") {;
+if ($mode == "") {
 	$mode = "login";
 }
 $dest = $_GET['dest'];
-if ($dest == "") {;
+if ($dest == "") {
 	$dest = "index.php";
 }
 
@@ -16,26 +16,26 @@ if ($_POST['username'] != "" && $_POST['password'] != "") {
 	$username = $_POST['username'];
 	$password = md5($_POST['password']);
 	$status = cm_auth_user($username,$password,$dest);
-	if ($status == 1) {;
+	if ($status == 1) {
 		header("Location: $dest");
 		exit; 
-	} else {;
+	} else {
 		header("Location: " . $PHP_SELF . "?msg=login-failed");
 		exit;
-	};
+	}
 }
 
 if ($_POST['username'] != "" && $_POST['email'] != "") {
 	$username = $_POST['username'];
 	$email = $_POST['email'];
 	$status = cm_reset_pass($username,$email);
-	if ($status == 1) {;
+	if ($status == 1) {
 		header("Location: " . $PHP_SELF . "?msg=password-reset");
 		exit; 
-	} else {;
+	} else {
 		header("Location: " . $PHP_SELF . "?msg=not-found");
 		exit;
-	};
+	}
 }
 ?>
 <html>
@@ -71,17 +71,17 @@ input {font-size: 15pt;width: 300px;}
 </head>
 <body>
 <div class="loginSplash">
-<?php if ($mode == "login") {; ?>
+<?php if ($mode == "login") { ?>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <fieldset>
 <legend><img src="cm-images/header.png" alt="PacerCMS" /></legend>
 <h2><a href="<?php echo cm_get_settings('site_url'); ?>"><?php echo cm_get_settings('site_name'); ?></a></h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "login-failed") {; echo "<p class=\"systemMessage\">Your username or password were incorrect.</p>"; };
-if ($msg == "password-reset") {; echo "<p class=\"systemMessage\">You new password has been e-mailed.</p>"; };
-if ($msg == "not-found") {; echo "<p class=\"systemMessage\">Could not find matching username and e-mail address.</p>"; };
-if ($msg == "logout") {; echo "<p class=\"systemMessage\">Your session has ended.</p>"; };
+if ($msg == "login-failed") { echo "<p class=\"systemMessage\">Your username or password were incorrect.</p>"; }
+if ($msg == "password-reset") { echo "<p class=\"systemMessage\">You new password has been e-mailed.</p>"; }
+if ($msg == "not-found") { echo "<p class=\"systemMessage\">Could not find matching username and e-mail address.</p>"; }
+if ($msg == "logout") { echo "<p class=\"systemMessage\">Your session has ended.</p>"; }
 ?>
 <p><label for="username">Username</label><input type="text" name="username" id="username" /></p>
 <p><label for="password">Password</label><input type="password" name="password" id="password" /></p>
@@ -93,7 +93,7 @@ if ($msg == "logout") {; echo "<p class=\"systemMessage\">Your session has ended
 </form>
 <?php
 	// Show reset password form instead
-	} else {;
+	} else {
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <fieldset>
@@ -106,7 +106,7 @@ if ($msg == "logout") {; echo "<p class=\"systemMessage\">Your session has ended
 <p><a href="<?php echo $PHP_SELF; ?>?action=login">Back to Login</a> | <a href="mailto:<?php echo cm_get_settings('site_email'); ?>">Request Login</a></p>
 </fieldset>
 </form>
-<?php }; ?>
+<?php } ?>
 </div>
 </body>
 </html>

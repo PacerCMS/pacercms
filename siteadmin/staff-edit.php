@@ -13,26 +13,26 @@ cm_auth_module($module);
 $id = $_GET["id"]; // Default
 
 // Change mode based on query string
-if ($_GET["action"] != "") {;
+if ($_GET["action"] != "") {
 	$mode = $_GET["action"];
-};
+}
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {;
+if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {
 	$id = $_POST['delete-id'];
 	$stat = cm_delete_user($id);
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
-	} else {;
+	} else {
 		cm_error("Error in 'cm_delete_user' function.");
 		exit;
-	};
-};
+	}
+}
 
 // If action is edit, call edit function
-if ($_GET['action'] == "edit") {; 
-	if ($_POST['id'] != "") {;
+if ($_GET['action'] == "edit") { 
+	if ($_POST['id'] != "") {
 		// Get posted data
 		$id = $_POST['id'];
 		$login = $_POST['login'];
@@ -58,27 +58,27 @@ if ($_GET['action'] == "edit") {;
 		$password_confirm = $_POST['password_confirm'];
 		if ($password_new == "$password_confirm" && $password_new != "") {
 			$password = md5($password_new);
-		};
+		}
 		if ($password_new != "$password_confirm") {
 			cm_error("Passwords did not match.");
 			exit;
-		};
+		}
 		$stat = cm_edit_user($login,$password,$first_name,$middle_name,$last_name,$job_title,$email,$telephone,$mobile,$address,$city,$state,$zipcode,$im_aol,$im_msn,$im_yahoo,$im_jabber,$profile,$id);
 		if ($stat == 1) {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
-		} else {;
+		} else {
 			cm_error("Error in 'cm_edit_user' function.");
 			exit;
-		};		
-	} else {;
+		}		
+	} else {
 		cm_error("Did not have a user to load.");
 		exit;
-	};
-};
+	}
+}
 
 // If action is add, call add function
-if ($_GET['action'] == "add" && $_POST['login'] != "") {; 
+if ($_GET['action'] == "add" && $_POST['login'] != "") { 
 	// Get posted data
 	$login = $_POST['login'];
 	$first_name = $_POST['first_name'];
@@ -101,58 +101,58 @@ if ($_GET['action'] == "add" && $_POST['login'] != "") {;
 	$password_confirm = $_POST['password_confirm'];
 	if ($password_new == "$password_confirm" && $password_new != "") {
 		$password = md5($password_new);
-	} else {;
+	} else {
 		cm_error("Passwords did not match, or left blank.");
 		exit;
-	};	
+	}	
 	$stat = cm_add_user($login,$password,$first_name,$middle_name,$last_name,$job_title,$email,$telephone,$mobile,$address,$city,$state,$zipcode,$im_aol,$im_msn,$im_yahoo,$im_jabber,$profile);
 	if ($stat == 1) {	
 		$user_id = mysql_insert_id();
 		header("Location: staff-access.php?id=$user_id&action=add");
 		exit;
-	} else {;
+	} else {
 		cm_error("Error in 'cm_add_user' function.");
 		exit;
-	};
-};
+	}
+}
 
 // Only call database if in edit mode.
-if ($mode == "edit") {;
+if ($mode == "edit") {
 	
 	// Query
-	$query_CM_Array = "SELECT * FROM cm_users WHERE cm_users.id = $id;";
+	$query = "SELECT * FROM cm_users WHERE cm_users.id = $id;";
 	
 	// Run Query
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
+	$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
 
-	if ($totalRows_CM_Array != 1) {;
+	if ($result_row_count != 1) {
 		cm_error("User does not exist.");
-	};
+	}
 	
-	$id = $row_CM_Array['id'];
-	$login = $row_CM_Array['user_login'];
-	$password = $row_CM_Array['user_password'];
-	$first_name = $row_CM_Array['user_first_name'];
-	$middle_name = $row_CM_Array['user_middle_name'];
-	$last_name = $row_CM_Array['user_last_name'];
-	$job_title = $row_CM_Array['user_job_title'];
-	$email = $row_CM_Array['user_email'];
-	$telephone = $row_CM_Array['user_telephone'];
-	$mobile = $row_CM_Array['user_mobile'];
-	$address = $row_CM_Array['user_address'];
-	$city = $row_CM_Array['user_city'];
-	$state = $row_CM_Array['user_state'];
-	$zipcode = $row_CM_Array['user_zipcode'];
-	$im_aol = $row_CM_Array['user_im_aol'];
-	$im_msn = $row_CM_Array['user_im_msn'];
-	$im_yahoo = $row_CM_Array['user_im_yahoo'];
-	$im_jabber = $row_CM_Array['user_im_jabber'];
-	$profile = $row_CM_Array['user_profile'];
+	$id = $result_array['id'];
+	$login = $result_array['user_login'];
+	$password = $result_array['user_password'];
+	$first_name = $result_array['user_first_name'];
+	$middle_name = $result_array['user_middle_name'];
+	$last_name = $result_array['user_last_name'];
+	$job_title = $result_array['user_job_title'];
+	$email = $result_array['user_email'];
+	$telephone = $result_array['user_telephone'];
+	$mobile = $result_array['user_mobile'];
+	$address = $result_array['user_address'];
+	$city = $result_array['user_city'];
+	$state = $result_array['user_state'];
+	$zipcode = $result_array['user_zipcode'];
+	$im_aol = $result_array['user_im_aol'];
+	$im_msn = $result_array['user_im_msn'];
+	$im_yahoo = $result_array['user_im_yahoo'];
+	$im_jabber = $result_array['user_im_jabber'];
+	$profile = $result_array['user_profile'];
 
 
-}; // End database call if in edit mode.
+} // End database call if in edit mode.
 
 ?>
 <?php get_cm_header(); ?>
@@ -164,14 +164,14 @@ if ($mode == "edit") {;
   <legend>Basic Profile</legend>
   <div class="sidebar">
     <?php
-if ($mode == "add") {;
+if ($mode == "add") {
 ?>
     <p>
       <label for="login">Login</label>
       <br />
       <input type="text" name="login" id="login" />
     </p>
-    <?php }; ?>
+    <?php } ?>
     <p>Passwords <strong>must match</strong>.</p>
     <p>
       <label for="password_new">Password</label>
@@ -184,11 +184,11 @@ if ($mode == "add") {;
       <input type="password" name="password_confirm" id="password_confirm" />
     </p>
     <?php
-if ($mode == "edit") {;
+if ($mode == "edit") {
 ?>
     <p><em>Leave blank if you do not wish<br/>
       to change the password.</em></p>
-    <?php }; ?>
+    <?php } ?>
   </div>
   <p>
     <label for="first_name">First Name</label>
@@ -281,7 +281,7 @@ if ($mode == "edit") {;
   </p>
   <p>
 
-<?php if ($mode == "add") {; ?>
+<?php if ($mode == "add") { ?>
 
   <p>
     <input type="submit" value="Add User" name="submit" id="submit" class="button" />
@@ -290,7 +290,7 @@ if ($mode == "edit") {;
   </fieldset>
 <form>
 
-<?php } else {; ?>
+<?php } else { ?>
 <p>
     <input type="submit" value="Update Profile" name="update" id="update" class="button" />
     <input name="id" type="hidden" id="id" value="<?php echo $id; ?>" />
@@ -312,6 +312,6 @@ if ($mode == "edit") {;
     </fieldset>
   </form>
 </div>
-<?php }; ?>
+<?php } ?>
 
 <?php get_cm_footer(); ?>

@@ -8,26 +8,26 @@ $cmodule = "poll-edit";
 cm_auth_module($module);
 
 // Change active poll
-if (is_numeric($_POST['id'])) {;
+if (is_numeric($_POST['id'])) {
 	$id = $_POST['id'];
 	$stat = cm_edit_poll_settings($id);
 	if ($stat = 1) {
 		header("Location: $module.php?msg=active-updated");
 		exit;
-		} else {;
+		} else {
 		cm_error("You have an error in the cm_edit_poll_settings function.");
 		exit;
-	};
-};
+	}
+}
 
 
 // Database Query
-$query_CM_Array = "SELECT * FROM cm_poll_questions ORDER BY poll_created DESC;";
+$query = "SELECT * FROM cm_poll_questions ORDER BY poll_created DESC;";
 
 // Run Query
-$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-$totalRows_CM_Array = mysql_num_rows($CM_Array);
+$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result_array  = mysql_fetch_assoc($result);
+$result_row_count = mysql_num_rows($result);
 
 ?>
 <?php get_cm_header(); ?>
@@ -35,10 +35,10 @@ $totalRows_CM_Array = mysql_num_rows($CM_Array);
 
 <h2>Poll Manager</h2>
 <?php $msg = $_GET['msg'];
-if ($msg == "added") {; echo "<p class=\"systemMessage\">Poll question added.</p>"; };
-if ($msg == "updated") {; echo "<p class=\"systemMessage\">Poll question updated.</p>"; };
-if ($msg == "deleted") {; echo "<p class=\"systemMessage\">Poll question and ballots deleted.</p>"; };
-if ($msg == "active-updated") {; echo "<p class=\"systemMessage\">Active poll setting changed.</p>"; };
+if ($msg == "added") { echo "<p class=\"systemMessage\">Poll question added.</p>"; }
+if ($msg == "updated") { echo "<p class=\"systemMessage\">Poll question updated.</p>"; }
+if ($msg == "deleted") { echo "<p class=\"systemMessage\">Poll question and ballots deleted.</p>"; }
+if ($msg == "active-updated") { echo "<p class=\"systemMessage\">Active poll setting changed.</p>"; }
 ?>
 
 <form action="<?php echo "$module.php"; ?>" method="post">
@@ -47,7 +47,7 @@ if ($msg == "active-updated") {; echo "<p class=\"systemMessage\">Active poll se
   <p>
     <label for="id">Current Poll Question</label>
     <select name="id" id="id">
-	<option value="0" <?php if (cm_get_settings('active_poll') == 0) {; echo "SELECTED"; }; ?>>--- Polls Disabled ---</option>
+	<option value="0" <?php if (cm_get_settings('active_poll') == 0) { echo "SELECTED"; } ?>>--- Polls Disabled ---</option>
 	<?php cm_poll_list(cm_get_settings('active_poll')); ?>
 	</select>
 	<input type="submit" id="submit-active-poll" value="Change Active Poll" class="button" />
@@ -55,7 +55,7 @@ if ($msg == "active-updated") {; echo "<p class=\"systemMessage\">Active poll se
   </fieldset>
 </form>
 
-<?php if ($totalRows_CM_Array > 0) {; // If there are any pages ?>
+<?php if ($result_row_count > 0) { // If there are any pages ?>
 
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-table"; ?>">
@@ -75,13 +75,13 @@ if ($msg == "active-updated") {; echo "<p class=\"systemMessage\">Active poll se
 	// To mark active in table
 	$active_poll = cm_get_settings('active_poll');
 
-do {;
-	$id = $row_CM_Array['id'];
-	$question = $row_CM_Array['poll_question'];
-	$created = $row_CM_Array['poll_created'];
+do {
+	$id = $result_array['id'];
+	$question = $result_array['poll_question'];
+	$created = $result_array['poll_created'];
 ?>
     <tr>
-      <td><?php if ($active_poll == $id) {; echo "<strong>Current &raquo;&raquo;</strong> "; }; ?><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $question; ?></a></p>
+      <td><?php if ($active_poll == $id) { echo "<strong>Current &raquo;&raquo;</strong> "; } ?><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $question; ?></a></p>
 	  
 	  </td>
       <td><?php echo $created; ?></td>
@@ -92,13 +92,13 @@ do {;
         </ul>
       </td>
     </tr>
-    <? } while ($row_CM_Array = mysql_fetch_assoc($CM_Array)); ?>
+    <? } while ($result_array = mysql_fetch_assoc($result)); ?>
   </table>
   </fieldset>
 </form>
 
-<?php } else {; ?>
+<?php } else { ?>
 	<p>You are not currently using polls. Why not <a href="<?php echo "$cmodule.php?action=add"; ?>">add one</a> now?</p>
-<?php }; ?>
+<?php } ?>
 
 <?php get_cm_footer(); ?>
