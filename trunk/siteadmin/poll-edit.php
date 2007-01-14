@@ -11,30 +11,30 @@ $mode = "edit"; // Default
 cm_auth_module($module);
 
 // Change mode based on query string
-if ($_GET["action"] != "") {;
+if ($_GET["action"] != "") {
 	$mode = $_GET["action"];
-};
+}
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {; 
+if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") { 
 	$id = $_POST['delete-id'];
 	// Run function
 	$stat = cm_delete_poll($id);
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
-	} else {;
+	} else {
 		cm_error("Error in 'cm_delete_poll' function.");
 		exit;
-	};	
-};
+	}	
+}
 
 // Default value for 'volume' field
 $volume = $_COOKIE['issue-browse-volume'];
 
 // If action is edit, call edit function
-if ($_GET['action'] == "edit") {; 
-	if ($_POST['id'] != "") {;
+if ($_GET['action'] == "edit") { 
+	if ($_POST['id'] != "") {
 		// Get posted data
 		$question = $_POST['question'];
 		$r1 = $_POST['r1'];
@@ -54,18 +54,18 @@ if ($_GET['action'] == "edit") {;
 		if ($stat == 1) {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
-		} else {;
+		} else {
 			cm_error("Error in 'cm_edit_poll' function.");
 			exit;
-		};
-	} else {;
+		}
+	} else {
 		cm_error("Did not have a poll question to load.");
 		exit;
-	};
-};
+	}
+}
 
 // If action is new, call add function
-if ($_GET['action'] == "add" && $_POST['question'] != "") {; 
+if ($_GET['action'] == "add" && $_POST['question'] != "") { 
 	// Get posted data
 	$question = $_POST['question'];
 	$r1 = $_POST['r1'];
@@ -85,36 +85,36 @@ if ($_GET['action'] == "add" && $_POST['question'] != "") {;
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=added");
 		exit;
-	} else {;
+	} else {
 		cm_error("Error in 'cm_add_poll' function.");
 		exit;
-	};
-};
+	}
+}
 
-if ($mode == "edit") {;
+if ($mode == "edit") {
 	$id = $_GET["id"];
-	$query_CM_Array = "SELECT *";
-	$query_CM_Array .= " FROM cm_poll_questions WHERE id = '$id;'";
-	$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);	
-	if ($totalRows_CM_Array != 1) {;
+	$query = "SELECT *";
+	$query .= " FROM cm_poll_questions WHERE id = '$id;'";
+	$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);	
+	if ($result_row_count != 1) {
 		cm_error("That poll question cannot be loaded.");
-	};	
-	$id = $row_CM_Array['id'];
-	$question = $row_CM_Array['poll_question'];
-	$r1 = $row_CM_Array['poll_response_1'];
-	$r2 = $row_CM_Array['poll_response_2'];
-	$r3 = $row_CM_Array['poll_response_3'];		
-	$r4 = $row_CM_Array['poll_response_4'];
-	$r5 = $row_CM_Array['poll_response_5'];
-	$r6 = $row_CM_Array['poll_response_6'];
-	$r7 = $row_CM_Array['poll_response_7'];
-	$r8 = $row_CM_Array['poll_response_8'];
-	$r9 = $row_CM_Array['poll_response_9'];
-	$r10 = $row_CM_Array['poll_response_10'];
-	$article = $row_CM_Array['article_id'];		
-}; // End database call if in edit mode.
+	}	
+	$id = $result_array['id'];
+	$question = $result_array['poll_question'];
+	$r1 = $result_array['poll_response_1'];
+	$r2 = $result_array['poll_response_2'];
+	$r3 = $result_array['poll_response_3'];		
+	$r4 = $result_array['poll_response_4'];
+	$r5 = $result_array['poll_response_5'];
+	$r6 = $result_array['poll_response_6'];
+	$r7 = $result_array['poll_response_7'];
+	$r8 = $result_array['poll_response_8'];
+	$r9 = $result_array['poll_response_9'];
+	$r10 = $result_array['poll_response_10'];
+	$article = $result_array['article_id'];		
+} // End database call if in edit mode.
 
 
 ?>
@@ -131,12 +131,12 @@ if ($mode == "edit") {;
       <br />
       <input type="text" name="article" id="article" value="<?php echo $article; ?>" />
     </p>
-	<?php if ($mode == "edit") {; ?>
+	<?php if ($mode == "edit") { ?>
 	<h4>Audit</h4>
 	<p><?php cm_poll_cleanup($id) ?></p>
 	<h4>Current Results</h4>
 	<?php cm_poll_results($id); ?>
-	<?php }; ?>
+	<?php } ?>
   </div>
   <p>
     <label for="question">Poll Question</label>
@@ -194,12 +194,12 @@ if ($mode == "edit") {;
     <input type="text" name="r10" id="r10" value="<?php echo $r10; ?>" class="text" />
   </p>
   <p>
-    <?php if ($mode == "add") {; ?>
+    <?php if ($mode == "add") { ?>
     <input type="submit" value="Add Poll" name="submit" id="submit" class="button" />
-    <?php }; if ($mode == "edit") {; ?>
+    <?php } if ($mode == "edit") { ?>
     <input type="submit" value="Update Poll" name="update" id="update" class="button" />
     <input name="id" type="hidden" id="id" value="<?php echo $id; ?>" />
-    <?php }; ?>
+    <?php } ?>
     <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
   </p>
   </fieldset>

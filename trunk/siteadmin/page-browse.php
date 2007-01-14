@@ -8,12 +8,12 @@ $cmodule = "page-edit";
 cm_auth_module($module);
 
 // Database Query
-$query_CM_Array = "SELECT * FROM cm_pages ORDER BY page_title DESC;";
+$query = "SELECT * FROM cm_pages ORDER BY page_title DESC;";
 
 // Run Query
-$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-$totalRows_CM_Array = mysql_num_rows($CM_Array);
+$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result_array  = mysql_fetch_assoc($result);
+$result_row_count = mysql_num_rows($result);
 
 ?>
 <?php get_cm_header(); ?>
@@ -21,12 +21,12 @@ $totalRows_CM_Array = mysql_num_rows($CM_Array);
 
 <h2>Page Manager</h2>
 <?php $msg = $_GET['msg'];
-if ($msg == "added") {; echo "<p class=\"systemMessage\">Page added.</p>"; };
-if ($msg == "updated") {; echo "<p class=\"systemMessage\">Page updated.</p>"; };
-if ($msg == "deleted") {; echo "<p class=\"systemMessage\">Page deleted.</p>"; };
+if ($msg == "added") { echo "<p class=\"systemMessage\">Page added.</p>"; }
+if ($msg == "updated") { echo "<p class=\"systemMessage\">Page updated.</p>"; }
+if ($msg == "deleted") { echo "<p class=\"systemMessage\">Page deleted.</p>"; }
 ?>
 
-<?php if ($totalRows_CM_Array > 0) {; // If there are any pages ?>
+<?php if ($result_row_count > 0) { // If there are any pages ?>
 
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-table"; ?>">
@@ -43,10 +43,10 @@ if ($msg == "deleted") {; echo "<p class=\"systemMessage\">Page deleted.</p>"; }
     </tr>
     <?php
 
-do {;
-	$id = $row_CM_Array['id'];
-	$title = $row_CM_Array['page_title'];
-	$edited = $row_CM_Array['page_edited'];
+do {
+	$id = $result_array['id'];
+	$title = $result_array['page_title'];
+	$edited = $result_array['page_edited'];
 ?>
     <tr>
       <td><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $title; ?></a></p>
@@ -60,13 +60,13 @@ do {;
         </ul>
       </td>
     </tr>
-    <? } while ($row_CM_Array = mysql_fetch_assoc($CM_Array)); ?>
+    <? } while ($result_array = mysql_fetch_assoc($result)); ?>
   </table> 
   </fieldset>
 </form>
 
-<?php } else {; ?>
+<?php } else { ?>
 	<p>You are not currently using pages. Why not <a href="<?php echo "$cmodule.php?action=add"; ?>">add one</a> now?</p>
-<?php }; ?>
+<?php } ?>
 
 <?php get_cm_footer(); ?>

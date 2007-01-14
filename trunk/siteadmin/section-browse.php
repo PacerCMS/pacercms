@@ -12,7 +12,7 @@ cm_auth_module($module);
 <h2>Section Manager</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "updated") {; echo "<p class=\"systemMessage\">Section updated.</p>"; };
+if ($msg == "updated") { echo "<p class=\"systemMessage\">Section updated.</p>"; }
 ?>
 <form>
   <fieldset class="<?php echo "$module-form"; ?>">
@@ -27,20 +27,20 @@ if ($msg == "updated") {; echo "<p class=\"systemMessage\">Section updated.</p>"
     <?php
 
 // Database Query
-$query_CM_Array = "SELECT * FROM cm_sections ORDER BY section_priority;";
+$query = "SELECT * FROM cm_sections ORDER BY section_priority;";
 
 // Run Query
-$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-$totalRows_CM_Array = mysql_num_rows($CM_Array);
+$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result_array  = mysql_fetch_assoc($result);
+$result_row_count = mysql_num_rows($result);
 
-do {;
-$id = $row_CM_Array['id'];
-$section_name = $row_CM_Array['section_name'];
-$section_url = $row_CM_Array['section_url'];
-$section_editor = $row_CM_Array['section_editor'];
-$section_editor_title = $row_CM_Array['section_editor_title'];
-$section_priority = $row_CM_Array['section_priority'];
+do {
+$id = $result_array['id'];
+$section_name = $result_array['section_name'];
+$section_url = $result_array['section_url'];
+$section_editor = $result_array['section_editor'];
+$section_editor_title = $result_array['section_editor_title'];
+$section_priority = $result_array['section_priority'];
 ?>
     <tr>
       <td><?php echo $section_priority; ?></td>
@@ -53,7 +53,7 @@ $section_priority = $row_CM_Array['section_priority'];
         </ul>
       </td>
     </tr>
-    <? } while ($row_CM_Array = mysql_fetch_assoc($CM_Array)); ?>
+    <? } while ($result_array = mysql_fetch_assoc($result)); ?>
   </table>
   </fieldset>
 </form>

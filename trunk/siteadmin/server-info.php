@@ -70,19 +70,19 @@ cm_auth_module($module);
 <?php
 	$user_id = $_SESSION['cm_user_id'];
 	
-	$query_CM_Array = "SELECT * FROM cm_access";
-	$query_CM_Array .= " WHERE user_id = '$user_id'";
-	$query_CM_Array .= " ORDER BY access_option ASC;";
-	$CM_Array = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-	$totalRows_CM_Array = mysql_num_rows($CM_Array);
+	$query = "SELECT * FROM cm_access";
+	$query .= " WHERE user_id = '$user_id'";
+	$query .= " ORDER BY access_option ASC;";
+	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
 	echo "<pre>";
 	do {
-		$type = $row_CM_Array['access_type'];
-		$option = $row_CM_Array['access_option'];
-		$value = $row_CM_Array['access_value'];
+		$type = $result_array['access_type'];
+		$option = $result_array['access_option'];
+		$value = $result_array['access_value'];
 		echo "$type\t$value\t$option\n";
-	} while ($row_CM_Array = mysql_fetch_assoc($CM_Array));
+	} while ($result_array = mysql_fetch_assoc($result));
 	echo "</pre>"
 ?>
 

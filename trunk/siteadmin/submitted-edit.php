@@ -10,7 +10,7 @@ $pmodule = "submitted-browse";
 cm_auth_module($module);
 
 // Change mode based on query string
-if ($_GET["action"] != "") {;
+if ($_GET["action"] != "") {
 	$mode = $_GET["action"];
 }
 
@@ -18,49 +18,49 @@ if ($_GET["action"] != "") {;
 $id = $_GET["id"];
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {; 
+if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") { 
 	$id = $_POST['delete-id'];
 	// Run function
 	$stat = cm_delete_submitted($id);
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
-	} else {;
+	} else {
 		cm_error("Error in 'cm_delete_submitted' function.");
 		exit;
-	};	
-};
+	}	
+}
 
 
 // Query
-$query_CM_Array = "SELECT * FROM cm_submitted ";
-$query_CM_Array .= " WHERE id = $id";
+$query = "SELECT * FROM cm_submitted ";
+$query .= " WHERE id = $id";
 // Security Measure
 
 // Run Query
-$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(cm_error(mysql_error()));
-$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-$totalRows_CM_Array = mysql_num_rows($CM_Array);
+$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+$result_array  = mysql_fetch_assoc($result);
+$result_row_count = mysql_num_rows($result);
 
 // If Array comes back empty, produce error
-if ($totalRows_CM_Array != 1) {;
+if ($result_row_count != 1) {
 	cm_error("Submitted article does not exist.");
 	exit;
-};
+}
 	
 // Define variables
-$id = $row_CM_Array['id'];
-$issue = $row_CM_Array['issue_id'];
-$title = $row_CM_Array['submitted_title'];
-$text = $row_CM_Array['submitted_text'];
-$keyword = $row_CM_Array['submitted_keyword'];
-$author = $row_CM_Array['submitted_author'];
-$email = $row_CM_Array['submitted_author_email'];
-$major = $row_CM_Array['submitted_author_major'];
-$city = $row_CM_Array['submitted_author_city'];
-$telephone = $row_CM_Array['submitted_author_telephone'];
-$sent = $row_CM_Array['submitted_sent'];
-$words = $row_CM_Array['submitted_words'];
+$id = $result_array['id'];
+$issue = $result_array['issue_id'];
+$title = $result_array['submitted_title'];
+$text = $result_array['submitted_text'];
+$keyword = $result_array['submitted_keyword'];
+$author = $result_array['submitted_author'];
+$email = $result_array['submitted_author_email'];
+$major = $result_array['submitted_author_major'];
+$city = $result_array['submitted_author_city'];
+$telephone = $result_array['submitted_author_telephone'];
+$sent = $result_array['submitted_sent'];
+$words = $result_array['submitted_words'];
 ?>
 <?php get_cm_header(); ?>
 
@@ -86,7 +86,7 @@ $words = $row_CM_Array['submitted_words'];
 
 <?php
 // Show preview if not an add form
-if ($show_submitted_delete == "true") {; ?>
+if ($show_submitted_delete == "true") { ?>
 <h2>Delete Submitted Article <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
 <div id="deleteRecord">
   <form action="<?php echo "$module.php?action=delete"; ?>" method="post">
@@ -99,6 +99,6 @@ if ($show_submitted_delete == "true") {; ?>
     </fieldset>
   </form>
 </div>
-<?php }; ?>
+<?php } ?>
 
 <?php get_cm_footer(); ?>

@@ -7,15 +7,15 @@ $module = "issue-browse";
 cm_auth_module($module);
 
 
-if ($_COOKIE["$module-volume"] == "") {;
+if ($_COOKIE["$module-volume"] == "") {
 	setcookie("$module-volume", cm_current_issue('volume')); // Current Volume
 	$volume = cm_current_issue('volume');
-} else {;
+} else {
 	$volume = $_COOKIE["$module-volume"];
-};
+}
 
 // If changing publishing settings
-if ($_POST['id'] != "") {;
+if ($_POST['id'] != "") {
 	// Get posted data
 	$id = $_POST['id'];
 	$current_issue = $_POST['current_issue'];
@@ -25,18 +25,18 @@ if ($_POST['id'] != "") {;
 	if ($stat == 1) {
 		header("Location: $module.php?msg=publish-updated");
 		exit;
-	} else {;
+	} else {
 		cm_error("Error in 'cm_edit_settings' function.");
 		exit;
-	};
-};
+	}
+}
 
 // Volume for display
-if ($_GET['volume'] != "") {;
+if ($_GET['volume'] != "") {
 	setcookie("$module-volume", $_GET['volume']);
 	header("Location: $module.php");
 	exit;
-};
+}
 
 class MyCalendar extends Calendar
 {
@@ -56,17 +56,17 @@ class MyCalendar extends Calendar
 <h2>Issue Manager</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "added") {; echo "<p class=\"systemMessage\">Issue added.</p>"; };
-if ($msg == "updated") {; echo "<p class=\"systemMessage\">Issue updated.</p>"; };
-if ($msg == "publish-updated") {; echo "<p class=\"systemMessage\">Publish settings updated.</p>"; };
+if ($msg == "added") { echo "<p class=\"systemMessage\">Issue added.</p>"; }
+if ($msg == "updated") { echo "<p class=\"systemMessage\">Issue updated.</p>"; }
+if ($msg == "publish-updated") { echo "<p class=\"systemMessage\">Publish settings updated.</p>"; }
 ?>
 <form action="<?php echo "$module.php"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend>Publication Settings</legend>
   <div class="sidebar">
     <?
-	if ($_GET['month'] == "") {; $month = date('d'); } else {; $month = $_GET['month']; };
-	if ($_GET['year'] == "") {; $year = date('Y'); } else {; $year = $_GET['year']; };
+	if ($_GET['month'] == "") { $month = date('d'); } else { $month = $_GET['month']; }
+	if ($_GET['year'] == "") { $year = date('Y'); } else { $year = $_GET['year']; }
 	$cal = new MyCalendar;
 	echo $cal->getMonthView($month, $year);
 ?>
@@ -105,19 +105,19 @@ if ($msg == "publish-updated") {; echo "<p class=\"systemMessage\">Publish setti
   <?php
 
 // Make sure soemthing loads
-if ($volume == "") {;
+if ($volume == "") {
 	$volume = cm_current_issue('volume');
-};
+}
 
 // Database Query
-$query_CM_Array = "SELECT * FROM cm_issues WHERE issue_volume = \"$volume\" ORDER BY issue_number;";
+$query = "SELECT * FROM cm_issues WHERE issue_volume = \"$volume\" ORDER BY issue_number;";
 
 // Run Query
-$CM_Array  = mysql_query($query_CM_Array, $CM_MYSQL) or die(mysql_error());
-$row_CM_Array  = mysql_fetch_assoc($CM_Array);
-$totalRows_CM_Array = mysql_num_rows($CM_Array);
+$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result_array  = mysql_fetch_assoc($result);
+$result_row_count = mysql_num_rows($result);
 
-if ($totalRows_CM_Array > 0) {;
+if ($result_row_count > 0) {
 
 ?>
   <table class="<?php echo $module; ?>-table">
@@ -129,13 +129,13 @@ if ($totalRows_CM_Array > 0) {;
     </tr>
     <?php
 
-do {;
+do {
 
-	$id = $row_CM_Array['id'];
-	$date = $row_CM_Array['issue_date'];
-	$volume = $row_CM_Array['issue_volume'];
-	$number = $row_CM_Array['issue_number'];
-	$circulation = $row_CM_Array['issue_circulation'];
+	$id = $result_array['id'];
+	$date = $result_array['issue_date'];
+	$volume = $result_array['issue_volume'];
+	$number = $result_array['issue_number'];
+	$circulation = $result_array['issue_circulation'];
 
   
 ?>
@@ -151,7 +151,7 @@ do {;
         </ul>
       </td>
     </tr>
-    <? } while ($row_CM_Array = mysql_fetch_assoc($CM_Array)); ?>
+    <? } while ($result_array = mysql_fetch_assoc($result)); ?>
     <tr>
       <td class="center" colspan="3"><strong><a href="issue-edit.php?action=new">Add
             an Issue</a></strong></td>
@@ -160,8 +160,8 @@ do {;
   </table>
   </fieldset>
 </form>
-<?php } else {; ?>
+<?php } else { ?>
 <p>This selected volume is empty. <a href="issue-edit.php?action=new">Add an
     issue</a>.</p>
-<?php }; ?>
+<?php } ?>
 <?php get_cm_footer(); ?>
