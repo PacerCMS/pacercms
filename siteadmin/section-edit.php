@@ -108,7 +108,9 @@ $priority = $result_array['section_priority'];
   <p>
     <label for="sidebar">Sidebar Content</label>
     <br />
+    <span class="article-edit-tags"><script type="text/javascript">edToolbar();</script></span>
     <textarea name="sidebar" id="sidebar" rows="10"><?php echo $sidebar; ?></textarea>
+    <script type="text/javascript">var edCanvas = document.getElementById('sidebar');</script>
   </p>
   <p>
     <label for="priority">Section Priority</label>
