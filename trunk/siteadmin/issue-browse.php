@@ -65,7 +65,7 @@ if ($msg == "publish-updated") { echo "<p class=\"systemMessage\">Publish settin
   <legend>Publication Settings</legend>
   <div class="sidebar">
     <?
-	if ($_GET['month'] == "") { $month = date('d'); } else { $month = $_GET['month']; }
+	if ($_GET['month'] == "") { $month = date('m'); } else { $month = $_GET['month']; }
 	if ($_GET['year'] == "") { $year = date('Y'); } else { $year = $_GET['year']; }
 	$cal = new MyCalendar;
 	echo $cal->getMonthView($month, $year);
