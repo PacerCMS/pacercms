@@ -1101,6 +1101,11 @@ function trim_text($text,$length)
 	return $text;
 }
 
+/*******************************************
+	Function:	prep_string
+*******************************************/
+function prep_string($string){    if (get_magic_quotes_gpc() == 1)    {        return($string);    } else {        return(addslashes($string));    }}
+
 #==========================================#
 ############## Site Constants ##############
 #==========================================#

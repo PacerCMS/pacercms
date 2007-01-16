@@ -20,7 +20,8 @@ $query .= " ORDER BY article_priority ASC;";
 $result = $db->Execute($query);
 while ($array = $result->GetArray()) {    $cover_articles = $array;}
 
-$top_story = $cover_articles[0][id]; // Locates the first story
+// Locates the first story
+$top_story = $cover_articles[0][id]; 
 
 // Assign variables
 $smarty->assign("cover_articles", $cover_articles);

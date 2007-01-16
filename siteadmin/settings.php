@@ -9,17 +9,17 @@ cm_auth_module($module);
 if ($_POST['id'] != "") {
 	// Get posted data
 	$id = $_POST['id'];
-	$name = $_POST['name'];
-	$description = $_POST['description'];
-	$url = $_POST['url'];
-	$email = $_POST['email'];
-	$address = $_POST['address'];
-	$city = $_POST['city'];
-	$state = $_POST['state'];
-	$zipcode = $_POST['zipcode'];
-	$telephone = $_POST['telephone'];
-	$fax = $_POST['fax'];
-	$announce = $_POST['announce'];	
+	$name = prep_string($_POST['name']);
+	$description = prep_string($_POST['description']);
+	$url = prep_string($_POST['url']);
+	$email = prep_string($_POST['email']);
+	$address = prep_string($_POST['address']);
+	$city = prep_string($_POST['city']);
+	$state = prep_string($_POST['state']);
+	$zipcode = prep_string($_POST['zipcode']);
+	$telephone = prep_string($_POST['telephone']);
+	$fax = prep_string($_POST['fax']);
+	$announce = prep_string($_POST['announce']);	
 	// Run function
 	$stat = cm_edit_settings($name,$description,$url,$email,$address,$city,$state,$zipcode,$telephone,$fax,$announce,$id);
 	if ($stat == 1) {

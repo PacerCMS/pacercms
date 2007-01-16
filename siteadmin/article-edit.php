@@ -54,13 +54,13 @@ if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {
 if ($_GET['action'] == "edit") { 
 	if ($_POST['id'] != "") {
 		// Get posted data
-		$title = $_POST['title'];
-		$subtitle = $_POST['subtitle'];
-		$author = $_POST['author'];
-		$author_title = $_POST['author_title'];
-		$summary = $_POST['summary'];
-		$text = $_POST['text'];
-		$keywords = $_POST['keywords'];
+		$title = prep_string($_POST['title']);
+		$subtitle = prep_string($_POST['subtitle']);
+		$author = prep_string($_POST['author']);
+		$author_title = prep_string($_POST['author_title']);
+		$summary = prep_string($_POST['summary']);
+		$text = prep_string($_POST['text']);
+		$keywords = prep_string($_POST['keywords']);
 		$priority = $_POST['priority'];
 		$section = $_POST['section'];
 		$issue = $_POST['issue'];
@@ -85,13 +85,13 @@ if ($_GET['action'] == "edit") {
 // If action is new, call add function
 if ($_GET['action'] == "new" && $_POST['text'] != "") { 
 	// Get posted data
-	$title = $_POST['title'];
-	$subtitle = $_POST['subtitle'];
-	$author = $_POST['author'];
-	$author_title = $_POST['author_title'];
-	$summary = $_POST['summary'];
-	$text = $_POST['text'];
-	$keywords = $_POST['keywords'];
+	$title = prep_string($_POST['title']);
+	$subtitle = prep_string($_POST['subtitle']);
+	$author = prep_string($_POST['author']);
+	$author_title = prep_string($_POST['author_title']);
+	$summary = prep_string($_POST['summary']);
+	$text = prep_string($_POST['text']);
+	$keywords = prep_string($_POST['keywords']);
 	$priority = $_POST['priority'];
 	$section = $_POST['section'];
 	$issue = $_POST['issue'];
@@ -165,7 +165,7 @@ if ($mode == "edit") {
     <p>
       <label for="keywords">Keywords</label>
       <br />
-      <input type="text" name="keywords" id="keywords" value="<?php echo $keywords; ?>" />
+      <input type="text" name="keywords" id="keywords" value="<?php echo htmlentities($keywords); ?>" />
     </p>
     <?php if ($restrict_section == "false") { ?>
     <p>
@@ -237,22 +237,22 @@ if ($mode == "edit") {
   <p>
     <label for="title">Title</label>
     <br />
-    <input type="text" name="title" id="title" value="<?php echo $title; ?>" class="text" />
+    <input type="text" name="title" id="title" value="<?php echo htmlentities($title); ?>" class="text" />
   </p>
   <p>
     <label for="subtitle">Subtitle</label>
     <br />
-    <input type="text" name="subtitle" id="subtitle" value="<?php echo $subtitle; ?>" class="text" />
+    <input type="text" name="subtitle" id="subtitle" value="<?php echo htmlentities($subtitle); ?>" class="text" />
   </p>
   <p>
     <label for="author_id">Author</label>
     <br />
-    <input type="text" name="author" id="author" value="<?php echo $author; ?>" class="text" />
+    <input type="text" name="author" id="author" value="<?php echo htmlentities($author); ?>" class="text" />
   </p>
   <p>
     <label for="author_title">Author Title</label>
     <br />
-    <input type="text" name="author_title" id="author_title" value="<?php echo $author_title; ?>" class="text" />
+    <input type="text" name="author_title" id="author_title" value="<?php echo htmlentities($author_title); ?>" class="text" />
   </p>
   <p>
     <label for="summary">Summary</label>
