@@ -36,11 +36,11 @@ if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {
 if ($_GET['action'] == "edit") { 
 	if ($_POST['id'] != "") {
 		// Get posted data
-		$title = $_POST['title'];
-		$short_title = $_POST['short_title'];
-		$text = $_POST['text'];
-		$side_text = $_POST['side_text'];
-		$slug = $_POST['slug'];
+		$title = prep_string($_POST['title']);
+		$short_title = prep_string($_POST['short_title']);
+		$text = prep_string($_POST['text']);
+		$side_text = prep_string($_POST['side_text']);
+		$slug = prep_string($_POST['slug']);
 		$edited = $_POST['edited'];
 		$id	= $_POST['id'];
 		
@@ -62,11 +62,11 @@ if ($_GET['action'] == "edit") {
 // If action is new, call add function
 if ($_GET['action'] == "add" && $_POST['text'] != "") { 
 	// Get posted data
-	$title = $_POST['title'];
-	$short_title = $_POST['short_title'];
-	$text = $_POST['text'];
-	$side_text = $_POST['side_text'];
-	$slug = $_POST['slug'];
+	$title = prep_string($_POST['title']);
+	$short_title = prep_string($_POST['short_title']);
+	$text = prep_string($_POST['text']);
+	$side_text = prep_string($_POST['side_text']);
+	$slug = prep_string($_POST['slug']);
 	$edited = $_POST['edited'];	
 	// Run function
 	$stat = cm_add_page($title,$short_title,$text,$side_text,$slug,$edited);

@@ -164,6 +164,31 @@ if ($issue_year == "") { $issue_year = date('Y'); }
       <option value="31" <?php if ($issue_day == "31") { echo "selected"; } ?>>31</option>
     </select>
     <select name="issue-year" id="issue-year">
+      <option value="1900" <?php if ($issue_year == "1900") { echo "selected"; } ?>>1900</option>
+      <option value="1901" <?php if ($issue_year == "1901") { echo "selected"; } ?>>1901</option>
+      <option value="1902" <?php if ($issue_year == "1902") { echo "selected"; } ?>>1902</option>
+      <option value="1903" <?php if ($issue_year == "1903") { echo "selected"; } ?>>1903</option>
+      <option value="1904" <?php if ($issue_year == "1904") { echo "selected"; } ?>>1904</option>
+      <option value="1905" <?php if ($issue_year == "1905") { echo "selected"; } ?>>1905</option>
+      <option value="1906" <?php if ($issue_year == "1906") { echo "selected"; } ?>>1906</option>
+      <option value="1907" <?php if ($issue_year == "1907") { echo "selected"; } ?>>1907</option>
+      <option value="1908" <?php if ($issue_year == "1908") { echo "selected"; } ?>>1908</option>
+      <option value="1909" <?php if ($issue_year == "1909") { echo "selected"; } ?>>1909</option>
+      <option value="1910" <?php if ($issue_year == "1910") { echo "selected"; } ?>>1910</option>
+      <option value="1911" <?php if ($issue_year == "1911") { echo "selected"; } ?>>1911</option>
+      <option value="1912" <?php if ($issue_year == "1912") { echo "selected"; } ?>>1912</option>
+      <option value="1913" <?php if ($issue_year == "1913") { echo "selected"; } ?>>1913</option>
+      <option value="1914" <?php if ($issue_year == "1914") { echo "selected"; } ?>>1914</option>
+      <option value="1915" <?php if ($issue_year == "1915") { echo "selected"; } ?>>1915</option>
+      <option value="1916" <?php if ($issue_year == "1916") { echo "selected"; } ?>>1916</option>
+      <option value="1917" <?php if ($issue_year == "1917") { echo "selected"; } ?>>1917</option>
+      <option value="1918" <?php if ($issue_year == "1918") { echo "selected"; } ?>>1918</option>
+      <option value="1919" <?php if ($issue_year == "1919") { echo "selected"; } ?>>1919</option>
+      <option value="1920" <?php if ($issue_year == "1920") { echo "selected"; } ?>>1920</option>
+      <option value="1921" <?php if ($issue_year == "1921") { echo "selected"; } ?>>1921</option>
+      <option value="1922" <?php if ($issue_year == "1922") { echo "selected"; } ?>>1922</option>
+      <option value="1923" <?php if ($issue_year == "1923") { echo "selected"; } ?>>1923</option>
+      <option value="1924" <?php if ($issue_year == "1924") { echo "selected"; } ?>>1924</option>
       <option value="1925" <?php if ($issue_year == "1925") { echo "selected"; } ?>>1925</option>
       <option value="1926" <?php if ($issue_year == "1926") { echo "selected"; } ?>>1926</option>
       <option value="1927" <?php if ($issue_year == "1927") { echo "selected"; } ?>>1927</option>

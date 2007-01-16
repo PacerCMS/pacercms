@@ -36,11 +36,11 @@ if ($_GET['action'] == "edit") {
 	if ($_POST['id'] != "") {
 		// Get posted data
 		$article_id = $_POST['article_id'];
-		$title = $_POST['title'];
-		$src = $_POST['src'];
-		$type = $_POST['type'];
-		$caption = $_POST['caption'];
-		$credit = $_POST['credit'];
+		$title = prep_string($_POST['title']);
+		$src = prep_string($_POST['src']);
+		$type = prep_string($_POST['type']);
+		$caption = prep_string($_POST['caption']);
+		$credit = prep_string($_POST['credit']);
 		$id	= $_POST['id'];		
 		// Run function
 		$stat = cm_edit_media($article_id,$title,$src,$type,$caption,$credit,$id);
@@ -61,11 +61,11 @@ if ($_GET['action'] == "edit") {
 if ($_GET['action'] == "new" && $_POST['article_id'] != "") { 
 	// Get posted data
 	$article_id = $_POST['article_id'];
-	$title = $_POST['title'];
-	$src = $_POST['src'];
-	$type = $_POST['type'];
-	$caption = $_POST['caption'];
-	$credit = $_POST['credit'];
+	$title = prep_string($_POST['title']);
+	$src = prep_string($_POST['src']);
+	$type = prep_string($_POST['type']);
+	$caption = prep_string($_POST['caption']);
+	$credit = prep_string($_POST['credit']);
 	// Run function
 	$stat = cm_add_media($article_id,$title,$src,$type,$caption,$credit);
 	if ($stat == 1) {

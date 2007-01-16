@@ -27,6 +27,9 @@ $result = $db->Execute($query);while ($array = $result->GetArray()) {    $feed
 $smarty->assign("section_name", section_info('name', $section) );
 $smarty->assign("feed_items", $feed_items);
 
+// Add headers for XML
+header("Content-type: text/xml; charset=UTF-8");
+
 
 // Render
 $smarty->display("feed.tpl");

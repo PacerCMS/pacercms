@@ -22,12 +22,12 @@ $id = $_GET["id"];
 if ($_GET['action'] == "edit") { 
 	if ($_POST['id'] != "") {
 		// Get posted data
-		$name = $_POST['name'];
-		$editor = $_POST['editor'];
-		$editor_title = $_POST['editor_title'];
+		$name = prep_string($_POST['name']);
+		$editor = prep_string($_POST['editor']);
+		$editor_title = prep_string($_POST['editor_title']);
 		$editor_email = $_POST['editor_email'];
 		$url = $_POST['url'];
-		$sidebar = $_POST['sidebar'];
+		$sidebar = prep_string($_POST['sidebar']);
 		$priority = $_POST['priority'];
 		$feed_image = $_POST['feed_image'];	
 		$id	= $_POST['id'];		

@@ -354,6 +354,12 @@ function run_query($query)
 
 
 /*******************************************
+	Function:	prep_string
+*******************************************/
+function prep_string($string){    if (get_magic_quotes_gpc() == 1)    {        return($string);    } else {        return(addslashes($string));    }}
+
+
+/*******************************************
 	Function:	autop
 	Credit:
 		Matthew Mullenweg of WordPress

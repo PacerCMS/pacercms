@@ -35,27 +35,27 @@ if ($_GET['action'] == "edit") {
 	if ($_POST['id'] != "") {
 		// Get posted data
 		$id = $_POST['id'];
-		$login = $_POST['login'];
-		$password = $_POST['password'];
-		$first_name = $_POST['first_name'];
-		$middle_name = $_POST['middle_name'];
-		$last_name = $_POST['last_name'];
-		$job_title = $_POST['job_title'];
-		$email = $_POST['email'];
-		$telephone = $_POST['telephone'];
-		$mobile = $_POST['mobile'];		
-		$classification = $_POST['classification'];
-		$address = $_POST['address'];
-		$city = $_POST['city'];
-		$state = $_POST['state'];
-		$zipcode = $_POST['zipcode'];
-		$im_aol = $_POST['im_aol'];
-		$im_msn = $_POST['im_msn'];
-		$im_yahoo = $_POST['im_yahoo'];
-		$im_jabber = $_POST['im_jabber'];
-		$profile = $_POST['profile'];	
-		$password_new = $_POST['password_new'];
-		$password_confirm = $_POST['password_confirm'];
+		$login = prep_string($_POST['login']);
+		$password = prep_string($_POST['password']);
+		$first_name = prep_string($_POST['first_name']);
+		$middle_name = prep_string($_POST['middle_name']);
+		$last_name = prep_string($_POST['last_name']);
+		$job_title = prep_string($_POST['job_title']);
+		$email = prep_string($_POST['email']);
+		$telephone = prep_string($_POST['telephone']);
+		$mobile = prep_string($_POST['mobile']);
+		$classification = prep_string($_POST['classification']);
+		$address = prep_string($_POST['address']);
+		$city = prep_string($_POST['city']);
+		$state = prep_string($_POST['state']);
+		$zipcode = prep_string($_POST['zipcode']);
+		$im_aol = prep_string($_POST['im_aol']);
+		$im_msn = prep_string($_POST['im_msn']);
+		$im_yahoo = prep_string($_POST['im_yahoo']);
+		$im_jabber = prep_string($_POST['im_jabber']);
+		$profile = prep_string($_POST['profile']);	
+		$password_new = prep_string($_POST['password_new']);
+		$password_confirm = prep_string($_POST['password_confirm']);
 		if ($password_new == "$password_confirm" && $password_new != "") {
 			$password = md5($password_new);
 		}
@@ -80,25 +80,25 @@ if ($_GET['action'] == "edit") {
 // If action is add, call add function
 if ($_GET['action'] == "add" && $_POST['login'] != "") { 
 	// Get posted data
-	$login = $_POST['login'];
-	$first_name = $_POST['first_name'];
-	$middle_name = $_POST['middle_name'];
-	$last_name = $_POST['last_name'];
-	$job_title = $_POST['job_title'];
-	$email = $_POST['email'];
-	$telephone = $_POST['telephone'];
-	$mobile = $_POST['mobile'];
-	$address = $_POST['address'];
-	$city = $_POST['city'];
-	$state = $_POST['state'];
-	$zipcode = $_POST['zipcode'];
-	$im_aol = $_POST['im_aol'];
-	$im_msn = $_POST['im_msn'];
-	$im_yahoo = $_POST['im_yahoo'];
-	$im_jabber = $_POST['im_jabber'];
-	$profile = $_POST['profile'];	
-	$password_new = $_POST['password_new'];
-	$password_confirm = $_POST['password_confirm'];
+	$login = prep_string($_POST['login']);
+	$first_name = prep_string($_POST['first_name']);
+	$middle_name = prep_string($_POST['middle_name']);
+	$last_name = prep_string($_POST['last_name']);
+	$job_title = prep_string($_POST['job_title']);
+	$email = prep_string($_POST['email']);
+	$telephone = prep_string($_POST['telephone']);
+	$mobile = prep_string($_POST['mobile']);
+	$address = prep_string($_POST['address']);
+	$city = prep_string($_POST['city']);
+	$state = prep_string($_POST['state']);
+	$zipcode = prep_string($_POST['zipcode']);
+	$im_aol = prep_string($_POST['im_aol']);
+	$im_msn = prep_string($_POST['im_msn']);
+	$im_yahoo = prep_string($_POST['im_yahoo']);
+	$im_jabber = prep_string($_POST['im_jabber']);
+	$profile = prep_string($_POST['profile']);
+	$password_new = prep_string($_POST['password_new']);
+	$password_confirm = prep_string($_POST['password_confirm']);
 	if ($password_new == "$password_confirm" && $password_new != "") {
 		$password = md5($password_new);
 	} else {

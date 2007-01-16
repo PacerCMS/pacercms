@@ -42,7 +42,9 @@ if (!empty($_POST['text'])) {
 
 /* Header Configuration */
 $page_title = "Feedback";
-
 $smarty->assign("section_title", $page_title);
 $smarty->assign("page_title", $page_title);
+
+
+// Render page
 $smarty->display("feedback.tpl");
