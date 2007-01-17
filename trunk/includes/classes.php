@@ -17,7 +17,14 @@ class Smarty_PacerCMS extends Smarty
   
         		$this->assign('site_name', site_info('name'));
         		$this->assign('site_url', site_info('url'));
+        		$this->assign('site_email', site_info('email'));
         		$this->assign('site_description', site_info('description'));
+        		$this->assign('site_address', site_info('address'));
+        		$this->assign('site_city', site_info('city'));
+        		$this->assign('site_state', site_info('state'));
+        		$this->assign('site_zipcode', site_info('zipcode'));
+        		$this->assign('site_telephone', site_info('telephone'));
+        		$this->assign('site_fax', site_info('fax'));
         		$this->assign('site_sections', section_list('array'));
         		$this->assign('site_templates_folder', TEMPLATES_FOLDER);
         		$this->assign("current_issue_date", current_issue('date') . " 00:00:01");

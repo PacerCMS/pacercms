@@ -18,12 +18,22 @@
     <div class="colWrap">
         <div class="leftCol">
             <h3>Mailing Address</h3>
-            <p><strong>{$site_name}<br />
-            {$site_address}<br />
-            {$site_city}, {$site_state} {$site_zipcode}</strong></p>
+            <p>
+                <strong><em>{$site_name}</em></strong><br />
+                {$site_address}<br />
+                {$site_city}, {$site_state} {$site_zipcode}
+            </p>
+            
             <h3>Contacting Us</h3>
-            <p><strong>Telephone: {$site_telephone}<br />Fax: {$site_fax}</strong></p>
-            <p><strong>Primary E-mail: <a href="mailto:{$site_email}">{$site_email}</a></strong></p>
+            <p>
+                <strong>Telephone:</strong> {$site_telephone}<br />
+                <strong>Fax:</strong> {$site_fax}
+            </p>
+            
+            <p>
+                <strong>Primary E-mail:</strong> <a href="mailto:{$site_email}">{$site_email}</a>
+            </p>
+            
             <hr />
             <h3>Before you complete this form ...</h3>
             <p>We receive hundreds of e-mails every day. Unfortunately, this means we cannot guarantee individual response. Take a look at the links below to make sure your question is not answered elsewhere on the Web site.</p>
