@@ -31,7 +31,7 @@
         <h4>Related</h4>
         <ul>
             {section name="items" loop=$article_related}
-            <li><a href="{$article_related[items].media_src}">{$article_related[items].media_title}</li>
+            <li><a href="{$article_related[items].media_src}">{$article_related[items].media_title}</a></li>
             {/section}
         </ul>
     </div>

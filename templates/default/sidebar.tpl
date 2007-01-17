@@ -9,7 +9,7 @@
         <ul>
             <li><a href="{$site_url}/submit.php?mode=letter">Write a Letter</a></li>
             <li><a href="{$site_url}/archives.php">Archived Issues</a></li>
-            <li><a href="{$site_url}/submit.php?mode=story">Submit a Story</a></li>
+            <li><a href="{$site_url}/submit.php?mode=article">Submit a Story</a></li>
         </ul>
         <ul>
             <li><a href="{$site_url}/page.php?id=1">About <em>{$site_name}</em></a></li>
