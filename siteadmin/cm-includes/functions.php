@@ -377,7 +377,8 @@ function cm_list_media($sel,$display=false)
 			do {		
 				$id = $result_array['id'];
 				$title = $result_array['media_title'];
-				echo "<li><a href=\"article-media.php?id=$id\">#$id: $title</a></li>\n";
+				$type = $result_array['media_type'];
+				echo "<li><a href=\"article-media.php?id=$id\">#$id: $title</a> ($type)</li>\n";
 			} while ($result_array = mysql_fetch_assoc($result));
 		} else {
 			echo "<li><em>No linked files.</em></li>";
