@@ -112,12 +112,12 @@ if ($result_row_count == 1) {
   <p>
     <label for="title">Title / Description</label>
     <br />
-    <input type="text" name="title" id="title" value="<?php echo $title; ?>" />
+    <input type="text" name="title" id="title" value="<?php echo $title; ?>" class="text" />
   </p>
   <p>
     <label for="src">Media URL</label>
     <br />
-    <input type="text" name="src" id="src" value="<?php echo $src; ?>" />
+    <input type="text" name="src" id="src" value="<?php echo $src; ?>" class="text" />
   </p>
   <p>
     <label for="type">Type of Media</label>
@@ -140,7 +140,7 @@ if ($result_row_count == 1) {
   <p>
     <label for="type">Credit / Source</label>
     <br />
-    <input type="text" name="credit" id="credit" value="<?php echo $credit; ?>" />
+    <input type="text" name="credit" id="credit" value="<?php echo $credit; ?>" class="text" />
   </p>
   <p>
     <?php if ($mode == "new") { ?>

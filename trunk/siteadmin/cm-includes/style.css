@@ -9,7 +9,6 @@ h3 {font-size: 125%; line-height: 1.5em; border-bottom: 1px solid #CCCCCC;}
 table {border:1px solid #000; border-collapse:collapse; margin: 10px; font-size:100%; width: 95%;}
 td, th {border:1px solid #000; border-collapse:collapse; vertical-align: middle; padding:7px;}
 th {background-color: #EFA72A; color:#fff;}
-ul {margin: 0; padding: 0;}
 fieldset {border: solid 1px #ccc; margin-bottom:10px;padding-bottom:10px;}
 fieldset p {margin-left:10px;} 
 fieldset ul {text-indent:10px;} 
@@ -48,7 +47,7 @@ label {font-weight:bold;}
 #header hr { display: none; margin: 0;}
 /* Main Menu */
 #mainmenu {float: left; width: 15%; margin-right:2%;}
-#mainmenu ul {list-style-type: none;}
+#mainmenu ul {list-style-type: none;margin:0;padding:0;}
 /* Content */
 #content {float: left; width: 80%; clear: right;}
 /* Footer */
@@ -65,6 +64,7 @@ label {font-weight:bold;}
 .article-edit-form input.text {width:60%;}
 .article-edit-form input.button {width:20%;}
 .article-edit-form textarea {width:60%; font-family: sans-serif; font-size:100%;}
+.article-edit-form ul {margin:0;padding:0;}
 
 /* -------------------------- Classes for ''issue-browse.php'' Module -------------------------- */
 .issue-browse-form select {width:40%;}
