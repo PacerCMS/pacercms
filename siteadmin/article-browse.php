@@ -100,14 +100,14 @@ $result_row_count = mysql_num_rows($result);
 <h2>Article Manager</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"systemMessage\">Article added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"systemMessage\">Article updated.</p>"; }
-if ($msg == "deleted") { echo "<p class=\"systemMessage\">Article deleted.</p>"; }
-if ($msg == "media-added") { echo "<p class=\"systemMessage\">Media added.</p>"; }
-if ($msg == "media-updated") { echo "<p class=\"systemMessage\">Media updated.</p>"; }
-if ($msg == "media-deleted") { echo "<p class=\"systemMessage\">Media deleted.</p>"; }
-if ($msg == "pub-reset") { echo "<p class=\"systemMessage\">Publication dates set to match issue.</p>"; }
-if ($msg == "pub-error") { echo "<p class=\"systemMessage\">Error setting publication dates.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">Article added.</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">Article updated.</p>"; }
+if ($msg == "deleted") { echo "<p class=\"alertMessage\">Article deleted.</p>"; }
+if ($msg == "media-added") { echo "<p class=\"infoMessage\">Media added.</p>"; }
+if ($msg == "media-updated") { echo "<p class=\"infoMessage\">Media updated.</p>"; }
+if ($msg == "media-deleted") { echo "<p class=\"alertMessage\">Media deleted.</p>"; }
+if ($msg == "pub-reset") { echo "<p class=\"alertMessage\">Publication dates set to match issue.</p>"; }
+if ($msg == "pub-error") { echo "<p class=\"alertMessage\">Error setting publication dates.</p>"; }
 ?>
 <?php if ($restrict_issue != "next" && $restrict_issue != "current") { // Begin Restrict Issue ?>
 <form action="<?php echo "$module.php"; ?>" method="get">

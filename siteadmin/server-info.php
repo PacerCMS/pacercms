@@ -9,7 +9,7 @@ cm_auth_module($module);
 <?php get_cm_header(); ?>
 <?php get_cm_menu(); ?>
 <h2>Session Variables Set by Server</h2>
-<p class="systemMessage">These are set when you login. Updates do not occur until you login again.</p>
+<p class="infoMessage">These are set when you login. Updates do not occur until you login again.</p>
 <?php
 
 	echo "<pre>\n";
@@ -18,7 +18,7 @@ cm_auth_module($module);
 	echo "</pre>\n"
 ?>
 <h2>Cookies Set by Server</h2>
-<p class="systemMessage">Modules set cookies to keep everything easy to get to.</p>
+<p class="infoMessage">Modules set cookies to keep everything easy to get to.</p>
 <?php
 
 	echo "<pre>\n";
@@ -30,7 +30,7 @@ cm_auth_module($module);
 
 ?>
 <h2>Persisting Variables</h2>
-<p class="systemMessage">These are set from the cm_access table entries.</p>
+<p class="infoMessage">These are set from the cm_access table entries.</p>
 <?php
 
 	echo "<pre>\n";
@@ -66,7 +66,7 @@ cm_auth_module($module);
 	echo "</pre>\n"
 ?>
 <h2>Your Access Rights</h2>
-<p class="systemMessage">This is the raw read-out of your cm_access entries.</p>
+<p class="infoMessage">This is the raw read-out of your cm_access entries.</p>
 <?php
 	$user_id = $_SESSION['cm_user_id'];
 	
@@ -88,6 +88,6 @@ cm_auth_module($module);
 
 
 <h2>Server Information</h2>
-<p class="systemMessage">A phpinfo() instance. Might be helpful in debugging server errors.</p>
+<p class="infoMessage">A phpinfo() instance. Might be helpful in debugging server errors.</p>
 <?php phpinfo(); ?>
 <?php get_cm_footer(); ?>

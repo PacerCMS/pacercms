@@ -56,9 +56,9 @@ class MyCalendar extends Calendar
 <h2>Issue Manager</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"systemMessage\">Issue added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"systemMessage\">Issue updated.</p>"; }
-if ($msg == "publish-updated") { echo "<p class=\"systemMessage\">Publish settings updated.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">Issue added.</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">Issue updated.</p>"; }
+if ($msg == "publish-updated") { echo "<p class=\"infoMessage\">Publish settings updated.</p>"; }
 ?>
 <form action="<?php echo "$module.php"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">

@@ -12,7 +12,7 @@ cm_auth_module($module);
 <h2>Section Manager</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "updated") { echo "<p class=\"systemMessage\">Section updated.</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">Section updated.</p>"; }
 ?>
 <form>
   <fieldset class="<?php echo "$module-form"; ?>">

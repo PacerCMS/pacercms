@@ -19,7 +19,7 @@ function cm_error($msg)
 {
 	get_cm_header();
 	echo "<h2>Error!</h2>";
-	echo autop($msg);
+	echo "<p class=\"alertMessage\">$msg</p>";
 	echo "<p><a href=\"javascript:history.back();\">Go Back</a>";
 	get_cm_footer();
 	exit;

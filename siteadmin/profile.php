@@ -92,7 +92,11 @@ $profile = $result_array['user_profile'];
 <h2>User Profile</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "updated") { echo "<p class=\"systemMessage\">Your user profile has been updated.</p>"; }
+if ($msg == "updated") {
+    echo "<p class=\"infoMessage\">Your user profile has been updated.</p>";
+} else {
+    echo "<p class=\"alertMessage\">You cannot change your name or job title. Please contact an administrator to correct any errors.</p>";
+}
 ?>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
@@ -116,24 +120,26 @@ if ($msg == "updated") { echo "<p class=\"systemMessage\">Your user profile has 
     <p><em>Leave blank if you do not wish<br />
  to change your password.</em></p>
   </div>
-  <p><strong>Note:</strong> You cannot change your name or job title. Please
-    contact an administrator to correct any errors.</p>
   <p>
     <label for="first_name">First Name</label>
     <br />
-    <big><?php echo $first_name; ?></big> </p>
+    <big><?php echo $first_name; ?>&nbsp;</big>
+  </p>
   <p>
     <label for="middle_name">Middle Name</label>
     <br />
-    <big><?php echo $middle_name; ?></big> </p>
+    <big><?php echo $middle_name; ?>&nbsp;</big>
+  </p>
   <p>
     <label for="last_name">Last Name</label>
     <br />
-    <big><?php echo $last_name; ?></big> </p>
+    <big><?php echo $last_name; ?></big>&nbsp;
+  </p>
   <p>
     <label for="job_title">Job Title</label>
     <br />
-    <big><?php echo $job_title; ?></big> </p>
+    <big><?php echo $job_title; ?></big>&nbsp;
+  </p>
   </fieldset>
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend>Contact Information</legend>
