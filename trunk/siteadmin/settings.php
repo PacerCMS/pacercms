@@ -39,7 +39,7 @@ if ($_POST['id'] != "") {
 <h2>Site Settings</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "updated") { echo "<p class=\"systemMessage\">Site settings updated.</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">Site settings updated.</p>"; }
 ?>
 <?php
 

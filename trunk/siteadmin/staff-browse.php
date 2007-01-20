@@ -12,10 +12,10 @@ cm_auth_module($module);
 <h2>Staff Manager</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"systemMessage\">User added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"systemMessage\">User updated.</p>"; }
-if ($msg == "deleted") { echo "<p class=\"systemMessage\">User deleted.</p>"; }
-if ($msg == "access-updated") { echo "<p class=\"systemMessage\">User access updated.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">User added.</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">User updated.</p>"; }
+if ($msg == "deleted") { echo "<p class=\"alertMessage\">User deleted.</p>"; }
+if ($msg == "access-updated") { echo "<p class=\"infoMessage\">User access updated.</p>"; }
 ?>
 <table class="<?php echo "$module-table"; ?>">
   <tr>

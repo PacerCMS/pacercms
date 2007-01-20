@@ -30,9 +30,7 @@
 </table>
 {/if}
 
-
-
-<p>Select an issue to the right to begin browsing through the most-recent volume of the newspaper. If you are looking for an article from a previous year, use the "Volumes" list below it to see any article published. If you need any help, just <a href"mailto:{$site_email}">drop us an email</a>.</p>
+<p>Select an issue to the right to begin browsing through the most-recent volume of the newspaper. If you are looking for an article from a previous year, use the "Volumes" list below it to see any article published. If you need any help, just <a href="mailto:{$site_email}">drop us an email</a>.</p>
 
 </div>
 <div class="smallCol">

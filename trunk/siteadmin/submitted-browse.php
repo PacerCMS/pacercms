@@ -39,9 +39,9 @@ $result_row_count = mysql_num_rows($result);
 <h2>Submitted Article Manager</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"systemMessage\">Submitted article added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"systemMessage\">Submitted updated.</p>"; }
-if ($msg == "deleted") { echo "<p class=\"systemMessage\">Submitted article deleted.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">Submitted article added.</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">Submitted updated.</p>"; }
+if ($msg == "deleted") { echo "<p class=\"alertMessage\">Submitted article deleted.</p>"; }
 ?>
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-form"; ?>">

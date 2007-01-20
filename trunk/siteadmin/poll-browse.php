@@ -35,10 +35,10 @@ $result_row_count = mysql_num_rows($result);
 
 <h2>Poll Manager</h2>
 <?php $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"systemMessage\">Poll question added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"systemMessage\">Poll question updated.</p>"; }
-if ($msg == "deleted") { echo "<p class=\"systemMessage\">Poll question and ballots deleted.</p>"; }
-if ($msg == "active-updated") { echo "<p class=\"systemMessage\">Active poll setting changed.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">Poll question added.</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">Poll question updated.</p>"; }
+if ($msg == "deleted") { echo "<p class=\"alertMessage\">Poll question and ballots deleted.</p>"; }
+if ($msg == "active-updated") { echo "<p class=\"infoMessage\">Active poll setting changed.</p>"; }
 ?>
 
 <form action="<?php echo "$module.php"; ?>" method="post">

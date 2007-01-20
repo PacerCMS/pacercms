@@ -109,7 +109,7 @@ $job_title = $result_array['user_job_title'];
 <?php get_cm_menu(); ?>
 
 <h2><a href="<?php echo "$pmodule.php"?>">Staff Manager</a></h2>
-<p class="systemMessage"><?php echo "Setting user access for $first_name $last_name, $job_title"; ?></p>
+<p class="infoMessage"><?php echo "Setting user access for $first_name $last_name, $job_title"; ?></p>
 <form action="<?php echo "$module.php"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend>Module Access</legend>

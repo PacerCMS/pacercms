@@ -226,10 +226,10 @@ CREATE TABLE `cm_sections` (
 -- Dumping data for table `cm_sections`
 -- 
 
-INSERT INTO `cm_sections` VALUES (1, 'Cover', 'http://localhost/pacercms/', 'Samuel L. Clemens', 'Executive Editor', 'editor@example.com', 'Customize this space in the Sections setting.', '', 10);
-INSERT INTO `cm_sections` VALUES (2, 'Viewpoints', 'http://localhost/pacercms/section.php?id=2', 'Walter Winchell', 'Viewpoints Editor', 'viewpoints@example.com', 'Customize this space in the Sections setting.', '', 20);
-INSERT INTO `cm_sections` VALUES (3, 'Campus News', 'http://localhost/pacercms/section.php?id=3', 'Mathew Brady', 'News Editor', 'news@example.com', 'Customize this space in the Sections setting.', '', 30);
-INSERT INTO `cm_sections` VALUES (4, 'Arts & Entertainment', 'http://localhost/pacercms/section.php?id=4', 'Ernie Pyle', 'Arts & Entertainment Editor', 'features@example.com', 'Customize this space in the Sections setting.', '', 40);
+INSERT INTO `cm_sections` VALUES (1, 'Cover', 'http://localhost/pacercms', 'Samuel L. Clemens', 'Executive Editor', 'editor@example.com', 'Customize this space in the Sections setting.', '', 10);
+INSERT INTO `cm_sections` VALUES (2, 'Opinions', 'http://localhost/pacercms/section.php?id=2', 'Walter Winchell', 'Opinions Editor', 'viewpoints@example.com', 'Customize this space in the Sections setting.', '', 20);
+INSERT INTO `cm_sections` VALUES (3, 'News', 'http://localhost/pacercms/section.php?id=3', 'Mathew Brady', 'News Editor', 'news@example.com', 'Customize this space in the Sections setting.', '', 30);
+INSERT INTO `cm_sections` VALUES (4, 'Entertainment', 'http://localhost/pacercms/section.php?id=4', 'Ernie Pyle', 'Entertainment Editor', 'features@example.com', 'Customize this space in the Sections setting.', '', 40);
 INSERT INTO `cm_sections` VALUES (5, 'Sports', 'http://localhost/pacercms/section.php?id=5', 'Terry Frei', 'Sports Editor', 'sports@example.com', 'Customize this space in the Sections setting.', '', 50);
 
 -- --------------------------------------------------------

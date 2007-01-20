@@ -21,9 +21,9 @@ $result_row_count = mysql_num_rows($result);
 
 <h2>Page Manager</h2>
 <?php $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"systemMessage\">Page added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"systemMessage\">Page updated.</p>"; }
-if ($msg == "deleted") { echo "<p class=\"systemMessage\">Page deleted.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">Page added.</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">Page updated.</p>"; }
+if ($msg == "deleted") { echo "<p class=\"alertMessage\">Page deleted.</p>"; }
 ?>
 
 <?php if ($result_row_count > 0) { // If there are any pages ?>
