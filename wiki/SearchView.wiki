@@ -8,7 +8,7 @@
  * {{{ {$search_string} }}}
     Posted search string.
  * {{{ {$page_title} }}}
-    Set to "Search" if string empty "Search for {string}" if not empty.
+    Set to "Search" if string empty; "Search for {{{ {$search_string} }}}" if not empty.
 
 = File Dependency =
 

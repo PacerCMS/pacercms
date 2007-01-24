@@ -25,6 +25,20 @@ These are set in the classes.php file in the {{{ ./includes/ }}} directory.
     Publlication name stored in the Settings module of the Site Administration system.
  * {{{ {$site_url} }}}
     Web address stored in the Settings module of the Site Administration system.
+ * {{{ {$site_email} }}}
+    E-mail address stored in the Settings module of the Site Administration system.
+ * {{{ {$site_address} }}}
+    Physical address stored in the Settings module of the Site Administration system.
+ * {{{ {$site_city} }}}
+    City stored in the Settings module of the Site Administration system.
+ * {{{ {$site_state} }}}
+    State stored in the Settings module of the Site Administration system.
+ * {{{ {$site_zipcode} }}}
+    Zip code stored in the Settings module of the Site Administration system.
+ * {{{ {$site_telephone} }}}
+    Telephone number stored in the Settings module of the Site Administration system.
+ * {{{ {$site_fax} }}}
+    Fax number stored in the Settings module of the Site Administration system.
  * {{{ {$site_description} }}}
     Publlication tagline stored in the Settings module of the Site Administration system.
  * {{{ {$site_sections} }}}

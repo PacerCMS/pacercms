@@ -16,7 +16,7 @@
  * {{{ {$section_name} }}}
     Assigned as "Archives".
  * {{{ {$volume_list} }}}
-    Associative array of all unique volume numbers appearing in the cm_issues table.
+    Associative array of all unique volume numbers appearing in the {{{ cm_issues }}} table.
     
 = File Dependency =
 == File Name ==
