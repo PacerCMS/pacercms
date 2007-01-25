@@ -75,7 +75,7 @@ if ($mode == "edit") {
 	$query .= " DATE_FORMAT(issue_date, '%m') AS issue_month,";
 	$query .= " DATE_FORMAT(issue_date, '%d') AS issue_day";
 	$query .= " FROM cm_issues WHERE id = '$id;'";
-	$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
 	$result_array  = mysql_fetch_assoc($result);
 	$result_row_count = mysql_num_rows($result);	
 	if ($result_row_count != 1) {
@@ -95,9 +95,11 @@ if ($issue_day == "") { $issue_day = date('d'); }
 if ($issue_month == "") { $issue_month = date('m'); }
 if ($issue_year == "") { $issue_year = date('Y'); }
 
+
+get_cm_header();
+
 ?>
-<?php get_cm_header(); ?>
-<?php get_cm_menu(); ?>
+
 
 <h2><a href="<?php echo "$pmodule.php"; ?>">Issue Manager</a></h2>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">

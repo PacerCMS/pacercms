@@ -38,20 +38,10 @@ if ($_GET['volume'] != "") {
 	exit;
 }
 
-class MyCalendar extends Calendar
-{
-    function getCalendarLink($month, $year)
-    {
-        // Redisplay the current page, but with some parameters
-        // to set the new month and year
-        $s = getenv('PHP_SELF');
-        return "$s?month=$month&year=$year";
-    }
-}
 
+get_cm_header();
 
 ?>
-<?php get_cm_header(); ?>
 
 <h2>Issue Manager</h2>
 <?php
@@ -113,7 +103,7 @@ if ($volume == "") {
 $query = "SELECT * FROM cm_issues WHERE issue_volume = \"$volume\" ORDER BY issue_number;";
 
 // Run Query
-$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
 $result_array  = mysql_fetch_assoc($result);
 $result_row_count = mysql_num_rows($result);
 

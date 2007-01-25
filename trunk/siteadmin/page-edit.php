@@ -87,7 +87,7 @@ if ($mode == "edit") {
 	$query .= " WHERE id = $id";
 	
 	// Run Query
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
 	$result_array  = mysql_fetch_assoc($result);
 	$result_row_count = mysql_num_rows($result);
 	
@@ -107,8 +107,10 @@ if ($mode == "edit") {
 	$edited = $result_array['page_edited'];	
 }
 
+
+get_cm_header();
+
 ?>
-<?php get_cm_header(); ?>
 
 <h2><a href="<?php echo $pmodule; ?>.php?">Page Manager</a></h2>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">

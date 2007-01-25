@@ -32,9 +32,9 @@ if ($_POST['id'] != "") {
 }
 
 
+get_cm_header();
+
 ?>
-<?php get_cm_header(); ?>
-<?php get_cm_menu(); ?>
 
 <h2>Site Settings</h2>
 <?php
@@ -47,7 +47,7 @@ if ($msg == "updated") { echo "<p class=\"infoMessage\">Site settings updated.</
 $query = "SELECT * FROM cm_settings;";
 
 // Run Query
-$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
 $result_array  = mysql_fetch_assoc($result);
 $result_row_count = mysql_num_rows($result);
 

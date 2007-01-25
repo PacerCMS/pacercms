@@ -29,12 +29,13 @@ if (is_numeric($_GET['issue'])) {
 $query = "SELECT *, DATE_FORMAT(submitted_sent, '%b. %e, %Y at %l:%i %p')AS sent FROM cm_submitted WHERE issue_id = '$issue'  ORDER BY submitted_sent DESC;";
 
 // Run Query
-$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
 $result_array  = mysql_fetch_assoc($result);
 $result_row_count = mysql_num_rows($result);
 
+get_cm_header();
+
 ?>
-<?php get_cm_header(); ?>
 
 <h2>Submitted Article Manager</h2>
 <?php
