@@ -5,9 +5,11 @@ include('cm-includes/cm-header.php');
 $module = "section-browse";
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
+
+
+get_cm_header();
+
 ?>
-<?php get_cm_header(); ?>
-<?php get_cm_menu(); ?>
 
 <h2>Section Manager</h2>
 <?php
@@ -30,7 +32,7 @@ if ($msg == "updated") { echo "<p class=\"infoMessage\">Section updated.</p>"; }
 $query = "SELECT * FROM cm_sections ORDER BY section_priority;";
 
 // Run Query
-$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
 $result_array  = mysql_fetch_assoc($result);
 $result_row_count = mysql_num_rows($result);
 

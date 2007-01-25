@@ -399,4 +399,13 @@ class Calendar
     
 }
 
-?>
+class MyCalendar extends Calendar
+{
+    function getCalendarLink($month, $year)
+    {
+        // Redisplay the current page, but with some parameters
+        // to set the new month and year
+        $s = getenv('PHP_SELF');
+        return "$s?month=$month&year=$year";
+    }
+}

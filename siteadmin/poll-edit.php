@@ -95,7 +95,7 @@ if ($mode == "edit") {
 	$id = $_GET["id"];
 	$query = "SELECT *";
 	$query .= " FROM cm_poll_questions WHERE id = '$id;'";
-	$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
 	$result_array  = mysql_fetch_assoc($result);
 	$result_row_count = mysql_num_rows($result);	
 	if ($result_row_count != 1) {
@@ -117,9 +117,9 @@ if ($mode == "edit") {
 } // End database call if in edit mode.
 
 
+get_cm_header();
+
 ?>
-<?php get_cm_header(); ?>
-<?php get_cm_menu(); ?>
 
 <h2><a href="<?php echo "$pmodule.php"; ?>">Poll Manager</a></h2>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">

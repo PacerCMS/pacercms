@@ -5,9 +5,11 @@ include('cm-includes/cm-header.php');
 $module = "server-info";
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
+
+
+get_cm_header();
+
 ?>
-<?php get_cm_header(); ?>
-<?php get_cm_menu(); ?>
 <h2>Session Variables Set by Server</h2>
 <p class="infoMessage">These are set when you login. Updates do not occur until you login again.</p>
 <?php

@@ -56,7 +56,7 @@ if ($_GET['action'] == "edit") {
 $query = "SELECT * FROM cm_users WHERE cm_users.id = $id;";
 
 // Run Query
-$result  = mysql_query($query, $CM_MYSQL) or die(mysql_error());
+$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
 $result_array  = mysql_fetch_assoc($result);
 $result_row_count = mysql_num_rows($result);
 
@@ -85,9 +85,9 @@ $im_jabber = $result_array['user_im_jabber'];
 $profile = $result_array['user_profile'];
 
 
+get_cm_header();
+
 ?>
-<?php get_cm_header(); ?>
-<?php get_cm_menu(); ?>
 
 <h2>User Profile</h2>
 <?php

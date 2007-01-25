@@ -87,7 +87,7 @@ $query .= " WHERE id = $user_id ";
 $query .= " LIMIT 1;";
 	
 // Run Query
-$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
 $result_array  = mysql_fetch_assoc($result);
 $result_row_count = mysql_num_rows($result);
 	
@@ -104,9 +104,9 @@ $last_name = $result_array['user_last_name'];
 $job_title = $result_array['user_job_title'];
 
 
+get_cm_header();
+
 ?>
-<?php get_cm_header(); ?>
-<?php get_cm_menu(); ?>
 
 <h2><a href="<?php echo "$pmodule.php"?>">Staff Manager</a></h2>
 <p class="infoMessage"><?php echo "Setting user access for $first_name $last_name, $job_title"; ?></p>
