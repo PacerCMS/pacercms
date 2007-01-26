@@ -37,5 +37,15 @@ $smarty->assign("article_list", $article_list);
 $smarty->assign("search_string", stripslashes($string) );
 $smarty->assign("page_title", "Search for ''$string''");
 
+// Index
+$smarty->assign("s_index_values", array("article","author","keyword"));$smarty->assign("s_index_names", array("Article &amp; Headlines","Author","Keyword"));$smarty->assign("s_index_select", $index);
+
+// Sort By
+$smarty->assign("s_sort_by_values", array("article_publish","article_title","article_subtitle","article_author","article_word_count"));$smarty->assign("s_sort_by_names", array("Publish Date","Headline","Sub-Headline","Author Name","Word Count"));$smarty->assign("s_sort_by_select", $sort_by);
+
+// Sort Direction
+$smarty->assign("s_sort_dir_values", array("DESC","ASC"));$smarty->assign("s_sort_dir_names", array("Descending","Ascending"));$smarty->assign("s_sort_dir_select", $sort_dir);
+
+
 // Render
 $smarty->display("search.tpl");
