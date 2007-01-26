@@ -17,24 +17,17 @@
         <div class="smallerCol">
             <p>
             <label for="index">Search within:</label>
-                <select name="index" id="index">
-                <option value="article">Article &amp; Headlines</option>
-                <option value="author">Authors</option>
-                <option value="keyword">Keywords</option>
+            <select name="index" id="index">
+                {html_options values=$s_index_values output=$s_index_names selected=$s_index_select}
             </select>
             </p>
             <p>
             <label for="sort_by">Sort by:</label>
             <select name="sort_by" id="sort_by">
-                <option value="article_publish">Publish Date</option>
-                <option value="article_title">Headline</option>
-                <option value="article_subtitle">Sub-Headline</option>
-                <option value="article_author">Author Name</option>
-                <option value="article_word_count">Word Count</option>
+                {html_options values=$s_sort_by_values output=$s_sort_by_names selected=$s_sort_by_select}
             </select>
             <select name="sort_dir" id="sort_dir">
-                <option value="DESC">Descending</option>
-                <option value="ASC">Ascending</option>
+                {html_options values=$s_sort_dir_values output=$s_sort_dir_names selected=$s_sort_dir_select}
             </select>
             </p>
         </div>
