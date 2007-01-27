@@ -39,6 +39,7 @@ $article_summary = $result->Fields(article_summary);
 $article_text = autop($result->Fields(article_text));
 $article_author = $result->Fields(article_author);
 $article_author_title = $result->Fields(article_author_title);
+$article_keywords = $result->Fields(article_keywords);
 $article_publish = $result->Fields(article_publish);	
 $article_edit = $result->Fields(article_edit);
 
@@ -55,6 +56,7 @@ $smarty->assign("article_summary", $article_summary );
 $smarty->assign("article_text", $article_text );
 $smarty->assign("article_author", $article_author );
 $smarty->assign("article_author_title", $article_author_title );
+$smarty->assign("article_keywords", $article_keywords );
 $smarty->assign("article_publish", $article_publish );	
 $smarty->assign("article_edit", $article_edit );
 $smarty->assign("article_section_name", section_info('name', $article_section_id) );

@@ -6,7 +6,13 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset={#encoding#}" />
 <meta http-equiv="Pragma" content="no-cache" />
+{if $smarty.server.SCRIPT_NAME eq 'article.php'}
+<meta name="description" content="{$article_summary|escape:'html'}" />
+<meta name="author" content="{$article_author|escape:'html'}" /><meta name="keywords" content="{$article_keywords|escape:'html'}" /><meta name="date" content="{$article_publish|date_format:'%Y-%m-%d %T'}" />
+{else}
 <meta name="description" content="{$site_description|escape:'html'}" />
+{/if}
+<meta name="copyright" content="&copy; {$smarty.now|date_format:'%Y'} {$site_name|escape:'html'}" />
 <meta name="generator" content="PacerCMS {$site_cm_version}" />
 
 <link href="{$site_url}/favicon.ico" rel="shortcut icon" type="image/icon" title="Shortcut Icon" />
