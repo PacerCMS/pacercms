@@ -3,7 +3,7 @@
   <div class="topStory">
     <div class="biggerCol">
     {section name="items" loop=$cover_articles start=0 max=1}
-    {if $cover_articles[items].publish gt $current_issue_date}
+    {if $cover_articles[items].article_publish gt $current_issue_date}
     <h5 class="breakingNews">Breaking News</h5>
     {else}
     <h5>&mdash; TOP STORY &mdash;</h5>

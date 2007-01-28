@@ -3,7 +3,7 @@
 include_once('includes/cm-header.php');
 
 $current_issue_id = current_issue('id');
-$current_issue_date = current_issue('date');
+$current_issue_date = current_issue('date') . " 00:00:01";
 
 $smarty->assign("current_issue_date", $current_issue_date);
 $smarty->assign("section_sidebar", section_info('sidebar', 1) );
@@ -11,7 +11,7 @@ $smarty->assign("section_sidebar", section_info('sidebar', 1) );
 /*=======================
     Cover Articles
 =======================*/
-$query = "SELECT id, article_title, article_subtitle, article_author, article_author_title, article_summary ";
+$query = "SELECT id, article_title, article_subtitle, article_author, article_author_title, article_summary, article_publish ";
 $query .= " FROM cm_articles ";	
 $query .= " WHERE section_id = '1' AND issue_id = '$current_issue_id' ";
 $query .= " ORDER BY article_priority ASC;";
