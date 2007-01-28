@@ -1,7 +1,7 @@
 <?php
 
 // The Version of PacerCMS You Are Running
-define('CM_VERSION', "0.5 PR2");
+define('CM_VERSION', "0.5 PR3");
 
 // Make sure the config file exists
 if ( file_exists('includes/config.php') )
