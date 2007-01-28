@@ -26,7 +26,7 @@ label {font-weight:bold;}
 .sidebar table {width:190px; font-size:100%; margin:10px;}
 .sidebar select {width:190px !important;}
 .sidebar input {width:190px !important;}
-.sidebar ul {list-style-type: none !important;}
+.sidebar ul {margin:0;padding:0;list-style-type: none !important;}
 .sidebar ul li {list-style-type: none !important;}
 .sidebar input.checkbox {width: 20px !important;}
 .greyOut {color: #000; background-color: #eee;}
