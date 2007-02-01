@@ -1,6 +1,7 @@
 {include file="header.tpl"}
 
 <div id="content">
+{if $poll_question ne ''}
     <h2 class="sectionNameplate">Poll Results</h2>
     {if $smarty.request.msg eq 'counted'}<p class="systemMessage">Your vote was counted.</p>{/if}
     {if $smarty.request.msg eq 'error'}<p class="systemMessage">Something was wrong with your ballot.</p>{/if}
@@ -60,7 +61,9 @@
         <p>Our Web poll is not scientific and reflects the opinions of only those Internet users who have chosen to participate. The results cannot be assumed to represent the opinions of Internet users in general, the public as a whole, nor the students or faculty of our university.</p>
     
     </div>
-    
+{else}
+<h2>Web polls are currently unavailable.</h2>
+{/if}
 </div>
 
 {include file="footer.tpl"}
