@@ -1,3 +1,4 @@
+{if $poll_question ne ''}
 <form action="poll.php" method="post" class="sitePoll">
 <h4>&mdash;&nbsp;Web&nbsp;Poll&nbsp;&mdash;</h4>
 <p class="question"><strong>{$poll_question|escape:'html'}</strong></p>
@@ -43,3 +44,4 @@
 <input type="submit" id="submit" value="Cast Vote" class="button" />
 </p>
 </form>
+{/if}
