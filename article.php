@@ -50,6 +50,7 @@ $article_section_url = section_info('url', $article_section_id);
 
 // Assign variables
 $smarty->assign("page_title", $article_title );
+$smarty->assign("page_description", strip_tags($article_summary) );
 $smarty->assign("article_id", $article_id );
 $smarty->assign("article_title", $article_title );
 $smarty->assign("article_summary", $article_summary );

@@ -2,15 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="{#language#}">
 <head>
-<title>{$site_name}{if $page_title != ''} - {$page_title|escape:'html'}{/if}</title>
+<title>{$site_name}{if $page_title ne ''} - {$page_title|escape:'html'}{/if}</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset={#encoding#}" />
 <meta http-equiv="Pragma" content="no-cache" />
-{if $smarty.server.SCRIPT_NAME eq 'article.php'}
-<meta name="description" content="{$article_summary|escape:'html'}" />
-<meta name="author" content="{$article_author|escape:'html'}" /><meta name="keywords" content="{$article_keywords|escape:'html'}" /><meta name="date" content="{$article_publish|date_format:'%Y-%m-%d %T'}" />
+{if $page_description ne ''}
+<meta name="description" content="{$page_description|escape:'html'}" />
 {else}
 <meta name="description" content="{$site_description|escape:'html'}" />
+{/if}
+{if $article_author ne ''}
+<meta name="keywords" content="{$article_keywords|escape:'html'}" />
+<meta name="author" content="{$article_author|escape:'html'}" /><meta name="date" content="{$article_publish|date_format:'%Y-%m-%d %T'}" />
 {/if}
 <meta name="copyright" content="&copy; {$smarty.now|date_format:'%Y'} {$site_name|escape:'html'}" />
 <meta name="generator" content="PacerCMS {$site_cm_version}" />
