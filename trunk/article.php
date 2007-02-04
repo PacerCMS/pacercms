@@ -44,9 +44,8 @@ $article_publish = $result->Fields(article_publish);
 $article_edit = $result->Fields(article_edit);
 
 // Used in later assignment
+$article_issue_id = $result->Fields(issue_id);
 $article_section_id = $result->Fields(section_id);
-$article_section_name = section_info('name', $article_section_id);
-$article_section_url = section_info('url', $article_section_id);
 
 // Assign variables
 $smarty->assign("page_title", $article_title );
@@ -60,10 +59,14 @@ $smarty->assign("article_author_title", $article_author_title );
 $smarty->assign("article_keywords", $article_keywords );
 $smarty->assign("article_publish", $article_publish );	
 $smarty->assign("article_edit", $article_edit );
-$smarty->assign("article_section_name", section_info('name', $article_section_id) );
-$smarty->assign("article_section_url", section_info('url', $article_section_id) );
+
 $smarty->assign("section_name", section_info('name', $article_section_id) );
 $smarty->assign("section_url", section_info('url', $article_section_id) );
+
+$smarty->assign("issue_date", issue_info('date', $article_issue_id) );
+$smarty->assign("issue_volume", issue_info('volume', $article_issue_id) );
+$smarty->assign("issue_number", issue_info('number', $article_issue_id) );
+
 
 
 /*=======================
