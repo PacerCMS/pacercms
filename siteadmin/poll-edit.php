@@ -127,7 +127,7 @@ get_cm_header();
   <legend>Question Editor</legend>
   <div class="sidebar">
     <p>
-      <label for="article">Related Article</label>
+      <label for="article">Related Article ID</label>
       <br />
       <input type="text" name="article" id="article" value="<?php echo $article; ?>" />
     </p>
