@@ -67,7 +67,7 @@ $smarty->assign("section_url", section_info('url', $article_section_id) );
 
 
 /*=======================
-    Article
+    Article Section
 =======================*/
 $query = "SELECT * ";
 $query .= " FROM cm_articles ";

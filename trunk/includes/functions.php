@@ -211,8 +211,11 @@ function section_headlines($section=1,$issue,$disp='array')
 function get_ballot($field,$sel=0)
 {
     global $db;
-
-	$field = "poll_" . $field;
+    if ($field != 'article_id')
+    {
+	   $field = "poll_" . $field;
+    }
+    
 	$query = "SELECT $field AS myval FROM cm_poll_questions WHERE id = '$sel';";
 	
     $result = $db->Execute($query);

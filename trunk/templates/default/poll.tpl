@@ -50,14 +50,13 @@
                 <td>{$poll_votes}</td>
             </tr>
         </table>
-        
         {else}
-        
         <h4>No one has participated in this Web poll yet.</h4>
         <p>Please go back to the home page to cast your ballot</p>
-        
         {/if}
-        
+        {if $related_article_id ne ''}
+        <p><strong>Related Article:</strong> <a href="{$site_url}/article.php?id={$related_article_id}">{$related_article_title|escape:'html'}</a></p>
+        {/if}
         <p>Our Web poll is not scientific and reflects the opinions of only those Internet users who have chosen to participate. The results cannot be assumed to represent the opinions of Internet users in general, the public as a whole, nor the students or faculty of our university.</p>
     
     </div>

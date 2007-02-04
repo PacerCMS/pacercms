@@ -51,8 +51,23 @@ $poll_v9 = poll_results(9,$active_poll);
 $poll_v10 = poll_results(10,$active_poll);
 
 $poll_votes = $poll_v1 + $poll_v2 + $poll_v3 + $poll_v4 + $poll_v5 + $poll_v6 + $poll_v7 + $poll_v8 + $poll_v9 + $poll_v10;
+
 $smarty->assign("poll_votes", $poll_votes);
 
+$related_article = get_ballot('article_id', $active_poll);
+
+// Get related article if set
+$query = "SELECT id, article_title ";
+$query .= " FROM cm_articles ";
+$query .= " WHERE id = '$related_article' LIMIT 1;";
+
+// Run query
+$result = $db->Execute($query);
+
+$smarty->assign("related_article_id", $result->Fields(id) );
+$smarty->assign("related_article_title", $result->Fields(article_title) );
+
+// Assign variables
 $smarty->assign("page_title", "Web Poll");
 $smarty->assign("section_name", "Web Poll");
 $smarty->display("poll.tpl");
