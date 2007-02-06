@@ -17,9 +17,9 @@
 </tr>
 {section name="items" loop=$article_list}
 <tr>
-<td><a href="{$site_url}/article.php?id={$article_list[items].article_id}">{$article_list[items].article_title}</a></td>
-<td>{$article_list[items].article_author}</td>
-<td>{$article_list[items].section_name}</td>
+<td><a href="{$site_url}/article.php?id={$article_list[items].article_id}" title="{$article_list[items].article_title|escape:'html'}">{$article_list[items].article_title|escape:'html'}</a></td>
+<td>{$article_list[items].article_author|escape:'html'}</td>
+<td>{$article_list[items].section_name|escape:'html'}</td>
 <td>{$article_list[items].article_word_count}</td>
 </tr>
 {sectionelse}
@@ -47,7 +47,7 @@
 {section name="items" loop=$issue_list}
 <tr>
 <td>No. {$issue_list[items].issue_number}</td>
-<td><a href="{$site_url}/archives.php?issue={$issue_list[items].issue_date}">{$issue_list[items].issue_date|date_format:"%B %e, %Y"}</a></td>
+<td><a href="{$site_url}/archives.php?issue={$issue_list[items].issue_date}" title="Issue {$issue_list[items].issue_number}, Volume {$issue_volume}">{$issue_list[items].issue_date|date_format:"%B %e, %Y"}</a></td>
 </tr>
 {sectionelse}
 <tr>
@@ -59,7 +59,7 @@
 <h3>Volumes in our Internet Archives</h3>
 <ul>
 {section name="items" loop=$volume_list}
-<li><a href="{$site_url}/archives.php?volume={$volume_list[items].volume}">Volume {$volume_list[items].volume}</a> ({$volume_list[items].issue_count})</li>
+<li><a href="{$site_url}/archives.php?volume={$volume_list[items].volume}" title="Volume {$volume_list[items].volume}">Volume {$volume_list[items].volume}</a> ({$volume_list[items].issue_count})</li>
 {/section}
 </ul>
 </div>
