@@ -1,5 +1,7 @@
 <?php
 
+require( ADODB_DIR . '/adodb.inc.php'); // Database Layer
+
 /*******************************************
 	Class:	Calendar
 *******************************************/

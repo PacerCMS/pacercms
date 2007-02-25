@@ -1,15 +1,17 @@
 <div class="inlineCol">
+
     <div class="articleToolbar">
-    <ul>
-    <li><strong>Tools:</strong></li>
-    <li><a href="javascript:window.print()" class="printArticle">Print</a></li>
-    <li><a href="send.php?id={$article_id}" class="emailArticle">E-mail</a></li>
-    {literal}<li><a href="javascript:w=window;d=document;var u;s='';ds=d.selection;if(ds&&ds!=u){if(ds.createRange()!=u){s=ds.createRange().text;}}else if(d.getSelection!=u){s=d.getSelection()+'';}else if(w.getSelection!=u){s=w.getSelection()+'';} if(s.length<2){h=String(w.location.href);if(h.length==0||h.substring(0,6)=='about:'){s=prompt('Technorati Realtime Search for:',s);}else{s=w.location.href;}}if(s!=null)w.location='http://technorati.com/search/'+escape(s)+'?sub=toolsearch';void(1);" class="discussArticle">Search for Blogs</a></li>{/literal}
-    </ul>
+        <ul>
+            <li><strong>Tools:</strong></li>
+            <li><a href="javascript:window.print()" class="printArticle">Print</a></li>
+            <li><a href="send.php?id={$article_id}" class="emailArticle">E-mail</a></li>
+            <li><a href="share.php?id={$article_id}" class="discussArticle">Share This Article</a></li>
+        </ul>
     </div>
 
     {if $article_images ne '' OR $article_swfs ne '' }
     <div class="mediaImage">    
+
         {section name="items" loop=$article_images}
         <p class="image"><img src="{$article_images[items].media_src}" alt="{$article_images[items].media_title}" /></p>
         {if $article_images[items].media_credit ne ''}<p class="imageCredit">{$article_images[items].media_credit}</p>{/if}
