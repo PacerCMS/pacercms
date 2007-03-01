@@ -1,0 +1,1 @@
+INSERT INTO `cm_users` VALUES (1, 'admin', '{random_password}', 'System', '', 'Administrator', '', '{site_email}', '', '', '', '', '', '', '', '', '', '', '');
