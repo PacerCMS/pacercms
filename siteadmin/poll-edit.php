@@ -146,52 +146,52 @@ get_cm_header();
   <p>
     <label for="r1">Option 1</label>
     <br />
-    <input type="text" name="r1" id="r1" value="<?php echo htmlentities($r1); ?>" class="text" />
+    <input type="text" name="r1" id="r1" value="<?php echo htmlentities($r1, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="r2">Option 2</label>
     <br />
-    <input type="text" name="r2" id="r2" value="<?php echo htmlentities($r2); ?>" class="text" />
+    <input type="text" name="r2" id="r2" value="<?php echo htmlentities($r2, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="r3">Option 3</label>
     <br />
-    <input type="text" name="r3" id="r3" value="<?php echo htmlentities($r3); ?>" class="text" />
+    <input type="text" name="r3" id="r3" value="<?php echo htmlentities($r3, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="r4">Option 4</label>
     <br />
-    <input type="text" name="r4" id="r4" value="<?php echo htmlentities($r4); ?>" class="text" />
+    <input type="text" name="r4" id="r4" value="<?php echo htmlentities($r4, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="r5">Option 5</label>
     <br />
-    <input type="text" name="r5" id="r5" value="<?php echo htmlentities($r5); ?>" class="text" />
+    <input type="text" name="r5" id="r5" value="<?php echo htmlentities($r5, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="r6">Option 6</label>
     <br />
-    <input type="text" name="r6" id="r6" value="<?php echo htmlentities($r6); ?>" class="text" />
+    <input type="text" name="r6" id="r6" value="<?php echo htmlentities($r6, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="r7">Option 7</label>
     <br />
-    <input type="text" name="r7" id="r7" value="<?php echo htmlentities($r7); ?>" class="text" />
+    <input type="text" name="r7" id="r7" value="<?php echo htmlentities($r7, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="r8">Option 8</label>
     <br />
-    <input type="text" name="r8" id="r8" value="<?php echo htmlentities($r8); ?>" class="text" />
+    <input type="text" name="r8" id="r8" value="<?php echo htmlentities($r8, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="r9">Option 9</label>
     <br />
-    <input type="text" name="r9" id="r9" value="<?php echo htmlentities($r9); ?>" class="text" />
+    <input type="text" name="r9" id="r9" value="<?php echo htmlentities($r9, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="r10">Option 10</label>
     <br />
-    <input type="text" name="r10" id="r10" value="<?php echo htmlentities($r10); ?>" class="text" />
+    <input type="text" name="r10" id="r10" value="<?php echo htmlentities($r10, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <?php if ($mode == "add") { ?>
