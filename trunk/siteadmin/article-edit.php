@@ -167,7 +167,7 @@ get_cm_header();
     <p>
       <label for="keywords">Keywords</label>
       <br />
-      <input type="text" name="keywords" id="keywords" value="<?php echo htmlentities($keywords); ?>" />
+      <input type="text" name="keywords" id="keywords" value="<?php echo htmlentities($keywords, ENT_QUOTES, 'UTF-8'); ?>" />
     </p>
     <?php if ($restrict_section == "false") { ?>
     <p>
@@ -239,22 +239,22 @@ get_cm_header();
   <p>
     <label for="title">Title</label>
     <br />
-    <input type="text" name="title" id="title" value="<?php echo htmlentities($title); ?>" class="text" />
+    <input type="text" name="title" id="title" value="<?php echo htmlentities($title, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="subtitle">Subtitle</label>
     <br />
-    <input type="text" name="subtitle" id="subtitle" value="<?php echo htmlentities($subtitle); ?>" class="text" />
+    <input type="text" name="subtitle" id="subtitle" value="<?php echo htmlentities($subtitle, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="author_id">Author</label>
     <br />
-    <input type="text" name="author" id="author" value="<?php echo htmlentities($author); ?>" class="text" />
+    <input type="text" name="author" id="author" value="<?php echo htmlentities($author, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="author_title">Author Title</label>
     <br />
-    <input type="text" name="author_title" id="author_title" value="<?php echo htmlentities($author_title); ?>" class="text" />
+    <input type="text" name="author_title" id="author_title" value="<?php echo htmlentities($author_title, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
     <label for="summary">Summary</label>

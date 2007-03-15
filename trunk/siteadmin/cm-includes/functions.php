@@ -37,8 +37,8 @@ function cm_auth_user($username,$password,$dest)
 {
     global $CM_MYSQL;
 
-    $username = htmlentities($username);
-    $password = htmlentities($password);
+    $username = htmlentities($username, ENT_QUOTES, 'UTF-8');
+    $password = htmlentities($password, ENT_QUOTES, 'UTF-8');
 
 	// Database Query
 	$query = "SELECT * FROM cm_users";
@@ -272,7 +272,7 @@ function cm_section_list($module, $sel=1)
 		$section_url = $result_array['section_url'];		
 		// If called from the Menu include
 		if ($module == "menu") {
-		echo "\t<li><a href=\"$section_url\">" . htmlentities($section_name) . "</a></li>\n";
+		echo "\t<li><a href=\"$section_url\">" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</a></li>\n";
 		}		
 		// If called from "article-browse.php" module
 		if ($module == "article-browse") {
@@ -280,7 +280,7 @@ function cm_section_list($module, $sel=1)
 			if ($sel == $id) {
 			echo " class=\"selected\"";;	
 		}
-			echo ">" . htmlentities($section_name) . "</a></li>\n";
+			echo ">" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</a></li>\n";
 		}		
 		// If called from "article-edit.php" module
 		if ($module == "article-edit" || $module == "staff-access") {
@@ -288,7 +288,7 @@ function cm_section_list($module, $sel=1)
 			if ($sel == $id) {
 				echo " selected";;	
 			}
-			echo ">" . htmlentities($section_name) . "</option>\n";
+			echo ">" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</option>\n";
 		}		
 	} while ($result_array = mysql_fetch_assoc($result));
 }
