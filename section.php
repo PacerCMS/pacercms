@@ -64,5 +64,16 @@ foreach ( section_list('array') as $section_info )
 $smarty->assign("page_title", section_info('name', $section_id) );
 
 
-// Render
-$smarty->display("section.tpl");
+// Check if a 'section-#.tpl' file exists
+if ( file_exists(TEMPLATES_PATH . "/section-$section_id.tpl") )
+{
+
+    // Use the customized section template
+    $smarty->display("section-$section_id.tpl");
+
+} else {
+
+    // Use the default section template
+    $smarty->display("section.tpl");
+
+}
