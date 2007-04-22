@@ -256,7 +256,7 @@ function cm_get_access($module,$sel)
 /*******************************************
 	Function:	cm_section_list
 *******************************************/
-function cm_section_list($module, $sel=1)
+function cm_section_list($module, $sel=1, $exclude=0)
 {
     global $CM_MYSQL;
 
@@ -270,26 +270,34 @@ function cm_section_list($module, $sel=1)
 		$id = $result_array['id'];
 		$section_name = $result_array['section_name'];
 		$section_url = $result_array['section_url'];		
-		// If called from the Menu include
-		if ($module == "menu") {
-		echo "\t<li><a href=\"$section_url\">" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</a></li>\n";
-		}		
-		// If called from "article-browse.php" module
-		if ($module == "article-browse") {
-			echo "\t<li><a href=\"$module.php?section=$id\"";
-			if ($sel == $id) {
-			echo " class=\"selected\"";;	
-		}
-			echo ">" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</a></li>\n";
-		}		
-		// If called from "article-edit.php" module
-		if ($module == "article-edit" || $module == "staff-access") {
-			echo "\t<option value=\"$id\"";
-			if ($sel == $id) {
-				echo " selected";;	
-			}
-			echo ">" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</option>\n";
-		}		
+		
+        switch($module)
+        {
+        
+            case 'article-browse':
+                    if ($sel == $id) { $select = "class=\"selected\""; } else { unset($select); }
+                    echo "\t<li><a href=\"article-browse.php?section=$id\" $select>" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</a></li>\n";
+                break;
+
+            case 'menu':
+                    echo "\t<li><a href=\"$section_url\">" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</a></li>\n";
+                break;
+
+            case 'section-edit':
+                if ($exclude != $id)
+                {
+                    if ($sel == $id) { $select = "selected"; } else { unset($select); }
+                    echo "\t<option value=\"$id\" $select>" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</option>\n";
+                }
+                break;
+            
+            default:
+                if ($sel == $id) { $select = "selected"; } else { unset($select); }
+                echo "\t<option value=\"$id\" $select>" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</option>\n";
+                break;
+        
+        }
+		
 	} while ($result_array = mysql_fetch_assoc($result));
 }
 
@@ -748,6 +756,18 @@ function cm_edit_issue($date,$volume,$number,$circulation,$online_only,$id)
 #==========================================#
 
 /*******************************************
+	Function:	cm_add_section
+*******************************************/
+function cm_add_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority)
+{
+	$query = "INSERT INTO cm_sections (section_name,section_editor,section_editor_title,section_editor_email,section_url,section_sidebar,section_feed_image,section_priority)";
+	$query .= " VALUES ('$name','$editor','$editor_title','$editor_email','$url','$sidebar','$feed_image','$priority');";
+	$stat = cm_run_query($query);
+	return $stat;
+}
+
+
+/*******************************************
 	Function:	cm_edit_section
 *******************************************/
 function cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority,$id)
@@ -765,6 +785,32 @@ function cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar
 	$stat = cm_run_query($query);
 	return $stat;
 }
+
+
+/*******************************************
+	Function:	cm_delete_section
+*******************************************/
+function cm_delete_section($sel,$move)
+{	
+	$stat = cm_move_articles($sel,$move,'section'); // Move articles to new section	
+	$query = "DELETE FROM cm_sections WHERE id = '$sel';";
+	$stat = cm_run_query($query);
+	return $stat;	
+}
+
+
+/*******************************************
+	Function:	cm_move_articles
+*******************************************/
+function cm_move_articles($sel,$move,$key='section')
+{
+    if ($move == '') { cm_error("You cannot delete the last section."); }
+    setcookie("article-browse-section", $move); // Moved section
+	$query = "UPDATE cm_articles SET section_id = '$move' WHERE section_id = '$sel';";
+	$stat = cm_run_query($query);
+	return $stat;	
+}
+
 
 #==========================================#
 ############## Managing Users ##############

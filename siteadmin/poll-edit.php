@@ -65,7 +65,7 @@ if ($_GET['action'] == "edit") {
 }
 
 // If action is new, call add function
-if ($_GET['action'] == "add" && $_POST['question'] != "") { 
+if ($_GET['action'] == "new" && $_POST['question'] != "") { 
 	// Get posted data
 	$question = prep_string($_POST['question']);
 	$r1 = prep_string($_POST['r1']);
@@ -194,7 +194,7 @@ get_cm_header();
     <input type="text" name="r10" id="r10" value="<?php echo htmlentities($r10, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
-    <?php if ($mode == "add") { ?>
+    <?php if ($mode == "new") { ?>
     <input type="submit" value="Add Poll" name="submit" id="submit" class="button" />
     <?php } if ($mode == "edit") { ?>
     <input type="submit" value="Update Poll" name="update" id="update" class="button" />

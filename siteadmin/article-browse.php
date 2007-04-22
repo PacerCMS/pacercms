@@ -3,6 +3,8 @@
 include('cm-includes/cm-header.php');
 
 $module = "article-browse";
+$cmodule = "article-edit";
+
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
 
@@ -217,7 +219,7 @@ do {
   <?php } else { ?>
   <p>This selected section is empty.
     <?php if ($section != "") { ?>
-    <a href="article-edit.php?action=new">Add an article</a>.
+    <a href="article-edit.php?action=new">Add an Article</a>.
     <?php } ?>
   </p>
   <?php } ?>

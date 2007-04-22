@@ -18,6 +18,28 @@ if ($_GET["action"] != "") {
 // Key variable
 $id = $_GET["id"];
 
+if (!empty($id)) {
+
+    // Database Query
+    $query = "SELECT * FROM cm_sections WHERE id = $id;";
+    
+    // Run Query
+    $result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+    $result_array  = mysql_fetch_assoc($result);
+    $result_row_count = mysql_num_rows($result);
+    
+    $id = $result_array['id'];
+    $name = $result_array['section_name'];
+    $url = $result_array['section_url'];
+    $editor = $result_array['section_editor'];
+    $editor_title = $result_array['section_editor_title'];
+    $editor_email = $result_array['section_editor_email'];
+    $sidebar = $result_array['section_sidebar'];
+    $feed_image = $result_array['section_feed_image'];
+    $priority = $result_array['section_priority'];
+
+}
+
 // If action is edit, call edit function
 if ($_GET['action'] == "edit") { 
 	if ($_POST['id'] != "") {
@@ -44,35 +66,51 @@ if ($_GET['action'] == "edit") {
 		cm_error("Did not have a section to load.");
 		exit;
 	}
+
 }
 
+// If action is new, call add function
+if ($_GET['action'] == "new" && $_POST['name'] != "") { 
+	// Get posted data
+	$name = prep_string($_POST['name']);
+	$editor = prep_string($_POST['editor']);
+	$editor_title = prep_string($_POST['editor_title']);
+	$editor_email = $_POST['editor_email'];
+	$url = $_POST['url'];
+	$sidebar = prep_string($_POST['sidebar']);
+	$priority = $_POST['priority'];
+	$feed_image = $_POST['feed_image'];	
+	// Run function
+	$stat = cm_add_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority);
+	if ($stat == 1) {
+		header("Location: $pmodule.php?msg=added");
+		exit;
+	} else {
+		cm_error("Error in 'cm_add_section' function.");
+		exit;
+	}
+}
+
+// If action is delete, call delete function
+if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") { 
+	$id = $_POST['delete-id'];
+	$move = $_POST['move-id'];
+	// Run function
+	$stat = cm_delete_section($id,$move);
+	if ($stat == 1) {
+		header("Location: $pmodule.php?msg=deleted");
+		exit;
+	} else {
+		cm_error("Error in 'cm_delete_section' function.");
+		exit;
+	}	
+}
 
 get_cm_header();
 
 ?>
 
 <h2><a href="<?php echo "$pmodule.php"; ?>">Section Manager</a></h2>
-  <?php
-
-// Database Query
-$query = "SELECT * FROM cm_sections WHERE id = $id;";
-
-// Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
-
-$id = $result_array['id'];
-$name = $result_array['section_name'];
-$url = $result_array['section_url'];
-$editor = $result_array['section_editor'];
-$editor_title = $result_array['section_editor_title'];
-$editor_email = $result_array['section_editor_email'];
-$sidebar = $result_array['section_sidebar'];
-$feed_image = $result_array['section_feed_image'];
-$priority = $result_array['section_priority'];
-	
-?>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend>Section Editor</legend>
@@ -119,10 +157,35 @@ $priority = $result_array['section_priority'];
     <input type="text" name="priority" id="priority" value="<?php echo $priority; ?>" class="text" />
   </p>   
   <p>
+  
+<?php switch($mode) { case 'new': ?>
+    <input type="submit" value="Add Section" name="update" id="update" class="button" />
+<?php break; case 'edit': ?>
     <input type="submit" value="Update Section" name="update" id="update" class="button" />
     <input name="id" type="hidden" id="id" value="<?php echo $id; ?>" />
+<?php break; default: break; } ?>
+
     <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
   </p>
   </fieldset>
 </form>
+
+<?php if ($mode != "new") { ?>
+<h2>Delete Article <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
+<div id="deleteRecord">
+  <form action="<?php echo "$module.php?action=delete"; ?>" method="post">
+    <fieldset class="<?php echo "$module-delete" ?>">
+    <legend>Confirm Delete</legend>
+    <p><label for="move-id">Move affected articles to<label> <select name="move-id" id="move-id">
+    <?php cm_section_list($module, null, $id); ?>
+    </select>
+    <p>Are you sure you want to delete this section?</p>
+    <input type="submit" name="submit-delete" id="submit-delete" value="Yes" class="button" />
+    <input type="button" name="cancel-delete" id="cancel-delete" value="Cancel" onClick="javascript:toggleLayer('deleteArticle');" class="button" />
+    <input type="hidden" name="delete-id" id="delete-id" value="<?php echo $id; ?>" />
+    </fieldset>
+  </form>
+</div>
+<?php } ?>
+
 <?php get_cm_footer(); ?>
