@@ -3,6 +3,7 @@
 include('cm-includes/cm-header.php');
 
 $module = "section-browse";
+$cmodule = "section-edit";
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
 
@@ -15,10 +16,16 @@ get_cm_header();
 <?php
 $msg = $_GET['msg'];
 if ($msg == "updated") { echo "<p class=\"infoMessage\">Section updated.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">Section added.</p>"; }
 ?>
 <form>
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend>Browse Sections</legend>
+    <div class="actionMenu"><ul>
+    <li><strong>Section Options:</strong></li>
+    <li><a href="<?php echo "$cmodule.php?action=new"; ?>">Add New Section</a></li> 
+    </ul></div>
+
   <table class="<?php echo "$module-table"; ?>">
     <tr>
       <th><acronym title="Assigned Priority">AP</acronym></th>
@@ -46,12 +53,13 @@ $section_priority = $result_array['section_priority'];
 ?>
     <tr>
       <td><?php echo $section_priority; ?></td>
-      <td><a href="section-edit.php?id=<?php echo $id; ?>"><?php echo $section_name; ?></a></td>
+      <td><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $section_name; ?></a></td>
       <td><?php echo $section_editor; ?><br>
         <?php echo $section_editor_title; ?></td>
       <td class="actionMenu"><ul class="center">
           <li><a href="<?php echo $section_url; ?>">Preview</a></li>
           <li><a href="section-edit.php?id=<?php echo $id; ?>">Edit</a></li>
+          <li class="command-delete"><a href="section-edit.php?id=<?php echo $id; ?>#delete">Delete</a></li>
         </ul>
       </td>
     </tr>

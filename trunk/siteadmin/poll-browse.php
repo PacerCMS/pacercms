@@ -64,7 +64,7 @@ if ($msg == "active-updated") { echo "<p class=\"infoMessage\">Active poll setti
   <legend>Active Poll</legend>
   <div class="actionMenu"><ul>
   <li><strong>Poll Options:</strong></li>
-  <li><a href="<?php echo "$cmodule.php?action=add"; ?>">Add New Poll</a></li> 
+  <li><a href="<?php echo "$cmodule.php?action=new"; ?>">Add New Poll</a></li> 
   </ul></div>
   <table>
     <tr>
@@ -100,7 +100,7 @@ do {
 </form>
 
 <?php } else { ?>
-	<p>You are not currently using polls. Why not <a href="<?php echo "$cmodule.php?action=add"; ?>">add one</a> now?</p>
+	<p>You are not currently using polls. Why not <a href="<?php echo "$cmodule.php?action=new"; ?>">add one</a> now?</p>
 <?php } ?>
 
 <?php get_cm_footer(); ?>
