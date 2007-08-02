@@ -190,7 +190,7 @@ function section_headlines($section=1,$issue,$disp='array')
     global $db;
     
     // Database Query
-	$query = "SELECT id, article_title, article_summary, article_author, article_author_title ";
+	$query = "SELECT id, article_title, article_subtitle, article_summary, article_author, article_author_title ";
 	$query .= " FROM cm_articles";	
 	$query .= " WHERE section_id = '$section' AND issue_id = '$issue'";
 	$query .= " ORDER BY article_priority ASC;";
