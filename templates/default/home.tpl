@@ -11,7 +11,7 @@
 
 	<h2><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}">{$cover_articles[items].article_title|escape:'html'}</a></h2>
 	<p class="byline"><a href="{$site_url}/search.php?s={$cover_articles[items].article_author|escape:'url'}&amp;s_by=author"><strong>{$cover_articles[items].article_author|escape:'html'}</strong></a>{if $cover_articles[items].article_author_title ne ''}, <em>{$cover_articles[items].article_author_title|escape:'html'}</em>{/if}</p>
-	<p class="summary">{$cover_articles[items].article_summary|escape:'html'}</p>
+	<p class="summary">{$cover_articles[items].article_summary}</p>
 	<p class="moreLink"><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}"><strong>Read More</strong></a></p>
     {/section}
     </div>
