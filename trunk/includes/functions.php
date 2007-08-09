@@ -348,9 +348,9 @@ function run_query($query)
     
     if (empty($result))
     {
-        cm_error("Database connection failed");
+        cm_error("Database connection failed or malformed SQL.");
     } else {    
-        return $result;;
+        return $result;
     }
 
 };

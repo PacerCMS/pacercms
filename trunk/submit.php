@@ -41,9 +41,9 @@ if (!empty($_POST['text'])) {
 
     $query = "INSERT INTO cm_submitted (submitted_title, submitted_text, submitted_keyword, submitted_author, submitted_author_email, submitted_author_classification, submitted_author_major, submitted_author_city, submitted_author_telephone, submitted_sent, submitted_words, issue_id) VALUES ('$submitted_title', '$submitted_text', '$submitted_keyword', '$submitted_author', '$submitted_author_email', '$submitted_author_classification', '$submitted_author_major', '$submitted_author_city', '$submitted_author_telephone', now(), '$submitted_word_count', '$issue_id');";
 
-	$stat = $db->Execute($query);
+	$stat = run_query($query);
 
-	if ($stat == 1) {
+	if ($stat) {
 	   
 	   $recipient = site_info('email');
 	   $subject = stripslashes($submitted_title);
