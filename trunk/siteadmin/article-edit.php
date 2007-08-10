@@ -154,6 +154,33 @@ if ($mode == "edit") {
 	$edited = $result_array['article_edit'];
 }
 
+// Load selected submitted article for posting
+if (is_numeric($_REQUEST['submitted_id']))
+{
+    
+    $submitted_id = $_REQUEST['submitted_id'];
+    
+    // Query
+    $query = "SELECT * FROM cm_submitted WHERE id = '$submitted_id'; ";  
+
+	// Run Query
+	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+	$result_array  = mysql_fetch_assoc($result);
+	$result_row_count = mysql_num_rows($result);
+	
+	// If Array comes back empty, produce error
+	if ($result_row_count != 1) {
+		cm_error("Article doesn't exist, or you do not have permission to edit it.");
+		exit;
+	}
+
+    // Define variables
+	$title = $result_array['submitted_title'];
+	$text = $result_array['submitted_text'];
+	$author = $result_array['submitted_author'];
+
+
+}
 
 get_cm_header();
 

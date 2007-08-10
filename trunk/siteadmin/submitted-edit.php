@@ -68,6 +68,12 @@ get_cm_header();
 ?>
 
 <h2><a href="<?php echo $pmodule; ?>.php?">Submitted Article Manager</a></h2>
+<div class="actionMenu">
+<ul>    <li class="command-preview"><a href="article-edit.php?action=new&amp;submitted_id=2">Post to Article Manager</a></li>    <?php if ($show_submitted_delete == "true") { ?>
+    <li class="command-delete"><a href="#delete">Delete</a></li>
+    <?php } ?></ul>
+</div>
+
 <fieldset class="<?php echo "$module-preview" ?>">
 <legend>Story Preview</legend>
 <h3><?php echo $title; ?></h3>
@@ -88,7 +94,6 @@ get_cm_header();
 </fieldset>
 
 <?php
-// Show preview if not an add form
 if ($show_submitted_delete == "true") { ?>
 <h2>Delete Submitted Article <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
 <div id="deleteRecord">
