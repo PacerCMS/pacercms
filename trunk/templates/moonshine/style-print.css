@@ -1,15 +1,15 @@
 /*
-Template: PacerCMS Default
-Description: Default stylesheet for PacerCMS
+Template: The Pacer
+Description: Design created Spring 2006.
 Author: Stephen Yeargin
 URL: http://stephen.yeargin.com/
 */
 
-body { background: rgb(0,102,179); background-image: url(images/body_bg.png); background-repeat: repeat-y; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; font-size: 10pt;}
+body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt;}
 label {font-weight: bold;}
 h1, h2, h3, h4, h5, h6 {font-family: "Rockwell Bold", Rockwell, Arial, Helvetica, sans-serif;}
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {text-decoration: none;}
-hr {color: #FF6908; background-color: #FF6908; height: 2px; margin:10px 0 10px 0; clear: both;}
+hr {clear:both;}
 table {border:1px solid #000; border-collapse:collapse; margin: 10px; font-size:100%; width: 95%;}
 td, th {border:1px solid #000; border-collapse:collapse; vertical-align: middle; padding:7px;}
 th {background-color: #EFA72A; color:#fff;}
@@ -22,73 +22,37 @@ label {font-weight:bold;}
 /* #### ---- LAYOUT ---- #### */
 
 /* header */
-#header { height: 92px; overflow: hidden; background-image: url(images/header_bg.png); background-repeat: repeat-x;}
-#header h1 { font-size: 300%; margin:15px; padding:0; color:#fff; } // Could be hidden instead; see below
+#header { }
 
 /* nameplate */
-
-// If you have a 441x61 pixel image, you can use it here instead. Be sure to uncomment out the
-// last section of this stylesheet if you want to use a transparent PNG as well for compliant browsers
-
-#nameplate { float: left; height: 64px; width: 441px; margin: 10px; }
-/*
-#nameplate { background-image: url(images/gifs/nameplate.gif); background-repeat: no-repeat;}
-#nameplate h1 { display: none; margin: 0;}
-*/
+#nameplate { }
 
 /* sectionNameplate */
-#sectionNameplate {position: absolute; top: 40px; left: 460px; width: 300px; text-align: right; color: #fff; float: right;}
-#sectionNameplate {font-size: 200%; margin: 10px;}
-#sectionNameplate a {color: #fff;}
+#sectionNameplate {display:none;}
 
 
 /* pageTop */
-#pageTop {background-image:  url(images/page_top.png); background-repeat: no-repeat; background-position: left top; clear: both; margin 0; padding: 0; height: 40px; overflow: hidden;}
+#pageTop {display:none}
 
-/* siteUpdate */
-#siteUpdate { font-size: 80%; float: left; width: 135px;}
-#siteUpdate p {color: #fff; margin: 5px 0 0 5px;}
-#siteUpdate p strong {font-family: "Arial Black", Rockwell, Arial, Helvetica, sans-serif; font-weight: normal; }
-
-/* lastUpdate */
-#topBar { font-size: 100%; float: left; width: 380px; margin: 0 20px 0 0;}
-#topBar p { margin:15px 0 0 0;}
-#topBar .floatRight {float:right; color: #009;}
-#topBar .floatLeft {float:left;}
 
 /* searchBox */
-#searchBox { font-size: 100%; float: left; text-align: right; width: 230px;}
-#searchBox form {}
-#searchBox p { margin:10px 0 0 0;}
-#searchBox label { display: none;}
-#searchBox input.textField {width: 70%; border: solid 1px #000;}
-#searchBox input.button {1px; width: 25%; border: solid 1px #000;}
+#searchBox { display:none; }
 
 /* mainWrap */
 *#mainWrap { clear: both; }
 
 /* sideBar */
-#sideBar { float: left; width: 120px; text-decoration: none;}
-#sideBar a { text-decoration: none; }
-#sideBar #mainMenu { font-size: 100%; font-weight: bold; background-color: #fff; border-width: 4px 1px 1px 1px; border-style: solid; border-color: #003399; margin: 0 5px 10px 10px;}
-#sideBar #mainMenu ul {	margin: 10px 0 10px 5px; list-style: none; padding-left: 0; text-indent: 0; }
-#sideBar #mainMenu ul li { margin-top: 10px; margin-bottom: 10px;}
-#sideBar .subMenu {font-size: 80%; background-color: #fff; border-width: 4px 1px 1px 1px; border-style: solid; border-color: #003399;	margin: 0 5px 10px 10px;}
-#sideBar .subMenu ul { margin: 10px 0 10px 5px; list-style: none; padding-left: 1em; text-indent: -1em;}
-#sideBar .subMenu ul li { margin-top: 3px; margin-bottom: 3px;}
+#sideBar { display:none }
+
 
 /* content */
-#content {width: 630px; float: left; margin-top: 10px; margin-left: 20px;}
+#content {}
 
 /* footer */
-#footer { width: 630px; clear: both; margin-left: 140px; padding: 25px 0 25px 0;}
-#footer p { text-align: center; }
-#footer ul {list-style-type: none; text-align:center; margin:0;padding:0;}
-#footer ul li {display: inline;}
-#footer ul li a {padding: 5px; margin-right: 3px;}
+#footer { }
 
 /* adWideSkyscraper */
-#adWideSkyscraper {height:610px;width:170px;background-color:transparent;position:absolute;left:820px;top:90px;text-align:center;color:#ccc;font-weight:bold;}
+#adWideSkyscraper { display:none; }
 
 /* colWrap */
 .colWrap {clear: both;}
@@ -207,20 +171,4 @@ label {font-weight:bold;}
 .breakingNews { text-align:center; font-weight:bold; background-color: #f00; color: #fff !important; padding: 5px; text-transform: uppercase; }
 
 /* articleToolbar */
-.articleToolbar { border-bottom: solid 1px #ccc; border-top: solid 1px #ccc; width: 100%; margin: 0 0 5px 0;}
-.articleToolbar ul {padding: 5px 0 5px 0; margin: 0;}
-.articleToolbar ul li {display: inline; list-style-type: none; margin-right: 2px;}
-.articleToolbar ul li a {text-decoration: none;}
-.articleToolbar ul li a.printArticle {padding-left: 20px; background: transparent url(images/gifs/tool-print.gif) no-repeat;}
-.articleToolbar ul li a.emailArticle {padding-left: 20px; background: transparent url(images/gifs/tool-email.gif) no-repeat;}
-.articleToolbar ul li a.discussArticle {padding-left: 20px; background: transparent url(images/gifs/tool-discuss.gif) no-repeat;}
-
-/* Tell CSS-compliant browsers to use PNG's on transparent images */
-
-// Uncomment this out if you have a transparent PNG available for the nameplate
-
-/*
-body[id=the-body] #nameplate { float: left; height: 64px; width: 441px; margin: 10px; background-image: url(images/nameplate.png); background-repeat: no-repeat;}
-*/
-body[id=the-body] .sectionHeadlines li { background: transparent url(images/list_dot.png) 0 7px no-repeat; }
-body[id=the-body] .summaries li {background: transparent url(images/list_dot.png) 0 7px no-repeat; }
+.articleToolbar {display:none;}
