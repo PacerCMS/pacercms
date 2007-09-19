@@ -78,7 +78,9 @@ $query .= " WHERE section_id = $article_section_id AND issue_id = $current_issue
 
 // Run query
 $result = $db->Execute($query);
-while ($array = $result->GetArray()) {    $section_headlines = $array;}
+if (!empty($result)) {
+    while ($array = $result->GetArray()) {        $section_headlines = $array;    }
+}
 
 // Assign variables
 $smarty->assign("section_headlines", $section_headlines );
@@ -93,7 +95,9 @@ $query .= " AND (media_type = 'jpg' OR media_type = 'png' OR media_type = 'gif')
 $query .= " ORDER BY id ASC; ";
 
 // Run query
-$result = $db->Execute($query);while ($array = $result->GetArray()) {    $article_images = $array;}
+$result = $db->Execute($query);
+if (!empty($result)) {    while ($array = $result->GetArray()) {        $article_images = $array;    }
+}
 
 // Assign variables
 $smarty->assign("article_images", $article_images );
@@ -108,7 +112,10 @@ $query .= " AND (media_type = 'swf') ";
 $query .= " ORDER BY id ASC; ";
 
 // Run query
-$result = $db->Execute($query);while ($array = $result->GetArray()) {    $article_swfs = $array;}
+$result = $db->Execute($query);
+if (!empty($result)) {    while ($array = $result->GetArray()) {        $article_swfs = $array;
+    }
+}
 
 // Assign variables
 $smarty->assign("article_swfs", $article_swfs );
@@ -123,7 +130,9 @@ $query .= " AND (media_type = 'pdf' OR media_type = 'doc' OR media_type = 'wav' 
 $query .= " ORDER BY id ASC; ";
 
 // Run query
-$result = $db->Execute($query);while ($array = $result->GetArray()) {    $article_related = $array;}
+$result = $db->Execute($query);
+if (!empty($result)) {    while ($array = $result->GetArray()) {        $article_related = $array;    }
+}
 
 // Assign variables
 $smarty->assign("article_related", $article_related );
