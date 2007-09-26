@@ -29,7 +29,9 @@ $query .= " ORDER BY $sort_by $sort_dir;";
 
 // Run query
 $result = $db->Execute($query);
-while ($array = $result->GetArray()) {    $article_list = $array;}
+if (!empty($result)) {
+    while ($array = $result->GetArray()) {        $article_list = $array;    }
+}
 
 $smarty->assign("article_list", $article_list);
 
