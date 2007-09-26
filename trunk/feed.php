@@ -27,7 +27,10 @@ $query .= $feed_wc;
 $query .= " ORDER BY s.section_priority, a.article_priority ASC;";
 
 // Run Query
-$result = $db->Execute($query);while ($array = $result->GetArray()) {    $feed_items = $array;}
+$result = $db->Execute($query);
+if (!empty($result)) {
+    while ($array = $result->GetArray()) {        $feed_items = $array;    }
+}
 
 // Assign variables
 $smarty->assign("feed_items", $feed_items);

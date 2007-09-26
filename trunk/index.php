@@ -36,7 +36,9 @@ $query .= " AND (media_type = 'jpg' OR media_type = 'png' OR media_type = 'gif')
 $query .= " ORDER BY id ASC;";
 
 // Run query
-$result = $db->Execute($query);while ($array = $result->GetArray()) {    $top_article_images = $array;}
+$result = $db->Execute($query);
+if (!empty($result)) {    while ($array = $result->GetArray()) {        $top_article_images = $array;    }
+}
 
 // Assign variables
 $smarty->assign("top_article_images", $top_article_images);
@@ -51,7 +53,10 @@ $query .= " AND (media_type = 'swf') ";
 $query .= " ORDER BY id ASC;";
 
 // Run query
-$result = $db->Execute($query);while ($array = $result->GetArray()) {    $top_article_swfs = $array;}
+$result = $db->Execute($query);
+if (!empty($result)) {
+    while ($array = $result->GetArray()) {        $top_article_swfs = $array;    }
+}
 
 // Assign variables
 $smarty->assign("top_article_swfs", $top_article_swfs);
