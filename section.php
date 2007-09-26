@@ -34,15 +34,9 @@ $query .= " ORDER BY article_priority ASC;";
 
 // Run query
 $result = $db->Execute($query);
-
-// Error if empty
-if (empty($result))
-{
-    cm_error("Could not find section");
-    exit;
+if (!empty($result)) {
+    while ($array = $result->GetArray()) {        $section_articles = $array;    }
 }
-
-while ($array = $result->GetArray()) {    $section_articles = $array;}
 
 
 // Assign variables
