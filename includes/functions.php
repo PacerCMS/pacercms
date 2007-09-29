@@ -34,7 +34,7 @@ function site_info($field)
     global $db;
 
     // Column names not always prefixed
-	if ($field != "id" && $field != "active_poll") {;
+	if ($field != "id" && $field != "active_poll" && $field != "database_version") {;
 		$field = "site_" . $field;
 	};
 	
@@ -198,9 +198,11 @@ function section_headlines($section=1,$issue,$disp='array')
     // Rather than echo, just return value arrays
     if ($disp == 'array')
     {
-        $result = $db->Execute($query);        while ($array = $result->GetArray())
-        {            $section_headlines = $array;
-            return $section_headlines;        } 
+        $result = $db->Execute($query);        if (!empty($result)) {
+            while ($array = $result->GetArray())
+            {                $section_headlines = $array;
+                return $section_headlines;            } 
+        }
     }  
 }
 
