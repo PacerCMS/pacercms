@@ -7,7 +7,9 @@ require( SMARTY_DIR . '/Smarty.class.php'); // Smarty Template Engine
 /* Configure Smarty */
 class Smarty_PacerCMS extends Smarty
 {   function Smarty_PacerCMS()   {        
-        // These automatically get set with each new instance.        $this->Smarty();        $this->template_dir  = TEMPLATES_PATH;		$this->compile_dir   = TEMPLATES_C_PATH;		$this->config_dir    = CONFIGS_PATH;		$this->cache_dir     = CACHE_PATH;
+        // These automatically get set with each new instance.        $this->Smarty();        $this->template_dir  = TEMPLATES_PATH;
+		$this->compile_dir   = TEMPLATES_C_PATH;		$this->config_dir    = CONFIGS_PATH;		$this->cache_dir     = CACHE_PATH;
+		$this->plugins_dir   = SMARTY_DIR . '/plugins';
 		$this->debugging     = DEBUG_MODE;				$this->caching       = USE_TEMPLATE_CACHE;
 		$this->compile_check = COMPILE_CHECK;
 	    
