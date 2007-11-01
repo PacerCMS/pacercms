@@ -8,9 +8,16 @@ $db->Connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $smarty = new Smarty_PacerCMS;
 $smarty->caching = USE_TEMPLATE_CACHE;
 
-/*******************************************
-	Function:	cm_error
-*******************************************/
+/*
+* Prints an error message
+*
+* This is the generic error handler for database or user input validation. If Smarty
+* is available, it will use the error.tpl template to format the message.
+* 
+* @param    string  Error message to output
+* @return   null    Function stops all processing
+*/
+
 function cm_error($error_message)
 {
 	global $smarty;
@@ -26,10 +33,16 @@ function cm_error($error_message)
 	exit;
 }
 
-/*******************************************
-	Function:	site_info
-*******************************************/
-function site_info($field)
+/*
+* Returns values from settings table
+*
+* Used to grab current settings such as the site title, telephone number, etc.
+*
+* @todo     Let's not query the database every time for this info
+* @param    string  Column name (less 'site_' prefix) of desired information; default 'url'
+* @return   string  Value stored in database
+*/
+function site_info($field='url')
 {
     global $db;
 
@@ -52,9 +65,16 @@ function site_info($field)
 }
 
 
-/*******************************************
-	Function:	section_info
-*******************************************/
+/*
+* Returns values from sections table
+*
+* Used to grab current settings such as editor name, URL, etc.
+*
+* @todo     Let's not query the database every time for this info
+* @param    string  Column name (less 'section_' prefix) of desired information
+* @param    int     The ID number of the selected section; default 1
+* @return   string  Value stored in database
+*/
 function section_info($field,$sel=1)
 {
     global $db;
@@ -79,9 +99,16 @@ function section_info($field,$sel=1)
 }
 
 
-/*******************************************
-	Function:	issue_info
-*******************************************/
+/*
+* Returns values from sections table
+*
+* Used to grab current settings such as editor name, URL, etc.
+*
+* @todo     We should probably cache at least the current issue
+* @param    string  Column name (less 'issue_' prefix) of desired information
+* @param    int     The ID number of the selected issue; default 1
+* @return   string  Value stored in database
+*/
 function issue_info($field,$sel=1)
 {
     
@@ -107,9 +134,16 @@ function issue_info($field,$sel=1)
 }
 
 
-/*******************************************
-	Function:	section_list
-*******************************************/
+/*
+* Returns array of sections
+*
+* Used to grab current settings such as editor name, URL, etc. for all sections
+*
+* @todo     Let's not query the database every time for this info
+* @todo     Could this be part of section_info()? They query the same data
+* @param    string  Format of output (currently only accepts 'array'); default 'array'
+* @return   array   Associative array of all sections, keyed on ID
+*/
 function section_list($disp='array')
 {
 
@@ -129,10 +163,16 @@ function section_list($disp='array')
 }
 
 
-/*******************************************
-	Function:	current_issue
-*******************************************/
-function current_issue($format)
+/*
+* Returns data from issues table for current issue
+*
+* Used to grab the date, valume, issue, etc. for current issue.
+*
+* @todo     Let's not query the database every time for this info
+* @param    string  Column name (less 'issue_' prefix) of desired information; default 'date'
+* @return   string  Value stored in database
+*/
+function current_issue($format='date')
 {;	
     global $db;
 
@@ -156,9 +196,15 @@ function current_issue($format)
 };
 
 
-/*******************************************
-	Function:	next_issue
-*******************************************/
+/*
+* Returns data from issues table for current issue
+*
+* Used to grab the date, valume, issue, etc. for next issue.
+*
+* @todo     Let's not query the database every time for this info
+* @param    string  Column name (less 'issue_' prefix) of desired information; default 'date'
+* @return   string  Value stored in database
+*/
 function next_issue($format)
 {
     global $db;
@@ -182,9 +228,17 @@ function next_issue($format)
 }
 
 
-/*******************************************
-	Fuction: section_headlines
-*******************************************/
+/*
+* Returns array from a section/issue
+*
+* Used to grab title, summary, author, etc. in a particular section and issue 
+*
+* @todo     Let's not query the database every time for this info
+* @param    int     Selected section; default 1
+* @param    int     Selected issue
+* @param    string  Format of output (currently only accepts 'array'); default 'array'
+* @return   array   Associative array of section contents
+*/
 function section_headlines($section=1,$issue,$disp='array')
 {
     global $db;
@@ -202,14 +256,23 @@ function section_headlines($section=1,$issue,$disp='array')
             while ($array = $result->GetArray())
             {                $section_headlines = $array;
                 return $section_headlines;            } 
+        } else {
+            // Return empty array
+            return array();
         }
     }  
 }
 
 
-/*******************************************
-	Function:	get_ballot
-*******************************************/
+/*
+* Returns ballot information for selected poll
+*
+* Used to generate the questions and response choices for a Web poll
+*
+* @param    string  Column name (less 'issue_' prefix) of desired information; default 'date'
+* @param    int     Selected poll; default 0
+* @return   string  Value stored in database
+*/
 function get_ballot($field,$sel=0)
 {
     global $db;
@@ -224,6 +287,7 @@ function get_ballot($field,$sel=0)
 	
     if (empty($result))
     {
+        // Return nothing
         return 0;
     } else {    
         return $result->Fields('myval');
@@ -231,9 +295,14 @@ function get_ballot($field,$sel=0)
 };
 
 
-/*******************************************
-	Function:	cast_ballot
-*******************************************/
+/*
+* Writes ballot to the database
+*
+* Used to cast the ballot for the current active poll; Runs poll_cleanup() operation before writing to the database
+*
+* @param    int     Selected poll option
+* @return   string  On success, returns true
+*/
 function cast_ballot($sel)
 {
 	$poll_id = site_info('active_poll');
@@ -255,9 +324,16 @@ function cast_ballot($sel)
 };
 
 
-/*******************************************
-	Function:	poll_results
-*******************************************/
+/*
+* Returns count of responses for a particular answer/poll
+*
+* Used to return the count of votes for an answer in a poll
+*
+* @todo     We could probably return all results with a GROUP BY query
+* @param    string  Selected answer
+* @param    int     Selected poll, default 0
+* @return   int     Count of responses
+*/
 function poll_results($field,$sel=0)
 {
 	global $db;
@@ -278,9 +354,15 @@ function poll_results($field,$sel=0)
 }
 
 
-/*******************************************
-	Function:	poll_cleanup
-*******************************************/
+/*
+* Delete duplicate poll entries
+*
+* Removes duplicate entries for a poll by IP address
+*
+* @todo     Should we also do a look for a saved cookie value?
+* @param    int     Selected poll
+* @return   mixed   Returns false if no overvotes found; record handle if overvotes found
+*/
 function poll_cleanup($sel)
 {
 	global $db;
@@ -296,7 +378,7 @@ function poll_cleanup($sel)
     if (empty($result))
     {
         // No overvotes
-        return;
+        return false;
     } else {    
         // Clean up overvotes
         $ipad = $result->Fields('ballot_ip_address');
@@ -307,9 +389,15 @@ function poll_cleanup($sel)
 };
 
 
-/*******************************************
-	Function:	poll_delete_ballots
-*******************************************/
+/*
+* Deletes ballots by poll/IP address
+*
+* Helps poll_cleanup() by deleting the offending IP address for a poll
+*
+* @param    int     Selected poll ID
+* @param    string  IP address in 0.0.0.0 format
+* @return   mixed   Returns record handle
+*/
 function poll_delete_ballots($sel,$ipad)
 {
 	$query = "DELETE";
@@ -321,9 +409,14 @@ function poll_delete_ballots($sel,$ipad)
 };
 
 
-/*******************************************
-	Function:	count_words
-*******************************************/
+/*
+* Count words in string
+*
+* Returns approximate count of words in a string
+*
+* @param    string  String to be counted
+* @return   int     Count of words
+*/
 function count_words($string)
 {
 	$word_count = 0;
@@ -339,9 +432,14 @@ function count_words($string)
 }
 
 
-/*******************************************
-	Function: run_query
-*******************************************/
+/*
+* Runs a query
+*
+* Sends the query to the database layer
+*
+* @param    string  Query
+* @return   mixed   Returns record handle
+*/
 function run_query($query)
 {
     global $db;
@@ -358,18 +456,26 @@ function run_query($query)
 };
 
 
-/*******************************************
-	Function:	prep_string
-*******************************************/
+/*
+* Prepares a string for database insertion
+*
+* Detects 'magic_quotes' setting and reacts accordingly
+*
+* @param    string  String to be add slashed
+* @return   string  Add slashed string
+*/
 function prep_string($string){    if (get_magic_quotes_gpc() == 1)    {        return($string);    } else {        return(addslashes($string));    }}
 
 
-/*******************************************
-	Function:	autop
-	Credit:
-		Matthew Mullenweg of WordPress
-		http://photomatt.net/scripts/autop/
-*******************************************/
+/*
+* Convert plain text to HTML
+*
+* Take a multi-line text string and parse it for ideal HTML output
+*
+* @param    string  Text to be parsed
+* @param    boolean Flag to convert line breaks; 1 - true, 0 - false
+* @return   string  Parsed text
+*/
 function autop($pee, $br = 1) {
 	$pee = $pee . "\n"; // just to make things a little easier, pad the end
 	$pee = preg_replace('|<br />\s*<br />|', "\n\n", $pee);
@@ -390,4 +496,3 @@ function autop($pee, $br = 1) {
 	$pee = preg_replace('/&([^#])(?![a-z]{1,8};)/', '&#038;$1', $pee);
 	return $pee;
 };
-?>
