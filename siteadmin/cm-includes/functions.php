@@ -12,9 +12,14 @@ function get_cm_header() { include_once('header.php'); }
 function get_cm_footer() { include_once('footer.php'); }
 function get_cm_menu() { include_once('menu.php'); }
 
-/*******************************************
-	Function:	cm_error
-*******************************************/
+/*
+* Generate error message
+*
+* Genrates an error message within the header and footer wrapper.
+*
+* @param    string  Error message to produce
+* @return   null    Script terminates on exit
+*/
 function cm_error($msg)
 {
 	get_cm_header();
@@ -30,10 +35,17 @@ function cm_error($msg)
 #==========================================#
 
 
-/*******************************************
-	Function:	cm_auth_user
-*******************************************/
-function cm_auth_user($username,$password,$dest)
+/*
+* Authenticate user
+*
+* Queries users table for username and password match
+*
+* @todo     This should accomplish a great deal more
+* @param    string  Username to authenticate
+* @param    string  Password
+* @return   int     Number of rows found; 1 - Authenticated, !=1 - Not Authenticated 
+*/
+function cm_auth_user($username,$password)
 {
     global $CM_MYSQL;
 
@@ -55,9 +67,16 @@ function cm_auth_user($username,$password,$dest)
 }
 
 
-/*******************************************
-	Function:	cm_reset_pass
-*******************************************/
+/*
+* Reset user password
+*
+* Sets users password to seven random charachters, e-mails them.
+*
+* @todo     The e-mail shouldn't be passed as a variable
+* @param    string  Username
+* @param    string  E-mail address to send notification
+* @return   int     Number of rows found; 1 - true, 0 - false
+*/
 function cm_reset_pass($username,$email)
 {
     global $CM_MYSQL;
@@ -109,9 +128,15 @@ function cm_reset_pass($username,$email)
 	return $result_row_count;
 }
 
-/*******************************************
-	Function:	cm_auth_module
-*******************************************/
+/*
+* Check module authentication
+*
+* See if user has permission to access a specific module.
+*
+* @todo     Check against session variables instead of database calls
+* @param    string  Module to authenticate
+* @return   boolean Returns true on allowed, errors out on false
+*/
 function cm_auth_module($module)
 {
 	if (!isset($_SESSION['cm_user_id'])) {
@@ -138,9 +163,13 @@ function cm_auth_module($module)
 	}
 }
 
-/*******************************************
-	Function:	cm_logout
-*******************************************/
+/*
+* Logout of Site Administrator
+*
+* Destroyes set cookies and sessions
+*
+* @return   header  Sends user to login.php
+*/
 function cm_logout()
 {
 	$cookiesSet = array_keys($_COOKIE);
@@ -153,9 +182,15 @@ function cm_logout()
 	header("Location: login.php?msg=logout");
 }
 
-/*******************************************
-	Function:	cm_auth_restrict
-*******************************************/
+/*
+* Check for permission to access module
+*
+* Queries username to return whether a user can access a particular moudle
+*
+* @todo     Should check against sesion variable instaed of database
+* @param    string  Module name
+* @return   boolean Returns value from database if present, false iif not
+*/
 function cm_auth_restrict($sel)
 {
     global $CM_MYSQL;
@@ -176,9 +211,16 @@ function cm_auth_restrict($sel)
 	}
 }
 
-/*******************************************
-	Function:	cm_get_restrict
-*******************************************/
+/*
+* Check for permission to access a portion of a moudle
+*
+* Queries database to determine whether a user can access parts of a particular module
+*
+* @todo     Should check against sesion variable instaed of database
+* @param    string  Sub-module section name
+* @param    string  Username to check
+* @return   boolean Returns value from database if present, false if not
+*/
 function cm_get_restrict($string,$sel)
 {
     global $CM_MYSQL;
@@ -202,9 +244,14 @@ function cm_get_restrict($string,$sel)
 
 ///// Working with the cm_access table /////
 
-/*******************************************
-	Function:	cm_clear_access
-*******************************************/
+/*
+* Clear all permissions for a user
+*
+* Removes every entry from access table by username
+*
+* @param    string  Username
+* @return   mixed   Returns result resource
+*/
 function cm_clear_access($sel)
 {
 	$query = "DELETE FROM cm_access WHERE user_id = $sel;";
@@ -212,9 +259,17 @@ function cm_clear_access($sel)
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_add_access
-*******************************************/
+/*
+* Add permissions for a user
+*
+* Adds entries to access table for a user
+*
+* @param    string  Username
+* @param    string  Type of access entry ('module' or 'string')
+* @param    string  Option name
+* @param    string  Option Value
+* @return   mixed   Returns result resource
+*/
 function cm_add_access($sel,$type,$option,$value)
 {
 	if ($value == "") { $value = "false"; }	
@@ -223,9 +278,15 @@ function cm_add_access($sel,$type,$option,$value)
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_get_access
-*******************************************/
+/*
+* Check access for a module
+*
+* Returns true or false if username can access specfied module
+*
+* @param    string  Module name
+* @param    string  Username
+* @return   string  Returns either 'true' or 'false'
+*/
 function cm_get_access($module,$sel)
 {
     global $CM_MYSQL;
