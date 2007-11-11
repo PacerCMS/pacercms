@@ -1,6 +1,3 @@
-<?php
-$show_server_info = cm_get_access('server-info', $_SESSION['cm_user_id']);
-?>
 </div>
 <div id="footer">
 <hr />
@@ -11,7 +8,10 @@ $show_server_info = cm_get_access('server-info', $_SESSION['cm_user_id']);
 <ul>
     <li><a href="http://pacercms.sourceforge.net/">PacerCMS <?php echo CM_VERSION; ?></a></li>
     <li><a href="http://code.google.com/p/pacercms/issues/list">Report a Bug</a></li>
-    <?php if ($show_server_info == "true") {; ?><li><a href="server-info.php">Server Information</a></li><?php }; ?>
+    <?php if (cm_auth_restrict('server-info') == "true") { ?>
+    <li><a href="server-info.php">Server Information</a></li>
+    <?php }; ?>
 </ul>
 </div>
-</body></html>
+</body>
+</html>

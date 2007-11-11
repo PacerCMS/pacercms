@@ -27,22 +27,20 @@ if ($msg == "access-updated") { echo "<p class=\"infoMessage\">User access updat
     <th>Email</th>
     <th>Tools</th>
   </tr>
-  <?php
+<?php
 
-// Database Query
 $query = "SELECT * FROM cm_users ORDER BY user_last_name ASC, user_first_name ASC;";
 
-// Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
+$result = cm_run_query($query);
+$records = $result->GetArray();
 
-do {
-$id = $result_array['id'];
-$first_name = $result_array['user_first_name'];
-$last_name = $result_array['user_last_name'];
-$job_title = $result_array['user_job_title'];
-$email = $result_array['user_email'];
+foreach ($records as $record)
+{
+    $id = $record['id'];
+    $first_name = $record['user_first_name'];
+    $last_name = $record['user_last_name'];
+    $job_title = $record['user_job_title'];
+    $email = $record['user_email'];
 ?>
   <tr>
     <td><?php echo "$first_name $last_name"; ?></td>
@@ -58,7 +56,7 @@ $email = $result_array['user_email'];
       </ul>
     </td>
   </tr>
-  <? } while ($result_array = mysql_fetch_assoc($result)); ?>
+<?php } ?>
   <tr>
     <td class="center" colspan="3"><strong><a href="staff-edit.php?action=add">Add a User</a></strong></td>
     <td></td>

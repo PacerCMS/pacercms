@@ -13,7 +13,7 @@
 <body>
 <div id="header">
 <h1><a href="index.php" title="Back to Main Page"><?php echo cm_get_settings('site_name'); ?></a></h1>
-<?php if ($_SESSION['cm_user_id'] != "") {; ?><p>Welcome, <a href="profile.php" title="Edit Your Profile"><?php echo $_SESSION['cm_user_fullname']; ?></a></p><?php }; ?>
+<?php if (!empty($_SESSION['user_data'])) {; ?><p>Welcome, <a href="profile.php" title="Edit Your Profile"><?php echo $_SESSION['user_data']['user_first_name'] . ' ' . $_SESSION['user_data']['user_last_name']; ?></a></p><?php }; ?>
 <hr />
 </div>
 <?php get_cm_menu(); ?>

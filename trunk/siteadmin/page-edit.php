@@ -19,7 +19,7 @@ if ($_GET["action"] != "") {
 $id = $_GET["id"];
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") { 
+if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id'])) { 
 	$id = $_POST['delete-id'];
 	// Run function
 	$stat = cm_delete_page($id);
@@ -34,18 +34,18 @@ if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {
 
 // If action is edit, call edit function
 if ($_GET['action'] == "edit") { 
-	if ($_POST['id'] != "") {
+	if (is_numeric($_POST['id']))
+	{
 		// Get posted data
-		$title = prep_string($_POST['title']);
-		$short_title = prep_string($_POST['short_title']);
-		$text = prep_string($_POST['text']);
-		$side_text = prep_string($_POST['side_text']);
-		$slug = prep_string($_POST['slug']);
-		$edited = $_POST['edited'];
+		$page['title'] = prep_string($_POST['title']);
+		$page['short_title'] = prep_string($_POST['short_title']);
+		$page['text'] = prep_string($_POST['text']);
+		$page['side_text'] = prep_string($_POST['side_text']);
+		$page['slug'] = prep_string($_POST['slug']);
+		$page['edited'] = $_POST['edited'];
 		$id	= $_POST['id'];
-		
-		// Run function
-		$stat = cm_edit_page($title,$short_title,$text,$side_text,$slug,$edited,$id);
+
+		$stat = cm_edit_page($page,$id);
 		if ($stat == 1) {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
@@ -60,16 +60,16 @@ if ($_GET['action'] == "edit") {
 }
 
 // If action is new, call add function
-if ($_GET['action'] == "add" && $_POST['text'] != "") { 
-	// Get posted data
-	$title = prep_string($_POST['title']);
-	$short_title = prep_string($_POST['short_title']);
-	$text = prep_string($_POST['text']);
-	$side_text = prep_string($_POST['side_text']);
-	$slug = prep_string($_POST['slug']);
-	$edited = $_POST['edited'];	
-	// Run function
-	$stat = cm_add_page($title,$short_title,$text,$side_text,$slug,$edited);
+if ($_GET['action'] == "add" && !empty($_POST['text']))
+{ 
+	$page['title'] = prep_string($_POST['title']);
+	$page['short_title'] = prep_string($_POST['short_title']);
+	$page['text'] = prep_string($_POST['text']);
+	$page['side_text'] = prep_string($_POST['side_text']);
+	$page['slug'] = prep_string($_POST['slug']);
+	$page['edited'] = $_POST['edited'];
+
+	$stat = cm_add_page($page);
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=added");
 		exit;
@@ -80,31 +80,25 @@ if ($_GET['action'] == "add" && $_POST['text'] != "") {
 }
 
 // Only call database if in edit mode.
-if ($mode == "edit") {
-	
-	// Query
+if ($mode == "edit")
+{
 	$query = "SELECT * FROM cm_pages ";
 	$query .= " WHERE id = $id";
 	
-	// Run Query
-	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
+	$result = cm_run_query($query);
 	
-	// If Array comes back empty, produce error
-	if ($result_row_count != 1) {
+	if ($result->RecordCount() != 1) {
 		cm_error("Page does not exist, or you do not have permission to edit it.");
 		exit;
 	}
 		
-	// Define variables
-	$id = $result_array['id'];
-	$title = $result_array['page_title'];
-	$short_title = $result_array['page_short_title'];
-	$text = $result_array['page_text'];
-	$side_text = $result_array['page_side_text'];
-	$slug = $result_array['page_slug'];
-	$edited = $result_array['page_edited'];	
+	$id = $result->Fields('id');
+	$title = $result->Fields('page_title');
+	$short_title = $result->Fields('page_short_title');
+	$text = $result->Fields('page_text');
+	$side_text = $result->Fields('page_side_text');
+	$slug = $result->Fields('page_slug');
+	$edited = $result->Fields('page_edited');	
 }
 
 

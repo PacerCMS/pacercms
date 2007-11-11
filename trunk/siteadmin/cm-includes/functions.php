@@ -4,8 +4,8 @@
 session_start();
 
 // Database Connection
-$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-mysql_select_db(DB_DATABASE, $CM_MYSQL) or die(cm_error(mysql_error()));
+$cm_db = ADONewConnection('mysql');
+$cm_db->Connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 // File handling for templates
 function get_cm_header() { include_once('header.php'); }
@@ -47,23 +47,36 @@ function cm_error($msg)
 */
 function cm_auth_user($username,$password)
 {
-    global $CM_MYSQL;
-
     $username = htmlentities($username, ENT_QUOTES, 'UTF-8');
     $password = htmlentities($password, ENT_QUOTES, 'UTF-8');
 
 	// Database Query
-	$query = "SELECT * FROM cm_users";
+	$query = "SELECT id FROM cm_users";
 	$query .= " WHERE user_login = '$username' AND user_password = '$password';";	
+
 	// Run Query
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
-	if ($result_row_count == 1) {
-		$_SESSION['cm_user_id'] = $result_array['id'];
-		$_SESSION['cm_user_fullname'] = $result_array['user_first_name'] . " " . $result_array['user_last_name'];
+	$result = cm_run_query($query);
+
+	if ($result->RecordCount() == 1)
+	{
+        // User authenticated
+        $_SESSION['user_data']['id'] = $result->Fields('id');
+       
+		cm_settings_data(); // Load System Settings
+		cm_issues_data(); // Load Issue Data
+        cm_users_data(); // Load User Data
+        cm_access_data(); // Load User Access
+
+        // Authenticated
+        return true;
+
+	} else {
+	   
+	   // Not authenticated
+	   return false;
+	   
 	}
-	return $result_row_count;
+
 }
 
 
@@ -72,27 +85,23 @@ function cm_auth_user($username,$password)
 *
 * Sets users password to seven random charachters, e-mails them.
 *
-* @todo     The e-mail shouldn't be passed as a variable
 * @param    string  Username
 * @param    string  E-mail address to send notification
 * @return   int     Number of rows found; 1 - true, 0 - false
 */
 function cm_reset_pass($username,$email)
-{
-    global $CM_MYSQL;
-    	
+{   	
 	// Database Query
 	$query = "SELECT * FROM cm_users";
 	$query .= " WHERE user_login = '$username' AND user_email = '$email'";
 	$query .= " LIMIT 1;";	
 	// Run Query
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
+	$result = cm_run_query($query);
 
-	$id = $result_array['id'];
+	$id = $result->Fields('id');
 	
-	if ($id != "") {
+	if (is_numeric($id))
+	{
 		
 		// $username
 		$salt = "abchefghjkmnpqrstuvwxyz23456789"; 
@@ -110,7 +119,7 @@ function cm_reset_pass($username,$email)
       	$query = "UPDATE cm_users SET";
 		$query .= " user_password = '$enc_password'";
 		$query .= " WHERE id = $id";
-		$ChangePassword  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+    	$result = cm_run_query($query);
       	
       	// E-mail new password to user
       	$subject = "PacerCMS - Your new username and password";
@@ -124,38 +133,140 @@ function cm_reset_pass($username,$email)
 		// Send the e-mail notification
 		$sendit = mail($email, $subject, $message);      	
 
+        // Verified
+        return true;
+
+	} else {
+	   
+	   // Not verified
+	   return false;
+	   
 	}
-	return $result_row_count;
+
 }
+
+
+/*
+* Load settings data
+*
+* Places contents of settings table into session variables
+*/
+function cm_settings_data($sel='1')
+{
+    // Settings
+    $query = "SELECT * FROM cm_settings WHERE id = $sel; ";
+	$result = cm_run_query($query);
+
+    // Unset setting data
+    unset($_SESSION['setting_data']);
+
+    // Load settings
+    $_SESSION['setting_data']['id'] = $result->Fields('id');
+    $_SESSION['setting_data']['site_name'] = $result->Fields('site_name');    $_SESSION['setting_data']['site_url'] = $result->Fields('site_url');    $_SESSION['setting_data']['site_email'] = $result->Fields('site_email');    $_SESSION['setting_data']['site_address'] = $result->Fields('site_address');    $_SESSION['setting_data']['site_city'] = $result->Fields('site_city');    $_SESSION['setting_data']['site_state'] = $result->Fields('site_state');    $_SESSION['setting_data']['site_zipcode'] = $result->Fields('state_zipcode');    $_SESSION['setting_data']['site_telephone'] = $result->Fields('site_telephone');    $_SESSION['setting_data']['site_fax'] = $result->Fields('site_fax');    $_SESSION['setting_data']['site_announcement'] = $result->Fields('site_announcement');    $_SESSION['setting_data']['site_description'] = $result->Fields('site_description');    $_SESSION['setting_data']['current_issue'] = $result->Fields('current_issue');    $_SESSION['setting_data']['next_issue'] = $result->Fields('next_issue');    $_SESSION['setting_data']['active_poll'] = $result->Fields('active_poll');    $_SESSION['setting_data']['database_version'] = $result->Fields('database_version');
+}
+
+/*
+* Load issues data
+*
+* Places issue data for current and next issue into session variables
+*/
+function cm_issues_data()
+{
+    // Unset issue data
+    unset($_SESSION['issue_data']);
+ 
+    // Current issue    
+    $id = cm_get_settings('current_issue');
+    $query = "SELECT id, issue_date, issue_volume, issue_number FROM cm_issues WHERE id = $id; ";
+	$result = cm_run_query($query);
+
+    $_SESSION['issue_data']['current_issue_id'] = $result->Fields('id');
+    $_SESSION['issue_data']['current_issue_date'] = $result->Fields('issue_date');
+    $_SESSION['issue_data']['current_issue_volume'] = $result->Fields('issue_volume');
+    $_SESSION['issue_data']['current_issue_number'] = $result->Fields('issue_number');
+
+    // Next Issue
+    $id = cm_get_settings('next_issue');
+    $query = "SELECT id, issue_date, issue_volume, issue_number FROM cm_issues WHERE id = $id; ";
+	$result = cm_run_query($query);
+
+    $_SESSION['issue_data']['next_issue_id'] = $result->Fields('id');
+    $_SESSION['issue_data']['next_issue_date'] = $result->Fields('issue_date');
+    $_SESSION['issue_data']['next_issue_volume'] = $result->Fields('issue_volume');
+    $_SESSION['issue_data']['next_issue_number'] = $result->Fields('issue_number');
+}
+
+
+/*
+* Load user data
+*
+* Places user data for authenticated user into session variables
+*/
+function cm_users_data()
+{    
+    $id = $_SESSION['user_data']['id'];
+    
+    // Unset user data
+    unset($_SESSION['user_data']);
+
+    $query = "SELECT * FROM cm_users WHERE id = $id; ";
+	$result = cm_run_query($query);
+    
+    $_SESSION['user_data']['id'] = $result->Fields('id');
+    $_SESSION['user_data']['user_login'] = $result->Fields('user_login');
+    $_SESSION['user_data']['user_first_name'] = $result->Fields('user_first_name');
+    $_SESSION['user_data']['user_middle_name'] = $result->Fields('user_middle_name');
+    $_SESSION['user_data']['user_last_name'] = $result->Fields('user_last_name');
+    $_SESSION['user_data']['user_job_title'] = $result->Fields('user_job_title');
+    $_SESSION['user_data']['user_email'] = $result->Fields('user_email');
+}
+
+
+/*
+* Load user access data
+*
+* Places user access data for authenticated user into session variables
+*/
+function cm_access_data()
+{
+
+    $id = $_SESSION['user_data']['id'];
+
+    // Unset access data
+    unset($_SESSION['access_data']);
+
+    $query = "SELECT * FROM cm_access WHERE user_id = $id; ";
+	$result = cm_run_query($query);
+    $records = $result->GetArray();
+
+    foreach ($records as $record)
+    {
+        $key = $record['access_option'];
+        $value = $record['access_value'];
+        $_SESSION['access_data'][$key] = $value;
+    }
+}
+
 
 /*
 * Check module authentication
 *
 * See if user has permission to access a specific module.
 *
-* @todo     Check against session variables instead of database calls
 * @param    string  Module to authenticate
 * @return   boolean Returns true on allowed, errors out on false
 */
 function cm_auth_module($module)
 {
-	if (!isset($_SESSION['cm_user_id'])) {
+	if (!isset($_SESSION['access_data']))
+	{
 		$dest = $_SERVER['REQUEST_URI'];
 		header("Location: login.php?dest=$dest");
 		exit;
 	}
-	$user_id = $_SESSION['cm_user_id'];
-	$CM_MYSQL = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die(cm_error(mysql_error()));
-	mysql_select_db(DB_DATABASE, $CM_MYSQL);	
-	$query = "SELECT * FROM cm_access";
-	$query .= " WHERE user_id = '$user_id'";
-	$query .= " AND access_type = 'module'";
-	$query .= " AND access_option = '$module'";
-	$query .= " AND access_value = 'true'";
-	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);	
-	if ($result_row_count > 0) {
+
+	if ($_SESSION['access_data'][$module] == "true")
+	{
 		return true;
 	} else {
 		cm_error("You do not have permission to access this page.");
@@ -163,10 +274,25 @@ function cm_auth_module($module)
 	}
 }
 
+
+/*
+* Check permission
+*
+* Returns session value for requested module / auth
+*
+* @param    string  Module name
+* @return   string  Stored value
+*/
+function cm_auth_restrict($string)
+{
+    return $_SESSION['access_data'][$string];
+}
+
+
 /*
 * Logout of Site Administrator
 *
-* Destroyes set cookies and sessions
+* Destroys set cookies and sessions
 *
 * @return   header  Sends user to login.php
 */
@@ -175,72 +301,14 @@ function cm_logout()
 	$cookiesSet = array_keys($_COOKIE);
 	for ($x=0;$x<count($cookiesSet);$x++) setcookie($cookiesSet[$x],"",time()-1);
 	$_SESSION = array();
-	if (isset($_COOKIE[session_name()])) {
+	if (isset($_COOKIE[session_name()]))
+	{
 	   setcookie(session_name(), '', time()-42000, '/');
 	}
 	session_destroy();
 	header("Location: login.php?msg=logout");
 }
 
-/*
-* Check for permission to access module
-*
-* Queries username to return whether a user can access a particular moudle
-*
-* @todo     Should check against sesion variable instaed of database
-* @param    string  Module name
-* @return   boolean Returns value from database if present, false iif not
-*/
-function cm_auth_restrict($sel)
-{
-    global $CM_MYSQL;
-
-	$user_id = $_SESSION['cm_user_id'];
-	$query = "SELECT * FROM cm_access";
-	$query .= " WHERE user_id = '$user_id'";
-	$query .= " AND access_type = 'string'";
-	$query .= " AND access_option = '$sel'";
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);	
-	$myval = $result_array['access_value'];	
-	if ($result_row_count > 0) {
-		return $myval;
-	} else {
-		return false;
-	}
-}
-
-/*
-* Check for permission to access a portion of a moudle
-*
-* Queries database to determine whether a user can access parts of a particular module
-*
-* @todo     Should check against sesion variable instaed of database
-* @param    string  Sub-module section name
-* @param    string  Username to check
-* @return   boolean Returns value from database if present, false if not
-*/
-function cm_get_restrict($string,$sel)
-{
-    global $CM_MYSQL;
-    
-	// Database Query
-	$query = "SELECT * FROM cm_access";
-	$query .= " WHERE user_id = '$sel'";
-	$query .= " AND access_type = 'string'";
-	$query .= " AND access_option = '$string'";
-	// Run Query
-	$result = mysql_query($query, $CM_MYSQL) or die(mysql_error());
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);	
-	$myval = $result_array['access_value'];	
-	if ($result_row_count > 0) {
-		return $myval;
-	} else {
-		return false;
-	}	
-}
 
 ///// Working with the cm_access table /////
 
@@ -250,12 +318,13 @@ function cm_get_restrict($string,$sel)
 * Removes every entry from access table by username
 *
 * @param    string  Username
-* @return   mixed   Returns result resource
+* @return   boolean Returns true on success, false if no records deleted
 */
 function cm_clear_access($sel)
 {
 	$query = "DELETE FROM cm_access WHERE user_id = $sel;";
 	$stat = cm_run_query($query);
+
 	return $stat;
 }
 
@@ -275,6 +344,7 @@ function cm_add_access($sel,$type,$option,$value)
 	if ($value == "") { $value = "false"; }	
 	$query = "INSERT INTO cm_access (user_id,access_type,access_option,access_value) VALUES ($sel,'$type','$option','$value');";
 	$stat = cm_run_query($query);
+
 	return $stat;
 }
 
@@ -289,7 +359,6 @@ function cm_add_access($sel,$type,$option,$value)
 */
 function cm_get_access($module,$sel)
 {
-    global $CM_MYSQL;
     
 	// Database Query
 	$query = "SELECT * FROM cm_access";
@@ -297,16 +366,16 @@ function cm_get_access($module,$sel)
 	$query .= " AND access_type = 'module'";
 	$query .= " AND access_option = '$module'";
 	$query .= " AND access_value = 'true';";
+
 	// Run Query
-	$result = mysql_query($query, $CM_MYSQL) or die(mysql_error());
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
-	if ($result_row_count > 0) { 
-		$stat = "true";
+	$result = cm_run_query($query);
+	
+	if ($result->RecordCount() > 0)
+	{ 
+		return true;
 	} else {
-		$stat = "false";
+		return false;
 	} 
-	return $stat;
 }
 
 
@@ -314,214 +383,245 @@ function cm_get_access($module,$sel)
 ######### Building Lists and Menus #########
 #==========================================#
 
-/*******************************************
-	Function:	cm_section_list
-*******************************************/
+/*
+* Generate list of sections for dropdown
+*
+* Grabs list of sections and places them into <option> tags
+*
+* @todo     [todo item]
+* @param    string  Module name (determines formatting)
+* @param    int     ID of seleted section
+* @param    int     ID of section to exclude from list
+* @return   print   Outputs list of sections
+*/
 function cm_section_list($module, $sel=1, $exclude=0)
 {
-    global $CM_MYSQL;
+	$query = "SELECT * FROM cm_sections WHERE id != $exclude ORDER BY section_priority ASC;";	
+	$result = cm_run_query($query);
+    $records = $result->GetArray();
 
-	// Database Query
-	$query = "SELECT * FROM cm_sections ORDER BY section_priority ASC;";	
-	// Run Query
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);	
-	do {	
-		$id = $result_array['id'];
-		$section_name = $result_array['section_name'];
-		$section_url = $result_array['section_url'];		
+	foreach($records as $record)
+	{
+		$id = $record['id'];
+		$section_name = htmlentities($record['section_name'], ENT_QUOTES, 'UTF-8');
+		$section_url = htmlentities($record['section_url'], ENT_QUOTES, 'UTF-8');		
 		
         switch($module)
         {
         
             case 'article-browse':
                     if ($sel == $id) { $select = "class=\"selected\""; } else { unset($select); }
-                    echo "\t<li><a href=\"article-browse.php?section=$id\" $select>" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</a></li>\n";
+                    print "\t<li><a href=\"article-browse.php?section=$id\" $select>$section_name</a></li>\n";
                 break;
 
             case 'menu':
-                    echo "\t<li><a href=\"$section_url\">" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</a></li>\n";
+                    print "\t<li><a href=\"$section_url\">$section_name</a></li>\n";
                 break;
 
             case 'section-edit':
-                if ($exclude != $id)
-                {
                     if ($sel == $id) { $select = "selected"; } else { unset($select); }
-                    echo "\t<option value=\"$id\" $select>" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</option>\n";
-                }
+                    print "\t<option value=\"$id\" $select>$section_name</option>\n";
                 break;
             
             default:
-                if ($sel == $id) { $select = "selected"; } else { unset($select); }
-                echo "\t<option value=\"$id\" $select>" . htmlentities($section_name, ENT_QUOTES, 'UTF-8') . "</option>\n";
+                    if ($sel == $id) { $select = "selected"; } else { unset($select); }
+                    print "\t<option value=\"$id\" $select>$section_name</option>\n";
                 break;
         
-        }
-		
-	} while ($result_array = mysql_fetch_assoc($result));
+        }		
+	}
 }
 
-/*******************************************
-	Function:	cm_issue_list
-*******************************************/
+/*
+* Generate list of issues for dropdown
+*
+* Grabs list of issues and places them into <option> tags
+*
+* @param    string  Module name (determines formatting -- not used)
+* @param    int     ID of seleted issue
+* @return   print   Outputs list of issues
+*/
 function cm_issue_list($module, $sel)
-{
-    global $CM_MYSQL;
-    
+{   
 	$query = "SELECT * FROM cm_issues ORDER BY issue_date DESC;";	
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
-	do {
-		$id = $result_array['id'];
-		$date = $result_array['issue_date'];
-		$volume = $result_array['issue_volume'];
-		$number = $result_array['issue_number'];
-		echo "\t<option value=\"$id\"";
-		if ($sel == $id) {
-			echo " selected";;	
-		}
-		echo ">$date (Vol. $volume, No. $number)</option>\n";
-	} while ($result_array = mysql_fetch_assoc($result));
+	$result = cm_run_query($query);
+    $records = $result->GetArray();
+
+	foreach ($records as $record) {
+		$id = $record['id'];
+		$date = $record['issue_date'];
+		$volume = $record['issue_volume'];
+		$number = $record['issue_number'];
+		if ($sel == $id) { $selected = " selected=\"selected\""; }
+
+		print "\t<option value=\"$id\" $selected\">$date (Vol. $volume, No. $number)</option>\n";
+		unset($selected);
+	}
 }
 
-/*******************************************
-	Function:	cm_volume_list
-*******************************************/
+/*
+* Generate list of volumes for dropdown
+*
+* Grabs list of volumes and places them into <option> tags
+*
+* @param    string  Module name (determines formatting -- not used)
+* @param    int     Number of seleted volume
+* @return   print   Outputs list of issues
+*/
 function cm_volume_list($module, $sel=1)
 {
-    global $CM_MYSQL;
     
-	$query = "SELECT DISTINCT(issue_volume) FROM cm_issues ORDER BY issue_volume DESC;";	
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
-	do {
-		$volume = $result_array['issue_volume'];
-		if ($module == "issue-browse") {
-			echo "\t<option value=\"$volume\"";
-			if ($sel == $volume) {
-			echo " selected";;	
-		}
-		echo ">Volume $volume</option>\n";
-		}
-	} while ($result_array = mysql_fetch_assoc($result));
+    $query = "SELECT DISTINCT(issue_volume) FROM cm_issues ORDER BY issue_volume DESC;";	
+    $result = cm_run_query($query);
+    $records = $result->GetArray();
+    
+    foreach ($records as $record)
+    {
+        $volume = $record['issue_volume'];
+        if ($sel == $volume) { $selected = "selected=\"selected\""; }
+        
+        switch ($module)
+        {
+            default:   
+                print "\t<option value=\"$volume\" $selected>Volume $volume</option>\n";
+                unset($selected);
+                break;
+        }
+    
+    }
 }
 
-/*******************************************
-	Function:	cm_list_media
-*******************************************/
+
+/*
+* List associated media
+*
+* Grab related media files for an article
+*
+* @param    int     ID of article
+* @param    boolean Show media file preview
+* @return   print   Shows list or media previews
+*/
 function cm_list_media($sel,$display=false)
 {
-    global $CM_MYSQL;
+
+	$query = "SELECT * FROM cm_media WHERE article_id = '$sel';";	
+	$result = cm_run_query($query);
+	$records = $result->GetArray();
 
 	if ($display == true) {
-		$query = "SELECT * FROM cm_media WHERE article_id = '$sel';";	
-		$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
-		$result_array = mysql_fetch_assoc($result);
-		$result_row_count = mysql_num_rows($result);
+		
 		echo "<p><strong>Linked Media:</strong></p>";
-		if ($result_row_count > 0) {
-			do {		
-				$id = $result_array['id'];
-				$title = $result_array['media_title'];
-				$src = $result_array['media_src'];
-				$type = $result_array['media_type'];
-				echo "<p>";
+		if ($result->RecordCount() > 0) {
+			foreach ($records as $record) {		
+				$id = $record['id'];
+				$title = $record['media_title'];
+				$src = $recordy['media_src'];
+				$type = $record['media_type'];
+				print "<p>";
 				cm_display_media($src,$type,$title);
-				echo "</p>\n";
-				echo "<p class=\"systemMessage\"><a href=\"article-media.php?id=$id\">Edit '$title' ($type)</a> | <a href=\"article-media.php?id=$id#delete\">Delete</a></p>\n";
-			} while ($result_array = mysql_fetch_assoc($result));
-			echo "<p><strong><a href=\"article-media.php?action=new&amp;article_id=$sel\">Add a file</a></strong></p>";
+				print "</p>\n";
+				print "<p class=\"systemMessage\"><a href=\"article-media.php?id=$id\">Edit '$title' ($type)</a> | <a href=\"article-media.php?id=$id#delete\">Delete</a></p>\n";
+			}
+			print "<p><strong><a href=\"article-media.php?action=new&amp;article_id=$sel\">Add a file</a></strong></p>";
 		} else {
 			echo "<p><em>No linked files. <a href=\"article-media.php?action=new&amp;article_id=$sel\">Add a file</a></em></p>";
 		}
 	} else {	
-		$query = "SELECT * FROM cm_media WHERE article_id = '$sel';";	
-		$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
-		$result_array = mysql_fetch_assoc($result);
-		$result_row_count = mysql_num_rows($result);
-		if ($result_row_count > 0) {
-			do {		
-				$id = $result_array['id'];
-				$title = $result_array['media_title'];
-				$type = $result_array['media_type'];
-				echo "<li><a href=\"article-media.php?id=$id\">#$id: $title</a> ($type)</li>\n";
-			} while ($result_array = mysql_fetch_assoc($result));
+		if ($result->RecordCount() > 0) {
+			foreach ($records as $record) {		
+				$id = $record['id'];
+				$title = $record['media_title'];
+				$type = $record['media_type'];
+			    print "<li><a href=\"article-media.php?id=$id\">#$id: $title</a> ($type)</li>\n";
+			}
 		} else {
-			echo "<li><em>No linked files.</em></li>";
+			print "<li><em>No linked files.</em></li>";
 		}
 	}
 }
 
-/*******************************************
-	Function:	cm_user_list
-*******************************************/
+/*
+* List system users
+*
+* Generates list of users in <option> tags
+*
+* @param    int     Selected user ID
+* @return   print   Prints list of users
+*/
 function cm_user_list($sel)
 {
-    global $CM_MYSQL;
     	
-	$query = "SELECT * FROM cm_users ORDER BY user_last_name ASC, user_first_name ASC;";	
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
-	do {
-		$id = $result_array['id'];
-		$last_name = $result_array['user_last_name'];
-		$first_name = $result_array['user_first_name'];
-		echo "\t<option value=\"$id\"";
-		if ($sel == $id) {
-			echo " selected";;	
-		}
-		echo ">$last_name, $first_name</option>\n";
-	} while ($result_array = mysql_fetch_assoc($result));
+	$query = "SELECT id, user_last_name, user_first_name FROM cm_users ORDER BY user_last_name ASC, user_first_name ASC;";	
+	$result  = cm_run_query($query);
+    $records = $result->GetArray();
+
+	foreach ($records as $record) {
+		$id = $record['id'];
+		$last_name = $record['user_last_name'];
+		$first_name = $record['user_first_name'];
+		if ($sel == $id) { $selected = "selected=\"selected\""; }
+		
+		print "\t<option value=\"$id\">$last_name, $first_name</option>\n";
+		unset($selected);
+	}
 }
 
-/*******************************************
-	Function:	cm_poll_list
-*******************************************/
+/*
+* List poll questions
+*
+* Generates list of poll questions in <option> tags
+*
+* @param    int     Selected poll
+* @return   print   Prints list of poll questions
+*/
 function cm_poll_list($sel)
 {
-    global $CM_MYSQL;
 
-	$query = "SELECT * FROM cm_poll_questions ORDER BY poll_created DESC, id DESC;";	
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));;
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
-	do {
-		$id = $result_array['id'];
-		$question = trim_text($result_array['poll_question'], 50);
-		echo "\t<option value=\"$id\"";
-		if ($sel == $id) {
-			echo " selected";;	
-		}
-		echo ">$question</option>\n";
-	} while ($result_array = mysql_fetch_assoc($result));
+	$query = "SELECT id, poll_question FROM cm_poll_questions ORDER BY poll_created DESC, id DESC;";	
+	$result = cm_run_query($query);
+	$records = $result->GetArray();
+	
+	foreach ($records as $record)
+	{
+		$id = $record['id'];
+		$question = trim_text($record['poll_question'], 50);
+		if ($sel == $id) { $selected = "selected=\"selected\""; }	
+		
+		print "\t<option value=\"$id\" $selected>$question</option>\n";
+		unset($selected);
+	}
 }
 
 
-/*******************************************
-	Function:	cm_display_media
-*******************************************/
+
+/*
+* Show media
+*
+* Generate media HTML based on type
+*
+* @param    string  Path to media
+* @param    string  Type of media
+* @param    string  Title of media
+* @return   print   Places HTML for media
+*/
 function cm_display_media($src,$type,$title='')
 {
 	if ($type == "jpg" || $type == "png" || $type == "gif") {
-		echo "<img src=\"$src\" alt=\"$type\" />";
+		print "<img src=\"$src\" alt=\"$type\" />";
 	}
 	if ($type == "pdf" || $type == "doc") {
-		echo "Related Document: <a href=\"$src\">Dowload '$title' ($type)</a>.";
+		print "Related Document: <a href=\"$src\">Dowload '$title' ($type)</a>.";
 	}
 	if ($type == "wav" || $type == "mp3") {
-		echo "Media File: <a href=\"$src\">Play '$title' ($type)</a>.";
+		print "Media File: <a href=\"$src\">Play '$title' ($type)</a>.";
 	}
 	if ($type == "swf") {
-		echo "<object type=\"application/x-shockwave-flash\" data=\"$src\" width=\"300\" height=\"250\">\n";
-		echo "\t<param name=\"movie\" value=\"$src\" />\n";
-		echo "</object>\n";
+		print "<object type=\"application/x-shockwave-flash\" data=\"$src\" width=\"300\" height=\"250\">\n";
+		print "\t<param name=\"movie\" value=\"$src\" />\n";
+		print "</object>\n";
 	}
 	if ($type == "url") {
-		echo "Related: <a href=\"$src\">Open related link</a>.";
+		print "Related: <a href=\"$src\">Open related link</a>.";
 	}
 }
 
@@ -530,98 +630,117 @@ function cm_display_media($src,$type,$title='')
 ###########  Returns Information ###########
 #==========================================#
 
-/*******************************************
-	Function:	cm_current_issue
-*******************************************/
+/*
+* Returns current issue information
+*
+* Reads data from the 'issue_data' session variable
+*
+* @param    string  Desired data type
+* @return   string  Returns desired data
+*/
 function cm_current_issue($format)
 {	
-    global $CM_MYSQL;
-
-	if ($format != "id") {
-		$format = "issue_" . $format;
-	}	
-	$query = "SELECT cm_issues.$format AS myvalue";	
-	$query .= " FROM cm_issues, cm_settings";
-	$query .= " WHERE cm_settings.current_issue = cm_issues.id";
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result );	
-	$value = $result_array['myvalue'];
-	return $value;
+    switch ($format)
+    {
+        case 'date':    
+            $value = $_SESSION['issue_data']['current_issue_date'];
+            break;
+        case 'volume':
+            $value = $_SESSION['issue_data']['current_issue_volume'];
+            break;
+        case 'number':
+            $value = $_SESSION['issue_data']['current_issue_number'];
+            break;
+        default:
+            $value = $_SESSION['issue_data']['current_issue_id'];
+            break;
+    }
+    return $value;
 }
-/*******************************************
-	Function:	cm_next_issue	
-*******************************************/
+
+
+/*
+* Returns next issue information
+*
+* Reads data from the 'issue_data' session variable
+*
+* @param    string  Desired data type
+* @return   string  Returns desired data
+*/
 function cm_next_issue($format)
 {	
-    global $CM_MYSQL;
-
-	if ($format != "id") {
-	$format = "issue_" . $format;
-	}	
-	$query = "SELECT cm_issues.$format AS myvalue";	
-	$query .= " FROM cm_issues, cm_settings";
-	$query .= " WHERE cm_settings.next_issue = cm_issues.id";
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result );	
-	$value = $result_array['myvalue'];
-	return $value;
+    switch ($format)
+    {
+        case 'date':    
+            $value = $_SESSION['issue_data']['next_issue_date'];
+            break;
+        case 'volume':
+            $value = $_SESSION['issue_data']['next_issue_volume'];
+            break;
+        case 'number':
+            $value = $_SESSION['issue_data']['next_issue_number'];
+            break;
+        default:
+            $value = $_SESSION['issue_data']['next_issue_id'];
+            break;
+    }
+    return $value;
 }
 
-/*******************************************
-	Function:	cm_issue_info
-*******************************************/
+/*
+* Return information about an issue
+*
+* Grabs data from issues table for selected issue
+*
+* @todo     Calls to this should probably return an array of info
+* @param    string  Column name
+* @param    int     Issue ID
+* @return   string  Returns database value
+*/
 function cm_issue_info($format, $sel)
 {	
-    global $CM_MYSQL;
-
 	$query = "SELECT $format AS myvalue";	
 	$query .= " FROM cm_issues";
 	$query .= " WHERE id = '$sel'";
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result );
-	do {	
-		$value = $result_array['myvalue'];
-		return $value;
-	} while ($result_array = mysql_fetch_assoc($result));
+	$result = cm_run_query($query);
+    return $result->Fields('myvalue');
 }
 
-/*******************************************
-	Function:	cm_section_info
-*******************************************/
+
+/*
+* Return information about an issue
+*
+* Grabs data from sections table
+*
+* @todo     Calls to this should probably return an array of info
+* @param    string  Column name
+* @param    int     Section ID
+* @return   string  Returns database value
+*/
 function cm_section_info($format, $sel)
 {	
-    global $CM_MYSQL;
-    
 	$query = "SELECT $format AS myvalue";	
 	$query .= " FROM cm_sections";
 	$query .= " WHERE id = '$sel'";
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result );
-	do {	
-		$value = $result_array['myvalue'];
-		return $value;
-	} while ($result_array = mysql_fetch_assoc($result));
+
+    $result = cm_run_query($query);
+
+    return $result->Fields('myvalue');
 }
 
-/*******************************************
-	Function:	cm_get_settings
-*******************************************/
+
+/*
+* Read site settings
+*
+* Reads data from session variable for site setting
+*
+* @param    string  Setting name
+* @return   string  Session variable value
+*/
 function cm_get_settings($sel)
 {
-    global $CM_MYSQL;
-
-	$query = "SELECT $sel AS myval FROM cm_settings;";
-	$result  = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
-	do {
-		$myval = $result_array['myval'];
-		return $myval;	
-	} while ($result_array = mysql_fetch_assoc($result));
+    // Read the session variable
+    return $_SESSION['setting_data'][$sel];
 }
 
 
@@ -629,24 +748,51 @@ function cm_get_settings($sel)
 ############# Managing Pages ############
 #==========================================#
 
-/*******************************************
-	Function:	cm_add_page
-*******************************************/
-function cm_add_page($title,$short_title,$text,$side_text,$slug,$edited)
+/*
+* Add a page
+*
+* Adds a static info page
+*
+* @todo     Security
+* @param    array   Keyed array of page data
+* @return   mixed   Database result resource
+*/
+function cm_add_page($page)
 {
+    $title = $page['title'];
+    $short_title = $page['short_title'];
+    $text = $page['text'];
+    $side_text = $page['side_text'];
+    $slug = $page['slug'];
 	$edited = date("Y-m-d h:i:s",time());
+	
 	$query = "INSERT INTO cm_pages (page_title,page_short_title,page_text,page_side_text,page_slug,page_edited)";
 	$query .= " VALUES ('$title','$short_title','$text','$side_text','$slug','$edited')";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_edit_page
-*******************************************/
-function cm_edit_page($title,$short_title,$text,$side_text,$slug,$edited,$id)
+
+/*
+* Edit a page
+*
+* Edits static info page
+*
+* @todo     Security
+* @param    array   Keyed array of page data
+* @param    int     ID of page to edit
+* @return   mixed   Database result resource
+*/
+function cm_edit_page($page, $id)
 {
+    $title = $page['title'];
+    $short_title = $page['short_title'];
+    $text = $page['text'];
+    $side_text = $page['side_text'];
+    $slug = $page['slug'];
 	$edited = date("Y-m-d h:i:s",time());
+
 	$query = "UPDATE cm_pages SET";
 	$query .= " page_title = '$title',";
 	$query .= " page_short_title = '$short_title',";
@@ -654,17 +800,25 @@ function cm_edit_page($title,$short_title,$text,$side_text,$slug,$edited,$id)
 	$query .= " page_text = '$text',";
 	$query .= " page_side_text = '$side_text',";
 	$query .= " page_edited = '$edited' ";
-	$query .= " WHERE id = $id";
+	$query .= " WHERE id = $id; ";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_delete_page
-*******************************************/
+/*
+* Delete page
+*
+* Delete page
+*
+* @todo     Security
+* @param    int     ID of page to delete
+* @return   mixed   Database result resource
+*/
 function cm_delete_page($sel)
 {	
-	$query = "DELETE FROM cm_pages WHERE id = '$sel';";
+	$query = "DELETE FROM cm_pages WHERE id = $sel; ";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
@@ -674,26 +828,66 @@ function cm_delete_page($sel)
 ############# Managing Articles ############
 #==========================================#
 
-/*******************************************
-	Function:	cm_add_article
-*******************************************/
-function cm_add_article($title,$subtitle,$author,$author_title,$summary,$text,$keywords,$priority,$section,$issue,$published)
+
+/*
+* Add an article
+*
+* Add an article to article database
+*
+* @todo     Security
+* @param    array   Article to add
+* @return   mixed   Database result resource
+*/
+function cm_add_article($article)
 {
+    $title = $article['title'];
+    $subtitle = $article['subtitle'];
+    $author = $article['author'];
+    $author_title = $article['author_title'];
+    $summary = $article['summary'];
+    $text = $article['text'];
+    $keywords = $article['keywords'];
+    $priority = $article['priority'];
+    $section = $article['section'];
+    $issue = $article['issue'];
+    $published = $article['published'];
 	$edited = date("Y-m-d h:i:s",time());
 	$word_count = count_words($text);
+	
 	$query = "INSERT INTO cm_articles (article_title,article_subtitle,article_author,article_author_title,article_summary,article_text,article_keywords,article_priority,section_id,issue_id,article_publish,article_edit,article_word_count)";
-	$query .= " VALUES ('$title','$subtitle','$author','$author_title','$summary','$text','$keywords','$priority','$section','$issue','$published','$edited',$word_count)";
+	$query .= " VALUES ('$title','$subtitle','$author','$author_title','$summary','$text','$keywords','$priority','$section','$issue','$published','$edited',$word_count); ";
+	
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_edit_article
-*******************************************/
-function cm_edit_article($title,$subtitle,$author,$author_title,$summary,$text,$keywords,$priority,$section,$issue,$published,$id)
+
+/*
+* Edit an article
+*
+* Edit an article to article database
+*
+* @todo     Security
+* @param    array   Article to edit
+* @param    int     ID of article
+* @return   mixed   Database result resource
+*/
+function cm_edit_article($article, $id)
 {
-	$word_count = count_words($text);
+    $title = $article['title'];
+    $subtitle = $article['subtitle'];
+    $author = $article['author'];
+    $author_title = $article['author_title'];
+    $summary = $article['summary'];
+    $text = $article['text'];
+    $keywords = $article['keywords'];
+    $priority = $article['priority'];
+    $section = $article['section'];
+    $issue = $article['issue'];
+    $published = $article['published'];
 	$edited = date("Y-m-d h:i:s",time());
+	$word_count = count_words($text);
+	
 	$query = "UPDATE cm_articles SET";
 	$query .= " article_title = '$title',";
 	$query .= " article_subtitle = '$subtitle',";
@@ -708,41 +902,81 @@ function cm_edit_article($title,$subtitle,$author,$author_title,$summary,$text,$
 	$query .= " article_publish = '$published',";
 	$query .= " article_edit = '$edited',";
 	$query .= " article_word_count = '$word_count'";
-	$query .= " WHERE id = $id";
+	$query .= " WHERE id = $id; ";
+	
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_delete_article
-*******************************************/
+
+/*
+* Delete article
+*
+* Delete article from article table
+*
+* @todo     Security
+* @param    int     ID of article
+* @return   mixed   Database result resource
+*/
 function cm_delete_article($sel)
 {	
-	$query = "DELETE FROM cm_articles WHERE id = '$sel';";
+    // Clean up associated media
+	$query = "DELETE FROM cm_media WHERE article_id = '$sel'; ";
 	$stat = cm_run_query($query);
-	$query = "DELETE FROM cm_media WHERE article_id = '$sel';";
+    
+    // Delete the article
+	$query = "DELETE FROM cm_articles WHERE id = '$sel'; ";
 	$stat = cm_run_query($query);
+	
 	return $stat;
 }
 
 //// Media Module Portion of the System ////
 
-/*******************************************
-	Function:	cm_add_media	
-*******************************************/
-function cm_add_media($article_id,$title,$src,$type,$caption,$credit)
+/*
+* Add media
+*
+* Add media to an article
+*
+* @todo     Security
+* @param    array   Media to add
+* @return   mixed   Database result resource
+*/
+function cm_add_media($media)
 {
+    $article_id = $media['article_id'];
+    $title = $media['title'];
+    $src = $media['src'];
+    $type = $media['type'];
+    $caption = $media['caption'];
+    $credit = $media['credit'];
+
 	$query .= "INSERT INTO cm_media (article_id,media_title,media_src,media_type,media_caption,media_credit)";
-	$query .= " VALUES ('$article_id','$title','$src','$type','$caption','$credit');";
+	$query .= " VALUES ('$article_id','$title','$src','$type','$caption','$credit'); ";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_edit_media
-*******************************************/
-function cm_edit_media($article_id,$title,$src,$type,$caption,$credit,$id)
+/*
+* Edit media
+*
+* Edit article media
+*
+* @todo     Security
+* @param    array   Media to edit
+* @param    int     ID of media
+* @return   mixed   Database result resource
+*/
+function cm_edit_media($media,$id)
 {
+    $article_id = $media['article_id'];
+    $title = $media['title'];
+    $src = $media['src'];
+    $type = $media['type'];
+    $caption = $media['caption'];
+    $credit = $media['credit'];
+
 	$query = "UPDATE cm_media SET";
 	$query .= " article_id = '$article_id',";
 	$query .= " media_title = '$title',";
@@ -751,16 +985,24 @@ function cm_edit_media($article_id,$title,$src,$type,$caption,$credit,$id)
 	$query .= " media_caption = '$caption',";
 	$query .= " media_credit = '$credit'";
 	$query .= " WHERE id = $id";	
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_delete_media
-*******************************************/
-function cm_delete_media($module, $sel)
+/*
+* Delete article media
+*
+* Delete article media from media table
+*
+* @todo     Security
+* @param    int     ID of media
+* @return   mixed   Database result resource
+*/
+function cm_delete_media($sel)
 {	
-	$query = "DELETE FROM cm_media WHERE id = '$sel';";
+	$query = "DELETE FROM cm_media WHERE id = $sel; ";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
@@ -770,9 +1012,14 @@ function cm_delete_media($module, $sel)
 #######  Managing Submitted Articles #######
 #==========================================#
 
-/*******************************************
-	Function:	cm_delete_submitted
-*******************************************/
+/*
+* Delete submitted article
+*
+* Removes submitted article from table
+*
+* @param    int     ID of submitted article
+* @return   mixed   Database result resource
+*/
 function cm_delete_submitted($sel)
 {	
 	$query = "DELETE FROM cm_submitted WHERE id = '$sel';";
@@ -785,30 +1032,60 @@ function cm_delete_submitted($sel)
 #############  Managing Issues #############
 #==========================================#
 
-/*******************************************
-	Function:	cm_add_issue
-*******************************************/
-function cm_add_issue($date,$volume,$number,$circulation,$online_only)
+/*
+* Add issue
+*
+* Add new issue to the table
+*
+* @todo     Security
+* @param    array   Issue data
+* @return   mixed   Database result resource
+*/
+function cm_add_issue($issue)
 {
+    $date = $issue['date'];
+    $volume = $issue['volume'];
+    $number = $issue['number'];
+    $circulation = $issue['circulation'];
+    $online_only = $issue['online_only'];
+    
 	$query = "INSERT INTO cm_issues (issue_date,issue_volume,issue_number,issue_circulation,online_only)";
-	$query .= " VALUES ('$date','$volume','$number','$circulation','$online_only');";
+	$query .= " VALUES ('$date','$volume','$number','$circulation','$online_only'); ";
+	
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_edit_issue
-*******************************************/
-function cm_edit_issue($date,$volume,$number,$circulation,$online_only,$id)
+/*
+* Edit issue
+*
+* Edit issue data
+*
+* @todo     Security
+* @param    array   Issue data
+* @param    int     ID of issue
+* @return   mixed   Database result resource
+*/
+function cm_edit_issue($issue,$id)
 {
+    $date = $issue['date'];
+    $volume = $issue['volume'];
+    $number = $issue['number'];
+    $circulation = $issue['circulation'];
+    $online_only = $issue['online_only'];
+
 	$query = "UPDATE cm_issues SET";
 	$query .= " issue_date = '$date',";
 	$query .= " issue_volume = '$volume',";
 	$query .= " issue_number = '$number',";
 	$query .= " issue_circulation = '$circulation',";
 	$query .= " online_only = '$online_only'";
-	$query .= " WHERE id = $id;";
+	$query .= " WHERE id = $id; ";
+	
 	$stat = cm_run_query($query);
+
+    cm_issues_data();
+
 	return $stat;
 }
 
@@ -816,23 +1093,55 @@ function cm_edit_issue($date,$volume,$number,$circulation,$online_only,$id)
 ############  Managing Sections ############
 #==========================================#
 
-/*******************************************
-	Function:	cm_add_section
-*******************************************/
-function cm_add_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority)
+/*
+* Add section
+*
+* Add a section to the section table
+*
+* @todo     Security
+* @param    array   Section data
+* @return   mixed   Database result resource
+*/
+function cm_add_section($section)
 {
+    $name = $section['name'];
+    $editor = $section['editor'];
+    $editor_title = $section['editor_title'];
+    $editor_email = $section['editor_email'];
+    $url = $section['url'];
+    $sidebar = $section['sidebar'];
+    $feed_image = $section['feed_image'];
+    $priority = $section['priority'];
+    
 	$query = "INSERT INTO cm_sections (section_name,section_editor,section_editor_title,section_editor_email,section_url,section_sidebar,section_feed_image,section_priority)";
 	$query .= " VALUES ('$name','$editor','$editor_title','$editor_email','$url','$sidebar','$feed_image','$priority');";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
 
-/*******************************************
-	Function:	cm_edit_section
-*******************************************/
-function cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority,$id)
+/*
+* Edit section
+*
+* Edit a section in the section table
+*
+* @todo     Security
+* @param    array   Section data
+* @param    int     ID of section
+* @return   mixed   Database result resource
+*/
+function cm_edit_section($section,$id)
 {
+    $name = $section['name'];
+    $editor = $section['editor'];
+    $editor_title = $section['editor_title'];
+    $editor_email = $section['editor_email'];
+    $url = $section['url'];
+    $sidebar = $section['sidebar'];
+    $feed_image = $section['feed_image'];
+    $priority = $section['priority'];
+
 	$query = "UPDATE cm_sections SET";
 	$query .= " section_name = '$name',";
 	$query .= " section_editor = '$editor',";
@@ -843,31 +1152,57 @@ function cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar
 	$query .= " section_feed_image = '$feed_image',";
 	$query .= " section_priority = '$priority'";
 	$query .= " WHERE id = $id";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
 
-/*******************************************
-	Function:	cm_delete_section
-*******************************************/
+/*
+* Delete section
+*
+* Delete a section and move its articles to a different section
+*
+* @todo     Security
+* @param    int     ID of origin section 
+* @param    int     ID of destination section
+* @return   mixed   Database result resource
+*/
 function cm_delete_section($sel,$move)
 {	
-	$stat = cm_move_articles($sel,$move,'section'); // Move articles to new section	
-	$query = "DELETE FROM cm_sections WHERE id = '$sel';";
+	$stat = cm_move_articles($sel,$move,'section');
+	
+	$query = "DELETE FROM cm_sections WHERE id = $sel;";
+	
 	$stat = cm_run_query($query);
 	return $stat;	
 }
 
 
-/*******************************************
-	Function:	cm_move_articles
-*******************************************/
-function cm_move_articles($sel,$move,$key='section')
+/*
+* Move articles
+*
+* Moves articles from one section to another
+*
+* @todo     Security
+* @param    int     ID of origin section 
+* @param    int     ID of destination section
+* @return   mixed   Database result resource
+*/
+function cm_move_articles($sel,$move)
 {
-    if ($move == '') { cm_error("You cannot delete the last section."); }
-    setcookie("article-browse-section", $move); // Moved section
-	$query = "UPDATE cm_articles SET section_id = '$move' WHERE section_id = '$sel';";
+    // Prevent deleting last section
+    if (!is_numeric($move))
+    {
+        cm_error("Section does not exist. Hint: You cannot delete the last section.");
+        exit;
+    }
+    
+    // Reset browse cookie to destination section
+    setcookie("article-browse-section", $move);
+    
+	$query = "UPDATE cm_articles SET section_id = $move WHERE section_id = $sel; ";
+	
 	$stat = cm_run_query($query);
 	return $stat;	
 }
@@ -877,80 +1212,162 @@ function cm_move_articles($sel,$move,$key='section')
 ############## Managing Users ##############
 #==========================================#
 
-/*******************************************
-	Function:	cm_add_user	
-*******************************************/
-function cm_add_user($user_login,$user_password,$user_first_name,$user_middle_name,$user_last_name,$user_job_title,$user_email,$user_telephone,$user_mobile,$user_address,$user_city,$user_state,$user_zipcode,$user_im_aol,$user_im_msn,$user_im_yahoo,$user_im_jabber,$user_profile)
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
+function cm_add_user($user)
 {
+    $login = $user['login'];
+    $password = $user['password'];
+    $first_name = $user['first_name'];
+    $middle_name = $user['middle_name'];
+    $last_name = $user['last_name'];
+    $job_title = $user['job_title'];
+    $email = $user['email'];
+    $telephone = $user['telephone'];
+    $mobile = $user['mobile'];
+    $address = $user['address'];
+    $city = $user['city'];
+    $state = $user['state'];
+    $zipcode = $user['zipcode'];
+    $im_aol = $user['im_aol'];
+    $im_msn = $user['im_msn'];
+    $im_yahoo = $user['im_yahoo'];
+    $im_jabber = $user['im_jabber'];
+    $profile = $user['profile'];
+
 	$query = "INSERT INTO cm_users (user_login,user_password,user_first_name,user_middle_name,user_last_name,user_job_title,user_email,user_telephone,user_mobile,user_address,user_city,user_state,user_zipcode,user_im_aol,user_im_msn,user_im_yahoo,user_im_jabber,user_profile)";
-	$query .= " VALUES ('$user_login','$user_password','$user_first_name','$user_middle_name','$user_last_name','$user_job_title','$user_email','$user_telephone','$user_mobile','$user_address','$user_city','$user_state','$user_zipcode','$user_im_aol','$user_im_msn','$user_im_yahoo','$user_im_jabber','$user_profile');";
+	$query .= " VALUES ('$login','$password','$first_name','$middle_name','$last_name','$job_title','$email','$telephone','$mobile','$address','$city','$state','$zipcode','$im_aol','$im_msn','$im_yahoo','$im_jabber','$profile');";
 	$stat = cm_run_query($query);
 		
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_edit_user	
-*******************************************/
-function cm_edit_user($user_login,$user_password,$user_first_name,$user_middle_name,$user_last_name,$user_job_title,$user_email,$user_telephone,$user_mobile,$user_address,$user_city,$user_state,$user_zipcode,$user_im_aol,$user_im_msn,$user_im_yahoo,$user_im_jabber,$user_profile,$id)
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
+function cm_edit_user($user,$id)
 {
+    $login = $user['login'];
+    $password = $user['password'];
+    $first_name = $user['first_name'];
+    $middle_name = $user['middle_name'];
+    $last_name = $user['last_name'];
+    $job_title = $user['job_title'];
+    $email = $user['email'];
+    $telephone = $user['telephone'];
+    $mobile = $user['mobile'];
+    $address = $user['address'];
+    $city = $user['city'];
+    $state = $user['state'];
+    $zipcode = $user['zipcode'];
+    $im_aol = $user['im_aol'];
+    $im_msn = $user['im_msn'];
+    $im_yahoo = $user['im_yahoo'];
+    $im_jabber = $user['im_jabber'];
+    $profile = $user['profile'];
+
 	$query = "UPDATE cm_users SET";
-	$query .= " user_login = '$user_login',";
-	$query .= " user_password = '$user_password',";
-	$query .= " user_first_name = '$user_first_name',";
-	$query .= " user_middle_name = '$user_middle_name',";
-	$query .= " user_last_name = '$user_last_name',";
-	$query .= " user_job_title = '$user_job_title',";
-	$query .= " user_email = '$user_email',";
-	$query .= " user_telephone = '$user_telephone',";
-	$query .= " user_mobile = '$user_mobile',";
-	$query .= " user_address = '$user_address',";
-	$query .= " user_city = '$user_city',";
-	$query .= " user_state = '$user_state',";
-	$query .= " user_zipcode = '$user_zipcode',";
-	$query .= " user_im_aol = '$user_im_aol',";
-	$query .= " user_im_msn = '$user_im_msn',";
-	$query .= " user_im_yahoo = '$user_im_yahoo',";
-	$query .= " user_im_jabber = '$user_im_jabber',";
-	$query .= " user_profile = '$user_profile'";
-	$query .= " WHERE id = $id;";
+	$query .= " user_login = '$login',";
+	$query .= " user_password = '$password',";
+	$query .= " user_first_name = '$first_name',";
+	$query .= " user_middle_name = '$middle_name',";
+	$query .= " user_last_name = '$last_name',";
+	$query .= " user_job_title = '$job_title',";
+	$query .= " user_email = '$email',";
+	$query .= " user_telephone = '$telephone',";
+	$query .= " user_mobile = '$mobile',";
+	$query .= " user_address = '$address',";
+	$query .= " user_city = '$city',";
+	$query .= " user_state = '$state',";
+	$query .= " user_zipcode = '$zipcode',";
+	$query .= " user_im_aol = '$im_aol',";
+	$query .= " user_im_msn = '$im_msn',";
+	$query .= " user_im_yahoo = '$im_yahoo',";
+	$query .= " user_im_jabber = '$im_jabber',";
+	$query .= " user_profile = '$profile'";
+	$query .= " WHERE id = $id; ";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_delete_user
-*******************************************/
+
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function cm_delete_user($sel)
-{	
-	$stat = cm_clear_access($sel); // Lock out user
-	$query = "DELETE FROM cm_users WHERE id = '$sel';";
+{	    // Lock out user
+	$stat = cm_clear_access($sel);
+
+	$query = "DELETE FROM cm_users WHERE id = $sel; ";
+
 	$stat = cm_run_query($query);
 	return $stat;	
 }
 #==========================================#
 ##########  Managing User Profiles #########
 #==========================================#
-/*******************************************
-	Function:	cm_edit_profile	
-*******************************************/
-function cm_edit_profile($user_password,$user_email,$user_telephone,$user_mobile,$user_address,$user_city,$user_state,$user_zipcode,$user_im_aol,$user_im_msn,$user_im_yahoo,$user_im_jabber,$user_profile,$id)
+
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
+function cm_edit_profile($user,$id)
 {
+    $password = $user['password'];
+    $email = $user['email'];
+    $telephone = $user['telephone'];
+    $mobile = $user['mobile'];
+    $address = $user['address'];
+    $city = $user['city'];
+    $state = $user['state'];
+    $zipcode = $user['zipcode'];
+    $im_aol = $user['im_aol'];
+    $im_msn = $user['im_msn'];
+    $im_yahoo = $user['im_yahoo'];
+    $im_jabber = $user['im_jabber'];
+    $profile = $user['profile'];
+
 	$query = "UPDATE cm_users SET";
-	$query .= " user_password = '$user_password',";
-	$query .= " user_email = '$user_email',";
-	$query .= " user_telephone = '$user_telephone',";
-	$query .= " user_mobile = '$user_mobile',";
-	$query .= " user_address = '$user_address',";
-	$query .= " user_city = '$user_city',";
-	$query .= " user_state = '$user_state',";
-	$query .= " user_zipcode = '$user_zipcode',";
-	$query .= " user_im_aol = '$user_im_aol',";
-	$query .= " user_im_msn = '$user_im_msn',";
-	$query .= " user_im_yahoo = '$user_im_yahoo',";
-	$query .= " user_im_jabber = '$user_im_jabber',";
-	$query .= " user_profile = '$user_profile'";
+	$query .= " user_password = '$password',";
+	$query .= " user_email = '$email',";
+	$query .= " user_telephone = '$telephone',";
+	$query .= " user_mobile = '$mobile',";
+	$query .= " user_address = '$address',";
+	$query .= " user_city = '$city',";
+	$query .= " user_state = '$state',";
+	$query .= " user_zipcode = '$zipcode',";
+	$query .= " user_im_aol = '$im_aol',";
+	$query .= " user_im_msn = '$im_msn',";
+	$query .= " user_im_yahoo = '$im_yahoo',";
+	$query .= " user_im_jabber = '$im_jabber',";
+	$query .= " user_profile = '$profile'";
 	$query .= " WHERE id = $id;";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
@@ -959,24 +1376,63 @@ function cm_edit_profile($user_password,$user_email,$user_telephone,$user_mobile
 ########## Managing Poll Questions #########
 #==========================================#
 
-/*******************************************
-	Function:	cm_add_poll
-*******************************************/
-function cm_add_poll($question,$r1,$r2,$r3,$r4,$r5,$r6,$r7,$r8,$r9,$r10,$article)
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
+function cm_add_poll($poll)
 {
-	$created = date("Y-m-d h:i:s",time());
-	$query = "INSERT INTO ";
-	$query .= " cm_poll_questions (poll_created,poll_question,poll_response_1,poll_response_2,poll_response_3,poll_response_4,poll_response_5,poll_response_6,poll_response_7,poll_response_8,poll_response_9,poll_response_10,article_id)";
-	$query .= "  VALUES ('$created','$question','$r1','$r2','$r3','$r4','$r5','$r6','$r7','$r8','$r9','$r10','$article');";
+    $question = $poll['question'];
+    $r1 = $poll['r1'];
+    $r2 = $poll['r2'];
+    $r3 = $poll['r3'];
+    $r4 = $poll['r4'];
+    $r5 = $poll['r5'];
+    $r6 = $poll['r6'];
+    $r7 = $poll['r7'];
+    $r8 = $poll['r8'];
+    $r9 = $poll['r9'];
+    $r10 = $poll['r10'];
+    $article_id = $poll['article_id'];
+	$created = date("Y-m-d h:i:s", time());
+
+	$query = "INSERT INTO cm_poll_questions ";
+	$query .= " (poll_created, poll_question, poll_response_1, poll_response_2, poll_response_3, poll_response_4, poll_response_5, poll_response_6, poll_response_7, poll_response_8, poll_response_9, poll_response_10, article_id)";
+	$query .= "  VALUES ('$created', '$question', '$r1', '$r2', '$r3', '$r4', '$r5', '$r6', '$r7', '$r8', '$r9', '$r10', '$article_id');";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_edit_poll
-*******************************************/
-function cm_edit_poll($question,$r1,$r2,$r3,$r4,$r5,$r6,$r7,$r8,$r9,$r10,$article,$id)
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
+function cm_edit_poll($poll,$id)
 {
+    $question = $poll['question'];
+    $r1 = $poll['r1'];
+    $r2 = $poll['r2'];
+    $r3 = $poll['r3'];
+    $r4 = $poll['r4'];
+    $r5 = $poll['r5'];
+    $r6 = $poll['r6'];
+    $r7 = $poll['r7'];
+    $r8 = $poll['r8'];
+    $r9 = $poll['r9'];
+    $r10 = $poll['r10'];
+    $article_id = $poll['article_id'];
+
 	$query = "UPDATE cm_poll_questions SET";
 	$query .= " poll_question = '$question',";
 	$query .= " poll_response_1 = '$r1',";
@@ -990,101 +1446,134 @@ function cm_edit_poll($question,$r1,$r2,$r3,$r4,$r5,$r6,$r7,$r8,$r9,$r10,$articl
 	$query .= " poll_response_9 = '$r9',";
 	$query .= " poll_response_10 = '$r10',";
 	$query .= " article_id = '$article'";	
-	$query .= " WHERE id = '$id';";
+	$query .= " WHERE id = '$id'; ";
+
 	$stat = cm_run_query($query);
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_delete_poll
-*******************************************/
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function cm_delete_poll($sel)
 {	
-	$query1 = "UPDATE cm_settings SET active_poll = 0;";
-	$stat = cm_run_query($query1); // Disables polls
-	$query2 = "DELETE FROM cm_poll_ballot WHERE poll_id = '$sel';";
-	$stat = cm_run_query($query2); // Deletes associated ballots
-	$query3 = "DELETE FROM cm_poll_questions WHERE id = '$sel';";
-	$stat = cm_run_query($query3); // Deletes questions
+    // Disable polls if current poll
+	$query = "UPDATE cm_settings SET active_poll = 0 WHERE active_poll = $sel; ";
+	$stat = cm_run_query($query);
+	
+	// Delete ballots
+	$query = "DELETE FROM cm_poll_ballot WHERE poll_id = $sel; ";
+	$stat = cm_run_query($query);
+	
+	// Remove question
+	$query = "DELETE FROM cm_poll_questions WHERE id = $sel; ";
+	$stat = cm_run_query($query);
 	return $stat;	
 }
 
 
 
-/*******************************************
-	Function:	cm_poll_results
-*******************************************/
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function cm_poll_results($sel)
 {
-    global $CM_MYSQL;
 
 	$query = "SELECT COUNT(id) AS total";
 	$query .= " FROM cm_poll_ballot";
 	$query .= " WHERE poll_id = '$sel'";
-	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
 	
-	$total = $result_array['total'];
+	$result = cm_run_query($query);
+	
+	$total = $result->Fields('total');
 
 	$query = "SELECT ballot_response AS response, COUNT(ballot_response) AS votes, COUNT(id) AS total";
 	$query .= " FROM cm_poll_ballot";
 	$query .= " WHERE poll_id = '$sel'";
 	$query .= " GROUP BY ballot_response;";
-	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
-	if ($total > 0) {
-		echo "<ul>";
-		do {
-			$response = $result_array['response'];
-			$votes = $result_array['votes'];
+    
+    $result = cm_run_query($query);
+    $records = $result->GetArray();
+
+	if ($total > 0)
+	{
+		print "<ul>";
+		foreach ($records as $record)
+		{
+			$response = $record['response'];
+			$votes = $record['votes'];
 			$percent = (100 * ($votes / $total));
 			$percent = number_format($percent, 2, '.', '');
-			echo "<li><strong>Option $response:</strong> $votes votes ($percent%)</li>\n";	
-		} while ($result_array = mysql_fetch_assoc($result));
-		echo "</ul>";
-		echo "<p><strong>Total votes:</strong> $total</p>";
+			print "<li><strong>Option $response:</strong> $votes votes ($percent%)</li>\n";	
+		}
+		print "</ul>";
+		print "<p><strong>Total votes:</strong> $total</p>";
 	} else {
-	    echo "<p>No one has voted yet.</p>";
+	    print "<p>No one has voted yet.</p>";
 	}
 }
 
-/*******************************************
-	Function:	cm_poll_cleanup
-*******************************************/
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function cm_poll_cleanup($sel)
 {
-    global $CM_MYSQL;
+	$query = "SELECT ballot_ip_address, COUNT(ballot_ip_address) AS ballots ";
+	$query .= " FROM cm_poll_ballot ";
+	$query .= " WHERE poll_id = $sel ";
+	$query .= " GROUP BY ballot_ip_address ";
+	$query .= " HAVING ballots > 1; ";
 
-	$query = "SELECT ballot_ip_address, COUNT(ballot_ip_address) AS ballots";
-	$query .= " FROM cm_poll_ballot";
-	$query .= " WHERE poll_id = '$sel'";
-	$query .= " GROUP BY ballot_ip_address";
-	$query .= " HAVING ballots > 1;";
-	$result = mysql_query($query, $CM_MYSQL) or die(mysql_error());
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
-	
-	if ($result_row_count > 0) {
-		do {
-			$ipad = $result_array['ballot_ip_address'];
+	$result = cm_run_query($query);
+	$records = $result->GetArray();
+    
+	if ($result->RecordCount() > 0)
+	{
+		foreach ($records as $record)
+		{
+			$ipad = $record['ballot_ip_address'];
 			cm_poll_delete_ballots($sel,$ipad);
-		} while ($result_array = mysql_fetch_assoc($result));
-		echo "This poll had $result_row_count multiple voter(s).<br /> All have been cleared.";
+		}
+		print "This poll had $result_row_count multiple voter(s).<br /> All have been cleared.";
 	} else {
-		echo "Poll audit successful.<br /> No multiple-voters detected.";
+		print "Poll audit successful.<br /> No multiple-voters detected.";
 	}
 }
 
-/*******************************************
-	Function:	cm_poll_delete_ballots
-*******************************************/
+
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function cm_poll_delete_ballots($sel,$ipad)
 {
-	$query = "DELETE";
-	$query .= " FROM cm_poll_ballot";
+	$query = "DELETE FROM cm_poll_ballot";
 	$query .= " WHERE ballot_ip_address = '$ipad'";
 	$query .= " AND poll_id = '$sel'";
+
 	$stat = cm_run_query($query);
 	return $stat;	
 }
@@ -1094,35 +1583,77 @@ function cm_poll_delete_ballots($sel,$ipad)
 ##############  Site Settings ##############
 #==========================================#
 
-/*******************************************
-	Function:	cm_edit_publish_settings
-*******************************************/
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function cm_edit_publish_settings($current_issue,$next_issue,$id=1)
 {
 	$query = "UPDATE cm_settings SET current_issue = $current_issue, next_issue = $next_issue WHERE id = $id";
+
 	$stat = cm_run_query($query);
+	
+	// Reset session variables
+	cm_settings_data();
+	cm_issues_data();
+	
 	return $stat;
 }
 
-/*******************************************
-	Function:	cm_edit_poll_settings
-*******************************************/
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function cm_edit_poll_settings($active_poll,$id=1)
 {
-	if ($active_poll == "") {
+	if (!is_numeric($active_poll)) {
 		$active_poll = 0;
 	}
+
 	$query = "UPDATE cm_settings SET active_poll = $active_poll WHERE id = $id";
+
 	$stat = cm_run_query($query);
+	
+	// Reset session variables
+	cm_settings_data();
+	
 	return $stat;
 }
 
 
-/*******************************************
-	Function:	cm_edit_settings
-*******************************************/
-function cm_edit_settings($name,$description,$url,$email,$address,$city,$state,$zipcode,$telephone,$fax,$announce,$id)
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
+function cm_edit_settings($settings,$id=1)
 {
+	$name = $settings['name'];
+	$description = $settings['description'];
+	$url = $settings['url'];
+	$email = $settings['email'];
+	$address = $settings['address'];
+	$city = $settings['city'];
+	$state = $settings['state'];
+	$zipcode = $settings['zipcode'];
+	$telephone = $settings['telephone'];
+	$fax = $settings['fax'];
+	$announce = $settings['announce'];
+	
 	$query = "UPDATE cm_settings SET";
 	$query .= " site_name = '$name',";
 	$query .= " site_description = '$description',";
@@ -1136,27 +1667,45 @@ function cm_edit_settings($name,$description,$url,$email,$address,$city,$state,$
 	$query .= " site_fax = '$fax',";
 	$query .= " site_announcement = '$announce'";
 	$query .= " WHERE id = $id";
+
 	$stat = cm_run_query($query);
+	
+	// Reset session variables
+	cm_settings_data();	
+	
 	return $stat;
 }
 
 #==========================================#
 ###########  Universal Functions ###########
 #==========================================#
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function cm_run_query($query)
 {
-    global $CM_MYSQL;
-    
-	// Database Query
-	$query = $query;
-	// Run Query
-	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
+    global $cm_db;
+
+	$result = $cm_db->Execute($query) or die(cm_error($cm_db->ErrorMsg()));
 	return $result;
 }
 
-/*******************************************
-	Function:	autop
-*******************************************/
+
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function autop($pee, $br = 1) {
 	$pee = $pee . "\n"; // just to make things a little easier, pad the end
 	$pee = preg_replace('|<br />\s*<br />|', "\n\n", $pee);
@@ -1178,9 +1727,16 @@ function autop($pee, $br = 1) {
 	return $pee;
 }
 
-/*******************************************
-	Function:	count_words
-*******************************************/
+
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function count_words($string)
 {
 	$word_count = 0;
@@ -1195,9 +1751,16 @@ function count_words($string)
 	return($word_count);
 }
 
-/*******************************************
-	Function:	trim_text
-*******************************************/
+
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function trim_text($text,$length)
 {
 	if (strlen($text) > $length) {
@@ -1209,41 +1772,14 @@ function trim_text($text,$length)
 	return $text;
 }
 
-/*******************************************
-	Function:	prep_string
-*******************************************/
+
+/*
+* [Short description]
+*
+* [Longer description]
+*
+* @todo     [todo item]
+* @param    [type]  [param description];[default val]
+* @return   [type]  [return description]
+*/
 function prep_string($string){    if (get_magic_quotes_gpc() == 1)    {        return($string);    } else {        return(addslashes($string));    }}
-
-#==========================================#
-############## Site Constants ##############
-#==========================================#
-
-$current_issue_id = cm_current_issue('id'); 
-$current_issue_date = cm_current_issue('date');
-$next_issue_id = cm_next_issue('id'); 
-$next_issue_date = cm_next_issue('date');
-
-$restrict_issue = cm_get_restrict('restrict_issue', $_SESSION['cm_user_id']);
-$restrict_section = cm_get_restrict('restrict_section', $_SESSION['cm_user_id']);
-
-$show_issue_browse = cm_get_access('issue-browse', $_SESSION['cm_user_id']);
-$show_issue_edit = cm_get_access('issue-edit', $_SESSION['cm_user_id']);
-$show_page_browse = cm_get_access('page-browse', $_SESSION['cm_user_id']);
-$show_page_edit = cm_get_access('page-edit', $_SESSION['cm_user_id']);
-$show_profile = cm_get_access('profile', $_SESSION['cm_user_id']);
-$show_section_browse = cm_get_access('section-browse', $_SESSION['cm_user_id']);
-$show_section_edit = cm_get_access('section-edit', $_SESSION['cm_user_id']);
-$show_server_info = cm_get_access('server-info', $_SESSION['cm_user_id']);
-$show_settings = cm_get_access('settings', $_SESSION['cm_user_id']);
-$show_staff_access = cm_get_access('staff-access', $_SESSION['cm_user_id']);
-$show_staff_browse = cm_get_access('staff-browse', $_SESSION['cm_user_id']);
-$show_staff_edit = cm_get_access('staff-edit', $_SESSION['cm_user_id']);
-$show_index = cm_get_access('index', $_SESSION['cm_user_id']);
-$show_article_media = cm_get_access('article-media', $_SESSION['cm_user_id']);
-$show_article_edit = cm_get_access('article-edit', $_SESSION['cm_user_id']);
-$show_article_browse = cm_get_access('article-browse', $_SESSION['cm_user_id']);
-$show_submitted_browse = cm_get_access('submitted-browse', $_SESSION['cm_user_id']);
-$show_submitted_edit = cm_get_access('submitted-edit', $_SESSION['cm_user_id']);
-$show_submitted_delete = cm_get_access('submitted-delete', $_SESSION['cm_user_id']);
-$show_poll_browse = cm_get_access('poll-browse', $_SESSION['cm_user_id']);
-$show_poll_edit = cm_get_access('poll-edit', $_SESSION['cm_user_id']);

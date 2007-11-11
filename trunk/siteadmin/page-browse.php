@@ -11,10 +11,8 @@ cm_auth_module($module);
 $query = "SELECT * FROM cm_pages ORDER BY page_title DESC;";
 
 // Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
-
+$result = cm_run_query($query);
+$records = $result->GetArray();
 
 get_cm_header();
 
@@ -27,7 +25,10 @@ if ($msg == "updated") { echo "<p class=\"infoMessage\">Page updated.</p>"; }
 if ($msg == "deleted") { echo "<p class=\"alertMessage\">Page deleted.</p>"; }
 ?>
 
-<?php if ($result_row_count > 0) { // If there are any pages ?>
+<?php
+if ($result->RecordCount() > 0)
+{
+?>
 
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-table"; ?>">
@@ -42,12 +43,13 @@ if ($msg == "deleted") { echo "<p class=\"alertMessage\">Page deleted.</p>"; }
       <th>Edited</th>
       <th>Tools</th>
     </tr>
-    <?php
+<?php
 
-do {
-	$id = $result_array['id'];
-	$title = $result_array['page_title'];
-	$edited = $result_array['page_edited'];
+foreach ($records as $record)
+{
+	$id = $record['id'];
+	$title = $record['page_title'];
+	$edited = $record['page_edited'];
 ?>
     <tr>
       <td><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $title; ?></a></p>
@@ -61,13 +63,13 @@ do {
         </ul>
       </td>
     </tr>
-    <? } while ($result_array = mysql_fetch_assoc($result)); ?>
+<?php }  ?>
   </table> 
   </fieldset>
 </form>
 
 <?php } else { ?>
-	<p>You are not currently using pages. Why not <a href="<?php echo "$cmodule.php?action=add"; ?>">add one</a> now?</p>
+	<p>You are not currently using pages. <a href="<?php echo "$cmodule.php?action=add"; ?>">Add a Page</a></p>
 <?php } ?>
 
 <?php get_cm_footer(); ?>

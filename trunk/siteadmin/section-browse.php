@@ -17,6 +17,7 @@ get_cm_header();
 $msg = $_GET['msg'];
 if ($msg == "updated") { echo "<p class=\"infoMessage\">Section updated.</p>"; }
 if ($msg == "added") { echo "<p class=\"infoMessage\">Section added.</p>"; }
+if ($msg == "deleted") { echo "<p class=\"infoMessage\">Section deleted.</p>"; }
 ?>
 <form>
   <fieldset class="<?php echo "$module-form"; ?>">
@@ -39,17 +40,17 @@ if ($msg == "added") { echo "<p class=\"infoMessage\">Section added.</p>"; }
 $query = "SELECT * FROM cm_sections ORDER BY section_priority;";
 
 // Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
+$result = cm_run_query($query);
+$records = $result->GetArray();
 
-do {
-$id = $result_array['id'];
-$section_name = $result_array['section_name'];
-$section_url = $result_array['section_url'];
-$section_editor = $result_array['section_editor'];
-$section_editor_title = $result_array['section_editor_title'];
-$section_priority = $result_array['section_priority'];
+foreach ($records as $record)
+{
+    $id = $record['id'];
+    $section_name = $record['section_name'];
+    $section_url = $record['section_url'];
+    $section_editor = $record['section_editor'];
+    $section_editor_title = $record['section_editor_title'];
+    $section_priority = $record['section_priority'];
 ?>
     <tr>
       <td><?php echo $section_priority; ?></td>
@@ -63,7 +64,7 @@ $section_priority = $result_array['section_priority'];
         </ul>
       </td>
     </tr>
-    <? } while ($result_array = mysql_fetch_assoc($result)); ?>
+<?php } ?>
   </table>
   </fieldset>
 </form>

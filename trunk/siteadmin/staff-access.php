@@ -10,8 +10,7 @@ cm_auth_module($module);
 $mode = $_GET['action'];
 $user_id = $_GET['id'];
 
-
-if ($_POST['user_id'] != "") {
+if (!empty($_POST['user_id'])) {
 	// Get modules
 	$user_id = $_POST['user_id'];
 	$article_browse = $_POST['article-browse'];
@@ -69,12 +68,14 @@ if ($_POST['user_id'] != "") {
 	$stat = cm_add_access($user_id,"string","restrict_issue",$restrict_issue);
 
 	if ($stat == 1) {
+        cm_access_data(); // Load User Data
 		header("Location: $pmodule.php?msg=access-updated");
 		exit;
 	} else {
 		cm_error("Error in 'cm_add_access' function.");
 		exit;
 	}
+	
 }
 
 if ($user_id == "") {
@@ -86,23 +87,33 @@ $query = "SELECT * FROM cm_users ";
 $query .= " WHERE id = $user_id ";
 $query .= " LIMIT 1;";
 	
-// Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
+$result = cm_run_query($query);
 	
 // If Array comes back empty, produce error
-if ($result_row_count != 1) {
+if ($result->RecordCount() != 1) {
 	cm_error("User $user_id doesn't exist, or you cannot edit access permisions.");
 	exit;
 }
 		
-// Define variables
-$id = $result_array['id'];
-$first_name = $result_array['user_first_name'];
-$last_name = $result_array['user_last_name'];
-$job_title = $result_array['user_job_title'];
+$id = $result->Fields('id');
+$first_name = $result->Fields('user_first_name');
+$last_name = $result->Fields('user_last_name');
+$job_title = $result->Fields('user_job_title');
 
+$query = "SELECT * FROM cm_access WHERE user_id = $user_id; ";
+
+$result = cm_run_query($query);
+$records = $result->GetArray();
+
+foreach ($records as $record)
+{
+    $access_type = $record['access_type'];
+    $access_option = $record['access_option'];
+    $access_value = $record['access_value'];
+    
+    $access[$access_option] = $access_value;
+    
+}
 
 get_cm_header();
 
@@ -110,31 +121,36 @@ get_cm_header();
 
 <h2><a href="<?php echo "$pmodule.php"?>">Staff Manager</a></h2>
 <p class="infoMessage"><?php echo "Setting user access for $first_name $last_name, $job_title"; ?></p>
+
+<?php if ($user_id == $_SESSION['user_data']['id']) { ?>
+<p class="infoMessage">Note: As this is your account, changes will be effective at next login.</p>
+<?php } ?>
+
 <form action="<?php echo "$module.php"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend>Module Access</legend>
   <h3>Basic</h3>
   <p>
-    <input type="checkbox" name="index" id="index" value="true" class="checkbox" <?php if(cm_get_access('index', $user_id) == "true" || $mode == "add") { echo "checked"; } ?> />
+    <input type="checkbox" name="index" id="index" value="true" class="checkbox" <?php if($access['index'] == "true" || $mode == "add") { echo "checked"; } ?> />
     <label for="">Home Page</label>
   </p>
   <p>
-    <input type="checkbox" name="profile" id="profile" value="true" class="checkbox" <?php if(cm_get_access('profile',$user_id) == "true" || $mode == "add") { echo "checked"; } ?> />
+    <input type="checkbox" name="profile" id="profile" value="true" class="checkbox" <?php if($access['profile'] == "true" || $mode == "add") { echo "checked"; } ?> />
     <label for="">User Profile</label>
   </p>
   <h3>Manage</h3>
   <div>
     <h4>Article Manager</h4>
     <p>
-      <input type="checkbox" name="article-browse" id="article-browse" value="true" class="checkbox" <?php if(cm_get_access('article-browse',$user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="article-browse" id="article-browse" value="true" class="checkbox" <?php if($access['article-browse'] == "true") { echo "checked"; } ?> />
       <label for="">Browse</label>
     </p>
     <p>
-      <input type="checkbox" name="article-edit" id="article-edit" value="true" class="checkbox" <?php if (cm_get_access('article-edit',$user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="article-edit" id="article-edit" value="true" class="checkbox" <?php if ($access['article-edit'] == "true") { echo "checked"; } ?> />
       <label for="">Edit / Delete</label>
     </p>
     <p>
-      <input type="checkbox" name="article-media" id="article-media" value="true" class="checkbox" <?php if (cm_get_access('article-media',$user_id) == "true") { echo "checked"; }  ?> />
+      <input type="checkbox" name="article-media" id="article-media" value="true" class="checkbox" <?php if ($access['article-media'] == "true") { echo "checked"; }  ?> />
       <label for="">Media</label>
     </p>
   </div>
@@ -143,17 +159,17 @@ get_cm_header();
     <p>
       <select name="restrict-section" id="restrict-section">
         <option value="false">-- No Restrictions --</option>
-        <?php cm_section_list($module, cm_get_restrict('restrict_section',$user_id)); ?>
+        <?php cm_section_list($module, $access['restrict_section']); ?>
       </select>
       <label for="restrict-section">Section</label>
     </p>
     <p>
       <select name="restrict-issue" id="restrict-issue">
-        <option value="false" <?php if (cm_get_restrict('restrict_issue',$user_id) == "false") { echo "selected"; } ?>>--
+        <option value="false" <?php if ($access['restrict_issue'] == "false") { echo "selected"; } ?>>--
         No Restrictions --</option>
-        <option value="next" <?php if (cm_get_restrict('restrict_issue',$user_id) == "next") { echo "selected"; } ?>>Next
+        <option value="next" <?php if ($access['restrict_issue'] == "next") { echo "selected"; } ?>>Next
         Issue Only</option>
-        <option value="current" <?php if (cm_get_restrict('restrict_issue',$user_id) == "current") { echo "selected"; } ?>>Current
+        <option value="current" <?php if ($access['restrict_issue'] == "current") { echo "selected"; } ?>>Current
         Issue Only</option>
       </select>
       <label for="restrict-issue">Issue</label>
@@ -162,48 +178,48 @@ get_cm_header();
   <div>
     <h4>Submitted Article Manager</h4>
     <p>
-      <input type="checkbox" name="submitted-browse" id="submitted-browse" value="true" class="checkbox" <?php if (cm_get_access('submitted-browse',$user_id) == "true") { echo "checked"; }  ?> />
+      <input type="checkbox" name="submitted-browse" id="submitted-browse" value="true" class="checkbox" <?php if ($access['submitted-browse'] == "true") { echo "checked"; }  ?> />
       <label for="submitted-browse">Browse</label>
     </p>
     <p>
-      <input type="checkbox" name="submitted-edit" id="submitted-edit" value="true" class="checkbox" <?php if (cm_get_access('submitted-edit',$user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="submitted-edit" id="submitted-edit" value="true" class="checkbox" <?php if ($access['submitted-edit'] == "true") { echo "checked"; } ?> />
       <label for="submitted-edit">View</label>
     </p>
     <p>
-      <input type="checkbox" name="submitted-delete" id="submitted-delete" value="true" class="checkbox" <?php if (cm_get_access('submitted-delete',$user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="submitted-delete" id="submitted-delete" value="true" class="checkbox" <?php if ($access['submitted-delete'] == "true") { echo "checked"; } ?> />
       <label for="submitted-delete">Delete</label>
     </p>
   </div>
   <div>
     <h4>Poll Manager</h4>
     <p>
-      <input type="checkbox" name="poll-browse" id="poll-browse" value="true" class="checkbox" <?php if (cm_get_access('poll-browse',$user_id) == "true") { echo "checked"; }  ?> />
+      <input type="checkbox" name="poll-browse" id="poll-browse" value="true" class="checkbox" <?php if ($access['poll-browse'] == "true") { echo "checked"; }  ?> />
       <label for="poll-browse">Browse</label>
     </p>
     <p>
-      <input type="checkbox" name="poll-edit" id="poll-edit" value="true" class="checkbox" <?php if (cm_get_access('poll-edit',$user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="poll-edit" id="poll-edit" value="true" class="checkbox" <?php if ($access['poll-edit'] == "true") { echo "checked"; } ?> />
       <label for="poll-edit">Edit</label>
     </p>
   </div>
   <div>
     <h4>Issue Manager</h4>
     <p>
-      <input type="checkbox" name="issue-browse" id="issue-browse" value="true" class="checkbox" <?php if (cm_get_access('issue-browse',$user_id) == "true") { echo "checked"; }  ?> />
+      <input type="checkbox" name="issue-browse" id="issue-browse" value="true" class="checkbox" <?php if ($access['issue-browse'] == "true") { echo "checked"; }  ?> />
       <label for="">Browse</label>
     </p>
     <p>
-      <input type="checkbox" name="issue-edit" id="issue-edit" value="true" class="checkbox" <?php if (cm_get_access('issue-edit',$user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="issue-edit" id="issue-edit" value="true" class="checkbox" <?php if ($access['issue-edit'] == "true") { echo "checked"; } ?> />
       <label for="">Edit</label>
     </p>
   </div>
 <div>
     <h4>Page Manager</h4>
     <p>
-      <input type="checkbox" name="page-browse" id="page-browse" value="true" class="checkbox" <?php if (cm_get_access('page-browse',$user_id) == "true") { echo "checked"; }  ?> />
+      <input type="checkbox" name="page-browse" id="page-browse" value="true" class="checkbox" <?php if ($access['page-browse'] == "true") { echo "checked"; }  ?> />
       <label for="">Browse</label>
     </p>
     <p>
-      <input type="checkbox" name="page-edit" id="page-edit" value="true" class="checkbox" <?php if (cm_get_access('page-edit',$user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="page-edit" id="page-edit" value="true" class="checkbox" <?php if ($access['page-edit'] == "true") { echo "checked"; } ?> />
       <label for="">Edit</label>
     </p>
   </div>
@@ -211,37 +227,37 @@ get_cm_header();
   <div>
     <h4>Users</h4>
     <p>
-      <input type="checkbox" name="staff-browse" id="staff-browse" value="true" class="checkbox" <?php if (cm_get_access('staff-browse',$user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="staff-browse" id="staff-browse" value="true" class="checkbox" <?php if ($access['staff-browse'] == "true") { echo "checked"; } ?> />
       <label for="">Browse</label>
     </p>
     <p>
-      <input type="checkbox" name="staff-access" id="staff-access" value="true" class="checkbox" <?php if (cm_get_access('staff-access',$user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="staff-access" id="staff-access" value="true" class="checkbox" <?php if ($access['staff-access'] == "true") { echo "checked"; } ?> />
       <label for="">Access</label>
     </p>
     <p>
-      <input type="checkbox" name="staff-edit" id="staff-edit" value="true" class="checkbox" <?php if (cm_get_access('staff-edit',$user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="staff-edit" id="staff-edit" value="true" class="checkbox" <?php if ($access['staff-edit'] == "true") { echo "checked"; } ?> />
       <label for="">Edit</label>
     </p>
   </div>
   <div>
     <h4>Sections</h4>
     <p>
-      <input type="checkbox" name="section-browse" id="section-browse" value="true" class="checkbox" <?php if (cm_get_access('section-browse',$user_id) == "true") { echo "checked"; }  ?> />
+      <input type="checkbox" name="section-browse" id="section-browse" value="true" class="checkbox" <?php if ($access['section-browse'] == "true") { echo "checked"; }  ?> />
       <label for="">Browse</label>
     </p>
     <p>
-      <input type="checkbox" name="section-edit" id="section-edit" value="true" class="checkbox" <?php if (cm_get_access('section-edit',$user_id) == "true") { echo "checked"; }  ?> />
+      <input type="checkbox" name="section-edit" id="section-edit" value="true" class="checkbox" <?php if ($access['section-edit'] == "true") { echo "checked"; }  ?> />
       <label for="">Edit</label>
     </p>
   </div>
   <div>
     <h4>Other</h4>
     <p>
-      <input type="checkbox" name="server-info" id="server-info" value="true" class="checkbox" <?php if (cm_get_access('server-info',$user_id) == "true") { echo "checked"; }  ?> />
+      <input type="checkbox" name="server-info" id="server-info" value="true" class="checkbox" <?php if ($access['server-info'] == "true") { echo "checked"; }  ?> />
       <label for="">Server Information</label>
     </p>
     <p>
-      <input type="checkbox" name="settings" id="settings" value="true" class="checkbox" <?php if (cm_get_access('settings', $user_id) == "true") { echo "checked"; } ?> />
+      <input type="checkbox" name="settings" id="settings" value="true" class="checkbox" <?php if ($access['settings'] == "true") { echo "checked"; } ?> />
       <label for="">Settings</label>
     </p>
   </div>

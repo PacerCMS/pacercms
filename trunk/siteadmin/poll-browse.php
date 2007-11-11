@@ -8,9 +8,12 @@ $cmodule = "poll-edit";
 cm_auth_module($module);
 
 // Change active poll
-if (is_numeric($_POST['id'])) {
+if (is_numeric($_POST['id']))
+{
 	$id = $_POST['id'];
+
 	$stat = cm_edit_poll_settings($id);
+
 	if ($stat = 1) {
 		header("Location: $module.php?msg=active-updated");
 		exit;
@@ -25,10 +28,8 @@ if (is_numeric($_POST['id'])) {
 $query = "SELECT * FROM cm_poll_questions ORDER BY poll_created DESC;";
 
 // Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
-
+$result = cm_run_query($query);
+$records = $result->GetArray();
 
 get_cm_header();
 
@@ -57,7 +58,7 @@ if ($msg == "active-updated") { echo "<p class=\"infoMessage\">Active poll setti
   </fieldset>
 </form>
 
-<?php if ($result_row_count > 0) { // If there are any pages ?>
+<?php if ($result->RecordCount() > 0) { ?>
 
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-table"; ?>">
@@ -72,15 +73,16 @@ if ($msg == "active-updated") { echo "<p class=\"infoMessage\">Active poll setti
       <th>Created</th>
       <th>Tools</th>
     </tr>
-    <?php
+<?php
 
-	// To mark active in table
-	$active_poll = cm_get_settings('active_poll');
+// To mark active in table
+$active_poll = cm_get_settings('active_poll');
 
-do {
-	$id = $result_array['id'];
-	$question = $result_array['poll_question'];
-	$created = $result_array['poll_created'];
+foreach ($records as $record)
+{
+	$id = $record['id'];
+	$question = $record['poll_question'];
+	$created = $record['poll_created'];
 ?>
     <tr>
       <td><?php if ($active_poll == $id) { echo "<strong>Current &raquo;&raquo;</strong> "; } ?><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $question; ?></a></p>
@@ -94,7 +96,7 @@ do {
         </ul>
       </td>
     </tr>
-    <? } while ($result_array = mysql_fetch_assoc($result)); ?>
+<?php } ?>
   </table>
   </fieldset>
 </form>

@@ -2,6 +2,8 @@
 // Loads everything needed to run PacerCMS
 include('cm-includes/cm-header.php');
 
+//$cm_db->debug = true;
+
 $module = "article-browse";
 $cmodule = "article-edit";
 
@@ -16,8 +18,8 @@ if ($_COOKIE["$module-section"] == "") {
 }
 
 if ($_COOKIE["$module-issue"] == "") {
-	setcookie("$module-issue", $next_issue_id); // Current Issue
-	$issue = $next_issue_id;
+	setcookie("$module-issue", cm_next_issue('id')); // Current Issue
+	$issue = cm_next_issue('id');
 } else {
 	$issue = $_COOKIE["$module-issue"];
 }
@@ -25,8 +27,10 @@ if ($_COOKIE["$module-issue"] == "") {
 // Switch sections
 if ($_GET['section'] != "") {
 	$section = $_GET['section'];
-	if (cm_section_info("id",$section) == "") {
+	if (!is_numeric(cm_section_info("id",$section)))
+	{
 		cm_error("The selected section could not be loaded.");
+		exit;
 	}
 	setcookie("$module-section", $section);
 	header("Location: $module.php");
@@ -36,8 +40,10 @@ if ($_GET['section'] != "") {
 // Switch issues
 if (is_numeric($_GET['issue'])) {
 	$issue = $_GET['issue'];
-	if (cm_issue_info("id",$issue) == "") {
+	if (!is_numeric(cm_issue_info("id",$issue)))
+	{
 		cm_error("The selected issue could not be loaded.");
+		exit;
 	}	
 	setcookie("$module-issue", $issue);
 	header("Location: $module.php");
@@ -58,16 +64,16 @@ if ($_GET['summary'] == "hide") {
 	exit;
 }
 
-if ($restrict_issue == "next") {
-	$issue = $next_issue_id;
+if (cm_auth_restrict('restrict_issue') == "next") {
+	$issue = cm_next_issue('id');
 	setcookie("$module-issue", $issue);
 }
-if ($restrict_issue == "current") {
-	$issue = $current_issue_id;
+if (cm_auth_restrict('restrict_issue') == "current") {
+	$issue = cm_current_issue('id');
 	setcookie("$module-issue", $issue);
 }
-if ($restrict_section != "false") {
-	$section = $restrict_section;
+if (is_numeric(cm_auth_restrict('restrict_section'))) {
+	$section = cm_auth_restrict('restrict_section');
 	setcookie("$module-section", $section);
 }
 
@@ -92,10 +98,8 @@ if ($_GET['reset'] == 'publish') {
 $query = "SELECT * FROM cm_articles WHERE issue_id = \"$issue\" AND section_id = \"$section\" ORDER BY article_priority;";
 
 // Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
-
+$result = cm_run_query($query);
+$records = $result->GetArray();
 
 get_cm_header();
 
@@ -113,7 +117,11 @@ if ($msg == "media-deleted") { echo "<p class=\"alertMessage\">Media deleted.</p
 if ($msg == "pub-reset") { echo "<p class=\"alertMessage\">Publication dates set to match issue.</p>"; }
 if ($msg == "pub-error") { echo "<p class=\"alertMessage\">Error setting publication dates.</p>"; }
 ?>
-<?php if ($restrict_issue != "next" && $restrict_issue != "current") { // Begin Restrict Issue ?>
+<?php
+// Begin Restrict Issue
+if (cm_auth_restrict('restrict_issue') != "next" && cm_auth_restrict('restrict_issue') != "current")
+{
+?>
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend>Select Issue</legend>
@@ -126,8 +134,8 @@ if ($msg == "pub-error") { echo "<p class=\"alertMessage\">Error setting publica
         </select>
         <input type="submit" name="submit" id="submit" value="Open" class="button" />
       </li>
-      <li><a href="<?php echo "$module.php?issue=$current_issue_id";?>" <?php if ($issue == $current_issue_id) {	echo " class=\"selected\""; } ?>><strong>Current:</strong> <?php echo $current_issue_date; ?></a></li>
-      <li><a href="<?php echo "$module.php?issue=$next_issue_id";?>" <?php if ($issue == $next_issue_id) {	echo " class=\"selected\""; } ?>><strong>Next:</strong> <?php echo $next_issue_date; ?></a></li>
+      <li><a href="<?php echo "$module.php?issue=" . cm_current_issue('id');?>" <?php if ($issue == cm_current_issue('id')) {	echo " class=\"selected\""; } ?>><strong>Current:</strong> <?php echo cm_current_issue('date'); ?></a></li>
+      <li><a href="<?php echo "$module.php?issue=" . cm_next_issue('id');?>" <?php if ($issue == cm_next_issue('id')) {	echo " class=\"selected\""; } ?>><strong>Next:</strong> <?php echo cm_next_issue('date'); ?></a></li>
     </ul>
   </div>
   </fieldset>
@@ -136,7 +144,7 @@ if ($msg == "pub-error") { echo "<p class=\"alertMessage\">Error setting publica
 <form action="article-edit.php" method="get" name="QuickEdit" id="QuickEdit">
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend><?php echo "Viewing: " . cm_issue_info("issue_date", $issue) . " (Volume " . cm_issue_info("issue_volume", $issue) . ", No. " . cm_issue_info("issue_number", $issue) . ")"; ?></legend>
-  <?php if ($restrict_section == "false") { // Begin Restrict Section ?>
+  <?php if (cm_auth_restrict('restrict_section') == "false") { // Begin Restrict Section ?>
   <div class="actionMenu">
     <ul>
       <li><strong>Section:</strong></li>
@@ -146,26 +154,28 @@ if ($msg == "pub-error") { echo "<p class=\"alertMessage\">Error setting publica
   <?php } else {  ?>
   <p><strong>Viewing:</strong> <?php echo cm_section_info('section_name', $section); ?></p>
   <?php } // End Restrict Section  ?>
-  <?php if ($result_row_count > 0) { ?>
+  <?php if (!empty($records)) { ?>
+
   <table class="<?php echo $module; ?>-table">
     <tr>
       <th><acronym title="Assigned Priority">AP</acronym></th>
       <th>Headline</th>
-      <?php if ($show_article_edit == "true") { ?>
+      <?php if (cm_auth_restrict('article-edit') == "true") { ?>
       <th>Tools</th>
       <?php } ?>
     </tr>
     <?php
 
-do {
-	$id = $result_array['id'];
-	$title = $result_array['article_title'];
-	$summary = $result_array['article_summary'];
-	$published = $result_array['article_publish'];
-	$keywords = $result_array['article_keywords'];
-	$author = $result_array['article_author'];
-	$priority = $result_array['article_priority'];
-	$issue_id = $result_array['issue_id'];
+foreach ($records as $article)
+{
+	$id = $article['id'];
+	$title = $article['article_title'];
+	$summary = $article['article_summary'];
+	$published = $article['article_publish'];
+	$keywords = $article['article_keywords'];
+	$author = $article['article_author'];
+	$priority = $article['article_priority'];
+	$issue_id = $article['issue_id'];
 	$issue_date = cm_issue_info("issue_date",$issue_id) . " 00:00:00";
 	if ($published > $issue_date) { $is_breaking = "true"; } else { unset($is_breaking); }
 	if ($is_breaking == "true") { $flag = "<small style=\"color:red;font-weight:bold;\">[ BREAKING NEWS ]</small> "; } else { unset($flag); }
@@ -179,7 +189,7 @@ do {
         <p><strong>Keywords:</strong> <em><?php echo $keywords; ?></em></p>
         <?php	} // End Summary Row ?>
       </td>
-      <?php if ($show_article_edit == "true") { ?>
+      <?php if (cm_auth_restrict('article-edit') == "true") { ?>
       <td nowrap class="actionMenu">
         <ul class="center">
           <li class="command-preview"><a href="article-edit.php?id=<?php echo $id; ?>#preview">Preview</a></li>
@@ -189,8 +199,8 @@ do {
         <?php } ?>
       </td>
     </tr>
-    <? } while ($result_array = mysql_fetch_assoc($result)); ?>
-    <?php if ($show_article_edit == "true") { ?>
+<? } ?>
+    <?php if (cm_auth_restrict('article-edit') == "true") { ?>
     <tr>
       <td>&nbsp;</td>
       <td class="center"><strong><a href="article-edit.php?action=new">Add an
@@ -218,7 +228,7 @@ do {
   </div>
   <?php } else { ?>
   <p>This selected section is empty.
-    <?php if ($section != "") { ?>
+    <?php if (cm_auth_restrict('article-edit') == "true") { ?>
     <a href="article-edit.php?action=new">Add an Article</a>.
     <?php } ?>
   </p>
