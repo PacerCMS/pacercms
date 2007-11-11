@@ -12,7 +12,7 @@ cm_auth_module($module);
 
 // If action is delete, call delete function
 if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") { 
-	$stat = cm_delete_media($pmodule, $_POST['delete-id']);
+	$stat = cm_delete_media($_POST['delete-id']);
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=media-deleted");
 		exit;
@@ -33,17 +33,17 @@ $article_id = $_GET['article_id'];
 
 // If action is edit, call edit function
 if ($_GET['action'] == "edit") { 
-	if ($_POST['id'] != "") {
+	if (!empty($_POST['id'])) {
 		// Get posted data
-		$article_id = $_POST['article_id'];
-		$title = prep_string($_POST['title']);
-		$src = prep_string($_POST['src']);
-		$type = prep_string($_POST['type']);
-		$caption = prep_string($_POST['caption']);
-		$credit = prep_string($_POST['credit']);
+		$media['article_id'] = $_POST['article_id'];
+		$media['title'] = prep_string($_POST['title']);
+		$media['src'] = prep_string($_POST['src']);
+		$media['type'] = prep_string($_POST['type']);
+		$media['caption'] = prep_string($_POST['caption']);
+		$media['credit'] = prep_string($_POST['credit']);
 		$id	= $_POST['id'];		
 		// Run function
-		$stat = cm_edit_media($article_id,$title,$src,$type,$caption,$credit,$id);
+		$stat = cm_edit_media($media,$id);
 		if ($stat == 1) {
 			header("Location: $pmodule.php?msg=media-updated");
 			exit;
@@ -58,16 +58,16 @@ if ($_GET['action'] == "edit") {
 }
 
 // If action is new, call add function
-if ($_GET['action'] == "new" && $_POST['article_id'] != "") { 
+if ($_GET['action'] == "new" && !empty($_POST['article_id'])) { 
 	// Get posted data
-	$article_id = $_POST['article_id'];
-	$title = prep_string($_POST['title']);
-	$src = prep_string($_POST['src']);
-	$type = prep_string($_POST['type']);
-	$caption = prep_string($_POST['caption']);
-	$credit = prep_string($_POST['credit']);
+	$media['article_id'] = $_POST['article_id'];
+	$media['title'] = prep_string($_POST['title']);
+	$media['src'] = prep_string($_POST['src']);
+	$media['type'] = prep_string($_POST['type']);
+	$media['caption'] = prep_string($_POST['caption']);
+	$media['credit'] = prep_string($_POST['credit']);
 	// Run function
-	$stat = cm_add_media($article_id,$title,$src,$type,$caption,$credit);
+	$stat = cm_add_media($media);
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=media-added");
 		exit;
@@ -85,26 +85,22 @@ get_cm_header();
 <h2><a href="<?php echo "$pmodule.php"; ?>">Media Manager</a></h2>
 <?php
 
-// Database Query
-$query = "SELECT * FROM cm_media WHERE id = '$id;'";
-
-// Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
-
-if ($result_row_count == 1) {
-
-	do {
-		$id = $result_array['id'];
-		$article_id = $result_array['article_id'];
-		$title = $result_array['media_title'];
-		$src = $result_array['media_src'];
-		$type = $result_array['media_type'];
-		$caption = $result_array['media_caption'];
-		$credit = $result_array['media_credit'];
-	} while ($result_array = mysql_fetch_assoc($result));
-
+if ($mode == 'edit')
+{
+    $query = "SELECT * FROM cm_media WHERE id = $id; ";
+    
+    $result = cm_run_query($query);
+    
+    if ($result->RecordCount() == 1) {
+    
+    	$id = $result->Fields('id');
+    	$article_id = $result->Fields('article_id');
+    	$title = $result->Fields('media_title');
+    	$src = $result->Fields('media_src');
+    	$type = $result->Fields('media_type');
+    	$caption = $result->Fields('media_caption');
+    	$credit = $result->Fields('media_credit');
+    }
 }
 
 ?>

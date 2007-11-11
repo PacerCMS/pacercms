@@ -6,7 +6,6 @@ $module = "issue-browse";
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
 
-
 if ($_COOKIE["$module-volume"] == "") {
 	setcookie("$module-volume", cm_current_issue('volume')); // Current Volume
 	$volume = cm_current_issue('volume');
@@ -15,7 +14,7 @@ if ($_COOKIE["$module-volume"] == "") {
 }
 
 // If changing publishing settings
-if ($_POST['id'] != "") {
+if (is_numeric($_POST['id'])) {
 	// Get posted data
 	$id = $_POST['id'];
 	$current_issue = $_POST['current_issue'];
@@ -26,13 +25,13 @@ if ($_POST['id'] != "") {
 		header("Location: $module.php?msg=publish-updated");
 		exit;
 	} else {
-		cm_error("Error in 'cm_edit_settings' function.");
+		cm_error("Error in 'cm_edit_publish_settings' function.");
 		exit;
 	}
 }
 
 // Volume for display
-if ($_GET['volume'] != "") {
+if (is_numeric($_GET['volume'])) {
 	setcookie("$module-volume", $_GET['volume']);
 	header("Location: $module.php");
 	exit;
@@ -95,19 +94,18 @@ if ($msg == "publish-updated") { echo "<p class=\"infoMessage\">Publish settings
   <?php
 
 // Make sure soemthing loads
-if ($volume == "") {
+if (!is_numeric($volume))
+{
 	$volume = cm_current_issue('volume');
 }
 
-// Database Query
-$query = "SELECT * FROM cm_issues WHERE issue_volume = \"$volume\" ORDER BY issue_number;";
+$query = "SELECT * FROM cm_issues WHERE issue_volume = $volume ORDER BY issue_number; ";
 
 // Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
+$result = cm_run_query($query);
+$records = $result->GetArray();
 
-if ($result_row_count > 0) {
+if ($result->RecordCount() > 0) {
 
 ?>
   <table class="<?php echo $module; ?>-table">
@@ -117,16 +115,16 @@ if ($result_row_count > 0) {
       <th>Circulation</th>
       <th>Tools</th>
     </tr>
-    <?php
+<?php
 
-do {
+foreach ($records as $record)
+{
 
-	$id = $result_array['id'];
-	$date = $result_array['issue_date'];
-	$volume = $result_array['issue_volume'];
-	$number = $result_array['issue_number'];
-	$circulation = $result_array['issue_circulation'];
-
+	$id = $record['id'];
+	$date = $record['issue_date'];
+	$volume = $record['issue_volume'];
+	$number = $record['issue_number'];
+	$circulation = $record['issue_circulation'];
   
 ?>
     <tr>
@@ -141,7 +139,9 @@ do {
         </ul>
       </td>
     </tr>
-    <? } while ($result_array = mysql_fetch_assoc($result)); ?>
+
+<?php } ?>
+
     <tr>
       <td class="center" colspan="3"><strong><a href="issue-edit.php?action=new">Add
             an Issue</a></strong></td>

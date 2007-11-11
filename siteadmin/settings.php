@@ -6,23 +6,25 @@ $module = "settings";
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
 
-if ($_POST['id'] != "") {
-	// Get posted data
+if (is_numeric($_POST['id']))
+{
+	$settings['name'] = prep_string($_POST['name']);
+	$settings['description'] = prep_string($_POST['description']);
+	$settings['url'] = prep_string($_POST['url']);
+	$settings['email'] = prep_string($_POST['email']);
+	$settings['address'] = prep_string($_POST['address']);
+	$settings['city'] = prep_string($_POST['city']);
+	$settings['state'] = prep_string($_POST['state']);
+	$settings['zipcode'] = prep_string($_POST['zipcode']);
+	$settings['telephone'] = prep_string($_POST['telephone']);
+	$settings['fax'] = prep_string($_POST['fax']);
+	$settings['announce'] = prep_string($_POST['announce']);	
 	$id = $_POST['id'];
-	$name = prep_string($_POST['name']);
-	$description = prep_string($_POST['description']);
-	$url = prep_string($_POST['url']);
-	$email = prep_string($_POST['email']);
-	$address = prep_string($_POST['address']);
-	$city = prep_string($_POST['city']);
-	$state = prep_string($_POST['state']);
-	$zipcode = prep_string($_POST['zipcode']);
-	$telephone = prep_string($_POST['telephone']);
-	$fax = prep_string($_POST['fax']);
-	$announce = prep_string($_POST['announce']);	
-	// Run function
-	$stat = cm_edit_settings($name,$description,$url,$email,$address,$city,$state,$zipcode,$telephone,$fax,$announce,$id);
-	if ($stat == 1) {
+
+	$stat = cm_edit_settings($settings,$id);
+
+	if ($stat == 1)
+	{
 		header("Location: $module.php?msg=updated");
 		exit;
 	} else {
@@ -43,28 +45,24 @@ if ($msg == "updated") { echo "<p class=\"infoMessage\">Site settings updated.</
 ?>
 <?php
 
-// Database Query
-$query = "SELECT * FROM cm_settings;";
+$id = cm_get_settings('id');
 
-// Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
+$query = "SELECT * FROM cm_settings WHERE id = $id; ";
 
-do {
-	$id = $result_array['id'];
-	$name = $result_array['site_name'];
-	$description = $result_array['site_description'];
-	$url = $result_array['site_url'];
-	$email = $result_array['site_email'];
-	$address = $result_array['site_address'];
-	$city = $result_array['site_city'];
-	$state = $result_array['site_state'];
-	$zipcode = $result_array['site_zipcode'];
-	$telephone = $result_array['site_telephone'];
-	$fax = $result_array['site_fax'];
-	$announce = $result_array['site_announcement'];	
-} while ($result_array = mysql_fetch_assoc($result));
+$result = cm_run_query($query);
+
+$id = $result->Fields('id');
+$name = $result->Fields('site_name');
+$description = $result->Fields('site_description');
+$url = $result->Fields('site_url');
+$email = $result->Fields('site_email');
+$address = $result->Fields('site_address');
+$city = $result->Fields('site_city');
+$state = $result->Fields('site_state');
+$zipcode = $result->Fields('site_zipcode');
+$telephone = $result->Fields('site_telephone');
+$fax = $result->Fields('site_fax');
+$announce = $result->Fields('site_announcement');	
 
 ?>
 <form action="<?php echo "$module.php"; ?>" method="post">

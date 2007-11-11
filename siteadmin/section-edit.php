@@ -11,50 +11,47 @@ $mode = "edit"; // Default
 cm_auth_module($module);
 
 // Change mode based on query string
-if ($_GET["action"] != "") {
+if (!empty($_GET["action"])) {
 	$mode = $_GET["action"];
 }
 
 // Key variable
 $id = $_GET["id"];
 
-if (!empty($id)) {
-
-    // Database Query
-    $query = "SELECT * FROM cm_sections WHERE id = $id;";
+if (is_numeric($id))
+{
+    $query = "SELECT * FROM cm_sections WHERE id = $id; ";
     
-    // Run Query
-    $result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-    $result_array  = mysql_fetch_assoc($result);
-    $result_row_count = mysql_num_rows($result);
+    $result = cm_run_query($query);
     
-    $id = $result_array['id'];
-    $name = $result_array['section_name'];
-    $url = $result_array['section_url'];
-    $editor = $result_array['section_editor'];
-    $editor_title = $result_array['section_editor_title'];
-    $editor_email = $result_array['section_editor_email'];
-    $sidebar = $result_array['section_sidebar'];
-    $feed_image = $result_array['section_feed_image'];
-    $priority = $result_array['section_priority'];
+    $id = $result->Fields('id');
+    $name = $result->Fields('section_name');
+    $url = $result->Fields('section_url');
+    $editor = $result->Fields('section_editor');
+    $editor_title = $result->Fields('section_editor_title');
+    $editor_email = $result->Fields('section_editor_email');
+    $sidebar = $result->Fields('section_sidebar');
+    $feed_image = $result->Fields('section_feed_image');
+    $priority = $result->Fields('section_priority');
 
 }
 
 // If action is edit, call edit function
 if ($_GET['action'] == "edit") { 
-	if ($_POST['id'] != "") {
-		// Get posted data
-		$name = prep_string($_POST['name']);
-		$editor = prep_string($_POST['editor']);
-		$editor_title = prep_string($_POST['editor_title']);
-		$editor_email = $_POST['editor_email'];
-		$url = $_POST['url'];
-		$sidebar = prep_string($_POST['sidebar']);
-		$priority = $_POST['priority'];
-		$feed_image = $_POST['feed_image'];	
+	if (is_numeric($_POST['id']))
+	{
+		$section['name'] = prep_string($_POST['name']);
+		$section['editor'] = prep_string($_POST['editor']);
+		$section['editor_title'] = prep_string($_POST['editor_title']);
+		$section['editor_email'] = prep_string($_POST['editor_email']);
+		$section['url'] = prep_string($_POST['url']);
+		$section['sidebar'] = prep_string($_POST['sidebar']);
+		$section['priority'] = $_POST['priority'];
+		$section['feed_image'] = $_POST['feed_image'];	
 		$id	= $_POST['id'];		
-		// Run function
-		$stat = cm_edit_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority,$id);
+
+		$stat = cm_edit_section($section,$id);
+
 		if ($stat == 1) {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
@@ -70,18 +67,19 @@ if ($_GET['action'] == "edit") {
 }
 
 // If action is new, call add function
-if ($_GET['action'] == "new" && $_POST['name'] != "") { 
-	// Get posted data
-	$name = prep_string($_POST['name']);
-	$editor = prep_string($_POST['editor']);
-	$editor_title = prep_string($_POST['editor_title']);
-	$editor_email = $_POST['editor_email'];
-	$url = $_POST['url'];
-	$sidebar = prep_string($_POST['sidebar']);
-	$priority = $_POST['priority'];
-	$feed_image = $_POST['feed_image'];	
-	// Run function
+if ($_GET['action'] == "new" && $_POST['name'] != "")
+{ 
+	$section['name'] = prep_string($_POST['name']);
+	$section['editor'] = prep_string($_POST['editor']);
+	$section['editor_title'] = prep_string($_POST['editor_title']);
+	$section['editor_email'] = prep_string($_POST['editor_email']);
+	$section['url'] = prep_string($_POST['url']);
+	$section['sidebar'] = prep_string($_POST['sidebar']);
+	$section['priority'] = $_POST['priority'];
+	$section['feed_image'] = $_POST['feed_image'];	
+
 	$stat = cm_add_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority);
+
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=added");
 		exit;
@@ -92,10 +90,11 @@ if ($_GET['action'] == "new" && $_POST['name'] != "") {
 }
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") { 
+if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id']))
+{ 
 	$id = $_POST['delete-id'];
 	$move = $_POST['move-id'];
-	// Run function
+
 	$stat = cm_delete_section($id,$move);
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=deleted");

@@ -18,7 +18,7 @@ if ($_GET["action"] != "") {
 $id = $_GET["id"];
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") { 
+if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id'])) { 
 	$id = $_POST['delete-id'];
 	// Run function
 	$stat = cm_delete_submitted($id);
@@ -32,35 +32,30 @@ if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {
 }
 
 
-// Query
 $query = "SELECT * FROM cm_submitted ";
 $query .= " WHERE id = $id";
-// Security Measure
 
-// Run Query
-$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-$result_array  = mysql_fetch_assoc($result);
-$result_row_count = mysql_num_rows($result);
+$result = cm_run_query($query);
 
-// If Array comes back empty, produce error
-if ($result_row_count != 1) {
+// If empty, error
+if ($result->RecordCount() != 1) {
 	cm_error("Submitted article does not exist.");
 	exit;
 }
 	
 // Define variables
-$id = $result_array['id'];
-$issue = $result_array['issue_id'];
-$title = $result_array['submitted_title'];
-$text = $result_array['submitted_text'];
-$keyword = $result_array['submitted_keyword'];
-$author = $result_array['submitted_author'];
-$email = $result_array['submitted_author_email'];
-$major = $result_array['submitted_author_major'];
-$city = $result_array['submitted_author_city'];
-$telephone = $result_array['submitted_author_telephone'];
-$sent = $result_array['submitted_sent'];
-$words = $result_array['submitted_words'];
+$id = $result->Fields('id');
+$issue = $result->Fields('issue_id');
+$title = $result->Fields('submitted_title');
+$text = $result->Fields('submitted_text');
+$keyword = $result->Fields('submitted_keyword');
+$author = $result->Fields('submitted_author');
+$email = $result->Fields('submitted_author_email');
+$major = $result->Fields('submitted_author_major');
+$city = $result->Fields('submitted_author_city');
+$telephone = $result->Fields('submitted_author_telephone');
+$sent = $result->Fields('submitted_sent');
+$words = $result->Fields('submitted_words');
 
 
 get_cm_header();
@@ -69,7 +64,10 @@ get_cm_header();
 
 <h2><a href="<?php echo $pmodule; ?>.php?">Submitted Article Manager</a></h2>
 <div class="actionMenu">
-<ul>    <li class="command-preview"><a href="article-edit.php?action=new&amp;submitted_id=2">Post to Article Manager</a></li>    <?php if ($show_submitted_delete == "true") { ?>
+<ul>
+    <?php if (cm_auth_restrict('article-edit') == "true") { ?>
+    <li class="command-preview"><a href="article-edit.php?action=new&amp;submitted_id=2">Post to Article Manager</a></li>
+    <?php } ?>    <?php if (cm_auth_restrict('submitted-delete') == "true") { ?>
     <li class="command-delete"><a href="#delete">Delete</a></li>
     <?php } ?></ul>
 </div>
@@ -94,7 +92,7 @@ get_cm_header();
 </fieldset>
 
 <?php
-if ($show_submitted_delete == "true") { ?>
+if (cm_auth_restrict('submitted-delete') == "true") { ?>
 <h2>Delete Submitted Article <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
 <div id="deleteRecord">
   <form action="<?php echo "$module.php?action=delete"; ?>" method="post">

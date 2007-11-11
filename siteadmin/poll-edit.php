@@ -11,15 +11,18 @@ $mode = "edit"; // Default
 cm_auth_module($module);
 
 // Change mode based on query string
-if ($_GET["action"] != "") {
+if (!empty($_GET["action"]))
+{
 	$mode = $_GET["action"];
 }
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") { 
+if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id']))
+{ 
 	$id = $_POST['delete-id'];
-	// Run function
+	
 	$stat = cm_delete_poll($id);
+	
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
@@ -33,24 +36,26 @@ if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {
 $volume = $_COOKIE['issue-browse-volume'];
 
 // If action is edit, call edit function
-if ($_GET['action'] == "edit") { 
-	if ($_POST['id'] != "") {
-		// Get posted data
-		$question = prep_string($_POST['question']);
-		$r1 = prep_string($_POST['r1']);
-		$r2 = prep_string($_POST['r2']);
-		$r3 = prep_string($_POST['r3']);		
-		$r4 = prep_string($_POST['r4']);
-		$r5 = prep_string($_POST['r5']);
-		$r6 = prep_string($_POST['r6']);
-		$r7 = prep_string($_POST['r7']);
-		$r8 = prep_string($_POST['r8']);
-		$r9 = prep_string($_POST['r9']);
-		$r10 = prep_string($_POST['r10']);	
-		$article = $_POST['article'];	
+if ($_GET['action'] == "edit")
+{ 
+	if (is_numeric($_POST['id']))
+	{
+		$poll['question'] = prep_string($_POST['question']);
+		$poll['r1'] = prep_string($_POST['r1']);
+		$poll['r2'] = prep_string($_POST['r2']);
+		$poll['r3'] = prep_string($_POST['r3']);		
+		$poll['r4'] = prep_string($_POST['r4']);
+		$poll['r5'] = prep_string($_POST['r5']);
+		$poll['r6'] = prep_string($_POST['r6']);
+		$poll['r7'] = prep_string($_POST['r7']);
+		$poll['r8'] = prep_string($_POST['r8']);
+		$poll['r9'] = prep_string($_POST['r9']);
+		$poll['r10'] = prep_string($_POST['r10']);	
+		$poll['article_id'] = $_POST['article'];	
 		$id	= $_POST['id'];		
-		// Run function
-		$stat = cm_edit_poll($question,$r1,$r2,$r3,$r4,$r5,$r6,$r7,$r8,$r9,$r10,$article,$id);
+
+		$stat = cm_edit_poll($poll,$id);
+		
 		if ($stat == 1) {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
@@ -65,23 +70,23 @@ if ($_GET['action'] == "edit") {
 }
 
 // If action is new, call add function
-if ($_GET['action'] == "new" && $_POST['question'] != "") { 
-	// Get posted data
-	$question = prep_string($_POST['question']);
-	$r1 = prep_string($_POST['r1']);
-	$r2 = prep_string($_POST['r2']);
-	$r3 = prep_string($_POST['r3']);		
-	$r4 = prep_string($_POST['r4']);
-	$r5 = prep_string($_POST['r5']);
-	$r6 = prep_string($_POST['r6']);
-	$r7 = prep_string($_POST['r7']);
-	$r8 = prep_string($_POST['r8']);
-	$r9 = prep_string($_POST['r9']);
-	$r10 = prep_string($_POST['r10']);
-	$article = $_POST['article'];		
-	$id	= $_POST['id'];
-	// Run function
-	$stat = cm_add_poll($question,$r1,$r2,$r3,$r4,$r5,$r6,$r7,$r8,$r9,$r10,$article);
+if ($_GET['action'] == "new" && !empty($_POST['question']))
+{ 
+	$poll['question'] = prep_string($_POST['question']);
+	$poll['r1'] = prep_string($_POST['r1']);
+	$poll['r2'] = prep_string($_POST['r2']);
+	$poll['r3'] = prep_string($_POST['r3']);		
+	$poll['r4'] = prep_string($_POST['r4']);
+	$poll['r5'] = prep_string($_POST['r5']);
+	$poll['r6'] = prep_string($_POST['r6']);
+	$poll['r7'] = prep_string($_POST['r7']);
+	$poll['r8'] = prep_string($_POST['r8']);
+	$poll['r9'] = prep_string($_POST['r9']);
+	$poll['r10'] = prep_string($_POST['r10']);	
+	$poll['article_id'] = $_POST['article'];		
+
+	$stat = cm_add_poll($poll);
+	
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=added");
 		exit;
@@ -91,30 +96,32 @@ if ($_GET['action'] == "new" && $_POST['question'] != "") {
 	}
 }
 
-if ($mode == "edit") {
+if ($mode == "edit" && is_numeric($_GET['id']))
+{
 	$id = $_GET["id"];
-	$query = "SELECT *";
-	$query .= " FROM cm_poll_questions WHERE id = '$id;'";
-	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);	
-	if ($result_row_count != 1) {
+	$query = "SELECT * FROM cm_poll_questions WHERE id = $id; ";
+	$result = cm_run_query($query);
+	
+	if ($result->RecordCount() != 1)
+	{
 		cm_error("That poll question cannot be loaded.");
 	}	
-	$id = $result_array['id'];
-	$question = $result_array['poll_question'];
-	$r1 = $result_array['poll_response_1'];
-	$r2 = $result_array['poll_response_2'];
-	$r3 = $result_array['poll_response_3'];		
-	$r4 = $result_array['poll_response_4'];
-	$r5 = $result_array['poll_response_5'];
-	$r6 = $result_array['poll_response_6'];
-	$r7 = $result_array['poll_response_7'];
-	$r8 = $result_array['poll_response_8'];
-	$r9 = $result_array['poll_response_9'];
-	$r10 = $result_array['poll_response_10'];
-	$article = $result_array['article_id'];		
-} // End database call if in edit mode.
+	
+	$id = $result->Fields('id');
+	$question = $result->Fields('poll_question');
+	$r1 = $result->Fields('poll_response_1');
+	$r2 = $result->Fields('poll_response_2');
+	$r3 = $result->Fields('poll_response_3');		
+	$r4 = $result->Fields('poll_response_4');
+	$r5 = $result->Fields('poll_response_5');
+	$r6 = $result->Fields('poll_response_6');
+	$r7 = $result->Fields('poll_response_7');
+	$r8 = $result->Fields('poll_response_8');
+	$r9 = $result->Fields('poll_response_9');
+	$r10 = $result->Fields('poll_response_10');
+	$article = $result->Fields('article_id');
+			
+}
 
 
 get_cm_header();
@@ -131,12 +138,12 @@ get_cm_header();
       <br />
       <input type="text" name="article" id="article" value="<?php echo $article; ?>" />
     </p>
-	<?php if ($mode == "edit") { ?>
+<?php if ($mode == "edit") { ?>
 	<h4>Audit</h4>
 	<p><?php cm_poll_cleanup($id) ?></p>
 	<h4>Current Results</h4>
 	<?php cm_poll_results($id); ?>
-	<?php } ?>
+<?php } ?>
   </div>
   <p>
     <label for="question">Poll Question</label>

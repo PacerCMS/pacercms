@@ -11,12 +11,14 @@ $mode = "edit"; // Default
 cm_auth_module($module);
 
 // Change mode based on query string
-if ($_GET["action"] != "") {
+if ($_GET["action"] != "")
+{
 	$mode = $_GET["action"];
 }
 
 // Make sure we have operating parameters set.
-if ($_COOKIE["$pmodule-section"] == "" || $_COOKIE["$pmodule-issue"] == "") { // Send back to parent
+if ($_COOKIE["$pmodule-section"] == "" || $_COOKIE["$pmodule-issue"] == "") {
+    // Send back to parent
 	header("Location: $pmodule.php");
 	exit;
 }
@@ -28,7 +30,7 @@ $id = $_GET["id"];
 
 // If action is quick edit, call quick edit function
 if ($_GET['action'] == "quick-edit") { 
-		if ($_POST['quick-edit-id'] != "") {
+		if (is_numeric($_POST['quick-edit-id'])) {
 		cm_quick_edit($_POST['quick-edit-id']);
 		exit;
 	} else {
@@ -37,10 +39,11 @@ if ($_GET['action'] == "quick-edit") {
 }
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") { 
+if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id'])) { 
 	$id = $_POST['delete-id'];
-	// Run function
+
 	$stat = cm_delete_article($id);
+
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
@@ -52,23 +55,23 @@ if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {
 
 // If action is edit, call edit function
 if ($_GET['action'] == "edit") { 
-	if ($_POST['id'] != "") {
+	if (is_numeric($_POST['id'])) {
 		// Get posted data
-		$title = prep_string($_POST['title']);
-		$subtitle = prep_string($_POST['subtitle']);
-		$author = prep_string($_POST['author']);
-		$author_title = prep_string($_POST['author_title']);
-		$summary = prep_string($_POST['summary']);
-		$text = prep_string($_POST['text']);
-		$keywords = prep_string($_POST['keywords']);
-		$priority = $_POST['priority'];
-		$section = $_POST['section'];
-		$issue = $_POST['issue'];
-		$published = $_POST['published'];
-		$id	= $_POST['id'];
+		$article['title'] = prep_string($_POST['title']);
+		$article['subtitle'] = prep_string($_POST['subtitle']);
+		$article['author'] = prep_string($_POST['author']);
+		$article['author_title'] = prep_string($_POST['author_title']);
+		$article['summary'] = prep_string($_POST['summary']);
+		$article['text'] = prep_string($_POST['text']);
+		$article['keywords'] = prep_string($_POST['keywords']);
+		$article['priority'] = $_POST['priority'];
+		$article['section'] = $_POST['section'];
+		$article['issue'] = $_POST['issue'];
+		$article['published'] = $_POST['published'];
+		$id = $_POST['id'];
 		
-		// Run function
-		$stat = cm_edit_article($title,$subtitle,$author,$author_title,$summary,$text,$keywords,$priority,$section,$issue,$published,$id);
+		$stat = cm_edit_article($article,$id);
+
 		if ($stat == 1) {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
@@ -85,19 +88,20 @@ if ($_GET['action'] == "edit") {
 // If action is new, call add function
 if ($_GET['action'] == "new" && $_POST['text'] != "") { 
 	// Get posted data
-	$title = prep_string($_POST['title']);
-	$subtitle = prep_string($_POST['subtitle']);
-	$author = prep_string($_POST['author']);
-	$author_title = prep_string($_POST['author_title']);
-	$summary = prep_string($_POST['summary']);
-	$text = prep_string($_POST['text']);
-	$keywords = prep_string($_POST['keywords']);
-	$priority = $_POST['priority'];
-	$section = $_POST['section'];
-	$issue = $_POST['issue'];
-	$published = $_POST['published'];		
-	// Run function
-	$stat = cm_add_article($title,$subtitle,$author,$author_title,$summary,$text,$keywords,$priority,$section,$issue,$published);
+	$article['title'] = prep_string($_POST['title']);
+	$article['subtitle'] = prep_string($_POST['subtitle']);
+	$article['author'] = prep_string($_POST['author']);
+	$article['author_title'] = prep_string($_POST['author_title']);
+	$article['summary'] = prep_string($_POST['summary']);
+	$article['text'] = prep_string($_POST['text']);
+	$article['keywords'] = prep_string($_POST['keywords']);
+	$article['priority'] = $_POST['priority'];
+	$article['section'] = $_POST['section'];
+	$article['issue'] = $_POST['issue'];
+	$article['published'] = $_POST['published'];		
+
+	$stat = cm_add_article($article);
+
 	if ($stat == 1) {
 		header("Location: $pmodule.php?msg=added");
 		exit;
@@ -114,44 +118,45 @@ if ($mode == "edit") {
 	$query = "SELECT * FROM cm_articles ";
 	$query .= " WHERE id = $id";
 	// Security Measure
-	if ($restrict_section != "false") {
-		$section = $restrict_section;
-		$query .= " AND section_id = '$section'";
+	if (is_numeric(cm_auth_restrict('restrict_section')))
+	{
+		$section = cm_auth_restrict('restrict_section');
+		$query .= " AND section_id = $section";
 	}
-	if ($restrict_issue == "current") {
-		$issue = $current_issue_id;
-		$query .= " AND issue_id = '$issue'";
+	if (cm_auth_restrict('restrict_issue') == "current")
+	{
+		$issue = cm_current_issue('id');
+		$query .= " AND issue_id = $issue";
 	}
-	if ($restrict_issue == "next") {
-		$issue = $next_issue_id;
-		$query .= " AND issue_id = '$issue'";
+	if (cm_auth_restrict('restrict_issue') == "next")
+	{
+		$issue = cm_next_issue('id');
+		$query .= " AND issue_id = $issue";
 	}
 	
 	// Run Query
-	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
+	$result = cm_run_query($query);
 	
 	// If Array comes back empty, produce error
-	if ($result_row_count != 1) {
+	if ($result->RecordCount() != 1) {
 		cm_error("Article doesn't exist, or you do not have permission to edit it.");
 		exit;
 	}
 		
 	// Define variables
-	$id = $result_array['id'];
-	$section = $result_array['section_id'];
-	$issue = $result_array['issue_id'];
-	$title = $result_array['article_title'];
-	$subtitle = $result_array['article_subtitle'];
-	$summary = $result_array['article_summary'];
-	$text = $result_array['article_text'];
-	$keywords = $result_array['article_keywords'];
-	$author = $result_array['article_author'];
-	$author_title = $result_array['article_author_title'];
-	$priority = $result_array['article_priority']; 
-	$published = $result_array['article_publish'];
-	$edited = $result_array['article_edit'];
+	$id = $result->Fields('id');
+	$section = $result->Fields('section_id');
+	$issue = $result->Fields('issue_id');
+	$title = $result->Fields('article_title');
+	$subtitle = $result->Fields('article_subtitle');
+	$summary = $result->Fields('article_summary');
+	$text = $result->Fields('article_text');
+	$keywords = $result->Fields('article_keywords');
+	$author = $result->Fields('article_author');
+	$author_title = $result->Fields('article_author_title');
+	$priority = $result->Fields('article_priority'); 
+	$published = $result->Fields('article_publish');
+	$edited = $result->Fields('article_edit');
 }
 
 // Load selected submitted article for posting
@@ -160,24 +165,20 @@ if (is_numeric($_REQUEST['submitted_id']))
     
     $submitted_id = $_REQUEST['submitted_id'];
     
-    // Query
     $query = "SELECT * FROM cm_submitted WHERE id = '$submitted_id'; ";  
 
-	// Run Query
-	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
+	$result = cm_run_query($query);
 	
-	// If Array comes back empty, produce error
-	if ($result_row_count != 1) {
+	// If empty
+	if ($result->RecordCount() != 1 || cm_auth_restrict('submitted-view') == "false") {
 		cm_error("Article doesn't exist, or you do not have permission to edit it.");
 		exit;
 	}
 
     // Define variables
-	$title = $result_array['submitted_title'];
-	$text = $result_array['submitted_text'];
-	$author = $result_array['submitted_author'];
+	$title = $result->Fields('submitted_title');
+	$text = $result->Fields('submitted_text');
+	$author = $result->Fields('submitted_author');
 
 
 }
@@ -196,7 +197,7 @@ get_cm_header();
       <br />
       <input type="text" name="keywords" id="keywords" value="<?php echo htmlentities($keywords, ENT_QUOTES, 'UTF-8'); ?>" />
     </p>
-    <?php if ($restrict_section == "false") { ?>
+    <?php if (cm_auth_restrict('restrict_section') == "false") { ?>
     <p>
       <label for="section">Section</label>
       <br />
@@ -207,7 +208,7 @@ get_cm_header();
     <?php } else { ?>
     <input type="hidden" name="section" id="section" value="<?php echo $section; ?>" />
     <?php } ?>
-<?php if ($restrict_issue == "false") { ?>
+<?php if (cm_auth_restrict('restrict_issue') == "false") { ?>
     <p>
       <label for="issue">Issue</label>
       <br />
@@ -222,7 +223,7 @@ get_cm_header();
     <p> <strong>Last Edited</strong><br />
       <code><?php echo $edited; ?></code> </p>
     <?php } ?>
-<?php if ($restrict_issue == "false") { ?>
+<?php if (cm_auth_restrict('restrict_issue') == "false") { ?>
     <p>
       <label for="published">Publish Timestamp</label>
       <br />
@@ -249,7 +250,7 @@ get_cm_header();
 	  	<option value="12" <?php if ($priority == 12) { echo "selected"; } ?>>12</option>
 	  	<option value="13" <?php if ($priority == 13) { echo "selected"; } ?>>13</option>										
 	  	<option value="14" <?php if ($priority == 14) { echo "selected"; } ?>>14</option>
-	  	<option value="15" <?php if ($priority == 15 || $priority == "") { echo "selected"; } ?>>15 -- Lowest</option>		
+	  	<option value="15" <?php if ($priority == 15 || !is_numeric($priority)) { echo "selected"; } ?>>15 -- Lowest</option>		
 	  </select>
     </p>
     <strong>Linked Media</strong>
@@ -319,7 +320,7 @@ if ($mode != "new") { ?>
 <legend>Story Preview</legend>
 <h3><?php echo $title; ?></h3>
 <h4><?php echo $subtitle; ?></h4>
-<p><cite><?php echo $author; if ($author_title != "") { echo ", $author_title"; } ?></cite></p>
+<p><cite><?php echo $author; if (!empty($author_title)) { echo ", $author_title"; } ?></cite></p>
 <?php echo autop($text); ?>
 </fieldset>
 <h2>Delete Article <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>

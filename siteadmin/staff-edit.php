@@ -18,7 +18,7 @@ if ($_GET["action"] != "") {
 }
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {
+if ($_GET['action'] == "delete" && !empty($_POST['delete-id'])) {
 	$id = $_POST['delete-id'];
 	$stat = cm_delete_user($id);
 	if ($stat == 1) {
@@ -31,40 +31,49 @@ if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {
 }
 
 // If action is edit, call edit function
-if ($_GET['action'] == "edit") { 
-	if ($_POST['id'] != "") {
+if ($_GET['action'] == "edit")
+{ 
+	if (is_numeric($_POST['id']))
+	{
 		// Get posted data
-		$id = $_POST['id'];
-		$login = prep_string($_POST['login']);
-		$password = prep_string($_POST['password']);
-		$first_name = prep_string($_POST['first_name']);
-		$middle_name = prep_string($_POST['middle_name']);
-		$last_name = prep_string($_POST['last_name']);
-		$job_title = prep_string($_POST['job_title']);
-		$email = prep_string($_POST['email']);
-		$telephone = prep_string($_POST['telephone']);
-		$mobile = prep_string($_POST['mobile']);
-		$classification = prep_string($_POST['classification']);
-		$address = prep_string($_POST['address']);
-		$city = prep_string($_POST['city']);
-		$state = prep_string($_POST['state']);
-		$zipcode = prep_string($_POST['zipcode']);
-		$im_aol = prep_string($_POST['im_aol']);
-		$im_msn = prep_string($_POST['im_msn']);
-		$im_yahoo = prep_string($_POST['im_yahoo']);
-		$im_jabber = prep_string($_POST['im_jabber']);
-		$profile = prep_string($_POST['profile']);	
+
+		$user['login'] = prep_string($_POST['login']);
+		$user['password'] = prep_string($_POST['password']);
+		$user['first_name'] = prep_string($_POST['first_name']);
+		$user['middle_name'] = prep_string($_POST['middle_name']);
+		$user['last_name'] = prep_string($_POST['last_name']);
+		$user['job_title'] = prep_string($_POST['job_title']);
+		$user['email'] = prep_string($_POST['email']);
+		$user['telephone'] = prep_string($_POST['telephone']);
+		$user['mobile'] = prep_string($_POST['mobile']);
+		$user['classification'] = prep_string($_POST['classification']);
+		$user['address'] = prep_string($_POST['address']);
+		$user['city'] = prep_string($_POST['city']);
+		$user['state'] = prep_string($_POST['state']);
+		$user['zipcode'] = prep_string($_POST['zipcode']);
+		$user['im_aol'] = prep_string($_POST['im_aol']);
+		$user['im_msn'] = prep_string($_POST['im_msn']);
+		$user['im_yahoo'] = prep_string($_POST['im_yahoo']);
+		$user['im_jabber'] = prep_string($_POST['im_jabber']);
+		$user['profile'] = prep_string($_POST['profile']);	
+		
 		$password_new = prep_string($_POST['password_new']);
 		$password_confirm = prep_string($_POST['password_confirm']);
-		if ($password_new == "$password_confirm" && $password_new != "") {
-			$password = md5($password_new);
+		
+		if ($password_new == "$password_confirm" && !empty($password_new))
+		{
+			$user['password'] = md5($password_new);
 		}
-		if ($password_new != "$password_confirm") {
+		if ($password_new != "$password_confirm")
+		{
 			cm_error("Passwords did not match.");
 			exit;
 		}
-		$stat = cm_edit_user($login,$password,$first_name,$middle_name,$last_name,$job_title,$email,$telephone,$mobile,$address,$city,$state,$zipcode,$im_aol,$im_msn,$im_yahoo,$im_jabber,$profile,$id);
-		if ($stat == 1) {
+		$id = $_POST['id'];
+
+		$stat = cm_edit_user($user,$id);
+		if ($stat == 1)
+		{
 			header("Location: $pmodule.php?msg=updated");
 			exit;
 		} else {
@@ -78,36 +87,38 @@ if ($_GET['action'] == "edit") {
 }
 
 // If action is add, call add function
-if ($_GET['action'] == "add" && $_POST['login'] != "") { 
+if ($_GET['action'] == "add" && !empty($_POST['login'])) { 
 	// Get posted data
-	$login = prep_string($_POST['login']);
-	$first_name = prep_string($_POST['first_name']);
-	$middle_name = prep_string($_POST['middle_name']);
-	$last_name = prep_string($_POST['last_name']);
-	$job_title = prep_string($_POST['job_title']);
-	$email = prep_string($_POST['email']);
-	$telephone = prep_string($_POST['telephone']);
-	$mobile = prep_string($_POST['mobile']);
-	$address = prep_string($_POST['address']);
-	$city = prep_string($_POST['city']);
-	$state = prep_string($_POST['state']);
-	$zipcode = prep_string($_POST['zipcode']);
-	$im_aol = prep_string($_POST['im_aol']);
-	$im_msn = prep_string($_POST['im_msn']);
-	$im_yahoo = prep_string($_POST['im_yahoo']);
-	$im_jabber = prep_string($_POST['im_jabber']);
-	$profile = prep_string($_POST['profile']);
+	$user['login'] = prep_string($_POST['login']);
+	$user['first_name'] = prep_string($_POST['first_name']);
+	$user['middle_name'] = prep_string($_POST['middle_name']);
+	$user['last_name'] = prep_string($_POST['last_name']);
+	$user['job_title'] = prep_string($_POST['job_title']);
+	$user['email'] = prep_string($_POST['email']);
+	$user['telephone'] = prep_string($_POST['telephone']);
+	$user['mobile'] = prep_string($_POST['mobile']);
+	$user['classification'] = prep_string($_POST['classification']);
+	$user['address'] = prep_string($_POST['address']);
+	$user['city'] = prep_string($_POST['city']);
+	$user['state'] = prep_string($_POST['state']);
+	$user['zipcode'] = prep_string($_POST['zipcode']);
+	$user['im_aol'] = prep_string($_POST['im_aol']);
+	$user['im_msn'] = prep_string($_POST['im_msn']);
+	$user['im_yahoo'] = prep_string($_POST['im_yahoo']);
+	$user['im_jabber'] = prep_string($_POST['im_jabber']);
+	$user['profile'] = prep_string($_POST['profile']);	
 	$password_new = prep_string($_POST['password_new']);
 	$password_confirm = prep_string($_POST['password_confirm']);
+
 	if ($password_new == "$password_confirm" && $password_new != "") {
-		$password = md5($password_new);
+		$user['password'] = md5($password_new);
 	} else {
 		cm_error("Passwords did not match, or left blank.");
 		exit;
 	}	
-	$stat = cm_add_user($login,$password,$first_name,$middle_name,$last_name,$job_title,$email,$telephone,$mobile,$address,$city,$state,$zipcode,$im_aol,$im_msn,$im_yahoo,$im_jabber,$profile);
+	$stat = cm_add_user($user);
 	if ($stat == 1) {	
-		$user_id = mysql_insert_id();
+		$user_id = $cm_db->Insert_ID();
 		header("Location: staff-access.php?id=$user_id&action=add");
 		exit;
 	} else {
@@ -123,33 +134,31 @@ if ($mode == "edit") {
 	$query = "SELECT * FROM cm_users WHERE cm_users.id = $id;";
 	
 	// Run Query
-	$result = mysql_query($query, $CM_MYSQL) or die(cm_error(mysql_error()));
-	$result_array  = mysql_fetch_assoc($result);
-	$result_row_count = mysql_num_rows($result);
-
-	if ($result_row_count != 1) {
+	$result = cm_run_query($query);
+	
+	if ($result->RecordCount() != 1) {
 		cm_error("User does not exist.");
 	}
 	
-	$id = $result_array['id'];
-	$login = $result_array['user_login'];
-	$password = $result_array['user_password'];
-	$first_name = $result_array['user_first_name'];
-	$middle_name = $result_array['user_middle_name'];
-	$last_name = $result_array['user_last_name'];
-	$job_title = $result_array['user_job_title'];
-	$email = $result_array['user_email'];
-	$telephone = $result_array['user_telephone'];
-	$mobile = $result_array['user_mobile'];
-	$address = $result_array['user_address'];
-	$city = $result_array['user_city'];
-	$state = $result_array['user_state'];
-	$zipcode = $result_array['user_zipcode'];
-	$im_aol = $result_array['user_im_aol'];
-	$im_msn = $result_array['user_im_msn'];
-	$im_yahoo = $result_array['user_im_yahoo'];
-	$im_jabber = $result_array['user_im_jabber'];
-	$profile = $result_array['user_profile'];
+	$id = $result->Fields('id');
+	$login = $result->Fields('user_login');
+	$password = $result->Fields('user_password');
+	$first_name = $result->Fields('user_first_name');
+	$middle_name = $result->Fields('user_middle_name');
+	$last_name = $result->Fields('user_last_name');
+	$job_title = $result->Fields('user_job_title');
+	$email = $result->Fields('user_email');
+	$telephone = $result->Fields('user_telephone');
+	$mobile = $result->Fields('user_mobile');
+	$address = $result->Fields('user_address');
+	$city = $result->Fields('user_city');
+	$state = $result->Fields('user_state');
+	$zipcode = $result->Fields('user_zipcode');
+	$im_aol = $result->Fields('user_im_aol');
+	$im_msn = $result->Fields('user_im_msn');
+	$im_yahoo = $result->Fields('user_im_yahoo');
+	$im_jabber = $result->Fields('user_im_jabber');
+	$profile = $result->Fields('user_profile');
 
 
 }
