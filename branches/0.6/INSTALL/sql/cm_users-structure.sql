@@ -1,0 +1,22 @@
+CREATE TABLE `cm_users` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_login` varchar(25) NOT NULL default '',
+  `user_password` varchar(32) NOT NULL default '',
+  `user_first_name` varchar(40) NOT NULL default '',
+  `user_middle_name` varchar(40) NOT NULL default '',
+  `user_last_name` varchar(40) NOT NULL default '',
+  `user_job_title` varchar(100) NOT NULL default '',
+  `user_email` varchar(100) NOT NULL default '',
+  `user_telephone` varchar(40) NOT NULL default '',
+  `user_mobile` varchar(40) NOT NULL default '',
+  `user_address` varchar(225) NOT NULL default '',
+  `user_city` varchar(40) NOT NULL default '',
+  `user_state` char(3) NOT NULL default '',
+  `user_zipcode` varchar(10) NOT NULL default '',
+  `user_im_aol` varchar(40) NOT NULL default '',
+  `user_im_msn` varchar(40) NOT NULL default '',
+  `user_im_yahoo` varchar(40) NOT NULL default '',
+  `user_im_jabber` varchar(40) NOT NULL default '',
+  `user_profile` text NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Principle user table';

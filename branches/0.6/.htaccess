@@ -1,0 +1,34 @@
+### BEGIN PacerCMS ###
+RewriteEngine On
+
+# To use any of these, simply remove the ''#'' in front of them. Follow the model
+# to create your own. This is very handy for search engines to index your site.
+
+##### Articles & Archives #####
+#RewriteRule ^([0-9]+).htm([0-9]+)?/?$ article.php?id=$1&page=$2 [QSA]
+#RewriteRule ^([0-9]+)-([0-9]+)-([0-9]+).htm?/?$ archives.php?issue=$1-$2-$3 [QSA]
+
+##### RSS Feeds #####
+#Model:
+#RewriteRule ^rss\.xml$ feed.php?id=1
+#RewriteRule ^viewpoints/rss\.xml$ feed.php?id=2
+
+##### Sections #####
+#Model:
+#RewriteRule ^viewpoints* section.php?id=2
+
+##### Pages #####
+#Model:
+#RewriteRule ^about/feedback* feedback.php
+#RewriteRule ^about* page.php?id=1
+#RewriteRule ^advertise* page.php?id=2
+
+##### Submitted #####
+#RewriteRule ^write/feedback* feedback.php
+#RewriteRule ^write/letters* submit.php?mode=letter
+#RewriteRule ^write/comments* submit.php?mode=comments
+#RewriteRule ^write/events* submit.php?mode=bboard
+#RewriteRule ^write/article* submit.php?mode=article
+#RewriteRule ^write* submit.php?mode=article
+
+### END PacerCMS ###

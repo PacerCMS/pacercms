@@ -1,0 +1,174 @@
+/*
+Template: The Pacer
+Description: Design created Spring 2006.
+Author: Stephen Yeargin
+URL: http://stephen.yeargin.com/
+*/
+
+body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt;}
+label {font-weight: bold;}
+h1, h2, h3, h4, h5, h6 {font-family: "Rockwell Bold", Rockwell, Arial, Helvetica, sans-serif;}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {text-decoration: none;}
+hr {clear:both;}
+table {border:1px solid #000; border-collapse:collapse; margin: 10px; font-size:100%; width: 95%;}
+td, th {border:1px solid #000; border-collapse:collapse; vertical-align: middle; padding:7px;}
+th {background-color: #EFA72A; color:#fff;}
+fieldset {border: solid 1px #ccc; margin-bottom:10px;padding-bottom:10px;}
+fieldset p {margin-left:10px;} 
+fieldset ul {text-indent:10px;} 
+legend {font-weight: bold; border: solid 1px #ccc; padding: 5px;}
+label {font-weight:bold;}
+
+/* #### ---- LAYOUT ---- #### */
+
+/* header */
+#header { }
+
+/* nameplate */
+#nameplate { }
+
+/* sectionNameplate */
+#sectionNameplate {display:none;}
+
+
+/* pageTop */
+#pageTop {display:none}
+
+
+/* searchBox */
+#searchBox { display:none; }
+
+/* mainWrap */
+*#mainWrap { clear: both; }
+
+/* sideBar */
+#sideBar { display:none }
+
+
+/* content */
+#content {}
+
+/* footer */
+#footer { }
+
+/* adWideSkyscraper */
+#adWideSkyscraper { display:none; }
+
+/* colWrap */
+.colWrap {clear: both;}
+
+/* fullCol */
+.fullCol { width: 620px;}
+
+/* leftCol */
+.leftCol {float: left; width: 305px; margin-right: 10px;}
+
+/* rightCol */
+.rightCol {float: left; width: 305px;}
+
+/* biggerCol */
+.biggerCol {float: left; width: 305px; margin-right: 15px;}
+
+/* smallerCo */
+.smallerCol {float: left; width: 300px;}
+
+/* bigCol */
+.bigCol {float: left; width: 405px; margin-right: 15px;}
+
+/* smallCol */
+.smallCol {float: left; width: 200px;}
+
+/* fullCol */
+.fullCol {width:100%; clear:both;}
+.fullCol p.byline {padding: 7px 0 7px 0; border-top: solid 1px #ccc; border-bottom: solid 1px #ccc; width: 300px; font-size: 100%; }
+
+/* inlineCol */
+.inlineCol {width: 300px; float: right; margin: 0 0 20px 10px; display: inline;}
+.inlineCol h4 {font-size: 110%; margin: 0 0 0 5px; line-height: 2em;}
+
+
+/* #### ---- FORMATTING ---- #### */
+
+/* Full Story */
+.fullStory p.byline {padding: 7px 0 7px 3px; border-top: solid 1px #ccc; border-bottom: solid 1px #ccc; width: 310px; }
+.fullStory > p:first-child {font-size: 100%; font-weight: bold;}
+
+/* topStory */
+.topStory {clear: both;}
+.topStory h2 { font-size: 175%; margin-top: 15px;}
+.topStory h5 { font-size: 130%; margin-top: 15px; color: #999999; letter-spacing: .25em; text-align: center;}
+.topStory p {font-size: 125%;}
+.topStory p.byline {padding: 7px 0 7px 3px; border-top: solid 1px #ccc; border-bottom: solid 1px #ccc; width: 300px; font-size: 100%; }
+.topStory p.moreLink {text-align: right; font-weight: bold; font-size: 100%;}
+
+/* otherStory */
+.otherStory {}
+.otherStory p.summary {text-align:left; font-size: 100%;}
+.otherStory p.moreLink {text-align:right; font-size: 100%; font-width: bold;}
+
+/* summaries */
+.summaries {clear:both;}
+.summaries h4 { margin-right: 10px; border-bottom: solid 1px #ccc; line-height; 1em; margin-bottom: 2px; font-size: 120%;}
+.summaries h4 a { color: #000;}
+.summaries ul { margin: 0; padding: 0;}
+.summaries li {line-height: 1.2; list-style-type: none; display: block; margin: 0 5px 2px 5px; padding: 5px 0 0 15px;}
+.summaries li {background: transparent url(images/gifs/list_dot.gif) 0 7px no-repeat; } /* GIF fixed later */
+.summaries li a {font-weight: bold; font-size: 90%;}
+
+/* mediaImage */
+.mediaImage {text-align: left;}
+.mediaImage p {font-weight: bold; text-align: center;}
+.mediaImage p.image img {border: solid 1px #000;}
+.mediaImage p.imageCredit {text-align: right; font-size: 80%;}
+.mediaImage p.imageCaption {text-align: left; font-size: 90%;}
+
+/* sectionHeadlines */
+.sectionHeadlines h4 a { color: #000;}
+.sectionHeadlines { font-weight: bold; font-size: 90%; background-color: #fff; border-width: 4px 1px 1px 1px; border-style: solid; border-color: #003399; margin-bottom: 10px;}
+.sectionHeadlines ul { margin: 0 0 10px 0; padding: 0;}
+.sectionHeadlines li { line-height: 1.2; list-style-type: none; display: block; margin: 0 0 2px 5px; padding: 5px 0 0 15px;}
+.sectionHeadlines li { background: transparent url(images/gifs/list_dot.gif) 0 7px no-repeat; } /* GIF fixed later */
+
+/* homeSidebar */
+.homeSidebar {padding: 5px; border-left: solid 1px #ccc; border-bottom: solid 1px #ccc; margin-bottom: 10px;}
+.homeSidebar p {font-size: 90%;}
+.homeSidebar .divider {border-top:solid 1px #FF6908; height: 1px; margin:2px 0 2px 0; clear: both;}
+.homeSidebar .divider hr {display: none; margin: 0; padding: 0;}
+.homeSidebar a img { border: 0; }
+
+/* sitePoll  */
+.sitePoll ul { margin: 0; padding: 0; }
+.sitePoll li { line-height: 1em; list-style-type: none; display: block; margin: 0 0 2px 0; padding: 5px 0 0 20px; }
+.sitePoll li input { margin-left: -20px; }
+.sitePoll li label { font-weight: normal; font-size: 90%; }
+.sitePoll p.submit { text-align: center; }
+.sitePoll p.question {text-align: left; }
+.sitePoll input.button {1px; width: 75%; border: solid 1px #000;}
+.sitePoll h4 { font-size: 120%; margin-top: 10px; color: #999999; letter-spacing: .25em; text-align: center;}
+
+/* sectionSidebar */
+.sectionSidebar {padding: 5px; border-left: solid 1px #ccc; border-bottom: solid 1px #ccc; margin-bottom: 10px;}
+.sectionSidebar p {font-size: 90%;}
+.sectionSidebar .divider {border-top:solid 1px #FF6908; height: 1px; margin:2px 0 2px 0; clear: both;}
+.sectionSidebar .divider hr {display: none; margin: 0; padding: 0;}
+
+/* moreLink */
+.moreLink {text-align: right; font-weight: bold;}
+
+/* rssFeed */
+.rssFeed { background: transparent url(images/feed_icon.small.png) no-repeat; line-height: 1.25em; padding-left: 16px; }
+
+/* sectionNameplate */
+.sectionNameplate {font-size: 200%; line-height: 2em; border-bottom: solid 2px #ccc; margin: 0 0 10px 0}
+
+/* finePrint */
+.finePrint {font-size: 80%; padding: 5%; width: 75%; border: solid 1px #ccc;}
+
+/* systemMessage */
+.systemMessage { text-align:center; font-weight:bold; background-color: #ffc; color: #000; padding: 5px; margin-top: 5px; margin-bottom: 5px;  border: 1px solid #ccc; }
+
+/* breakingNewse */
+.breakingNews { text-align:center; font-weight:bold; background-color: #f00; color: #fff !important; padding: 5px; text-transform: uppercase; }
+
+/* articleToolbar */
+.articleToolbar {display:none;}
