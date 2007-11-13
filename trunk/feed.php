@@ -5,18 +5,19 @@ include_once('includes/cm-header.php');
 $issue = current_issue('id');
 
 // Switch sections
-if (is_numeric($_GET['id'])) {
+if (is_numeric($_GET['id']))
+{
 	// Grab selected section
 	$section = $_GET['id'];
     $smarty->assign("section_name", section_info('name', $_GET['id']) );
 	$feed_wc .= " WHERE section_id = '$section' AND issue_id = '$issue' ";
 } elseif ($_GET['show'] == 'all') {
 	// Show all sections
-	$feed_wc .= " WHERE issue_id = '$issue' ";
+	$feed_wc .= " WHERE issue_id = $issue ";
 } else {
 	// Default to cover section
-	$feed_wc .= " WHERE section_id = '1' AND issue_id = '$issue' ";
-};
+	$feed_wc .= " WHERE section_id = 1 AND issue_id = $issue ";
+}
 
 /*=======================
     Feed Articles
@@ -24,12 +25,15 @@ if (is_numeric($_GET['id'])) {
 $query = "SELECT a.id, a.article_title, a.article_summary, a.article_author, a.article_publish, s.section_name ";
 $query .= " FROM cm_articles a INNER JOIN cm_sections s ON a.section_id = s.id ";	
 $query .= $feed_wc;
-$query .= " ORDER BY s.section_priority, a.article_priority ASC;";
+$query .= " ORDER BY s.section_priority, a.article_priority ASC; ";
 
 // Run Query
-$result = $db->Execute($query);
-if (!empty($result)) {
-    while ($array = $result->GetArray()) {        $feed_items = $array;    }
+$result = run_query($query);
+
+if (!empty($result))
+{
+    while ($array = $result->GetArray())
+    {        $feed_items = $array;    }
 }
 
 // Assign variables

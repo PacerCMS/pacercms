@@ -187,7 +187,7 @@ get_cm_header();
 
 ?>
 
-<h2><a href="<?php echo $pmodule; ?>.php?">Article Manager</a></h2>
+<h2><a href="<?php echo $pmodule; ?>.php">Article Manager</a></h2>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend>Article Editor</legend>

@@ -23,7 +23,7 @@ if (ereg("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $_GET['issue']))
 {
     $issue_date = $_GET['issue'];
     $query = "SELECT issue_volume FROM cm_issues WHERE issue_date = '$issue_date';";
-    $result = $db->Execute($query);    
+    $result = run_query($query);    
     $volume = $result->Fields(issue_volume);
 }
 
@@ -33,7 +33,7 @@ if (is_numeric($_GET['volume']))
 {
     $volume = $_GET['volume'];
     $query = "SELECT issue_date FROM cm_issues WHERE issue_volume = '$volume';";
-    $result = $db->Execute($query);    
+    $result = run_query($query);    
     $issue_date = $result->Fields(issue_date);
 }
 
@@ -43,7 +43,7 @@ if (ereg("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $_GET['issue']) && is_numeric($
 {
     $issue_date = $_GET['issue'];
     $query = "SELECT issue_volume FROM cm_issues WHERE issue_date = '$issue_date';";
-    $result = $db->Execute($query);    
+    $result = run_query($query);    
     $volume = $result->Fields(issue_volume);
 }
 
@@ -63,11 +63,12 @@ $query .= " GROUP BY issue_volume";
 $query .= " ORDER BY issue_volume DESC;";
 
 // Run Query
-$result = $db->Execute($query);while ($array = $result->GetArray()) {    $volume_list = $array;}
+$result = run_query($query);
+while ($array = $result->GetArray())
+{    $volume_list = $array;}
 
 // Assign variables
 $smarty->assign("volume_list", $volume_list);
-
 
 /*=======================
     Issue List
@@ -79,11 +80,13 @@ $query .= " AND issue_date < '$next_issue_date'";
 $query .= " ORDER BY issue_date ASC;";
 
 // Run query
-$result = $db->Execute($query);while ($array = $result->GetArray()) {    $issue_list = $array;}
+$result = run_query($query);
+
+while ($array = $result->GetArray())
+{    $issue_list = $array;}
 
 // Assign variables
 $smarty->assign("issue_list", $issue_list);
-
 
 /*=======================
     Article List
@@ -96,7 +99,7 @@ $query .= " WHERE issue_date = '$issue_date' AND issue_date < '$next_issue_date'
 $query .= " ORDER BY section_priority ASC, article_priority ASC;";
 
 // Run query
-$result = $db->Execute($query);
+$result = run_query($query);
 
 // Error if empty
 if (empty($result))
@@ -112,7 +115,8 @@ $issue_number = $result->Fields(issue_number);
 // Assign variables
 $smarty->assign("issue_volume", $issue_volume );
 $smarty->assign("issue_number", $issue_number );
-while ($array = $result->GetArray()) {    $article_list = $array;}
+while ($array = $result->GetArray())
+{    $article_list = $array;}
 
 // Assign variables
 $smarty->assign("article_list", $article_list);

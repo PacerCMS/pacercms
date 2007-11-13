@@ -8,11 +8,10 @@ if (is_numeric($_GET['id'])) {
 } else {
 	cm_error("Could not find article");
 	exit;
-};
+}
 
 $next_issue = next_issue("id");
 $current_issue = current_issue("id");
-
 
 /*=======================
     Selected Article
@@ -22,7 +21,7 @@ $query .= " FROM cm_articles ";
 $query .= " WHERE id = $article_id AND issue_id < $next_issue;";
 
 // Run query
-$result = $db->Execute($query);
+$result = run_query($query);
 
 // Define variables
 $article_id = $result->Fields(id);
@@ -54,8 +53,8 @@ $smarty->assign("article_section_url", section_info('url', $article_section_id) 
 $smarty->assign("section_name", section_info('name', $article_section_id) );
 $smarty->assign("section_url", section_info('url', $article_section_id) );
 
-
-if (isset($_POST['recipient-email'])) {
+if (isset($_POST['recipient-email']))
+{
     // Build the e-mail message
 	$smarty->assign("sender_name", $_POST['sender']);
 	
@@ -72,7 +71,7 @@ if (isset($_POST['recipient-email'])) {
 	} else {
 		header("Location: $PHP_SELF?" . $_SERVER['QUERY_STRING'] . "&msg=fail");
 		exit;
-	};
+	}
 }
 
 $smarty->assign("preview_email", autop($smarty->fetch("send-email.tpl")) );
