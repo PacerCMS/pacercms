@@ -3,16 +3,16 @@
 include_once('includes/cm-header.php');
 
 /* If id is numeric, use it; else error */
-if (is_numeric($_GET['id'])) {
+if (is_numeric($_GET['id']))
+{
 	$article_id = $_GET['id'];
 } else {
 	cm_error("Could not find article");
 	exit;
-};
+}
 
 $next_issue = next_issue("id");
 $current_issue = current_issue("id");
-
 
 /*=======================
     Selected Article
@@ -22,7 +22,7 @@ $query .= " FROM cm_articles ";
 $query .= " WHERE id = $article_id AND issue_id < $next_issue;";
 
 // Run query
-$result = $db->Execute($query);
+$result = run_query($query);
 
 // Define variables
 $article_id = $result->Fields(id);

@@ -2,18 +2,22 @@
 // Loads everything needed to run PacerCMS
 include_once('includes/cm-header.php');
 
-if ($_GET['mode'] != "") {
+if ($_GET['mode'] != "")
+{
 	$mode = $_GET['mode'];
 } else {;
 	$mode = "letter";
-};
+}
 
 // If posted
-if (!empty($_POST['text'])) {
-	if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['title'])) {
+if (!empty($_POST['text']))
+{
+	if (empty($_POST['name']) || empty($_POST['email']) || empty($_POST['title']))
+	{
 		header("Location: $PHP_SELF?msg=missing");
 		exit;
 	}
+
 	$submitted_title = prep_string($_POST['title']);
 	$submitted_text = prep_string($_POST['text']);
 	$submitted_keyword = strtoupper($mode);
@@ -43,8 +47,8 @@ if (!empty($_POST['text'])) {
 
 	$stat = run_query($query);
 
-	if ($stat) {
-	   
+	if ($stat)
+	{
 	   $recipient = site_info('email');
 	   $subject = stripslashes($submitted_title);
 	   $message = stripslashes($smarty->fetch("submit-email.tpl"));
@@ -57,14 +61,13 @@ if (!empty($_POST['text'])) {
 	} else {
 		header("Location: $PHP_SELF?msg=failed");
 		exit;
-	};	
-};
+	}	
+}
 
 $page_title = "Submit";
 
 // Assign variables
 $smarty->assign("page_title", $page_title);
-
 
 // Render
 $smarty->display("submit.tpl");

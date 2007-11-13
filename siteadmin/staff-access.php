@@ -37,8 +37,8 @@ if (!empty($_POST['user_id'])) {
 	$restrict_issue = $_POST['restrict-issue'];
 	$restrict_section = $_POST['restrict-section'];
 
-	// Do actions
-	$stat = cm_clear_access($user_id);
+	$stat = cm_clear_access($user_id)
+	
 	if ($stat != 1) {
 		cm_error("Error in 'cm_clear_access' function.");
 		exit;

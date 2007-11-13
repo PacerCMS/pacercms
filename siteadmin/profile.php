@@ -32,7 +32,6 @@ if ($_GET['action'] == "edit")
 		$user['im_yahoo'] = prep_string($_POST['im_yahoo']);
 		$user['im_jabber'] = prep_string($_POST['im_jabber']);
 		$user['profile'] = prep_string($_POST['profile']);	
-		$id = $_POST['id'];
 		
 		$password_new = $_POST['password_new'];
 		$password_confirm = $_POST['password_confirm'];
@@ -44,7 +43,9 @@ if ($_GET['action'] == "edit")
 			cm_error("Passwords did not match.");
 			exit;
 		}
-		$stat = cm_edit_profile($user,$id);
+		
+		$stat = cm_edit_profile($user);
+		
 		if ($stat == 1) {
 			header("Location: $module.php?msg=updated");
 			exit;
@@ -210,7 +211,6 @@ if ($msg == "updated") {
   </p>
   <p>
     <input type="submit" value="Update Profile" name="update" id="update" class="button" />
-    <input name="id" type="hidden" id="id" value="<?php echo $id; ?>" />
     <input type="hidden" name="login" id="login" value="<?php echo $login; ?>" />
     <input type="hidden" name="password" id="password" value="<?php echo $password; ?>" />
     <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />

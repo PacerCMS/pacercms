@@ -17,15 +17,16 @@ $query .= " WHERE section_id = '1' AND issue_id = '$current_issue_id' ";
 $query .= " ORDER BY article_priority ASC;";
 
 // Run query
-$result = $db->Execute($query);
-while ($array = $result->GetArray()) {    $cover_articles = $array;}
+$result = run_query($query);
+
+while ($array = $result->GetArray())
+{    $cover_articles = $array;}
 
 // Locates the first story
 $top_story = $cover_articles[0][id]; 
 
 // Assign variables
 $smarty->assign("cover_articles", $cover_articles);
-
 
 /*=======================
     Top Artice Images
@@ -36,13 +37,14 @@ $query .= " AND (media_type = 'jpg' OR media_type = 'png' OR media_type = 'gif')
 $query .= " ORDER BY id ASC;";
 
 // Run query
-$result = $db->Execute($query);
-if (!empty($result)) {    while ($array = $result->GetArray()) {        $top_article_images = $array;    }
+$result = run_query($query);
+if (!empty($result))
+{    while ($array = $result->GetArray())
+    {        $top_article_images = $array;    }
 }
 
 // Assign variables
 $smarty->assign("top_article_images", $top_article_images);
-
 
 /*=======================
     Cover Article SWFs
@@ -53,14 +55,15 @@ $query .= " AND (media_type = 'swf') ";
 $query .= " ORDER BY id ASC;";
 
 // Run query
-$result = $db->Execute($query);
-if (!empty($result)) {
+$result = run_query($query);
+
+if (!empty($result))
+{
     while ($array = $result->GetArray()) {        $top_article_swfs = $array;    }
 }
 
 // Assign variables
 $smarty->assign("top_article_swfs", $top_article_swfs);
-
 
 /*=======================
     Web Poll
@@ -79,7 +82,6 @@ $smarty->assign("poll_r8", get_ballot('response_8', $active_poll) );
 $smarty->assign("poll_r9", get_ballot('response_9', $active_poll) );
 $smarty->assign("poll_r10", get_ballot('response_10', $active_poll) );
 
-
 /*=======================
     Section Summaries
 =======================*/
@@ -90,7 +92,6 @@ foreach ( section_list('array') as $section_info )
     $smarty->assign("section_url_$id", section_info('url', $id) );
     $smarty->assign("section_summary_$id", section_headlines($id, $current_issue_id) );
 }
-
 
 // Render
 $smarty->display("home.tpl");

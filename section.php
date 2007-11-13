@@ -11,8 +11,6 @@ if (is_numeric($_GET['id'])) {
 	exit;
 };
 
-
-
 $current_issue_id = current_issue('id');
 $current_issue_date = current_issue('date');
 
@@ -33,15 +31,14 @@ $query .= " WHERE section_id = '$section_id' AND issue_id = '$current_issue_id' 
 $query .= " ORDER BY article_priority ASC;";
 
 // Run query
-$result = $db->Execute($query);
+$result = run_query($query);
+
 if (!empty($result)) {
     while ($array = $result->GetArray()) {        $section_articles = $array;    }
 }
 
-
 // Assign variables
 $smarty->assign("section_articles", $section_articles);
-
 
 /*=======================
     Section Summaries
@@ -54,20 +51,14 @@ foreach ( section_list('array') as $section_info )
     $smarty->assign("section_summary_$id", section_headlines($id, $current_issue_id) );
 }
 
-
 $smarty->assign("page_title", section_info('name', $section_id) );
-
 
 // Check if a 'section-#.tpl' file exists
 if ( file_exists(TEMPLATES_PATH . "/section-$section_id.tpl") )
 {
-
     // Use the customized section template
     $smarty->display("section-$section_id.tpl");
-
 } else {
-
     // Use the default section template
     $smarty->display("section.tpl");
-
 }

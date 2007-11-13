@@ -62,7 +62,7 @@ $query .= " FROM cm_articles ";
 $query .= " WHERE id = '$related_article' LIMIT 1;";
 
 // Run query
-$result = $db->Execute($query);
+$result = run_query($query);
 
 $smarty->assign("related_article_id", $result->Fields(id) );
 $smarty->assign("related_article_title", $result->Fields(article_title) );

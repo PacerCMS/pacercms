@@ -2,14 +2,17 @@
 // Loads everything needed to run PacerCMS
 include_once('includes/cm-header.php');
 
-if (!empty($_GET['msg'])) {
+if (!empty($_GET['msg']))
+{
     $msg = $_GET['msg'];
     $smarty->assign("status_message", $msg );
 }
 
 // If posted
-if (!empty($_POST['text'])) {
-	if (empty($_POST['name']) || empty($_POST['email'])) {
+if (!empty($_POST['text']))
+{
+	if (empty($_POST['name']) || empty($_POST['email']))
+	{
 		header("Location: $PHP_SELF?msg=missing");
 		exit;
 	}
@@ -30,21 +33,20 @@ if (!empty($_POST['text'])) {
 	
 	// Send the e-mail notification
 	$sendit = mail($recipient, $subject, $message, $header);
-	if ($sendit == 1) {
+	if ($sendit == 1)
+	{
 		header("Location: $PHP_SELF?" . $_SERVER['QUERY_STRING'] . "&msg=submitted");
 		exit;
 	} else {
 		header("Location: $PHP_SELF?" . $_SERVER['QUERY_STRING'] . "&msg=failed");
 		exit;
-	};
-};
-
+	}
+}
 
 /* Header Configuration */
 $page_title = "Feedback";
 $smarty->assign("section_title", $page_title);
 $smarty->assign("page_title", $page_title);
-
 
 // Render page
 $smarty->display("feedback.tpl");

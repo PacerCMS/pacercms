@@ -3,19 +3,20 @@
 include_once('includes/cm-header.php');
 
 /* If id is numeric, use it; else 1 */
-if (is_numeric($_GET['id'])) {
+if (is_numeric($_GET['id']))
+{
 	$page_id = $_GET['id'];
 } else {
 	$page_id = 1; // Default
-};
+}
 
 // Query
 $query = "SELECT * FROM cm_pages ";
-$query .= " WHERE id = '$page_id' ";
-$query .= " LIMIT 0,1;";
+$query .= " WHERE id = $page_id ";
+$query .= " LIMIT 0,1; ";
 
 // Run Query
-$result = $db->Execute($query);
+$result = run_query($query);
 
 $page_title = $result->Fields(page_title);
 $page_short_title = $result->Fields(page_short_title);

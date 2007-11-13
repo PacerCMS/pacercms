@@ -6,7 +6,8 @@ $module = "submitted-browse";
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
 
-if ($_COOKIE["$module-issue"] == "") {
+if (!is_numeric($_COOKIE["$module-issue"]))
+{
 	setcookie("$module-issue", cm_next_issue('id')); // Current Issue
 	$issue = cm_next_issue('id');
 } else {
@@ -14,7 +15,8 @@ if ($_COOKIE["$module-issue"] == "") {
 }
 
 // Switch issues
-if (is_numeric($_GET['issue'])) {
+if (is_numeric($_GET['issue']))
+{
 	$issue = $_GET['issue'];
 	if (cm_issue_info("id",$issue) == "") {
 		cm_error("The selected issue could not be loaded.");
@@ -23,6 +25,24 @@ if (is_numeric($_GET['issue'])) {
 	header("Location: $module.php");
 	exit;
 }
+
+// Moderate submitted articles
+if (is_array($_POST['moderate']) && cm_auth_restrict('submitted-edit'))
+{
+    foreach ($_POST['moderate'] as $id)
+    {
+        if (is_numeric($id)) { $stat = cm_delete_submitted($id); }
+    }
+    if ($stat == 1)
+    {
+        header("Location: $module?msg=moderate");
+        exit;
+    } else {
+        cm_error("There was an error in the 'cm_delete_submitted' function.");
+        exit;
+    }
+}
+
 
 
 // Database Query
@@ -42,6 +62,8 @@ $msg = $_GET['msg'];
 if ($msg == "added") { echo "<p class=\"infoMessage\">Submitted article added.</p>"; }
 if ($msg == "updated") { echo "<p class=\"infoMessage\">Submitted updated.</p>"; }
 if ($msg == "deleted") { echo "<p class=\"alertMessage\">Submitted article deleted.</p>"; }
+if ($msg == "moderate") { echo "<p class=\"alertMessage\">Submitted article(s) deleted.</p>"; }
+
 ?>
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-form"; ?>">
@@ -61,12 +83,16 @@ if ($msg == "deleted") { echo "<p class=\"alertMessage\">Submitted article delet
   </div>
   </fieldset>
 </form>
-<form action="article-edit.php" method="get" name="QuickEdit" id="QuickEdit">
+<form action="<?php echo $module; ?>.php" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
   <legend><?php echo "Viewing: " . cm_issue_info("issue_date", $issue) . " (Volume " . cm_issue_info("issue_volume", $issue) . ", No. " . cm_issue_info("issue_number", $issue) . ")"; ?></legend>
 <?php if ($result->RecordCount() > 0) { ?>
+
 <table class="<?php echo $module; ?>-table">
   <tr>
+  <?php if (cm_auth_restrict('submitted-edit') == "true") { ?>
+    <th>ID</td>
+  <?php } ?>  
     <th>Sent</th>
     <th>From</th>
     <th>Subject</th>
@@ -87,6 +113,9 @@ foreach ($records as $record) {
   
 ?>
   <tr>
+  <?php if (cm_auth_restrict('submitted-edit') == "true") { ?>
+    <td><input type="checkbox" name="moderate[]" id="moderate-<?php echo $id; ?>" value="<?php echo $id; ?>" /></td>
+  <?php } ?>
     <td><?php echo $sent; ?></td>
     <td><a href="mailto:<?php echo $email; ?>"><?php echo $author; ?></a></td>
     <td><p><a href="submitted-edit.php?id=<?php echo $id; ?>#preview"><strong><?php echo $title; ?></strong></a> - <em><?php echo $keyword;?></em></p>
@@ -103,6 +132,12 @@ foreach ($records as $record) {
   </tr>
 <? } ?>
 </table>
+<?php if (cm_auth_restrict('submitted-edit') == "true") { ?>
+<div style="text-align:right;">
+    <input type="submit" value="Delete Checked Articles" />
+    <input type="reset" value="Clear Selection" />
+</div>
+<?php } ?>
   <?php } else { ?>
   <p>There are no submitted articles for this issue.</p>
   <?php } ?>

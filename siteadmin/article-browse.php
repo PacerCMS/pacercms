@@ -2,8 +2,6 @@
 // Loads everything needed to run PacerCMS
 include('cm-includes/cm-header.php');
 
-//$cm_db->debug = true;
-
 $module = "article-browse";
 $cmodule = "article-edit";
 
@@ -185,7 +183,7 @@ foreach ($records as $article)
       <td><p><?php echo $flag; ?><a href="article-edit.php?id=<?php echo $id; ?>#preview"><strong><?php echo $title; ?></strong></a><small> - <?php echo $author; ?></small></p>
         <?php if ($_COOKIE["$module-summary"] == true) { ?>
         <?php echo autop($summary); ?>
-        <?php if ($show_article_media == "true") { cm_list_media($id,true); } ?>
+        <?php if (cm_auth_restrict('article-media') == "true") { cm_list_media($id,true); } ?>
         <p><strong>Keywords:</strong> <em><?php echo $keywords; ?></em></p>
         <?php	} // End Summary Row ?>
       </td>
@@ -199,14 +197,14 @@ foreach ($records as $article)
         <?php } ?>
       </td>
     </tr>
-<? } ?>
+<?php } ?>
     <?php if (cm_auth_restrict('article-edit') == "true") { ?>
     <tr>
       <td>&nbsp;</td>
       <td class="center"><strong><a href="article-edit.php?action=new">Add an
             Article</a></strong></td>
       <td nowrap class="center">
-        <?php if ($restrict_section == "false" && $restrict_issue == "false") { // Hide Quick Edit ?>
+        <?php if (cm_auth_restrict('restrict_section') == "false" && cm_auth_restrict('restrict_issue') == "false") { // Hide Quick Edit ?>
         <input type="text" name="id" id="id" size="4" maxlength="11" />
         <input type="submit" name="submit-edit" id="submit-edit" value="Quick Edit" />
         <?php } // End Hide Quick Edit?>

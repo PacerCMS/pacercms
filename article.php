@@ -3,17 +3,17 @@
 include_once('includes/cm-header.php');
 
 /* If id is numeric, use it; else error */
-if (is_numeric($_GET['id'])) {
+if (is_numeric($_GET['id']))
+{
 	$article_id = $_GET['id'];
 } else {
     // Error if not numeric
     cm_error("Could not find article");
 	exit;
-};
+}
 
 $next_issue_id = next_issue("id");
 $current_issue_id = current_issue("id");
-
 
 /*=======================
     Selected Article
@@ -23,7 +23,7 @@ $query .= " FROM cm_articles ";
 $query .= " WHERE id = $article_id AND issue_id < $next_issue_id;";
 
 // Run query
-$result = $db->Execute($query);
+$result = run_query($query);
 
 // Error if empty
 if (empty($result))
@@ -67,8 +67,6 @@ $smarty->assign("issue_date", issue_info('date', $article_issue_id) );
 $smarty->assign("issue_volume", issue_info('volume', $article_issue_id) );
 $smarty->assign("issue_number", issue_info('number', $article_issue_id) );
 
-
-
 /*=======================
     Article Section
 =======================*/
@@ -77,9 +75,11 @@ $query .= " FROM cm_articles ";
 $query .= " WHERE section_id = $article_section_id AND issue_id = $current_issue_id;";
 
 // Run query
-$result = $db->Execute($query);
-if (!empty($result)) {
-    while ($array = $result->GetArray()) {        $section_headlines = $array;    }
+$result = run_query($query);
+if (!empty($result))
+{
+    while ($array = $result->GetArray())
+    {        $section_headlines = $array;    }
 }
 
 // Assign variables
@@ -95,13 +95,12 @@ $query .= " AND (media_type = 'jpg' OR media_type = 'png' OR media_type = 'gif')
 $query .= " ORDER BY id ASC; ";
 
 // Run query
-$result = $db->Execute($query);
+$result = run_query($query);
 if (!empty($result)) {    while ($array = $result->GetArray()) {        $article_images = $array;    }
 }
 
 // Assign variables
 $smarty->assign("article_images", $article_images );
-
 
 /*=======================
     Article SWFs
@@ -112,7 +111,7 @@ $query .= " AND (media_type = 'swf') ";
 $query .= " ORDER BY id ASC; ";
 
 // Run query
-$result = $db->Execute($query);
+$result = run_query($query);
 if (!empty($result)) {    while ($array = $result->GetArray()) {        $article_swfs = $array;
     }
 }
@@ -130,13 +129,14 @@ $query .= " AND (media_type = 'pdf' OR media_type = 'doc' OR media_type = 'wav' 
 $query .= " ORDER BY id ASC; ";
 
 // Run query
-$result = $db->Execute($query);
-if (!empty($result)) {    while ($array = $result->GetArray()) {        $article_related = $array;    }
+$result = run_query($query);
+if (!empty($result))
+{    while ($array = $result->GetArray())
+    {        $article_related = $array;    }
 }
 
 // Assign variables
 $smarty->assign("article_related", $article_related );
-
 
 /*=======================
     Section Summaries
@@ -148,7 +148,6 @@ foreach ( section_list('array') as $section_info )
     $smarty->assign("section_url_$id", section_info('url', $id) );
     $smarty->assign("section_summary_$id", section_headlines($id, $current_issue_id) );
 }
-
 
 // Render
 $smarty->display("article.tpl");
