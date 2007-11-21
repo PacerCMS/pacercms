@@ -8,9 +8,19 @@ if ( file_exists('cm-includes/config.php') ) { $config_file = "cm-includes/confi
 
 if (!empty($config_file))
 {
-    include_once($config_file); // Use chosen config file
-    include_once('classes.php'); // For other functions
-    include_once('functions.php'); // Primary functions
+    // Determine which configuration file to  use
+    include_once($config_file);
+
+    // Include various classes
+    include_once('classes.php');
+
+    // Database connection
+    $cm_db = ADONewConnection(DB_DRIVER);
+    $cm_db->Connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    // Primary functions
+    include_once('functions.php');
+
 } else {
     header("Location: ../INSTALL/cm-config.php ");
     exit;

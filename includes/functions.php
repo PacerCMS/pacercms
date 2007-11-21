@@ -1,13 +1,5 @@
 <?php 
 
-// Database Connection
-$db = ADONewConnection('mysql');
-$db->Connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
-// Start Template Engine
-$smarty = new Smarty_PacerCMS;
-$smarty->caching = USE_TEMPLATE_CACHE;
-
 /**
  * Prints an error message
  *

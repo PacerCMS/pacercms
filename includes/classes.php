@@ -1,10 +1,7 @@
 <?php
 
-require( ADODB_DIR . '/adodb.inc.php'); // Database Layer
-require( SMARTY_DIR . '/Smarty.class.php'); // Smarty Template Engine
-
-
 /* Configure Smarty */
+require( SMARTY_DIR . '/Smarty.class.php');
 class Smarty_PacerCMS extends Smarty
 {   function Smarty_PacerCMS()   {        
         // These automatically get set with each new instance.        $this->Smarty();        $this->template_dir  = TEMPLATES_PATH;
@@ -45,3 +42,7 @@ class Smarty_PacerCMS extends Smarty
 		$this->assign('site_cm_version', CM_VERSION);
 
 	   }}
+
+// Create Smarty object
+$smarty = new Smarty_PacerCMS;
+$smarty->caching = USE_TEMPLATE_CACHE;
