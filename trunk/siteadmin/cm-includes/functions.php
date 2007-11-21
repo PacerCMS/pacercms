@@ -3,10 +3,6 @@
 // Starting sessions
 session_start();
 
-// Database Connection
-$cm_db = ADONewConnection('mysql');
-$cm_db->Connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
 // File handling for templates
 function get_cm_header() { include_once('header.php'); }
 function get_cm_footer() { include_once('footer.php'); }

@@ -85,6 +85,17 @@ switch($step) {
   <p>Below you should enter your database connection details. If you're not sure about these, contact your host. </p>
   <table> 
     <tr> 
+      <th scope="row">Database Platform</th> 
+      <td>
+         <select name="dbplatform" type="text">
+           <option value="mysql">MySQL (recommended)</option>
+           <option value="mysqli">Driver: mysqli</option>           <option value="mysqlt">Driver: mysqlt</option>
+           <option value="fbsql">Driver: fbsql</option>           <option value="sybase_ase">Driver: sybase_ase</option>           <option value="maxdb">Driver: maxdb</option>           <option value="msql">Driver: msql</option>           <option value="mssql">Driver: mssql</option>           <option value="mssqlpo">Driver: mssqlpo</option>           <option value="mysql">Driver: mysql</option>           <option value="mysqli">Driver: mysqli</option>           <option value="mysqlt">Driver: mysqlt</option>           <option value="odbc">Driver: odbc</option>           <option value="postgres">Driver: postgres</option>           <option value="postgres7">Driver: postgres7</option>           <option value="postgres8">Driver: postgres8</option>           <option value="postgres64">Driver: postgres64</option>           <option value="sqlite">Driver: sqlitepro</option>           <option value="sqlitepo">Driver: sqlitepo</option>           <option value="sybase">Driver: sybase</option>
+         </select>
+      </td>
+      <td>The type of database platform (Note: Only tested with MySQL). </td> 
+    </tr> 
+    <tr> 
       <th scope="row">Database Name</th> 
       <td><input name="dbname" type="text" size="25" value="pacercms" /></td>
       <td>The name of the database you want to run PacerCMS in. </td> 
@@ -92,12 +103,12 @@ switch($step) {
     <tr> 
       <th scope="row">User Name</th> 
       <td><input name="uname" type="text" size="25" value="username" /></td>
-      <td>Your MySQL username</td> 
+      <td>Your database username</td> 
     </tr> 
     <tr> 
       <th scope="row">Password</th> 
       <td><input name="pwd" type="text" size="25" value="password" /></td>
-      <td>...and MySQL password.</td> 
+      <td>...and password.</td> 
     </tr> 
     <tr> 
       <th scope="row">Database Host</th> 
@@ -119,12 +130,14 @@ switch($step) {
 	break;
 
 	case 2:
-	$dbname  = trim($_POST['dbname']);
-    $uname   = trim($_POST['uname']);
-    $passwrd = trim($_POST['pwd']);
-    $dbhost  = trim($_POST['dbhost']);
-    $tplfld  = trim($_POST['tplfld']);
+	$dbplatform = trim($_POST['dbplatform']);
+	$dbname     = trim($_POST['dbname']);
+    $uname      = trim($_POST['uname']);
+    $passwrd    = trim($_POST['pwd']);
+    $dbhost     = trim($_POST['dbhost']);
+    $tplfld     = trim($_POST['tplfld']);
     
+    define('DB_PLATFORM', $dbplatform);
     define('DB_DATABASE', $dbname);
     define('DB_USERNAME', $uname);
     define('DB_PASSWORD', $passwrd);
@@ -145,6 +158,11 @@ switch($step) {
         
         switch (substr($line,0,19))
         {
+            case 'define("DB_PLATFORM':
+                $line = str_replace("mysql", $dbplatform, $line);
+                fwrite($handle, $line);
+                echo $line . "<br/>";
+                break;
             case 'define("DB_HOSTNAME':
                 $line = str_replace("localhost", $dbhost, $line);
                 fwrite($handle, $line);

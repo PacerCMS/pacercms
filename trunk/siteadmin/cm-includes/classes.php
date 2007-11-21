@@ -1,6 +1,8 @@
 <?php
 
-require( ADODB_DIR . '/adodb.inc.php'); // Database Layer
+// Database layer
+require( ADODB_DIR . '/adodb.inc.php');
+if (DB_DRIVER == 'DB_DRIVER') { define('DB_DRIVER', 'mysql'); }
 
 /*******************************************
 	Class:	Calendar
