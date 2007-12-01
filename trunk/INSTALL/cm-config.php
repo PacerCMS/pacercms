@@ -88,9 +88,7 @@ switch($step) {
       <th scope="row">Database Platform</th> 
       <td>
          <select name="dbplatform" type="text">
-           <option value="mysql">MySQL (recommended)</option>
-           <option value="mysqli">Driver: mysqli</option>           <option value="mysqlt">Driver: mysqlt</option>
-           <option value="fbsql">Driver: fbsql</option>           <option value="sybase_ase">Driver: sybase_ase</option>           <option value="maxdb">Driver: maxdb</option>           <option value="msql">Driver: msql</option>           <option value="mssql">Driver: mssql</option>           <option value="mssqlpo">Driver: mssqlpo</option>           <option value="mysql">Driver: mysql</option>           <option value="mysqli">Driver: mysqli</option>           <option value="mysqlt">Driver: mysqlt</option>           <option value="odbc">Driver: odbc</option>           <option value="postgres">Driver: postgres</option>           <option value="postgres7">Driver: postgres7</option>           <option value="postgres8">Driver: postgres8</option>           <option value="postgres64">Driver: postgres64</option>           <option value="sqlite">Driver: sqlitepro</option>           <option value="sqlitepo">Driver: sqlitepo</option>           <option value="sybase">Driver: sybase</option>
+           <option value="mysql">MySQL</option>
          </select>
       </td>
       <td>The type of database platform (Note: Only tested with MySQL). </td> 
