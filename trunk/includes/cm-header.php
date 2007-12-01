@@ -7,18 +7,19 @@ define('DB_VERSION', "65");
 // Make sure the config file exists
 if ( file_exists('includes/config.php') )
 {
-    include_once('config.php'); // Define site
+    // Load configuration file
+    include_once('config.php');
 
-    // If constant is undefined
-    if (DB_PLATFORM == 'DB_PLATFORM') { define('DB_PLATFORM', 'mysql'); }
+    // If platform constant is undefined, assume MySQL
+    if (!defined('DB_PLATFORM')) { define('DB_PLATFORM', 'mysql'); }
 
     // Database Connection
     require( ADODB_DIR . '/adodb.inc.php');
     $db = ADONewConnection(DB_PLATFORM);
     $db->Connect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
-    include_once('functions.php'); // Primary functions
-    include_once('classes.php'); // For other functions       
+    include_once('functions.php');
+    include_once('classes.php');     
     
 } else {
     // Redirect to the installer
