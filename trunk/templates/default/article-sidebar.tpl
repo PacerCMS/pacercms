@@ -39,9 +39,7 @@
     </div>
     {/if}
     
-    {if $section_headlines ne ''}
-    <div class="sectionHeadlines">
-        <h4><a href="{$article_section_url}" title="{$article_section_name|escape:'html'}">More {$article_section_name|escape:'html'} Headlines</a></h4>
+	{if $section_headlines ne ''}	  <div class="sectionHeadlines">	    <h4><a href="{$section_url}" title="{$section_name|escape:'html'}">More {$section_name|escape:'html'} Headlines</a></h4>
         <ul>
         {section name="items" loop=$section_headlines}
             <li><a href="{$site_url}/article.php?id={$section_headlines[items].id}">{$section_headlines[items].article_title|escape:'html'}</a></li>
