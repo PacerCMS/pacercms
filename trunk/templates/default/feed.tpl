@@ -3,7 +3,7 @@
 
 <channel>
   <title>{$site_name}{if $section_name ne ''} - {$section_name|escape:'html'}{/if}</title>
-  <description>{$site_description}</description> 
+  <description>{$site_description|escape:'html'}</description> 
   <language>{$smarty.config.language}</language> 
   <link>{$site_url}</link> 
   {if $feed_image_url ne ''}
