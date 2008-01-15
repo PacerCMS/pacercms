@@ -18,15 +18,15 @@ if (!empty($_POST['text']))
 		exit;
 	}
 
-	$submitted_title = prep_string($_POST['title']);
-	$submitted_text = prep_string($_POST['text']);
-	$submitted_keyword = strtoupper($mode);
-	$submitted_author = prep_string($_POST['name']);
-	$submitted_author_email = prep_string($_POST['email']);
-	$submitted_author_classification = prep_string($_POST['class']);	
-	$submitted_author_major = prep_string($_POST['major']);
-	$submitted_author_city = prep_string($_POST['hometown']);
-	$submitted_author_telephone = prep_string($_POST['telephone']);
+	$submitted_title = prep_string(strip_tags($_POST['title']));
+	$submitted_text = prep_string(strip_tags($_POST['text']));
+	$submitted_keyword = strtoupper(strip_tags($mode));
+	$submitted_author = prep_string(strip_tags($_POST['name']));
+	$submitted_author_email = prep_string(strip_tags($_POST['email']));
+	$submitted_author_classification = prep_string(strip_tags($_POST['class']));	
+	$submitted_author_major = prep_string(strip_tags($_POST['major']));
+	$submitted_author_city = prep_string(strip_tags($_POST['hometown']));
+	$submitted_author_telephone = prep_string(strip_tags($_POST['telephone']));
 	$submitted_word_count = count_words($submitted_text);
 	$issue_id = next_issue('id');
 
