@@ -11,13 +11,13 @@ $mode = "edit"; // Default
 cm_auth_module($module);
 
 // Change mode based on query string
-if (!empty($_GET["action"]))
+if (!empty($_GET['action']))
 {
-	$mode = $_GET["action"];
+	$mode = $_GET['action'];
 }
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id']))
+if ($mode == "delete" && is_numeric($_POST['delete-id']))
 { 
 	$id = $_POST['delete-id'];
 	
@@ -32,11 +32,12 @@ if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id']))
 	}	
 }
 
-// Default value for 'volume' field
+// These will be changed later if needed, set defaults.
 $volume = $_COOKIE['issue-browse-volume'];
+$id = $_GET["id"];
 
 // If action is edit, call edit function
-if ($_GET['action'] == "edit")
+if ($mode == "edit")
 { 
 	if (is_numeric($_POST['id']))
 	{
@@ -63,14 +64,14 @@ if ($_GET['action'] == "edit")
 			cm_error("Error in 'cm_edit_poll' function.");
 			exit;
 		}
-	} else {
+	} elseif (!empty($_POST)) {
 		cm_error("Did not have a poll question to load.");
 		exit;
 	}
 }
 
 // If action is new, call add function
-if ($_GET['action'] == "new" && !empty($_POST['question']))
+if ($mode == "new" && !empty($_POST['question']))
 { 
 	$poll['question'] = prep_string($_POST['question']);
 	$poll['r1'] = prep_string($_POST['r1']);
@@ -96,9 +97,9 @@ if ($_GET['action'] == "new" && !empty($_POST['question']))
 	}
 }
 
-if ($mode == "edit" && is_numeric($_GET['id']))
+// Only call database if in edit mode.
+if ($mode == "edit" && is_numeric($id))
 {
-	$id = $_GET["id"];
 	$query = "SELECT * FROM cm_poll_questions WHERE id = $id; ";
 	$result = cm_run_query($query);
 	

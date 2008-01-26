@@ -11,33 +11,16 @@ $mode = "edit"; // Default
 cm_auth_module($module);
 
 // Change mode based on query string
-if (!empty($_GET["action"])) {
-	$mode = $_GET["action"];
+if (!empty($_GET['action']))
+{
+	$mode = $_GET['action'];
 }
 
-// Key variable
+// These will be changed later if needed, set defaults.
 $id = $_GET["id"];
 
-if (is_numeric($id))
-{
-    $query = "SELECT * FROM cm_sections WHERE id = $id; ";
-    
-    $result = cm_run_query($query);
-    
-    $id = $result->Fields('id');
-    $name = $result->Fields('section_name');
-    $url = $result->Fields('section_url');
-    $editor = $result->Fields('section_editor');
-    $editor_title = $result->Fields('section_editor_title');
-    $editor_email = $result->Fields('section_editor_email');
-    $sidebar = $result->Fields('section_sidebar');
-    $feed_image = $result->Fields('section_feed_image');
-    $priority = $result->Fields('section_priority');
-
-}
-
 // If action is edit, call edit function
-if ($_GET['action'] == "edit") { 
+if ($mode == "edit") { 
 	if (is_numeric($_POST['id']))
 	{
 		$section['name'] = prep_string($_POST['name']);
@@ -59,7 +42,7 @@ if ($_GET['action'] == "edit") {
 			cm_error("Error in 'cm_edit_section' function.");
 			exit;
 		}
-	} else {
+	} elseif (!empty($_POST)) {
 		cm_error("Did not have a section to load.");
 		exit;
 	}
@@ -67,7 +50,7 @@ if ($_GET['action'] == "edit") {
 }
 
 // If action is new, call add function
-if ($_GET['action'] == "new" && $_POST['name'] != "")
+if ($mode == "new" && $_POST['name'] != "")
 { 
 	$section['name'] = prep_string($_POST['name']);
 	$section['editor'] = prep_string($_POST['editor']);
@@ -90,7 +73,7 @@ if ($_GET['action'] == "new" && $_POST['name'] != "")
 }
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id']))
+if ($mode == "delete" && is_numeric($_POST['delete-id']))
 { 
 	$id = $_POST['delete-id'];
 	$move = $_POST['move-id'];
@@ -103,6 +86,25 @@ if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id']))
 		cm_error("Error in 'cm_delete_section' function.");
 		exit;
 	}	
+}
+
+// Only call database if in edit mode.
+if ($mode == "edit" && is_numeric($id))
+{
+    $query = "SELECT * FROM cm_sections WHERE id = $id; ";
+    
+    $result = cm_run_query($query);
+    
+    $id = $result->Fields('id');
+    $name = $result->Fields('section_name');
+    $url = $result->Fields('section_url');
+    $editor = $result->Fields('section_editor');
+    $editor_title = $result->Fields('section_editor_title');
+    $editor_email = $result->Fields('section_editor_email');
+    $sidebar = $result->Fields('section_sidebar');
+    $feed_image = $result->Fields('section_feed_image');
+    $priority = $result->Fields('section_priority');
+
 }
 
 get_cm_header();

@@ -11,16 +11,17 @@ $mode = "edit"; // Default
 cm_auth_module($module);
 
 // Change mode based on query string
-if (!empty($_GET["action"]))
+if (!empty($_GET['action']))
 {
-	$mode = $_GET["action"];
+	$mode = $_GET['action'];
 }
 
-// Default value for 'volume' field
+// These will be changed later if needed, set defaults.
 $volume = $_COOKIE['issue-browse-volume'];
+$id = $_GET["id"];
 
 // If action is edit, call edit function
-if ($_GET['action'] == "edit") { 
+if ($mode == "edit") { 
 	if (is_numeric($_POST['id']))
 	{
 		$issue_year = $_POST['issue-year'];
@@ -42,14 +43,14 @@ if ($_GET['action'] == "edit") {
 			cm_error("Error in 'cm_edit_issue' function.");
 			exit;
 		}
-	} else {
+	} elseif (!empty($_POST)) {
 		cm_error("Did not have a issue to load.");
 		exit;
 	}
 }
 
 // If action is new, call add function
-if ($_GET['action'] == "new" && $_POST['volume'] != "")
+if ($mode == "new" && $_POST['volume'] != "")
 { 
 	$issue_year = $_POST['issue-year'];
 	$issue_month = $_POST['issue-month'];
@@ -71,9 +72,9 @@ if ($_GET['action'] == "new" && $_POST['volume'] != "")
 	}
 }
 
-if ($mode == "edit")
+// Only call database if in edit mode.
+if ($mode == "edit" && is_numeric($id))
 {
-	$id = $_GET["id"];
 	$query = "SELECT *,";
 	$query .= " DATE_FORMAT(issue_date, '%Y') AS issue_year,";
 	$query .= " DATE_FORMAT(issue_date, '%m') AS issue_month,";

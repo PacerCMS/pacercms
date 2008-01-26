@@ -4,13 +4,20 @@ include('cm-includes/cm-header.php');
 
 $module = "staff-access";
 $pmodule = "staff-browse";
+$mode = "edit"; // Default
+
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
 
-$mode = $_GET['action'];
+// Change mode based on query string
+if (!empty($_GET['action']))
+{
+	$mode = $_GET['action'];
+}
+
 $user_id = $_GET['id'];
 
-if (!empty($_POST['user_id'])) {
+if (is_numeric($_POST['user_id'])) {
 	// Get modules
 	$user_id = $_POST['user_id'];
 	$article_browse = $_POST['article-browse'];
@@ -37,7 +44,7 @@ if (!empty($_POST['user_id'])) {
 	$restrict_issue = $_POST['restrict-issue'];
 	$restrict_section = $_POST['restrict-section'];
 
-	$stat = cm_clear_access($user_id)
+	$stat = cm_clear_access($user_id);
 	
 	if ($stat != 1) {
 		cm_error("Error in 'cm_clear_access' function.");
@@ -78,7 +85,7 @@ if (!empty($_POST['user_id'])) {
 	
 }
 
-if ($user_id == "") {
+if (!is_numeric($user_id)) {
 	header("Location: $pmodule.php");
 	exit;
 }
