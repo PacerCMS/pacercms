@@ -10,15 +10,16 @@ $pmodule = "submitted-browse";
 cm_auth_module($module);
 
 // Change mode based on query string
-if ($_GET["action"] != "") {
-	$mode = $_GET["action"];
+if (!empty($_GET['action']))
+{
+	$mode = $_GET['action'];
 }
 
 // These will be changed later if needed, set defaults.
 $id = $_GET["id"];
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id'])) { 
+if ($mode == "delete" && is_numeric($_POST['delete-id'])) { 
 	$id = $_POST['delete-id'];
 	// Run function
 	$stat = cm_delete_submitted($id);
@@ -46,14 +47,14 @@ if ($result->RecordCount() != 1) {
 // Define variables
 $id = $result->Fields('id');
 $issue = $result->Fields('issue_id');
-$title = $result->Fields('submitted_title');
-$text = $result->Fields('submitted_text');
-$keyword = $result->Fields('submitted_keyword');
-$author = $result->Fields('submitted_author');
-$email = $result->Fields('submitted_author_email');
-$major = $result->Fields('submitted_author_major');
-$city = $result->Fields('submitted_author_city');
-$telephone = $result->Fields('submitted_author_telephone');
+$title = htmlentities($result->Fields('submitted_title'));
+$text = htmlentities($result->Fields('submitted_text'));
+$keyword = htmlentities($result->Fields('submitted_keyword'));
+$author = htmlentities($result->Fields('submitted_author'));
+$email = htmlentities($result->Fields('submitted_author_email'));
+$major = htmlentities($result->Fields('submitted_author_major'));
+$city = htmlentities($result->Fields('submitted_author_city'));
+$telephone = htmlentities($result->Fields('submitted_author_telephone'));
 $sent = $result->Fields('submitted_sent');
 $words = $result->Fields('submitted_words');
 
@@ -66,7 +67,7 @@ get_cm_header();
 <div class="actionMenu">
 <ul>
     <?php if (cm_auth_restrict('article-edit') == "true") { ?>
-    <li class="command-preview"><a href="article-edit.php?action=new&amp;submitted_id=2">Post to Article Manager</a></li>
+    <li class="command-preview"><a href="article-edit.php?action=new&amp;submitted_id=<?php echo $id; ?>">Post to Article Manager</a></li>
     <?php } ?>    <?php if (cm_auth_restrict('submitted-delete') == "true") { ?>
     <li class="command-delete"><a href="#delete">Delete</a></li>
     <?php } ?></ul>

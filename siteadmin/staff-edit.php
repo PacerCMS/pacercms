@@ -9,16 +9,17 @@ $mode = "edit"; // Default
 
 // SECURITY - User must be authenticated to view page //
 cm_auth_module($module);
-
-$id = $_GET["id"]; // Default
-
-// Change mode based on query string
-if ($_GET["action"] != "") {
-	$mode = $_GET["action"];
+// Change mode based on query string
+if (!empty($_GET['action']))
+{
+	$mode = $_GET['action'];
 }
 
+// These will be changed later if needed, set defaults.
+$id = $_GET["id"];
+
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && !empty($_POST['delete-id'])) {
+if ($mode == "delete" && !empty($_POST['delete-id'])) {
 	$id = $_POST['delete-id'];
 	$stat = cm_delete_user($id);
 	if ($stat == 1) {
@@ -31,7 +32,7 @@ if ($_GET['action'] == "delete" && !empty($_POST['delete-id'])) {
 }
 
 // If action is edit, call edit function
-if ($_GET['action'] == "edit")
+if ($mode == "edit")
 { 
 	if (is_numeric($_POST['id']))
 	{
@@ -80,14 +81,14 @@ if ($_GET['action'] == "edit")
 			cm_error("Error in 'cm_edit_user' function.");
 			exit;
 		}		
-	} else {
+	} elseif (!empty($_POST)) {
 		cm_error("Did not have a user to load.");
 		exit;
 	}
 }
 
 // If action is add, call add function
-if ($_GET['action'] == "add" && !empty($_POST['login'])) { 
+if ($mode == "add" && !empty($_POST['login'])) { 
 	// Get posted data
 	$user['login'] = prep_string($_POST['login']);
 	$user['first_name'] = prep_string($_POST['first_name']);
@@ -128,10 +129,10 @@ if ($_GET['action'] == "add" && !empty($_POST['login'])) {
 }
 
 // Only call database if in edit mode.
-if ($mode == "edit") {
+if ($mode == "edit" && is_numeric($id)) {
 	
 	// Query
-	$query = "SELECT * FROM cm_users WHERE cm_users.id = $id;";
+	$query = "SELECT * FROM cm_users WHERE id = $id;";
 	
 	// Run Query
 	$result = cm_run_query($query);

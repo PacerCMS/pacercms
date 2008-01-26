@@ -11,15 +11,16 @@ $mode = "edit"; // Default
 cm_auth_module($module);
 
 // Change mode based on query string
-if ($_GET["action"] != "") {
-	$mode = $_GET["action"];
+if (!empty($_GET['action']))
+{
+	$mode = $_GET['action'];
 }
 
 // These will be changed later if needed, set defaults.
 $id = $_GET["id"];
 
 // If action is delete, call delete function
-if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id'])) { 
+if ($mode == "delete" && is_numeric($_POST['delete-id'])) { 
 	$id = $_POST['delete-id'];
 	// Run function
 	$stat = cm_delete_page($id);
@@ -33,7 +34,7 @@ if ($_GET['action'] == "delete" && is_numeric($_POST['delete-id'])) {
 }
 
 // If action is edit, call edit function
-if ($_GET['action'] == "edit") { 
+if ($mode == "edit") { 
 	if (is_numeric($_POST['id']))
 	{
 		// Get posted data
@@ -53,14 +54,14 @@ if ($_GET['action'] == "edit") {
 			cm_error("Error in 'cm_edit_page' function.");
 			exit;
 		}
-	} else {
+	} elseif (!empty($_POST)) {
 		cm_error("Did not have a page to load.");
 		exit;
 	}
 }
 
 // If action is new, call add function
-if ($_GET['action'] == "add" && !empty($_POST['text']))
+if ($mode == "add" && !empty($_POST['text']))
 { 
 	$page['title'] = prep_string($_POST['title']);
 	$page['short_title'] = prep_string($_POST['short_title']);
@@ -80,7 +81,7 @@ if ($_GET['action'] == "add" && !empty($_POST['text']))
 }
 
 // Only call database if in edit mode.
-if ($mode == "edit")
+if ($mode == "edit" && is_numeric($id))
 {
 	$query = "SELECT * FROM cm_pages ";
 	$query .= " WHERE id = $id";
