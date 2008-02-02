@@ -3,6 +3,8 @@
 // The Version of PacerCMS You Are Running
 define('CM_VERSION', "0.6.1");
 
+unset($config_file);
+
 if ( file_exists('../includes/config.php') ) { $config_file = "../includes/config.php"; }
 if ( file_exists('cm-includes/config.php') ) { $config_file = "cm-includes/config.php"; }
 
