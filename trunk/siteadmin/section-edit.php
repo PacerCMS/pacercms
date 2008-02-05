@@ -35,7 +35,7 @@ if ($mode == "edit") {
 
 		$stat = cm_edit_section($section,$id);
 
-		if ($stat == 1) {
+		if ($stat) {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
 		} else {
@@ -63,7 +63,7 @@ if ($mode == "new" && $_POST['name'] != "")
 
 	$stat = cm_add_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority);
 
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $pmodule.php?msg=added");
 		exit;
 	} else {
@@ -79,7 +79,7 @@ if ($mode == "delete" && is_numeric($_POST['delete-id']))
 	$move = $_POST['move-id'];
 
 	$stat = cm_delete_section($id,$move);
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
 	} else {

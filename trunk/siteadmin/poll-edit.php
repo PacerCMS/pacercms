@@ -23,7 +23,7 @@ if ($mode == "delete" && is_numeric($_POST['delete-id']))
 	
 	$stat = cm_delete_poll($id);
 	
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
 	} else {
@@ -57,7 +57,7 @@ if ($mode == "edit")
 
 		$stat = cm_edit_poll($poll,$id);
 		
-		if ($stat == 1) {
+		if ($stat) {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
 		} else {
@@ -88,7 +88,7 @@ if ($mode == "new" && !empty($_POST['question']))
 
 	$stat = cm_add_poll($poll);
 	
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $pmodule.php?msg=added");
 		exit;
 	} else {

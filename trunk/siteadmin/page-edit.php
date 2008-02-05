@@ -24,7 +24,7 @@ if ($mode == "delete" && is_numeric($_POST['delete-id'])) {
 	$id = $_POST['delete-id'];
 	// Run function
 	$stat = cm_delete_page($id);
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
 	} else {
@@ -47,7 +47,7 @@ if ($mode == "edit") {
 		$id	= $_POST['id'];
 
 		$stat = cm_edit_page($page,$id);
-		if ($stat == 1) {
+		if ($stat) {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
 		} else {
@@ -71,7 +71,7 @@ if ($mode == "add" && !empty($_POST['text']))
 	$page['edited'] = $_POST['edited'];
 
 	$stat = cm_add_page($page);
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $pmodule.php?msg=added");
 		exit;
 	} else {

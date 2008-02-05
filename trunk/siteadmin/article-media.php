@@ -13,7 +13,7 @@ cm_auth_module($module);
 // If action is delete, call delete function
 if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") { 
 	$stat = cm_delete_media($_POST['delete-id']);
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $pmodule.php?msg=media-deleted");
 		exit;
 	} else {
@@ -44,7 +44,7 @@ if ($_GET['action'] == "edit") {
 		$id	= $_POST['id'];		
 		// Run function
 		$stat = cm_edit_media($media,$id);
-		if ($stat == 1) {
+		if ($stat) {
 			header("Location: $pmodule.php?msg=media-updated");
 			exit;
 		} else {
@@ -68,7 +68,7 @@ if ($_GET['action'] == "new" && !empty($_POST['article_id'])) {
 	$media['credit'] = prep_string($_POST['credit']);
 	// Run function
 	$stat = cm_add_media($media);
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $pmodule.php?msg=media-added");
 		exit;
 	} else {

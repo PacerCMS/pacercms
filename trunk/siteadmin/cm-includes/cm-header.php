@@ -1,7 +1,7 @@
 <?php
 
 // The Version of PacerCMS You Are Running
-define('CM_VERSION', "0.6.1");
+define('CM_VERSION', "0.6.2");
 
 unset($config_file);
 

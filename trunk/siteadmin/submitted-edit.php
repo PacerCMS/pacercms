@@ -23,7 +23,7 @@ if ($mode == "delete" && is_numeric($_POST['delete-id'])) {
 	$id = $_POST['delete-id'];
 	// Run function
 	$stat = cm_delete_submitted($id);
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
 	} else {
