@@ -1,0 +1,253 @@
+/*
+Template: Moonshine
+Description: Default template Mod (2007); Color scheme: overall black background with black/dark grey side menu (light teal grey menu links);
+Content: White background, black text; green headings; Background image needed
+Authors: Stephen Yeargin (default); mod: robinart.com
+URLs: http://stephen.yeargin.com/; http://www.robinart.com
+NO: polls, ads, breaking news, updated, header
+Additions: Wrapper (control layout); news (more control over sidebar menu)
+*/
+
+body {font-family: Arial, Helvetica, sans-serif; font-size: 10pt;background-color:#0A021F;}
+label {font-weight: bold;}
+h1, h2, h3,  h5, h6,  {font-family: Trebuchet MS1, Helvetica, sans-serif; font-size: 100%;}
+h1 a, h2 a, h3 a, h5 a, h6,  a {text-decoration: none;}
+
+h2, {font-family: Trebuchet MS1, Helvetica, sans-serif; font-color: #fff; font-size: 90%;}
+h2 a {text-decoration: none; font-color:#fff;}
+
+
+h4  {font-family: Trebuchet MS1, Helvetica, sans-serif; font-size:100%; background: #eee; color: #224F4E;}
+h4 a  {text-decoration: none; color: #C7DF8B;}
+h4 a:hover { text-decoration: underline;}
+h4 a:visited {color: #043F3E;}
+
+
+a:link { background-color: transparent; text-decoration: none; color:#3F0438; font-size: 100%;}
+a:hover { border: 0;  text-decoration: underline; color: #0099CC;font-size: 100%;}
+a:visited { border: 0; background-color: transparent; text-decoration:none; color: #062F2E; font-size: 100%;}
+
+
+hr {color: #000000; background-color: #000000; height: 0px; margin:10px 0 10px 0; clear: both;}
+table {border:1px solid #000; border-collapse:collapse; margin: 10px;font-size:100%; width: 95%;}
+td, th {border:0px solid #000; border-collapse:collapse; vertical-align: middle; padding:7px;}
+th {background-color: #EFA72A; color:#fff;}
+fieldset {border: solid 0px #ccc; margin-bottom:10px;padding-bottom:10px;}
+fieldset p {margin-left:10px;}
+fieldset ul {text-indent:10px;}
+legend {font-weight: bold; border: solid 0px #ccc; padding: 5px;}
+label {font-weight:bold;}
+
+/* #### ---- LAYOUT ---- #### */
+
+/* nameplate */
+// If you have a 441x61 pixel image, you can use it here instead. Be
+// sure to uncomment out the // last section of this stylesheet if you
+// want to use a transparent PNG as well for compliant browsers
+#nameplate { float: left; height: 64px; width: 441px; margin: 0px; }
+/*
+#nameplate { background-image: url(images/sublime.png); background-repeat: no-repeat; color: #3B3E4F;}
+#nameplate h1 { display: none; margin: 0;font-size: 10px;}
+*/
+
+/* sectionNameplate */
+#sectionNameplate {position: absolute; top: 40px; left: 460px; width:300px; text-align: right; color:  #3B3E4F; float: right;}
+#sectionNameplate {font-size: 150%; margin: 10px;}
+#sectionNameplate a {color: #fff;}
+
+.sectionNameplate {font-size: 150%; background-color:#fff;color:#0A021F; border-bottom: solid 2px #000009; margin: 0 0 15px 0}
+
+/* pageTop */
+#pageTop {background-image:  url(images/page_top.png); background-repeat: no-repeat; background-position: left top; clear: both;background-color: #000000;margin 0; padding: 0; height: 40px;overflow: hidden;}
+
+/* searchBox */
+#searchBox { font-size: 100%; float: left; text-align: left; width:130px; margin-top: 10px;}
+#searchBox form {}
+#searchBox p { margin-bottom:10px;}
+#searchBox label { display: none;}
+#searchBox input.textField {width: 95%; background-color: #eee;border: solid 1px #000;}
+#searchBox input.button {1px; width: 40%; border: solid 1px #000;}
+
+/* wrapper: controls layout in IE and firefox  */
+#wrapper {background-image: url(http://www.southerncreativity.com/moonshine/images/backplain.jpg); background-repeat: no-repeat;background-color: #000000; position: 138px; float: left; padding-bottom: 0px; width: 970px; margin-top: 0px;
+}
+
+
+#sidebar { float: left; width: 160px; height: 850px; padding-left:0px; margin-left: 0px; margin-right: 1px;margin-bottom: 0px; border-right: 0px dashed #7B8F2C; background-color: #000000;}
+
+/* news: provides layout and color for menu in sidebar */
+#news { margin: 0px; padding-left: 4px; padding-bottom: 10px; width:90%; font-family: verdana, arial, helvetica, sans-serif; font-size:11px; font-weight: bold; background: #242424;}
+#news h2 a { color:#C7DF8B; font-family: Arial, sans-serif; font-size:14px; margin-left: 0px;}
+#news h2 a:hover { color:#C7DF8B; font-family: Arial, sans-serif; font-size: 14px; margin-left: 0px;}
+#news h2 a:active { color:#C7DF8B; font-family: Arial, sans-serif;font-size: 14px; margin-left: 0px;}
+#news ul {list-style: none;font: bold 12px Arial, Helvetica, sans-serif; background: #242424;padding: 1px;}
+#news li { background: none; font-family: lucida grande, verdana,arial, sans-serif; font-weight: bold; font-size: 11px; color: #62838F;text-decoration: none; }
+#news a {color: #B5C8CF; text-decoration: none; text-indent: 1px; font-family: Arial, Helvetica, sans-serif;font-weight: bold; font-size:11px;}
+#news a:hover, #menubar a:active {color: #23333F; font-family: Arial,Helvetica, sans-serif;font-weight: bold; font-size: 11px;}
+
+/* content */
+#content {width: 784px; float: left; margin-top: 100px; margin-left:1px; background-color: #fff; padding: 2px;}
+#content a:link { background-color: transparent; text-decoration:none; color: #718F50; font-size: 100%;}
+#content a:hover { border: 0;  text-decoration: underline; color:#0099CC;font-size: 100%;}
+#content a:visited { border: 0; background-color: transparent; text-decoration: none; color: #000009; font-size: 100%;}
+#content h4  {font-family: Trebuchet MS1, Helvetica, sans-serif; font-size: 100%; background: #eee; color: #224F4E;}
+#content h4 a  {text-decoration: none; color: #C7DF8B;}
+#content h4 a:hover { text-decoration: underline;}
+#content h4 a:visited {color: #043F3E;}
+
+/* footer */
+#footer { width: 95%; clear: both;  padding: 25px 0 25px 0; position:center;}
+#footer p { text-align: center; color:#eee;}
+#footer p a {padding: 5px; margin-right: 3px; color:#fff;}
+#footer p a:hover {padding: 5px; margin-right: 3px; color:#8AAF62;}
+#footer p a:visited {padding: 5px; margin-right: 3px; color:#8B9E9F;}
+#footer p {list-style-type: none; text-align:center; margin:0;padding:0;}
+
+#footer ul li {display: inline; color:}
+#footer ul li a {padding: 5px; margin-right: 3px; color:#fff;}
+#footer ul li a:hover {padding: 5px; margin-right: 3px;color:#8AAF62;}
+#footer ul li a:visited {padding: 5px; margin-right: 3px;color:#8B9E9F;}
+
+/* colWrap */
+.colWrap {clear: both;}
+
+/* fullCol */
+.fullCol { width: 620px; padding: 0px; padding-left: 2px;}
+
+/* leftCol */
+.leftCol {float: left; width: 305px; margin-right: 10px;}
+
+
+/* rightCol */
+.rightCol {float: left; width: 305px;}
+
+/* biggerCol */
+.biggerCol {float: left; width: 350px; margin-left: 5px; margin-right:15px; padding-bottom: 10px;}
+
+/* smallerCo */
+.smallerCol {float: left; width: 350px;}
+
+/* bigCol */
+.bigCol {float: left; width: 550px; margin-right: 15px;}
+
+/* smallCol */
+.smallCol {float: left; width:150px;}
+
+/* fullCol */
+.fullCol {width:100%; clear:both;}
+.fullCol p.byline {padding: 5px 0 5px 0; border-top: solid 1px #ccc;border-bottom: solid 1px #ccc; width: 300px; font-size:100%; }
+
+/* inlineCol */
+.inlineCol {width: 350px; float: right; margin: 0 0 2px 2px; display:inline;}
+.inlineCol h4 {font-size: 110%; margin: 0 0 0 5px; line-height: 2em;}
+
+
+/* #### ---- FORMATTING ---- #### */
+
+/* Full Story */
+.fullStory p.byline {padding: 7px 0 7px 3px; border-top: solid 1px #ccc; border-bottom: solid 1px #ccc; width: 310px; }
+.fullStory > p:first-child {font-size: 100%; font-weight: bold;}
+
+/* topStory */
+.topStory {clear: both;}
+.topStory h2 { font-size: 175%; margin-top: 2px; color: #3F0438;}
+.topStory h5 { font-size: 130%; margin-top: 1px; color: #999999;letter-spacing: .25em; text-align: center;}
+.topStory p {font-size: 120%; letter-spacing: .01em;}
+.topStory p.byline {padding: 2px 0 0px 1px; border-top: solid 0px #ccc; border-bottom: solid 0px #ccc; width: 300px;
+
+font-size: 95% letter-spacing: 2em; }
+.topStory p.moreLink {text-align: right; font-weight: bold; font-size:90%;}
+
+/* otherStory */
+.otherStory {}
+.otherStory p.summary {text-align:left; font-size: 120%;}
+.otherStory p.moreLink {text-align:right; font-size: 90%; font-width:bold;}
+
+/* summaries */
+.summaries {clear:both;}
+.summaries h4 { margin-right: 10px; border-bottom: solid 1px #ccc;line-height; 1em; margin-bottom: 2px; font-size:100%;}
+.summaries h4 a { color: #224F4E;}
+
+
+.summaries ul { margin: 0; padding: 0;}
+.summaries li {line-height: 1.2; list-style-type: none; display:block; margin: 0 5px 2px 5px; padding: 5px 0 0 15px;}
+.summaries li {background: transparent url(images/gifs/list_dot.gif) 0 7px no-repeat; } /* GIF fixed later */
+.summaries li a {font-weight: bold; font-size: 90%;}
+
+
+/* mediaImage */
+.mediaImage {text-align: left; }
+.mediaImage p {font-weight: bold; text-align: center; padding: 1px; }
+.mediaImage p.image img {border: solid 0px #000; }
+.mediaImage p.imageCredit {text-align: right; font-size: 80%;}
+.mediaImage p.imageCaption {text-align: left; font-size: 90%;}
+
+/*mediaRelated*/
+.mediaRelated {float: left; margin: 5px; padding: 5px; width: 750px;}
+.mediaRelated ul {background: #eee; padding-top: 2px; padding-bottom:2px;}
+.mediaRelated li {display: block; padding: 1px; color: #000033;}
+
+/* sectionHeadlines */
+.sectionHeadlines h4 a { color: #000;}
+.sectionHeadlines { font-weight: bold; font-size: 90%; background-color: #fff; border-width: 4px 1px 1px 1px; border-style:solid; border-color: #003399; margin-bottom: 10px;}
+.sectionHeadlines ol {list-style-type: none;display: block;}
+.sectionHeadlines li {display: block; line-height: 1.2; margin: 0 0 2px 5px; padding: 5px 0 0 15px;}
+.sectionHeadlines li {background: transparent url(images/gifs/list_dot.gif) 0 7px no-repeat; } /* GIF fixed later */
+
+/* homeSidebar */
+.homeSidebar {padding: 5px; border-left: solid 1px #ccc; border-bottom: solid 1px #ccc; margin-bottom: 10px;}
+.homeSidebar p {font-size: 90%;}
+.homeSidebar .divider {border-top:solid 1px #FF6908; height: 1px;margin:2px 0 2px 0; clear: both;}
+.homeSidebar .divider hr {display: none; margin: 0; padding: 0;}
+.homeSidebar a img { border: 0; }
+
+/* sitePoll  */
+.sitePoll ul { margin: 0; padding: 0; }
+.sitePoll li { line-height: 1em; list-style-type: none; display:block; margin: 0 0 2px 0; padding: 5px 0 0 20px; }
+.sitePoll li input { margin-left: -20px; }
+.sitePoll li label { font-weight: normal; font-size: 90%; }
+.sitePoll p.submit { text-align: center; }
+.sitePoll p.question {text-align: left; }
+.sitePoll input.button {1px; width: 75%; border: solid 1px #000;}
+.sitePoll h4 { font-size: 120%; margin-top: 10px; color: #999999;letter-spacing: .25em; text-align: center;}
+
+/* sectionSidebar */
+.sectionSidebar {padding: 5px; border-left: solid 0px #ccc; border-bottom: solid 0px #ccc; margin-bottom: 10px; float:right;}
+.sectionSidebar p {font-size: 90%;}
+.sectionSidebar .divider {border-top:solid 0px #FF6908; height: 1px;margin:2px 0 2px 0; clear: both;}
+.sectionSidebar .divider hr {display: none; margin: 0; padding: 0;}
+
+/* moreLink */
+.moreLink {text-align: right; font-weight: bold;}
+
+/* rssFeed */
+.rssFeed { background: transparent url(images/feed_icon.small.png) no-repeat; line-height: 1.25em; padding-left: 16px; }
+
+
+/* finePrint */
+.finePrint {font-size: 80%; padding: 5%; width: 75%; border: solid 1px #ccc;}
+
+/* systemMessage */
+.systemMessage { text-align:center; font-weight:bold; background-color: #ffc; color: #000; padding: 5px; margin-top: 5px;margin-bottom: 5px;  border: 1px solid #ccc; }
+
+/* articleToolbar */
+.articleToolbar { border-bottom: solid 1px #ccc; border-top: solid 1px #ccc; width: 90%; float: right; margin: 0 0 5px 0;}
+.articleToolbar ul {padding: 5px 0 5px 0; margin: 0;}
+.articleToolbar ul li {display: inline; list-style-type: none; margin-right: 2px;}
+.articleToolbar ul li a {text-decoration: none;}
+.articleToolbar ul li a.printArticle {padding-left: 20px; background:transparent url(images/gifs/tool-print.gif) no-repeat;}
+.articleToolbar ul li a.emailArticle {padding-left: 20px; background:transparent url(images/gifs/tool-email.gif) no-repeat;}
+.articleToolbar ul li a.discussArticle {padding-left: 20px;background: transparent url(images/gifs/tool-discuss.gif) no-repeat;}
+
+/* Tell CSS-compliant browsers to use PNG's on transparent images */
+
+// Uncomment this out if you have a transparent PNG available for the nameplate
+
+/*
+body[id=the-body] #nameplate {
+
+float: left; height: 64px; width: 441px; margin: 10px; background-
+image: url(images/white.png); background-repeat: repeat;background-color:#fff;}
+*/
+body[id=the-body] .sectionHeadlines li { background: transparent url(images/list_dot.png) 0 7px no-repeat; }
+body[id=the-body] .summaries li {background: transparent url(images/list_dot.png) 0 7px no-repeat; }
