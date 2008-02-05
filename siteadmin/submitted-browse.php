@@ -33,7 +33,7 @@ if (is_array($_POST['moderate']) && cm_auth_restrict('submitted-edit'))
     {
         if (is_numeric($id)) { $stat = cm_delete_submitted($id); }
     }
-    if ($stat == 1)
+    if ($stat)
     {
         header("Location: $module?msg=moderate");
         exit;

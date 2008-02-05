@@ -35,7 +35,7 @@ if ($mode == "edit") {
 		$id	= $_POST['id'];		
 
 		$stat = cm_edit_issue($issue,$id);
-		if ($stat == 1)
+		if ($stat)
 		{
 			header("Location: $pmodule.php?msg=updated");
 			exit;
@@ -62,7 +62,7 @@ if ($mode == "new" && $_POST['volume'] != "")
 	$issue['online_only'] = $_POST['online_only'];
 
 	$stat = cm_add_issue($issue);
-	if ($stat == 1)
+	if ($stat)
 	{
 		header("Location: $pmodule.php?msg=added");
 		exit;

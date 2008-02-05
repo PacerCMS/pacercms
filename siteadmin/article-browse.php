@@ -82,7 +82,7 @@ if ($_GET['reset'] == 'publish') {
 	$query .= " SET article_publish = '$publish_date 00:00:00'";
 	$query .= " WHERE issue_id = \"$issue\" AND section_id = \"$section\";";
 	$stat = cm_run_query($query);
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $module.php?msg=pub-reset");
 		exit;
 	} else {

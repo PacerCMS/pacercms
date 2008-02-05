@@ -22,7 +22,7 @@ $id = $_GET["id"];
 if ($mode == "delete" && !empty($_POST['delete-id'])) {
 	$id = $_POST['delete-id'];
 	$stat = cm_delete_user($id);
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
 	} else {
@@ -73,7 +73,7 @@ if ($mode == "edit")
 		$id = $_POST['id'];
 
 		$stat = cm_edit_user($user,$id);
-		if ($stat == 1)
+		if ($stat)
 		{
 			header("Location: $pmodule.php?msg=updated");
 			exit;
@@ -118,7 +118,7 @@ if ($mode == "add" && !empty($_POST['login'])) {
 		exit;
 	}	
 	$stat = cm_add_user($user);
-	if ($stat == 1) {	
+	if ($stat) {	
 		$user_id = $cm_db->Insert_ID();
 		header("Location: staff-access.php?id=$user_id&action=add");
 		exit;

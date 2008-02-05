@@ -21,7 +21,7 @@ if (is_numeric($_POST['id'])) {
 	$next_issue = $_POST['next_issue'];		
 	// Run function
 	$stat = cm_edit_publish_settings($current_issue,$next_issue,$id);
-	if ($stat == 1) {
+	if ($stat) {
 		header("Location: $module.php?msg=publish-updated");
 		exit;
 	} else {

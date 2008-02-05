@@ -74,7 +74,7 @@ if (is_numeric($_POST['user_id'])) {
 	$stat = cm_add_access($user_id,"string","restrict_section",$restrict_section);
 	$stat = cm_add_access($user_id,"string","restrict_issue",$restrict_issue);
 
-	if ($stat == 1) {
+	if ($stat) {
         cm_access_data(); // Load User Data
 		header("Location: $pmodule.php?msg=access-updated");
 		exit;

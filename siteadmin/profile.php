@@ -46,7 +46,7 @@ if ($_GET['action'] == "edit")
 		
 		$stat = cm_edit_profile($user);
 		
-		if ($stat == 1) {
+		if ($stat) {
 			header("Location: $module.php?msg=updated");
 			exit;
 		} else {

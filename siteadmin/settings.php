@@ -23,7 +23,7 @@ if (is_numeric($_POST['id']))
 
 	$stat = cm_edit_settings($settings,$id);
 
-	if ($stat == 1)
+	if ($stat)
 	{
 		header("Location: $module.php?msg=updated");
 		exit;
