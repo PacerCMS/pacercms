@@ -46,10 +46,11 @@ if (is_numeric($_POST['user_id'])) {
 
 	$stat = cm_clear_access($user_id);
 	
-	if ($stat != 1) {
+	if (!$stat) {
 		cm_error("Error in 'cm_clear_access' function.");
 		exit;
 	}
+	
 	$stat = cm_add_access($user_id,"module","article-browse",$article_browse);
 	$stat = cm_add_access($user_id,"module","article-edit",$article_edit);
 	$stat = cm_add_access($user_id,"module","article-media",$article_media);
