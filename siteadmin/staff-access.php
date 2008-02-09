@@ -46,7 +46,7 @@ if (is_numeric($_POST['user_id'])) {
 
 	$stat = cm_clear_access($user_id);
 	
-	if (!$stat) {
+	if (empty($stat)) {
 		cm_error("Error in 'cm_clear_access' function.");
 		exit;
 	}
