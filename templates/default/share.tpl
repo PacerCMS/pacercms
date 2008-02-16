@@ -1,11 +1,11 @@
 {include file="header.tpl"}
 <div id="content">
-    <h2 class="sectionNameplate">Share Article</h2>
-    <p>Select a service from the list below to post this article to an Internet community.</p>
+    <h2 class="sectionNameplate">{t}Share Article{/t}</h2>
+    <p>{t}Select a service from the list below to post this article to an Internet community.{/t}</p>
     <div style="padding:10px;border:solid 1px #ccc;">
         <h3>{$article_title|escape}</h3>
         <p>{$article_summary|escape}</p>
-        <p><strong>Link:</strong> <a href="{$site_url}/article.php?id={$article_id}">{$site_url}/article.php?id={$article_id}</a></p>
+        <p><strong>{t}Link:{/t}</strong> <a href="{$site_url}/article.php?id={$article_id}">{$site_url}/article.php?id={$article_id}</a></p>
     </div>
 
     <div id="share_article">

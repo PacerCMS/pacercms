@@ -1,6 +1,6 @@
 {if $poll_question ne ''}
 <form action="poll.php" method="post" class="sitePoll">
-<h4>&mdash;&nbsp;Web&nbsp;Poll&nbsp;&mdash;</h4>
+<h4>&mdash; {t}Web Poll{/t} &mdash;</h4>
 <p class="question"><strong>{$poll_question|escape:'html'}</strong></p>
 <ul>
 
@@ -41,7 +41,7 @@
 
 </ul>
 <p class="submit">
-<input type="submit" id="submit" value="Cast Vote" class="button" />
+<input type="submit" id="submit" value="{t}Cast Vote{/t}" class="button" />
 </p>
 </form>
 {/if}

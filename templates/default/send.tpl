@@ -1,9 +1,9 @@
 {include file="header.tpl"}
 
 <div id="content">
-    <h2 class="sectionNameplate">E-mail Article</h2>    
-    {if $smarty.request.msg eq "sent"}<p class="systemMessage">Article was e-mailed.</p>{/if}
-    {if $smarty.request.msg eq "fail"}<p class="systemMessage">Mailing failed. Check your recipient's e-mail address.</p>{/if}
+    <h2 class="sectionNameplate">{t}E-mail Article{/t}</h2>    
+    {if $smarty.request.msg eq "sent"}<p class="systemMessage">{t}Article was e-mailed.{/t}</p>{/if}
+    {if $smarty.request.msg eq "fail"}<p class="systemMessage">{t}Mailing failed. Check your recipient's e-mail address.{/t}</p>{/if}
     <div class="colWrap">
         <div class="bigCol">
             <h3>{$site_name} - {$article_title}</h3> 
@@ -14,24 +14,24 @@
         <div class="smallCol">
         <form action="send.php?id={$article_id}" method="post">
             <fieldset>
-                <legend>Required Information</legend>
-                <h4>Recipient Information</h4>
+                <legend>{t}Required Information{/t}</legend>
+                <h4>{t}Recipient Information{/t}</h4>
                 <p>
-                    <label for="recipient-email">E-mail Address</label><br />
+                    <label for="recipient-email">{t}E-mail Address{/t}</label><br />
                     <input type="text" name="recipient-email" id="recipient-email" />
                 </p>
-                <h4>Your Information</h4>
+                <h4>{t}Your Information{/t}</h4>
                 <p>
-                    <label for="sender">Name</label><br />
+                    <label for="sender">{t}Name{/t}</label><br />
                     <input type="text" name="sender" id="sender" />
                 </p>
                 <p>
-                    <label for="sender">E-mail Address</label><br />
+                    <label for="sender">{t}E-mail Address{/t}</label><br />
                     <input type="text" name="sender-email" id="sender-email" />
                 </p>
                 <p>
-                    <input id="submit" type="submit" value="Send" />
-                    <input id="reset" type="reset" value="Reset" />
+                    <input id="submit" type="submit" value="{t}Send{/t}" />
+                    <input id="reset" type="reset" value="{t}Reset{/t}" />
                 </p>
             </fieldset>
         </form>
