@@ -21,25 +21,25 @@ get_cm_header();
 
 ?>
 
-<h2>Welcome <?php echo $_SESSION['user_data']['user_first_name'] . ' ' . $_SESSION['user_data']['user_last_name']; ?></h2>
+<h2><?php echo gettext("Welcome"); ?> <?php echo $_SESSION['user_data']['user_first_name'] . ' ' . $_SESSION['user_data']['user_last_name']; ?></h2>
 <div class="sidebar" style="border:solid 1px #ccc;background: #fff;padding:10px;">
-<h3>Quick Links</h3>
+<h3><?php echo gettext("Quick Links") ?></h3>
 <ul>
 <?php if (cm_auth_restrict('article-browse') == "true") { ?>
-<li><a href="article-browse.php">Manage Articles</a></li>
+<li><a href="article-browse.php"><?php echo gettext("Manage Articles"); ?></a></li>
 <?php } ?>
 <?php if (cm_auth_restrict('article-edit') == "true") { ?>
-<li><a href="article-edit.php?action=new">Add an Article</a></li>
+<li><a href="article-edit.php?action=new"><?php echo gettext("Add an Article"); ?></a></li>
 <?php } ?>
 <?php if (cm_auth_restrict('poll-browse') == "true") { ?>
-<li><a href="poll-browse.php">Manage Poll Questions</a></li>
+<li><a href="poll-browse.php"><?php echo gettext("Manage Poll Questions"); ?></a></li>
 <?php } ?>
 <?php if (cm_auth_restrict('poll-edit') == "true") { ?>
-<li><a href="poll-edit.php?action=new">Add a Poll Question</a></li>
+<li><a href="poll-edit.php?action=new"><?php echo gettext("Add a Poll Question"); ?></a></li>
 <?php } ?>
 </ul>
 </div>
-<h3>Announcements</h3>
+<h3><?php echo gettext("Announcements"); ?></h3>
 <?php echo autop(cm_get_settings('site_announcement')); ?>
 
 <div style="clear:both;"></div>
@@ -47,16 +47,16 @@ get_cm_header();
 <?php if (cm_auth_restrict('submitted-browse') == "true") { ?>
 
 <fieldset class="<?php echo "$module-form"; ?>">
-<legend><a href="submitted-browse.php">Submitted Articles</a> for <?php echo $_SESSION['issue_data']['next_issue_date'] . " (Volume " . $_SESSION['issue_data']['next_issue_volume'] . ", No. " . $_SESSION['issue_data']['next_issue_number'] . ")"; ?></legend>
+<legend><a href="submitted-browse.php"><?php echo gettext("Submitted Articles"); ?></a><?php echo gettext(" for"); ?> <?php echo $_SESSION['issue_data']['next_issue_date'] . gettext(" (Volume ") . $_SESSION['issue_data']['next_issue_volume'] . gettext(", No. ") . $_SESSION['issue_data']['next_issue_number'] . ")"; ?></legend>
 
 <?php if (!empty($submitted_articles)) { ?>
 
     <table class="<?php echo $module; ?>-table">
     <tr>
-    <th>Sent</th>
-    <th>From</th>
-    <th>Subject</th>
-    <th>Tools</th>
+    <th><?php echo gettext("Sent"); ?></th>
+    <th><?php echo gettext("From"); ?></th>
+    <th><?php echo gettext("Subject"); ?></th>
+    <th><?php echo gettext("Tools"); ?></th>
     </tr>
     <?php
     foreach($submitted_articles as $article)
@@ -75,10 +75,10 @@ get_cm_header();
         </td>
             <td nowrap class="actionMenu">
             <ul class="center">
-            <li class="command-preview"><a href="submitted-edit.php?id=<?php echo $id; ?>#preview">Preview</a></li>
-            <li class="command-post"><a href="article-edit.php?action=new&amp;submitted_id=<?php echo $id; ?>">Post</a></li>
+            <li class="command-preview"><a href="submitted-edit.php?id=<?php echo $id; ?>#preview"><?php echo gettext("Preview"); ?></a></li>
+            <li class="command-post"><a href="article-edit.php?action=new&amp;submitted_id=<?php echo $id; ?>"><?php echo gettext("Post"); ?></a></li>
              <?php if (cm_auth_restrict('submitted-delete') == "true") { ?>
-             <li class="command-delete"><a href="submitted-edit.php?id=<?php echo $id; ?>#delete">Delete</a></li>
+             <li class="command-delete"><a href="submitted-edit.php?id=<?php echo $id; ?>#delete"><?php echo gettext("Delete"); ?></a></li>
             <?php } ?>
             </ul>
             </td>
@@ -90,7 +90,7 @@ get_cm_header();
     </table>
     
 <?php } else { ?>
-    <p>There are no submitted articles for this issue.</p>
+    <p><?php echo gettext("There are no submitted articles for this issue."); ?></p>
 <?php } ?>
 
 </fieldset>

@@ -1,7 +1,7 @@
 <?php
 
 // The Version of PacerCMS You Are Running
-define('CM_VERSION', "0.6.2");
+define('CM_VERSION', "0.7-alpha");
 
 unset($config_file);
 
@@ -23,6 +23,8 @@ if (!empty($config_file))
 
     include_once('functions.php');
     include_once('classes.php');
+
+    include_once('cm-l10n.php');
 
 } else {
     header("Location: ../INSTALL/cm-config.php ");

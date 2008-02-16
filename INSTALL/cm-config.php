@@ -118,7 +118,11 @@ switch($step) {
       <td><input name="tplfld" type="text" size="25" value="default" /></td>
       <td>Use "local" if you plan to modify the template.</td> 
     </tr>
-
+    <tr> 
+      <th scope="row">Language</th> 
+      <td><input name="locale" type="text" size="25" value="en_US.UTF8" /></td>
+      <td>Type the name of your language file if other than US English.</td> 
+    </tr>
   </table>
   <h2 class="step">
   <input name="submit" type="submit" value="Submit" />
@@ -134,6 +138,7 @@ switch($step) {
     $passwrd    = trim($_POST['pwd']);
     $dbhost     = trim($_POST['dbhost']);
     $tplfld     = trim($_POST['tplfld']);
+    $locale     = trim($_POST['locale']);
     
     define('DB_PLATFORM', $dbplatform);
     define('DB_DATABASE', $dbname);
@@ -141,6 +146,7 @@ switch($step) {
     define('DB_PASSWORD', $passwrd);
     define('DB_HOSTNAME', $dbhost);
     define('TEMPLATES_FOLDER', $tplfld);
+    define('LOCALE', $locale);
     
     // Database Connection
     $dbTest = mysql_pconnect(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD) or die("Your connection to the server was refused.");
@@ -183,6 +189,11 @@ switch($step) {
                 break;
             case 'define("TEMPLATES_F':
                 $line = str_replace("default", $tplfld, $line);
+                fwrite($handle, $line);
+                echo $line . "<br/>";
+                break;
+            case 'define("LOCALE", "e':
+                $line = str_replace("en_US.UTF8", $locale, $line);
                 fwrite($handle, $line);
                 echo $line . "<br/>";
                 break;
