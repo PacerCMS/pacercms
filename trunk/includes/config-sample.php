@@ -14,6 +14,10 @@ define("USE_TEMPLATE_CACHE", false);
 define("COMPILE_CHECK", true);
 
 
+/* International Translations */
+define("LOCALE", "en_US.UTF8");
+
+
 /* Below this line should work without customization */
 $cm_path = substr(dirname(__FILE__),0,-9); // removes '/includes/'
 define("SITE_ROOT", $cm_path);

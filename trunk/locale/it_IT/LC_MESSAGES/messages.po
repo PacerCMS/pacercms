@@ -1,0 +1,130 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-02-12 16:53+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: siteadmin/index.php:24
+msgid "Welcome"
+msgstr "Benvenuto"
+
+#: siteadmin/index.php:26
+msgid "Quick Links"
+msgstr "Link Rapidi"
+
+#: siteadmin/index.php:29
+msgid "Manage Articles"
+msgstr "Gestisci Articoli"
+
+#: siteadmin/index.php:32
+msgid "Add an Article"
+msgstr "Aggiungi Articolo"
+
+#: siteadmin/index.php:35
+msgid "Manage Poll Questions"
+msgstr "Gestisci Sondaggi"
+
+#: siteadmin/index.php:38
+msgid "Add a Poll Question"
+msgstr "Aggiungi Sondaggio"
+
+#: siteadmin/index.php:42
+msgid "Announcements"
+msgstr "Annunci"
+
+#: siteadmin/index.php:50
+msgid "Submitted Articles"
+msgstr "Articoli Presentati"
+
+#: siteadmin/index.php:50
+msgid " for"
+msgstr " il"
+
+#: siteadmin/index.php:50
+msgid " (Volume "
+msgstr " (Volume "
+
+#: siteadmin/index.php:50
+msgid ", No. "
+msgstr ", Numero "
+
+#: siteadmin/index.php:56
+msgid "Sent"
+msgstr "Inviato"
+
+#: siteadmin/index.php:57
+msgid "From"
+msgstr "Da"
+
+#: siteadmin/index.php:58
+msgid "Subject"
+msgstr "Soggetto"
+
+#: siteadmin/index.php:59
+msgid "Tools"
+msgstr "Strumenti"
+
+#: siteadmin/index.php:78
+msgid "Preview"
+msgstr "Anteprima"
+
+#: siteadmin/index.php:79
+msgid "Post"
+msgstr "Invia"
+
+#: siteadmin/index.php:81
+msgid "Delete"
+msgstr "Elimina"
+
+#: siteadmin/index.php:93
+msgid "There are no submitted articles for this issue."
+msgstr "Non ci sono articoli in questa edizione"
+
+#: locale/tools/smarty-gettext/smarty.c:2
+msgid "Last Edition:"
+msgstr "Ultima Edizione:"
+
+#: locale/tools/smarty-gettext/smarty.c:5
+msgid "Published:"
+msgstr "Pubblicato:"
+
+#: locale/tools/smarty-gettext/smarty.c:8
+msgid "Updated:"
+msgstr "Aggiornato:"
+
+#: locale/tools/smarty-gettext/smarty.c:11
+msgid " Online Edition"
+msgstr " Edizione Online"
+
+#: locale/tools/smarty-gettext/smarty.c:14
+msgid "Search"
+msgstr "Cerca"
+
+#: locale/tools/smarty-gettext/smarty.c:17
+msgid "Breaking News"
+msgstr "Ultime notizie"
+
+#: locale/tools/smarty-gettext/smarty.c:20
+msgid "&mdash; TOP STORY &mdash;"
+msgstr "&mdash; PRIMA PAGINA &mdash;"
+
+#: locale/tools/smarty-gettext/smarty.c:23
+#: locale/tools/smarty-gettext/smarty.c:26
+msgid "Read More"
+msgstr "Dettagli"
+
+#: locale/tools/smarty-gettext/smarty.c:29
+msgid "Top Stories"
+msgstr "Importanti"

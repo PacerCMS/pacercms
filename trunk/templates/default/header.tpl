@@ -13,7 +13,8 @@
 {/if}
 {if $article_author ne ''}
 <meta name="keywords" content="{$article_keywords|escape:'html'}" />
-<meta name="author" content="{$article_author|escape:'html'}" /><meta name="date" content="{$article_publish|date_format:'%Y-%m-%d %T'}" />
+<meta name="author" content="{$article_author|escape:'html'}" />
+<meta name="date" content="{$article_publish|date_format:'%Y-%m-%d %T'}" />
 {/if}
 <meta name="copyright" content="&copy; {$smarty.now|date_format:'%Y'} {$site_name|escape:'html'}" />
 <meta name="generator" content="PacerCMS {$site_cm_version}" />
@@ -44,24 +45,24 @@
 </div>
 <div id="pageTop">
     <div id="siteUpdate">
-        <p><strong>Last Edition: </strong><br />
+        <p><strong>{t}Last Edition:{/t} </strong><br />
         {$current_issue_date|date_format:"%B %e, %Y"}</p>
     </div>
     <div id="topBar">
         {if $article_publish ne ""}
-        <p><strong>Published:</strong> {$article_publish|date_format:"%B %e, %Y"}
+        <p><strong>{t}Published:{/t}</strong> {$article_publish|date_format:"%B %e, %Y"}
         {if $article_edit > $article_publish}
-         <strong>Updated:</strong> {$article_edit|date_format:"%D %l:%m %p"}
+         <strong>{t}Updated:{/t}</strong> {$article_edit|date_format:"%D %l:%m %p"}
         {/if}
         </p>
         {else}
-        <p><strong>{$site_name|escape:'html'} Online Edition</strong></p>
+        <p><strong>{$site_name|escape:'html'}{t} Online Edition{/t}</strong></p>
         {/if}
     </div>
     <div id="searchBox">
         <form action="search.php" method="get">
         <p>
-        <label for="s">Search</label>
+        <label for="s">{t}Search{/t}</label>
         <input type="text" name="s" id="s" class="textField" />
         <input type="submit" name="b" id="b" value="Search" class="button" />
         <input type="hidden" name="index" id="index" value="article" />
