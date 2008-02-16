@@ -4,25 +4,25 @@
 <div class="colWrap">
     <form action="{$SCRIPT_NAME}" method="get">
         <div class="biggerCol">
-            <h3>Search <em>{$site_name}</em> Archives</h3>
+            <h3>Search <em>{$site_name}</em> {t}Archives{/t}</h3>
             <p>
-                <label for="s">Search for:</label>
+                <label for="s">{t}Search for:{/t}</label>
                 <input type="text" name="s" value="{$search_string|escape:'html'}"/>
             </p>
             <p>
-                <input type="submit" name="search" value="Search" />
-                <input type="reset" name="reset" value="Reset" />
+                <input type="submit" name="search" value="{t}Search{/t}" />
+                <input type="reset" name="reset" value="{t}Reset{/t}" />
             </p>
         </div>
         <div class="smallerCol">
             <p>
-            <label for="index">Search within:</label>
+            <label for="index">{t}Search within:{/t}</label>
             <select name="index" id="index">
                 {html_options values=$s_index_values output=$s_index_names selected=$s_index_select}
             </select>
             </p>
             <p>
-            <label for="sort_by">Sort by:</label>
+            <label for="sort_by">{t}Sort by:{/t}</label>
             <select name="sort_by" id="sort_by">
                 {html_options values=$s_sort_by_values output=$s_sort_by_names selected=$s_sort_by_select}
             </select>
@@ -38,11 +38,11 @@
     
         <table>
             <tr>
-                <th>Headline</th>
-                <th>Publish Date</th>
-                <th>Author</th>
-                <th>Section</th>
-                <th>Words</th>
+                <th>{t}Headline{/t}</th>
+                <th>{t}Publish Date{/t}</th>
+                <th>{t}Author{/t}</th>
+                <th>{t}Section{/t}</th>
+                <th>{t}Words{/t}</th>
             </tr>
             {section name="items" loop=$article_list}
             <tr>
@@ -54,7 +54,7 @@
             </tr>
             {sectionelse}
             <tr>
-                <td colspan="5">Your search did not return any articles.</td>
+                <td colspan="5">{t}Your search did not return any articles.{/t}</td>
             </tr>
         {/section}
         </table>

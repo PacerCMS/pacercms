@@ -11,17 +11,17 @@ reference.
 {$submitted_text}
 
 ---
-Type: {$submitted_keyword}
-Word Count: {$submitted_word_count}
+{t}Type:{/t} {$submitted_keyword}
+{t}Word Count:{/t} {$submitted_word_count}
 ---
 
-Author: {$submitted_author}
-E-mail: {$submitted_author_email}
-Classification: {$submitted_author_classification}
-Major: {$submitted_author_major}
-Hometown: {$submitted_author_city}
-Telephone: {$submitted_author_telephone}
+{t}Author:{/t} {$submitted_author}
+{t}E-mail:{/t} {$submitted_author_email}
+{t}Classification:{/t} {$submitted_author_classification}
+{t}Major:{/t} {$submitted_author_major}
+{t}Hometown:{/t} {$submitted_author_city}
+{t}Telephone:{/t} {$submitted_author_telephone}
         
 ------------------------------------------------
-Sent: {$smarty.now|date_format:'%Y-%m-%d %H:%M:%S'}
-Form: {$smarty.server.SCRIPT_NAME}
+{t}Sent:{/t} {$smarty.now|date_format:'%Y-%m-%d %H:%M:%S'}
+{t}Form:{/t} {$smarty.server.SCRIPT_NAME}

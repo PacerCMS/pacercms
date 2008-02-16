@@ -3,9 +3,9 @@
     <div class="articleToolbar">
         <ul>
             <li><strong>Tools:</strong></li>
-            <li><a href="javascript:window.print()" class="printArticle">Print</a></li>
-            <li><a href="send.php?id={$article_id}" class="emailArticle">E-mail</a></li>
-            <li><a href="share.php?id={$article_id}" class="discussArticle">Share This Article</a></li>
+            <li><a href="javascript:window.print()" class="printArticle">{t}Print{/t}</a></li>
+            <li><a href="send.php?id={$article_id}" class="emailArticle">{t}E-mail{/t}</a></li>
+            <li><a href="share.php?id={$article_id}" class="discussArticle">{t}Share This Article{/t}</a></li>
         </ul>
     </div>
 
@@ -39,7 +39,7 @@
     </div>
     {/if}
     
-	{if $section_headlines ne ''}	  <div class="sectionHeadlines">	    <h4><a href="{$section_url}" title="{$section_name|escape:'html'}">More {$section_name|escape:'html'} Headlines</a></h4>
+	{if $section_headlines ne ''}	  <div class="sectionHeadlines">	    <h4><a href="{$section_url}" title="{$section_name|escape:'html'}">{t}More{/t} {$section_name|escape:'html'} {t}Headlines{/t}</a></h4>
         <ul>
         {section name="items" loop=$section_headlines}
             <li><a href="{$site_url}/article.php?id={$section_headlines[items].id}">{$section_headlines[items].article_title|escape:'html'}</a></li>

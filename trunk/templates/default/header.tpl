@@ -24,7 +24,7 @@
 <link href="{$site_url}/templates/{$site_templates_folder}/{#screen_css#}" rel="stylesheet" type="text/css" media="screen" />
 <link href="{$site_url}/templates/{$site_templates_folder}/{#print_css#}" rel="stylesheet" type="text/css" media="print" />
 
-<link href="{$site_url}/feed.php" rel="alternate" type="application/rss+xml" title="{$site_name} - Headlines (RSS)" />
+<link href="{$site_url}/feed.php" rel="alternate" type="application/rss+xml" title="{$site_name} - {t}Headlines (RSS){/t}" />
 
 <script src="{$site_url}/includes/functions.js" type="text/javascript"> </script>
 
@@ -56,7 +56,7 @@
         {/if}
         </p>
         {else}
-        <p><strong>{$site_name|escape:'html'}{t} Online Edition{/t}</strong></p>
+        <p><strong>{$site_name|escape:'html'} {t}Online Edition{/t}</strong></p>
         {/if}
     </div>
     <div id="searchBox">
@@ -64,7 +64,7 @@
         <p>
         <label for="s">{t}Search{/t}</label>
         <input type="text" name="s" id="s" class="textField" />
-        <input type="submit" name="b" id="b" value="Search" class="button" />
+        <input type="submit" name="b" id="b" value="{t}Search{/t}" class="button" />
         <input type="hidden" name="index" id="index" value="article" />
         <input type="hidden" name="sort_by" id="sort_by" value="article_publish" />
         <input type="hidden" name="sort_dir" id="sort_dir" value="DESC" />

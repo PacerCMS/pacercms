@@ -7,14 +7,14 @@
     </div>
     <div class="subMenu">
         <ul>
-            <li><a href="{$site_url}/submit.php?mode=letter">Write a Letter</a></li>
-            <li><a href="{$site_url}/archives.php">Archived Issues</a></li>
-            <li><a href="{$site_url}/submit.php?mode=article">Submit a Story</a></li>
+            <li><a href="{$site_url}/submit.php?mode=letter">{t}Write a Letter{/t}</a></li>
+            <li><a href="{$site_url}/archives.php">{t}Archived Issues{/t}</a></li>
+            <li><a href="{$site_url}/submit.php?mode=article">{t}Submit a Story{/t}</a></li>
         </ul>
         <ul>
-            <li><a href="{$site_url}/page.php?id=1">About <em>{$site_name}</em></a></li>
-            <li><a href="{$site_url}/page.php?id=2">Advertising Rates</a></li>	  
-            <li><a href="{$site_url}/feedback.php">Contact Us</a></li>
+            <li><a href="{$site_url}/page.php?id=1">{t}About{/t} <em>{$site_name}</em></a></li>
+            <li><a href="{$site_url}/page.php?id=2">{t}Advertising Rates{/t}</a></li>	  
+            <li><a href="{$site_url}/feedback.php">{t}Contact Us{/t}</a></li>
         </ul>
     </div>
 </div>
