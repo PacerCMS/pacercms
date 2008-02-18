@@ -27,7 +27,7 @@ if ($mode == "delete" && is_numeric($_POST['delete-id'])) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
 	} else {
-		cm_error("Error in 'cm_delete_submitted' function.");
+		cm_error(gettext("Error in 'cm_delete_submitted' function."));
 		exit;
 	}	
 }
@@ -40,7 +40,7 @@ $result = cm_run_query($query);
 
 // If empty, error
 if ($result->RecordCount() != 1) {
-	cm_error("Submitted article does not exist.");
+	cm_error(gettext("Submitted article does not exist."));
 	exit;
 }
 	
@@ -63,22 +63,22 @@ get_cm_header();
 
 ?>
 
-<h2><a href="<?php echo $pmodule; ?>.php?">Submitted Article Manager</a></h2>
+<h2><a href="<?php echo $pmodule; ?>.php?"><?php echo gettext("Submitted Article Manager"); ?></a></h2>
 <div class="actionMenu">
 <ul>
     <?php if (cm_auth_restrict('article-edit') == "true") { ?>
-    <li class="command-preview"><a href="article-edit.php?action=new&amp;submitted_id=<?php echo $id; ?>">Post to Article Manager</a></li>
+    <li class="command-preview"><a href="article-edit.php?action=new&amp;submitted_id=<?php echo $id; ?>"><?php echo gettext("Post to Article Manager"); ?></a></li>
     <?php } ?>    <?php if (cm_auth_restrict('submitted-delete') == "true") { ?>
-    <li class="command-delete"><a href="#delete">Delete</a></li>
+    <li class="command-delete"><a href="#delete"><?php echo gettext("Delete"); ?></a></li>
     <?php } ?></ul>
 </div>
 
 <fieldset class="<?php echo "$module-preview" ?>">
-<legend>Story Preview</legend>
+<legend><?php echo gettext("Story Preview"); ?></legend>
 <h3><?php echo $title; ?></h3>
-<p>By <strong><?php echo $author; ?></strong></p>
+<p><?php echo gettext("By"); ?> <strong><?php echo $author; ?></strong></p>
 <?php echo autop($text); ?>
-<h4>Contact Information</h4>
+<h4><?php echo gettext("Contact Information"); ?></h4>
 
 <p>
 <?php echo $author; ?><br />
@@ -88,20 +88,20 @@ get_cm_header();
 <?php echo $telephone; ?>
 </p>
 
-<p><strong>Word Count:</strong> <?php echo $words; ?><br>
-<strong>Keyword:</strong> <?php echo $keyword; ?></p>
+<p><strong><?php echo gettext("Word Count:"); ?></strong> <?php echo $words; ?><br>
+<strong><?php echo gettext("Keyword:"); ?></strong> <?php echo $keyword; ?></p>
 </fieldset>
 
 <?php
 if (cm_auth_restrict('submitted-delete') == "true") { ?>
-<h2>Delete Submitted Article <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
+<h2><?php echo gettext("Delete Submitted Article"); ?> <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
 <div id="deleteRecord">
   <form action="<?php echo "$module.php?action=delete"; ?>" method="post">
     <fieldset class="<?php echo "$module-delete" ?>">
-    <legend>Confirm Delete</legend>
-    <p>Are you sure you want to delete this submitted article?</p>
-    <input type="submit" name="submit-delete" id="submit-delete" value="Yes" class="button" />
-    <input type="button" name="cancel-delete" id="cancel-delete" value="Cancel" onClick="javascript:toggleLayer('deleteArticle');" class="button" />
+    <legend><?php echo gettext("Confirm Delete"); ?></legend>
+    <p><?php echo gettext("Are you sure you want to delete this submitted article?"); ?></p>
+    <input type="submit" name="submit-delete" id="submit-delete" value="<?php echo gettext("Delete"); ?>" class="button" />
+    <input type="button" name="cancel-delete" id="cancel-delete" value="<?php echo gettext("Cancel"); ?>" onClick="javascript:toggleLayer('deleteArticle');" class="button" />
     <input type="hidden" name="delete-id" id="delete-id" value="<?php echo $id; ?>" />
     </fieldset>
   </form>

@@ -9,23 +9,23 @@ cm_auth_module($module);
 get_cm_header();
 
 ?>
-<h2>Session Variables Set by Server</h2>
-<p class="infoMessage">These are set when you login. Updates do not occur until you login again.</p>
+<h2><?php echo gettext("Session Variables Set by Server"); ?></h2>
+<p class="infoMessage"><?php echo gettext("These are set when you login. Updates do not occur until you login again."); ?></p>
 <?php
 
 	print "<pre>\n";
-	print "<strong>User Data:</strong> ";
+	print "<strong>" . gettext("User Data:") . "</strong> ";
     print_r($_SESSION['user_data']);
-	print "<strong>Access Data:</strong> ";
+	print "<strong>" . gettext("Access Data:") . "</strong> ";
     print_r($_SESSION['access_data']);
-    print "<strong>Setting Data:</strong> ";
+    print "<strong>" . gettext("Setting Data:") . "</strong> ";
     print_r($_SESSION['setting_data']);
-    print "<strong>Issue Data:</strong> ";
+    print "<strong>" . gettext("Issue Data:") . "</strong> ";
     print_r($_SESSION['issue_data']);
 	print "</pre>\n"
 ?>
-<h2>Cookies Set by Server</h2>
-<p class="infoMessage">Modules set cookies to keep everything easy to get to.</p>
+<h2><?php echo gettext("Cookies Set by Server"); ?></h2>
+<p class="infoMessage"><?php echo gettext("Modules set cookies to keep everything easy to get to."); ?></p>
 <?php
 
 	echo "<pre>\n";
@@ -36,7 +36,7 @@ get_cm_header();
 	echo "</pre>\n"
 
 ?>
-<h2>Server Information</h2>
-<p class="infoMessage">A phpinfo() instance. Might be helpful in debugging server errors.</p>
+<h2><?php echo gettext("Server Information"); ?></h2>
+<p class="infoMessage"><?php echo gettext("A phpinfo() instance. Might be helpful in debugging server errors."); ?></p>
 <?php phpinfo(); ?>
 <?php get_cm_footer(); ?>

@@ -6,7 +6,7 @@
     {if $cover_articles[items].article_publish gt $current_issue_date}
     <h5 class="breakingNews">{t}Breaking News{/t}</h5>
     {else}
-    <h5>&mdash; {t}TOP STORY{/t} &mdash;</h5>
+    <h5>&mdash; {t}Top Story{/t} &mdash;</h5>
     {/if}
 
 	<h2><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}">{$cover_articles[items].article_title|escape:'html'}</a></h2>
