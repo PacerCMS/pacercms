@@ -26,7 +26,7 @@ if ($mode == "delete" && !empty($_POST['delete-id'])) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
 	} else {
-		cm_error("Error in 'cm_delete_user' function.");
+		cm_error(gettext("Error in 'cm_delete_user' function."));
 		exit;
 	}
 }
@@ -67,7 +67,7 @@ if ($mode == "edit")
 		}
 		if ($password_new != "$password_confirm")
 		{
-			cm_error("Passwords did not match.");
+			cm_error(gettext("Passwords did not match."));
 			exit;
 		}
 		$id = $_POST['id'];
@@ -78,11 +78,11 @@ if ($mode == "edit")
 			header("Location: $pmodule.php?msg=updated");
 			exit;
 		} else {
-			cm_error("Error in 'cm_edit_user' function.");
+			cm_error(gettext("Error in 'cm_edit_user' function."));
 			exit;
 		}		
 	} elseif (!empty($_POST)) {
-		cm_error("Did not have a user to load.");
+		cm_error(gettext("Did not have a user to load."));
 		exit;
 	}
 }
@@ -114,7 +114,7 @@ if ($mode == "add" && !empty($_POST['login'])) {
 	if ($password_new == "$password_confirm" && $password_new != "") {
 		$user['password'] = md5($password_new);
 	} else {
-		cm_error("Passwords did not match, or left blank.");
+		cm_error(gettext("Passwords did not match, or left blank."));
 		exit;
 	}	
 	$stat = cm_add_user($user);
@@ -123,7 +123,7 @@ if ($mode == "add" && !empty($_POST['login'])) {
 		header("Location: staff-access.php?id=$user_id&action=add");
 		exit;
 	} else {
-		cm_error("Error in 'cm_add_user' function.");
+		cm_error(gettext("Error in 'cm_add_user' function."));
 		exit;
 	}
 }
@@ -138,7 +138,7 @@ if ($mode == "edit" && is_numeric($id)) {
 	$result = cm_run_query($query);
 	
 	if ($result->RecordCount() != 1) {
-		cm_error("User does not exist.");
+		cm_error(gettext("User does not exist."));
 	}
 	
 	$id = $result->Fields('id');
@@ -169,124 +169,123 @@ get_cm_header();
 ?>
 
 
-<h2><a href="<?php echo "$pmodule.php"; ?>">Staff Manager</a></h2>
+<h2><a href="<?php echo "$pmodule.php"; ?>"><?php echo gettext("Staff Manager"); ?></a></h2>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Basic Profile</legend>
+  <legend><?php echo gettext("Basic Profile"); ?></legend>
   <div class="sidebar">
     <?php
 if ($mode == "add") {
 ?>
     <p>
-      <label for="login">Login</label>
+      <label for="login"><?php echo gettext("Login"); ?></label>
       <br />
       <input type="text" name="login" id="login" />
     </p>
     <?php } ?>
-    <p>Passwords <strong>must match</strong>.</p>
+    <p><strong><?php echo gettext("Passwords must match."); ?></strong></p>
     <p>
-      <label for="password_new">Password</label>
+      <label for="password_new"><?php echo gettext("Password"); ?></label>
       <br />
       <input type="password" name="password_new" id="password_new" />
     </p>
     <p>
-      <label for="password_confirm">Confirm Password</label>
+      <label for="password_confirm"><?php echo gettext("Confirm Password"); ?></label>
       <br />
       <input type="password" name="password_confirm" id="password_confirm" />
     </p>
     <?php
 if ($mode == "edit") {
 ?>
-    <p><em>Leave blank if you do not wish<br/>
-      to change the password.</em></p>
+    <p style="width:175px;"><em><?php echo gettext("Leave blank if you do not wish to change the password."); ?></em></p>
     <?php } ?>
   </div>
   <p>
-    <label for="first_name">First Name</label>
+    <label for="first_name"><?php echo gettext("First Name"); ?></label>
     <br />
     <input type="text" name="first_name" id="first_name" value="<?php echo $first_name; ?>" class="text" />
   </p>
   <p>
-    <label for="middle_name">Middle Name</label>
+    <label for="middle_name"><?php echo gettext("Middle Name"); ?></label>
     <br />
     <input type="text" name="middle_name" id="middle_name" value="<?php echo $middle_name; ?>" class="text" />
   </p>
   <p>
-    <label for="last_name">Last Name</label>
+    <label for="last_name"><?php echo gettext("Last Name"); ?></label>
     <br />
     <input type="text" name="last_name" id="last_name" value="<?php echo $last_name; ?>" class="text" />
   </p>
   <p>
-    <label for="job_title">Job Title</label>
+    <label for="job_title"><?php echo gettext("Job Title"); ?></label>
     <br />
     <input type="text" name="job_title" id="job_title" value="<?php echo $job_title; ?>" class="text" />
   </p>
   </fieldset>
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Contact Information</legend>
+  <legend><?php echo gettext("Contact Information"); ?></legend>
   <div class="sidebar">
-    <p>Internet Messengers (Optional)</p>
+    <p><?php echo gettext("Internet Messengers"); ?></p>
     <p>
-      <label for="im_aol">AOL Instant Messenger</label>
+      <label for="im_aol"><?php echo gettext("AOL Instant Messenger"); ?></label>
       <br />
       <input type="text" name="im_aol" id="im_aol" value="<?php echo $im_aol; ?>" class="text" />
     </p>
     <p>
-      <label for="im_msn">Microsoft Messenger</label>
+      <label for="im_msn"><?php echo gettext("Microsoft Messenger"); ?></label>
       <br />
       <input type="text" name="im_msn" id="im_msn" value="<?php echo $im_msn; ?>" class="text" />
     </p>
     <p>
-      <label for="im_yahoo">Yahoo! Messenger</label>
+      <label for="im_yahoo"><?php echo gettext("Yahoo! Messenger"); ?></label>
       <br />
       <input type="text" name="im_yahoo" id="im_yahoo" value="<?php echo $im_yahoo; ?>" class="text" />
     </p>
     <p>
-      <label for="im_jabber">Jabber Services</label>
+      <label for="im_jabber"><?php echo gettext("Jabber Services"); ?></label>
       <br />
       <input type="text" name="im_jabber" id="im_jabber" value="<?php echo $im_jabber; ?>" class="text" />
     </p>
   </div>
   <p>
-    <label for="email">Email</label>
+    <label for="email"><?php echo gettext("E-mail"); ?></label>
     <br />
     <input type="text" name="email" id="email" value="<?php echo $email; ?>" class="text" />
   </p>
   <p>
-    <label for="telephone">Telephone (Local)</label>
+    <label for="telephone"><?php echo gettext("Telephone (Local)"); ?></label>
     <br />
     <input type="text" name="telephone" id="telephone" value="<?php echo $telephone; ?>" class="text" />
   </p>
   <p>
-    <label for="mobile">Mobile</label>
+    <label for="mobile"><?php echo gettext("Mobile"); ?></label>
     <br />
     <input type="text" name="mobile" id="mobile" value="<?php echo $mobile; ?>" class="text" />
   </p>
   <p>
-    <label for="address">Address</label>
+    <label for="address"><?php echo gettext("Address"); ?></label>
     <br />
     <input type="text" name="address" id="address" value="<?php echo $address; ?>" class="text" />
   </p>
   <p>
-    <label for="City">City</label>
+    <label for="City"><?php echo gettext("City"); ?></label>
     <br />
     <input type="text" name="city" id="city" value="<?php echo $city; ?>" class="text" />
   </p>
   <p>
-    <label for="state">State</label>
+    <label for="state"><?php echo gettext("State"); ?></label>
     <br />
     <input type="text" name="state" id="state" value="<?php echo $state; ?>" class="text" />
   </p>
   <p>
-    <label for="zipcode">Zip Code</label>
+    <label for="zipcode"><?php echo gettext("Zip Code"); ?></label>
     <br />
     <input type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>" class="text" />
   </p>
   </fieldset>
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Additional Information</legend>
+  <legend><?php echo gettext("Additional Information"); ?></legend>
   <p>
-    <label for="profile">Profile</label>
+    <label for="profile"><?php echo gettext("Profile"); ?></label>
     <br />
     <textarea name="profile" id="profile" rows="10"><?php echo $profile; ?></textarea>
   </p>
@@ -295,30 +294,30 @@ if ($mode == "edit") {
 <?php if ($mode == "add") { ?>
 
   <p>
-    <input type="submit" value="Add User" name="submit" id="submit" class="button" />
-    <input type="button" value="Cancel" name="cancel_add" id="cancel_add" class="button" onClick="javascript:history.back();" />
+    <input type="submit" value="<?php echo gettext("Add User"); ?>" name="submit" id="submit" class="button" />
+    <input type="button" value="<?php echo gettext("Cancel"); ?>" name="cancel_add" id="cancel_add" class="button" onClick="javascript:history.back();" />
   </p>
   </fieldset>
 <form>
 
 <?php } else { ?>
 <p>
-    <input type="submit" value="Update Profile" name="update" id="update" class="button" />
+    <input type="submit" value="<?php echo gettext("Update Profile"); ?>" name="update" id="update" class="button" />
     <input name="id" type="hidden" id="id" value="<?php echo $id; ?>" />
     <input type="hidden" name="login" id="login" value="<?php echo $login; ?>" />
     <input type="hidden" name="password" id="password" value="<?php echo $password; ?>" />
-    <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
+    <input type="button" value="<?php echo gettext("Cancel"); ?>" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
   </p>
   </fieldset>
 </form>
-<h2>Delete User <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
+<h2><?php echo gettext("Delete User"); ?> <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
 <div id="deleteRecord">
   <form action="<?php echo "$module.php?action=delete"; ?>" method="post">
     <fieldset class="<?php echo "$module-delete" ?>">
-    <legend>Confirm Delete</legend>
-    <p>Are you sure you want to delete this user?</p>
-    <input type="submit" name="submit_delete" id="submit_delete" value="Yes" class="button" />
-    <input type="button" name="cancel_delete" id="cancel_delete" value="Cancel" onClick="javascript:toggleLayer('deleteUser');" class="button" />
+    <legend><?php echo gettext("Confirm Delete"); ?></legend>
+    <p><?php echo gettext("Are you sure you want to delete this user?"); ?></p>
+    <input type="submit" name="submit_delete" id="submit_delete" value="<?php echo gettext("Delete"); ?>" class="button" />
+    <input type="button" name="cancel_delete" id="cancel_delete" value="<?php echo gettext("Cancel"); ?>" onClick="javascript:toggleLayer('deleteUser');" class="button" />
     <input type="hidden" name="delete-id" id="delete-id" value="<?php echo $id; ?>" />
     </fieldset>
   </form>

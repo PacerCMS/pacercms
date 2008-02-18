@@ -11,7 +11,7 @@
 
 {*Note: You can obviously do whatever you like with the credit line. If you take it out, at least let us know you are using the software. It makes our day to see it up and running. *}
 
-    <p>Copyright &copy; {$smarty.now|date_format:"%Y"}, <em>{$site_name} {t}Online Edition{/t}</em>. {t}Powered by{/t} <a href="http://pacercms.sourceforge.net">PacerCMS</a></p>
+    <p>{t}Copyright{/t} &copy; {$smarty.now|date_format:"%Y"}, <em>{$site_name} {t}Online Edition{/t}</em>. {t}Powered by{/t} <a href="http://pacercms.sourceforge.net">PacerCMS</a></p>
 
 </div>
 

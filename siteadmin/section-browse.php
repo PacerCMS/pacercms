@@ -15,24 +15,24 @@ get_cm_header();
 <h2>Section Manager</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "updated") { echo "<p class=\"infoMessage\">Section updated.</p>"; }
-if ($msg == "added") { echo "<p class=\"infoMessage\">Section added.</p>"; }
-if ($msg == "deleted") { echo "<p class=\"infoMessage\">Section deleted.</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">" . gettext("Section updated.") . "</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">" . gettext("Section added.") . "</p>"; }
+if ($msg == "deleted") { echo "<p class=\"infoMessage\">" . gettext("Section deleted.") . "</p>"; }
 ?>
 <form>
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Browse Sections</legend>
+  <legend><?php echo gettext("Browse Sections"); ?></legend>
     <div class="actionMenu"><ul>
-    <li><strong>Section Options:</strong></li>
-    <li><a href="<?php echo "$cmodule.php?action=new"; ?>">Add New Section</a></li> 
+    <li><strong><?php echo gettext("Section Options:"); ?></strong></li>
+    <li><a href="<?php echo "$cmodule.php?action=new"; ?>"><?php echo gettext("Add New Section"); ?></a></li> 
     </ul></div>
 
   <table class="<?php echo "$module-table"; ?>">
     <tr>
-      <th><acronym title="Assigned Priority">AP</acronym></th>
-      <th>Section</th>
-      <th>Editor</th>
-      <th>Tools</th>
+      <th><acronym title="<?php echo gettext("Assigned Priority"); ?>"><?php echo gettext("AP"); ?></acronym></th>
+      <th><?php echo gettext("Section"); ?></th>
+      <th><?php echo gettext("Editor"); ?></th>
+      <th><?php echo gettext("Tools"); ?></th>
     </tr>
     <?php
 
@@ -58,9 +58,9 @@ foreach ($records as $record)
       <td><?php echo $section_editor; ?><br>
         <?php echo $section_editor_title; ?></td>
       <td class="actionMenu"><ul class="center">
-          <li><a href="<?php echo $section_url; ?>">Preview</a></li>
-          <li><a href="section-edit.php?id=<?php echo $id; ?>">Edit</a></li>
-          <li class="command-delete"><a href="section-edit.php?id=<?php echo $id; ?>#delete">Delete</a></li>
+          <li><a href="<?php echo $section_url; ?>"><?php echo gettext("Preview"); ?></a></li>
+          <li><a href="section-edit.php?id=<?php echo $id; ?>"><?php echo gettext("Edit"); ?></a></li>
+          <li class="command-delete"><a href="section-edit.php?id=<?php echo $id; ?>#delete"><?php echo gettext("Delete"); ?></a></li>
         </ul>
       </td>
     </tr>

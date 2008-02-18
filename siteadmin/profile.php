@@ -40,7 +40,7 @@ if ($_GET['action'] == "edit")
 			$user['password'] = md5($password_new);
 		}
 		if ($password_new != "$password_confirm") {
-			cm_error("Passwords did not match.");
+			cm_error(gettext("Passwords did not match."));
 			exit;
 		}
 		
@@ -50,7 +50,7 @@ if ($_GET['action'] == "edit")
 			header("Location: $module.php?msg=updated");
 			exit;
 		} else {
-			cm_error("Error in 'cm_edit_profile' function.");
+			cm_error(gettext("Error in 'cm_edit_profile' function."));
 			exit;
 		}
 }
@@ -61,7 +61,7 @@ $result = cm_run_query($query);
 
 if ($result->RecordCount() != 1)
 {
-	cm_error("User does not exist.");
+	cm_error(gettext("User does not exist."));
 }
 
 $id = $result->Fields('id');
@@ -93,127 +93,123 @@ get_cm_header();
 <?php
 $msg = $_GET['msg'];
 if ($msg == "updated") {
-    echo "<p class=\"infoMessage\">Your user profile has been updated.</p>";
+    echo "<p class=\"infoMessage\">" . gettext("Your user profile has been updated.") . "</p>";
 } else {
-    echo "<p class=\"alertMessage\">You cannot change your name or job title. Please contact an administrator to correct any errors.</p>";
+    echo "<p class=\"alertMessage\">" . gettext("You cannot change your name or job title. Please contact an administrator to correct any errors.") . "</p>";
 }
 ?>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Basic Profile</legend>
+  <legend><?php echo gettext("Basic Profile"); ?></legend>
   <div class="sidebar">
-    <p>Passwords <strong>must match.</strong></p>
-    <p>It is recommended that your<br />
-	  password be longer than 6<br />
-	  characters, and a mix of<br />
-      letters and numbers.</p>
+    <p><strong><?php echo gettext("Passwords must match."); ?></strong></p>
+    <p style="width:200px;"><?php echo gettext("It is recommended that your password be longer than 6 characters, and a mix of letters and numbers."); ?></p>
     <p>
-      <label for="password_new">Password</label>
+      <label for="password_new"><?php echo gettext("Password"); ?></label>
       <br />
       <input type="password" name="password_new" id="password_new" />
     </p>
     <p>
-      <label for="password_confirm">Confirm Password</label>
+      <label for="password_confirm"><?php echo gettext("Confirm Password"); ?></label>
       <br />
       <input type="password" name="password_confirm" id="password_confirm" />
     </p>
-    <p><em>Leave blank if you do not wish<br />
- to change your password.</em></p>
+    <p style="width:200px;"><em><?php echo gettext("Leave blank if you do not wish to change your password."); ?></em></p>
   </div>
   <p>
-    <label for="first_name">First Name</label>
+    <label for="first_name"><?php echo gettext("First Name"); ?></label>
     <br />
     <big><?php echo $first_name; ?>&nbsp;</big>
   </p>
   <p>
-    <label for="middle_name">Middle Name</label>
+    <label for="middle_name"><?php echo gettext("Middle Name"); ?></label>
     <br />
     <big><?php echo $middle_name; ?>&nbsp;</big>
   </p>
   <p>
-    <label for="last_name">Last Name</label>
+    <label for="last_name"><?php echo gettext("Last Name"); ?></label>
     <br />
     <big><?php echo $last_name; ?></big>&nbsp;
   </p>
   <p>
-    <label for="job_title">Job Title</label>
+    <label for="job_title"><?php echo gettext("Job Title"); ?></label>
     <br />
     <big><?php echo $job_title; ?></big>&nbsp;
   </p>
   </fieldset>
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Contact Information</legend>
+  <legend><?php echo gettext("Contact Information"); ?></legend>
   <div class="sidebar">
-    <p>Internet Messengers (Optional)</p>
+    <p><?php echo gettext("Internet Messengers"); ?></p>
     <p>
-      <label for="im_aol">AOL Instant Messenger</label>
+      <label for="im_aol"><?php echo gettext("AOL Instant Messenger"); ?></label>
       <br />
       <input type="text" name="im_aol" id="im_aol" value="<?php echo $im_aol; ?>" />
     </p>
     <p>
-      <label for="im_msn">Microsoft Messenger</label>
+      <label for="im_msn"><?php echo gettext("Microsoft Messenger"); ?></label>
       <br />
       <input type="text" name="im_msn" id="im_msn" value="<?php echo $im_msn; ?>" />
     </p>
     <p>
-      <label for="im_yahoo">Yahoo! Messenger</label>
+      <label for="im_yahoo"><?php echo gettext("Yahoo! Messenger"); ?></label>
       <br />
       <input type="text" name="im_yahoo" id="im_yahoo" value="<?php echo $im_yahoo; ?>" />
     </p>
     <p>
-      <label for="im_jabber">Jabber Services</label>
+      <label for="im_jabber"><?php echo gettext("Jabber Services"); ?></label>
       <br />
       <input type="text" name="im_jabber" id="im_jabber" value="<?php echo $im_jabber; ?>" />
     </p>
   </div>
   <p>
-    <label for="email">Email</label>
+    <label for="email"><?php echo gettext("E-mail"); ?></label>
     <br />
     <input type="text" name="email" id="email" value="<?php echo $email; ?>" class="text" />
   </p>
   <p>
-    <label for="telephone">Telephone (Local)</label>
+    <label for="telephone"><?php echo gettext("Telephone (Local)"); ?></label>
     <br />
     <input type="text" name="telephone" id="telephone" value="<?php echo $telephone; ?>" class="text" />
   </p>
   <p>
-    <label for="mobile">Mobile</label>
+    <label for="mobile"><?php echo gettext("Mobile"); ?></label>
     <br />
     <input type="text" name="mobile" id="mobile" value="<?php echo $mobile; ?>" class="text" />
   </p>
   <p>
-    <label for="address">Address</label>
+    <label for="address"><?php echo gettext("Address"); ?></label>
     <br />
     <input type="text" name="address" id="address" value="<?php echo $address; ?>" class="text" />
   </p>
   <p>
-    <label for="City">City</label>
+    <label for="City"><?php echo gettext("City"); ?></label>
     <br />
     <input type="text" name="city" id="city" value="<?php echo $city; ?>" class="text" />
   </p>
   <p>
-    <label for="state">State</label>
+    <label for="state"><?php echo gettext("State"); ?></label>
     <br />
     <input type="text" name="state" id="state" value="<?php echo $state; ?>" class="text" />
   </p>
   <p>
-    <label for="zipcode">Zip Code</label>
+    <label for="zipcode"><?php echo gettext("Zip Code"); ?></label>
     <br />
     <input type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>" class="text" />
   </p>
   </fieldset>
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Additional Information</legend>
+  <legend><?php echo gettext("Additional Information"); ?></legend>
   <p>
-    <label for="profile">Profile</label>
+    <label for="profile"><?php echo gettext("Profile"); ?></label>
     <br />
     <textarea name="profile" id="profile" rows="10"><?php echo $profile; ?></textarea>
   </p>
   <p>
-    <input type="submit" value="Update Profile" name="update" id="update" class="button" />
+    <input type="submit" value="<?php echo gettext("Update Profile"); ?>" name="update" id="update" class="button" />
     <input type="hidden" name="login" id="login" value="<?php echo $login; ?>" />
     <input type="hidden" name="password" id="password" value="<?php echo $password; ?>" />
-    <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
+    <input type="button" value="<?php echo gettext("Cancel"); ?>" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
   </p>
   </fieldset>
 </form>

@@ -19,7 +19,7 @@ if (is_numeric($_GET['issue']))
 {
 	$issue = $_GET['issue'];
 	if (cm_issue_info("id",$issue) == "") {
-		cm_error("The selected issue could not be loaded.");
+		cm_error(gettext("The selected issue could not be loaded."));
 	}	
 	setcookie("$module-issue", $issue);
 	header("Location: $module.php");
@@ -38,7 +38,7 @@ if (is_array($_POST['moderate']) && cm_auth_restrict('submitted-edit'))
         header("Location: $module?msg=moderate");
         exit;
     } else {
-        cm_error("There was an error in the 'cm_delete_submitted' function.");
+        cm_error(gettext("There was an error in the 'cm_delete_submitted' function."));
         exit;
     }
 }
@@ -56,48 +56,48 @@ get_cm_header();
 
 ?>
 
-<h2>Submitted Article Manager</h2>
+<h2><?php echo gettext("Submitted Article Manager"); ?></h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"infoMessage\">Submitted article added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"infoMessage\">Submitted updated.</p>"; }
-if ($msg == "deleted") { echo "<p class=\"alertMessage\">Submitted article deleted.</p>"; }
-if ($msg == "moderate") { echo "<p class=\"alertMessage\">Submitted article(s) deleted.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">". gettext("Submitted article added.") . "</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">". gettext("Submitted updated.") . "</p>"; }
+if ($msg == "deleted") { echo "<p class=\"alertMessage\">". gettext("Submitted article deleted.") . "</p>"; }
+if ($msg == "moderate") { echo "<p class=\"alertMessage\">". gettext("Submitted article(s) deleted.") . "</p>"; }
 
 ?>
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Select Issue</legend>
+  <legend><?php echo gettext("Select Issue"); ?></legend>
   <div class="actionMenu">
     <ul>
       <li>
-        <label>Select Issue:</label>
+        <label><?php echo gettext("Select Issue:"); ?></label>
         <select name="issue" id="issue">
           <?php cm_issue_list($module, $issue); ?>
         </select>
-        <input type="submit" name="submit" id="submit" value="Open" class="button" />
+        <input type="submit" name="submit" id="submit" value="<?php echo gettext("Open"); ?>" class="button" />
       </li>
-      <li><a href="<?php echo "$module.php?issue=" . cm_current_issue('id'); ?>" <?php if ($issue == cm_current_issue('id')) {	echo " class=\"selected\""; } ?>><strong>Current:</strong> <?php echo cm_current_issue('date'); ?></a></li>
-      <li><a href="<?php echo "$module.php?issue=" . cm_next_issue('id'); ?>" <?php if ($issue == cm_next_issue('id')) {	echo " class=\"selected\""; } ?>><strong>Next:</strong> <?php echo cm_next_issue('date'); ?></a></li>
+      <li><a href="<?php echo "$module.php?issue=" . cm_current_issue('id'); ?>" <?php if ($issue == cm_current_issue('id')) {	echo " class=\"selected\""; } ?>><strong><?php echo gettext("Current:"); ?></strong> <?php echo cm_current_issue('date'); ?></a></li>
+      <li><a href="<?php echo "$module.php?issue=" . cm_next_issue('id'); ?>" <?php if ($issue == cm_next_issue('id')) {	echo " class=\"selected\""; } ?>><strong><?php echo gettext("Next:"); ?></strong> <?php echo cm_next_issue('date'); ?></a></li>
     </ul>
   </div>
   </fieldset>
 </form>
 <form action="<?php echo $module; ?>.php" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend><?php echo "Viewing: " . cm_issue_info("issue_date", $issue) . " (Volume " . cm_issue_info("issue_volume", $issue) . ", No. " . cm_issue_info("issue_number", $issue) . ")"; ?></legend>
+  <legend><?php echo "Viewing: " . cm_issue_info("issue_date", $issue) . gettext(" (Volume ") . cm_issue_info("issue_volume", $issue) . gettext(", No. ") . cm_issue_info("issue_number", $issue) . ")"; ?></legend>
 <?php if ($result->RecordCount() > 0) { ?>
 
 <table class="<?php echo $module; ?>-table">
   <tr>
   <?php if (cm_auth_restrict('submitted-edit') == "true") { ?>
-    <th>ID</td>
+    <th><?php echo gettext("ID"); ?></td>
   <?php } ?>  
-    <th>Sent</th>
-    <th>From</th>
-    <th>Subject</th>
+    <th><?php echo gettext("Sent"); ?></th>
+    <th><?php echo gettext("From"); ?></th>
+    <th><?php echo gettext("Subject"); ?></th>
     <?php if (cm_auth_restrict('submitted-edit') == "true") { ?>
-    <th>Tools</th>
+    <th><?php echo gettext("Tools"); ?></th>
     <?php } ?>
   </tr>
   <?php
@@ -122,10 +122,10 @@ foreach ($records as $record) {
     </td>
     <td nowrap class="actionMenu">
       <ul class="center">
-        <li class="command-preview"><a href="submitted-edit.php?id=<?php echo $id; ?>#preview">Preview</a></li>
-        <li class="command-preview"><a href="article-edit.php?action=new&amp;submitted_id=<?php echo $id; ?>">Post</a></li>
+        <li class="command-preview"><a href="submitted-edit.php?id=<?php echo $id; ?>#preview"><?php echo gettext("Preview"); ?></a></li>
+        <li class="command-preview"><a href="article-edit.php?action=new&amp;submitted_id=<?php echo $id; ?>"><?php echo gettext("Post"); ?></a></li>
         <?php if (cm_auth_restrict('submitted-delete') == "true") { ?>
-        <li class="command-preview"><a href="submitted-edit.php?id=<?php echo $id; ?>#delete">Delete</a></li>
+        <li class="command-preview"><a href="submitted-edit.php?id=<?php echo $id; ?>#delete"><?php echo gettext("Delete"); ?></a></li>
         <?php } ?>
       </ul>
     </td>
@@ -134,12 +134,12 @@ foreach ($records as $record) {
 </table>
 <?php if (cm_auth_restrict('submitted-edit') == "true") { ?>
 <div style="text-align:right;">
-    <input type="submit" value="Delete Checked Articles" />
-    <input type="reset" value="Clear Selection" />
+    <input type="submit" value="<?php echo gettext("Delete"); ?>" />
+    <input type="reset" value="<?php echo gettext("Clear Selection"); ?>" />
 </div>
 <?php } ?>
   <?php } else { ?>
-  <p>There are no submitted articles for this issue.</p>
+  <p><?php echo gettext("There are no submitted articles for this issue."); ?></p>
   <?php } ?>
   </fieldset>
 </form>

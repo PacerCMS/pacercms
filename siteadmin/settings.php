@@ -28,7 +28,7 @@ if (is_numeric($_POST['id']))
 		header("Location: $module.php?msg=updated");
 		exit;
 	} else {
-		cm_error("Error in 'cm_edit_settings' function.");
+		cm_error(gettext("Error in 'cm_edit_settings' function."));
 		exit;
 	}
 }
@@ -41,7 +41,7 @@ get_cm_header();
 <h2>Site Settings</h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "updated") { echo "<p class=\"infoMessage\">Site settings updated.</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">" . gettext("Site settings updated.") . "</p>"; }
 ?>
 <?php
 
@@ -67,66 +67,66 @@ $announce = $result->Fields('site_announcement');
 ?>
 <form action="<?php echo "$module.php"; ?>" method="post">
     <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Other Site Settings</legend>
+  <legend><?php echo gettext("Other Site Settings"); ?></legend>
   <p>
-    <label for="name">Publication Name</label>
+    <label for="name"><?php echo gettext("Publication Name"); ?></label>
     <br />
     <input type="text" name="name" id="name" value="<?php echo $name; ?>" class="text" />
   </p>
   <p>
-    <label for="name">Tagline</label>
+    <label for="name"><?php echo gettext("Tagline"); ?></label>
     <br />
     <input type="text" name="description" id="description" value="<?php echo $description; ?>" class="text" />
   </p>  
   <p>
-    <label for="url">Web Site URL</label>
+    <label for="url"><?php echo gettext("Web Site URL"); ?></label>
     <br />
     <input type="text" name="url" id="url" value="<?php echo $url; ?>" class="text" />
   </p>
   <p>
-    <label for="email">Primary Email Address</label>
+    <label for="email"><?php echo gettext("Primary Email Address"); ?></label>
     <br />
     <input type="text" name="email" id="email" value="<?php echo $email; ?>" class="text" />
   </p>    
   <p>
-    <label for="address">Address</label>
+    <label for="address"><?php echo gettext("Address"); ?></label>
     <br />
     <input type="text" name="address" id="address" value="<?php echo $address; ?>" class="text" />
   </p> 
   <p>
-    <label for="email">City</label>
+    <label for="email"><?php echo gettext("City"); ?></label>
     <br />
     <input type="text" name="city" id="city" value="<?php echo $city; ?>" class="text" />
   </p> 
   <p>
-    <label for="state">State</label>
+    <label for="state"><?php echo gettext("State"); ?></label>
     <br />
     <input type="text" name="state" id="state" value="<?php echo $state; ?>" class="text" />
   </p> 
   <p>
-    <label for="zipcode">Zip Code</label>
+    <label for="zipcode"><?php echo gettext("Zip Code"); ?></label>
     <br />
     <input type="text" name="zipcode" id="zipcode" value="<?php echo $zipcode; ?>" class="text" />
   </p>
   <p>
-    <label for="telephone">Telephone</label>
+    <label for="telephone"><?php echo gettext("Telephone"); ?></label>
     <br />
     <input type="text" name="telephone" id="telephone" value="<?php echo $telephone; ?>" class="text" />
   </p>
   <p>
-    <label for="fax">Fax</label>
+    <label for="fax"><?php echo gettext("Fax"); ?></label>
     <br />
     <input type="text" name="fax" id="fax" value="<?php echo $fax; ?>" class="text" />
   </p>
     <p>
-    <label for="announce">Announcement</label>
+    <label for="announce"><?php echo gettext("Announcement"); ?></label>
     <br />
     <textarea name="announce" id="announce" rows="5"><?php echo $announce; ?></textarea>
   </p>
   <p>
-    <input type="submit" value="Update Settings" name="update" id="update" class="button" />
+    <input type="submit" value="<?php echo gettext("Update Settings"); ?>" name="update" id="update" class="button" />
     <input name="id" type="hidden" id="id" value="<?php echo $id; ?>" />
-    <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
+    <input type="button" value="<?php echo gettext("Cancel"); ?>" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
   </p>
   </fieldset>
   
