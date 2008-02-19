@@ -9,6 +9,12 @@ $mode = $_REQUEST['action'];
 if ($mode == "") {
 	$mode = "login";
 }
+
+if ($mode == "logout") {
+    cm_logout();
+    exit;
+}
+
 $dest = $_REQUEST['dest'];
 if ($dest == "") {
 	$dest = "index.php";
@@ -81,17 +87,17 @@ input {font-size: 15pt;width: 300px;}
     <h2><a href="<?php echo cm_get_settings('site_url'); ?>"><?php echo cm_get_settings('site_name'); ?></a></h2>
     <?php
     $msg = $_GET['msg'];
-    if ($msg == "login-failed") { echo "<p class=\"alertMessage\">Your username or password were incorrect.</p>"; }
-    if ($msg == "password-reset") { echo "<p class=\"infoMessage\">You new password has been e-mailed.</p>"; }
-    if ($msg == "not-found") { echo "<p class=\"alertMessage\">Could not find matching username and e-mail address.</p>"; }
-    if ($msg == "logout") { echo "<p class=\"infoMessage\">Your session has ended.</p>"; }
+    if ($msg == "login-failed") { echo "<p class=\"alertMessage\">" . gettext("Your username or password were incorrect.") . "</p>"; }
+    if ($msg == "password-reset") { echo "<p class=\"infoMessage\">" . gettext("You new password has been e-mailed.") . "</p>"; }
+    if ($msg == "not-found") { echo "<p class=\"alertMessage\">" . gettext("Could not find matching username and e-mail address.") . "</p>"; }
+    if ($msg == "logout") { echo "<p class=\"infoMessage\">" . gettext("Your session has ended.") . "</p>"; }
     ?>
-    <p><label for="username">Username</label><input type="text" name="username" id="username" /></p>
-    <p><label for="password">Password</label><input type="password" name="password" id="password" /></p>
+    <p><label for="username"><?php echo gettext("Username"); ?></label><input type="text" name="username" id="username" /></p>
+    <p><label for="password"><?php echo gettext("Password"); ?></label><input type="password" name="password" id="password" /></p>
     <p>
     <input type="hidden" name="dest" id="dest" value="<?php echo $dest; ?>" />
-    <input type="submit" name="login" id="login" value="Login" /></p>
-    <p><a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=reset">Reset My Password</a> | <a href="mailto:<?php echo cm_get_settings('site_email'); ?>">Request Login</a></p>
+    <input type="submit" name="login" id="login" value="<?php echo gettext("Login"); ?>" /></p>
+    <p><a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=reset"><?php echo gettext("Reset My Password"); ?></a> | <a href="mailto:<?php echo cm_get_settings('site_email'); ?>"><?php echo gettext("Request Login"); ?></a></p>
     </fieldset>
     </form>
 <?php
@@ -102,11 +108,11 @@ input {font-size: 15pt;width: 300px;}
     <fieldset>
     <legend><img src="cm-images/header.png" alt="PacerCMS" /></legend>
     <h2><a href="<?php echo cm_get_settings('site_url'); ?>"><?php echo cm_get_settings('site_name'); ?></a></h2>
-    <p><label for="username">Username</label><input type="text" name="username" id="username" /></p>
-    <p><label for="password">E-mail</label><input type="text" name="email" id="password" /></p>
+    <p><label for="username"><?php echo gettext("Username"); ?></label><input type="text" name="username" id="username" /></p>
+    <p><label for="password"><?php echo gettext("E-mail"); ?></label><input type="text" name="email" id="password" /></p>
     <p>
-    <input type="submit" name="submit" id="submit" value="Reset Password" /></p>
-    <p><a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=login">Back to Login</a> | <a href="mailto:<?php echo cm_get_settings('site_email'); ?>">Request Login</a></p>
+    <input type="submit" name="submit" id="submit" value="<?php echo gettext("Reset Password"); ?>" /></p>
+    <p><a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=login"><?php echo gettext("Back to Login"); ?></a> | <a href="mailto:<?php echo cm_get_settings('site_email'); ?>"><?php echo gettext("Request Login"); ?></a></p>
     </fieldset>
     </form>
 <?php } ?>

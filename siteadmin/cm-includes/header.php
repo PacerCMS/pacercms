@@ -12,8 +12,8 @@
 </head>
 <body>
 <div id="header">
-<h1><a href="index.php" title="Back to Main Page"><?php echo cm_get_settings('site_name'); ?></a></h1>
-<?php if (!empty($_SESSION['user_data'])) {; ?><p>Welcome, <a href="profile.php" title="Edit Your Profile"><?php echo $_SESSION['user_data']['user_first_name'] . ' ' . $_SESSION['user_data']['user_last_name']; ?></a></p><?php }; ?>
+<h1><a href="index.php"><?php echo cm_get_settings('site_name'); ?></a></h1>
+<?php if (!empty($_SESSION['user_data'])) {; ?><p><?php echo gettext("Welcome"); ?>, <a href="profile.php"><?php echo $_SESSION['user_data']['user_first_name'] . ' ' . $_SESSION['user_data']['user_last_name']; ?></a></p><?php }; ?>
 <hr />
 </div>
 <?php get_cm_menu(); ?>

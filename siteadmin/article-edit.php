@@ -34,7 +34,7 @@ if ($mode == "quick-edit") {
 		cm_quick_edit($_POST['quick-edit-id']);
 		exit;
 	} else {
-		cm_error("You must enter a number.");
+		cm_error(gettext("You must enter a number."));
 	}
 }
 
@@ -48,7 +48,7 @@ if ($mode == "delete" && is_numeric($_POST['delete-id'])) {
 		header("Location: $pmodule.php?msg=deleted");
 		exit;
 	} else {
-		cm_error("Error in 'cm_delete_article' function.");
+		cm_error(gettext("Error in 'cm_delete_article' function."));
 		exit;
 	}	
 }
@@ -76,11 +76,11 @@ if ($mode == "edit") {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
 		} else {
-			cm_error("Error in 'cm_edit_article' function.");
+			cm_error(gettext("Error in 'cm_edit_article' function."));
 			exit;
 		}
 	} elseif (!empty($_POST)) {
-		cm_error("Did not have an article to load.");
+		cm_error(gettext("Did not have an article to load."));
 		exit;
 	}
 }
@@ -106,7 +106,7 @@ if ($mode == "new" && $_POST['text'] != "") {
 		header("Location: $pmodule.php?msg=added");
 		exit;
 	} else {
-		cm_error("Error in 'cm_add_article' function.");
+		cm_error(gettext("Error in 'cm_add_article' function."));
 		exit;
 	}
 }
@@ -139,7 +139,7 @@ if ($mode == "edit" && is_numeric($id)) {
 	
 	// If Array comes back empty, produce error
 	if ($result->RecordCount() != 1) {
-		cm_error("Article doesn't exist, or you do not have permission to edit it.");
+		cm_error(gettext("Article doesn't exist, or you do not have permission to edit it."));
 		exit;
 	}
 		
@@ -171,7 +171,7 @@ if (is_numeric($_REQUEST['submitted_id']))
 	
 	// If empty
 	if ($result->RecordCount() != 1 || cm_auth_restrict('submitted-view') == "false") {
-		cm_error("Article doesn't exist, or you do not have permission to edit it.");
+		cm_error(gettext("Article doesn't exist, or you do not have permission to edit it."));
 		exit;
 	}
 
@@ -187,19 +187,19 @@ get_cm_header();
 
 ?>
 
-<h2><a href="<?php echo $pmodule; ?>.php">Article Manager</a></h2>
+<h2><a href="<?php echo $pmodule; ?>.php"><?php echo gettext("Article Manager"); ?></a></h2>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Article Editor</legend>
+  <legend><?php echo gettext("Article Editor"); ?></legend>
   <div class="sidebar">
     <p>
-      <label for="keywords">Keywords</label>
+      <label for="keywords"><?php echo gettext("Keywords"); ?></label>
       <br />
       <input type="text" name="keywords" id="keywords" value="<?php echo htmlentities($keywords, ENT_QUOTES, 'UTF-8'); ?>" />
     </p>
     <?php if (cm_auth_restrict('restrict_section') == "false") { ?>
     <p>
-      <label for="section">Section</label>
+      <label for="section"><?php echo gettext("Section"); ?></label>
       <br />
       <select name="section" id="section">
         <?php cm_section_list($module, $section); ?>
@@ -210,7 +210,7 @@ get_cm_header();
     <?php } ?>
 <?php if (cm_auth_restrict('restrict_issue') == "false") { ?>
     <p>
-      <label for="issue">Issue</label>
+      <label for="issue"><?php echo gettext("Issue"); ?></label>
       <br />
       <select name="issue" id="issue">
         <?php cm_issue_list($module, $issue); ?>
@@ -220,12 +220,12 @@ get_cm_header();
     <input type="hidden" name="issue" id="issue" value="<?php echo $issue; ?>" />
     <?php } ?>
 <?php if ($mode != "new") { ?>
-    <p> <strong>Last Edited</strong><br />
+    <p> <strong><?php echo gettext("Last Edited"); ?></strong><br />
       <code><?php echo $edited; ?></code> </p>
     <?php } ?>
 <?php if (cm_auth_restrict('restrict_issue') == "false") { ?>
     <p>
-      <label for="published">Publish Timestamp</label>
+      <label for="published"><?php echo gettext("Publish Timestamp"); ?></label>
       <br />
       <input type="text" name="published" id="published" value="<?php if ($published == "") { echo date("Y-m-d h:i:s",time()); } else { echo $published; }?>" />
     </p>
@@ -233,10 +233,10 @@ get_cm_header();
     <input type="hidden" name="published" id="published" value="<?php echo $published; ?>" />
     <?php } ?>
     <p>
-      <label for="priority">Assigned Priority</label>
+      <label for="priority"><?php echo gettext("Assigned Priority"); ?></label>
       <br />
 	  <select name="priority" id="priority">
-	  	<option value="1" <?php if ($priority == 1) { echo "selected"; } ?>>1 -- Highest</option>
+	  	<option value="1" <?php if ($priority == 1) { echo "selected"; } ?>>1 -- <?php echo gettext("Highest"); ?></option>
 	  	<option value="2" <?php if ($priority == 2) { echo "selected"; } ?>>2</option>
 	  	<option value="3" <?php if ($priority == 3) { echo "selected"; } ?>>3</option>
 	  	<option value="4" <?php if ($priority == 4) { echo "selected"; } ?>>4</option>
@@ -250,47 +250,46 @@ get_cm_header();
 	  	<option value="12" <?php if ($priority == 12) { echo "selected"; } ?>>12</option>
 	  	<option value="13" <?php if ($priority == 13) { echo "selected"; } ?>>13</option>										
 	  	<option value="14" <?php if ($priority == 14) { echo "selected"; } ?>>14</option>
-	  	<option value="15" <?php if ($priority == 15 || !is_numeric($priority)) { echo "selected"; } ?>>15 -- Lowest</option>		
+	  	<option value="15" <?php if ($priority == 15 || !is_numeric($priority)) { echo "selected"; } ?>>15 -- <?php echo gettext("Lowest"); ?></option>		
 	  </select>
     </p>
-    <strong>Linked Media</strong>
+    <strong><?php echo gettext("Linked Media"); ?></strong>
     <ul>
       <?php if ($mode != "new") { ?>
 <?php cm_list_media($id); ?>
-      <li><strong><a href="article-media.php?action=new&amp;article_id=<?php echo $id; ?>" onClick="return confirmLink(this, 'leave this page and lose all changes')">Add
-            New Media</a></strong></li>
+      <li><strong><a href="article-media.php?action=new&amp;article_id=<?php echo $id; ?>" onClick="return confirmLink(this, '<?php echo gettext("leave this page and lose all changes"); ?>')"><?php echo gettext("Add New Media"); ?></a></strong></li>
       <?php } else { ?>
-      <li>You must first publish the article<br /> before adding linked media.</li>
+      <li style="width:200px;"><?php echo gettext("You must first publish the article before adding linked media."); ?></li>
       <?php } ?>
     </ul>
   </div>
   <p>
-    <label for="title">Title</label>
+    <label for="title"><?php echo gettext("Title"); ?></label>
     <br />
     <input type="text" name="title" id="title" value="<?php echo htmlentities($title, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
-    <label for="subtitle">Subtitle</label>
+    <label for="subtitle"><?php echo gettext("Subtitle"); ?></label>
     <br />
     <input type="text" name="subtitle" id="subtitle" value="<?php echo htmlentities($subtitle, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
-    <label for="author_id">Author</label>
+    <label for="author_id"><?php echo gettext("Author"); ?></label>
     <br />
     <input type="text" name="author" id="author" value="<?php echo htmlentities($author, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
-    <label for="author_title">Author Title</label>
+    <label for="author_title"><?php echo gettext("Author Title"); ?></label>
     <br />
     <input type="text" name="author_title" id="author_title" value="<?php echo htmlentities($author_title, ENT_QUOTES, 'UTF-8'); ?>" class="text" />
   </p>
   <p>
-    <label for="summary">Summary</label>
+    <label for="summary"><?php echo gettext("Summary"); ?></label>
     <br />
     <textarea name="summary" rows="5" id="summary"><?php echo $summary; ?></textarea>
   </p>
   <p>
-    <label for="text">Text</label>
+    <label for="text"><?php echo gettext("Text"); ?></label>
     <br />
 	<span class="article-edit-tags"><script type="text/javascript">edToolbar();</script></span>
     <textarea name="text" rows="20" id="text"><?php echo $text; ?></textarea>
@@ -300,37 +299,37 @@ get_cm_header();
     <?php
 if ($mode == "new") {
 ?>
-    <input type="submit" value="Submit Article" name="submit" id="submit" class="button" />
+    <input type="submit" value="<?php echo gettext("Submit Article"); ?>" name="submit" id="submit" class="button" />
     <?php
 }
 if ($mode == "edit") {
 ?>
-    <input type="submit" value="Update Article" name="update" id="update" class="button" />
+    <input type="submit" value="<?php echo gettext("Update Article"); ?>" name="update" id="update" class="button" />
     <input name="id" type="hidden" id="id" value="<?php echo $id; ?>" />
     <?php } ?>
-    <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
+    <input type="button" value="<?php echo gettext("Cancel"); ?>" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
   </p>
   </fieldset>
 </form>
 <?php
 // Show preview if not an add form
 if ($mode != "new") { ?>
-<h2><a name="preview"></a>Preview Article</h2>
+<h2><a name="preview"></a><?php echo gettext("Preview Article"); ?></h2>
 <fieldset class="<?php echo "$module-preview" ?>">
-<legend>Story Preview</legend>
+<legend><?php echo gettext("Story Preview"); ?></legend>
 <h3><?php echo $title; ?></h3>
 <h4><?php echo $subtitle; ?></h4>
 <p><cite><?php echo $author; if (!empty($author_title)) { echo ", $author_title"; } ?></cite></p>
 <?php echo autop($text); ?>
 </fieldset>
-<h2>Delete Article <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
+<h2><?php echo gettext("Delete Article"); ?> <a href="javascript:toggleLayer('deleteRecord');" name="delete">&raquo;&raquo;</a></h2>
 <div id="deleteRecord">
   <form action="<?php echo "$module.php?action=delete"; ?>" method="post">
     <fieldset class="<?php echo "$module-delete" ?>">
-    <legend>Confirm Delete</legend>
-    <p>Are you sure you want to delete this article?</p>
-    <input type="submit" name="submit-delete" id="submit-delete" value="Yes" class="button" />
-    <input type="button" name="cancel-delete" id="cancel-delete" value="Cancel" onClick="javascript:toggleLayer('deleteArticle');" class="button" />
+    <legend><?php echo gettext("Confirm Delete"); ?></legend>
+    <p><?php echo gettext("Are you sure you want to delete this article?"); ?></p>
+    <input type="submit" name="submit-delete" id="submit-delete" value="<?php echo gettext("Delete"); ?>" class="button" />
+    <input type="button" name="cancel-delete" id="cancel-delete" value="<?php echo gettext("Cancel"); ?>" onClick="javascript:toggleLayer('deleteRecord');" class="button" />
     <input type="hidden" name="delete-id" id="delete-id" value="<?php echo $id; ?>" />
     </fieldset>
   </form>

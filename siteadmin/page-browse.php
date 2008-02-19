@@ -20,9 +20,9 @@ get_cm_header();
 
 <h2>Page Manager</h2>
 <?php $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"infoMessage\">Page added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"infoMessage\">Page updated.</p>"; }
-if ($msg == "deleted") { echo "<p class=\"alertMessage\">Page deleted.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">" . gettext("Page added.") . "</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">" . gettext("Page updated.") . "</p>"; }
+if ($msg == "deleted") { echo "<p class=\"alertMessage\">" . gettext("Page deleted.") . "</p>"; }
 ?>
 
 <?php
@@ -32,16 +32,16 @@ if ($result->RecordCount() > 0)
 
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-table"; ?>">
-  <legend>Page Browser</legend>
+  <legend><?php echo gettext("Page Browser"); ?></legend>
   <div class="actionMenu"><ul>
-  <li><strong>Actions</strong></li>
-  <li><a href="<?php echo "$cmodule.php?action=add"; ?>">Add New Page</a></li> 
+  <li><strong><?php echo gettext("Actions"); ?></strong></li>
+  <li><a href="<?php echo "$cmodule.php?action=add"; ?>"><?php echo gettext("Add New Page"); ?></a></li> 
   </ul></div>
   <table>
     <tr>
-      <th>Title</th>
-      <th>Edited</th>
-      <th>Tools</th>
+      <th><?php echo gettext("Title"); ?></th>
+      <th><?php echo gettext("Edited"); ?></th>
+      <th><?php echo gettext("Tools"); ?></th>
     </tr>
 <?php
 
@@ -49,7 +49,7 @@ foreach ($records as $record)
 {
 	$id = $record['id'];
 	$title = $record['page_title'];
-	$edited = $record['page_edited'];
+	$edited = date('m/d/Y h:i a', strtotime($record['page_edited']));
 ?>
     <tr>
       <td><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $title; ?></a></p>
@@ -57,9 +57,9 @@ foreach ($records as $record)
 	  </td>
       <td><?php echo $edited; ?></td>
       <td class="actionMenu" nowrap><ul class="center">
-          <li><a href="<?php echo "$cmodule.php?id=$id#preview"; ?>">Preview</a></li>
-          <li><a href="<?php echo "$cmodule.php?id=$id"; ?>">Edit</a></li>
-          <li><a href="<?php echo "$cmodule.php?id=$id#delete"; ?>">Delete</a></li>
+          <li><a href="<?php echo "$cmodule.php?id=$id#preview"; ?>"><?php echo gettext("Preview"); ?></a></li>
+          <li><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo gettext("Edit"); ?></a></li>
+          <li><a href="<?php echo "$cmodule.php?id=$id#delete"; ?>"><?php echo gettext("Delete"); ?></a></li>
         </ul>
       </td>
     </tr>
@@ -69,7 +69,7 @@ foreach ($records as $record)
 </form>
 
 <?php } else { ?>
-	<p>You are not currently using pages. <a href="<?php echo "$cmodule.php?action=add"; ?>">Add a Page</a></p>
+	<p><?php echo gettext("You are not currently using pages."); ?> <a href="<?php echo "$cmodule.php?action=add"; ?>"><?php echo gettext("Add a Page"); ?></a></p>
 <?php } ?>
 
 <?php get_cm_footer(); ?>

@@ -18,7 +18,7 @@ if (is_numeric($_POST['id']))
 		header("Location: $module.php?msg=active-updated");
 		exit;
 		} else {
-		cm_error("You have an error in the cm_edit_poll_settings function.");
+		cm_error(gettext("You have an error in the cm_edit_poll_settings function."));
 		exit;
 	}
 }
@@ -36,24 +36,24 @@ get_cm_header();
 ?>
 
 
-<h2>Poll Manager</h2>
+<h2><?php echo gettext("Poll Manager"); ?></h2>
 <?php $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"infoMessage\">Poll question added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"infoMessage\">Poll question updated.</p>"; }
-if ($msg == "deleted") { echo "<p class=\"alertMessage\">Poll question and ballots deleted.</p>"; }
-if ($msg == "active-updated") { echo "<p class=\"infoMessage\">Active poll setting changed.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">" . gettext("Poll question added.") . "</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">" . gettext("Poll question updated.") . "</p>"; }
+if ($msg == "deleted") { echo "<p class=\"alertMessage\">" . gettext("Poll question and ballots deleted.") . "</p>"; }
+if ($msg == "active-updated") { echo "<p class=\"infoMessage\">" . gettext("Active poll setting changed.") . "</p>"; }
 ?>
 
 <form action="<?php echo "$module.php"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Active Poll</legend>
+  <legend><?php echo gettext("Active Poll"); ?></legend>
   <p>
-    <label for="id">Current Poll Question</label>
+    <label for="id"><?php echo gettext("Current Poll Question"); ?></label>
     <select name="id" id="id">
-	<option value="0" <?php if (cm_get_settings('active_poll') == 0) { echo "SELECTED"; } ?>>--- Polls Disabled ---</option>
+	<option value="0" <?php if (cm_get_settings('active_poll') == 0) { echo "selected=\"selected\""; } ?>>-- <?php echo gettext("Polls Disabled"); ?> --</option>
 	<?php cm_poll_list(cm_get_settings('active_poll')); ?>
 	</select>
-	<input type="submit" id="submit-active-poll" value="Change Active Poll" class="button" />
+	<input type="submit" id="submit-active-poll" value="<?php echo gettext("Change Active Poll"); ?>" class="button" />
 	</p>
   </fieldset>
 </form>
@@ -62,16 +62,16 @@ if ($msg == "active-updated") { echo "<p class=\"infoMessage\">Active poll setti
 
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-table"; ?>">
-  <legend>Active Poll</legend>
+  <legend><?php echo gettext("Active Poll"); ?></legend>
   <div class="actionMenu"><ul>
-  <li><strong>Poll Options:</strong></li>
-  <li><a href="<?php echo "$cmodule.php?action=new"; ?>">Add New Poll</a></li> 
+  <li><strong><?php echo gettext("Poll Options:"); ?></strong></li>
+  <li><a href="<?php echo "$cmodule.php?action=new"; ?>"><?php echo gettext("Add New Poll"); ?></a></li> 
   </ul></div>
   <table>
     <tr>
-      <th>Question</th>
-      <th>Created</th>
-      <th>Tools</th>
+      <th><?php echo gettext("Question"); ?></th>
+      <th><?php echo gettext("Created"); ?></th>
+      <th><?php echo gettext("Tools"); ?></th>
     </tr>
 <?php
 
@@ -82,17 +82,17 @@ foreach ($records as $record)
 {
 	$id = $record['id'];
 	$question = $record['poll_question'];
-	$created = $record['poll_created'];
+	$created = date('m/d/Y h:i a', strtotime($record['poll_created']));
 ?>
     <tr>
-      <td><?php if ($active_poll == $id) { echo "<strong>Current &raquo;&raquo;</strong> "; } ?><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $question; ?></a></p>
+      <td><?php if ($active_poll == $id) { echo "<strong>" . gettext("Current") . " &raquo;&raquo;</strong> "; } ?><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $question; ?></a></p>
 	  
 	  </td>
       <td><?php echo $created; ?></td>
       <td class="actionMenu" nowrap><ul class="center">
-          <li><a href="<?php echo "$cmodule.php?id=$id"; ?>">Edit</a></li>
-          <li><a href="<?php echo "$cmodule.php?id=$id#results"; ?>">Results</a></li>
-          <li><a href="<?php echo "$cmodule.php?id=$id#delete"; ?>">Delete</a></li>
+          <li><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo gettext("Edit"); ?></a></li>
+          <li><a href="<?php echo "$cmodule.php?id=$id#results"; ?>"><?php echo gettext("Results"); ?></a></li>
+          <li><a href="<?php echo "$cmodule.php?id=$id#delete"; ?>"><?php echo gettext("Delete"); ?></a></li>
         </ul>
       </td>
     </tr>
@@ -102,7 +102,7 @@ foreach ($records as $record)
 </form>
 
 <?php } else { ?>
-	<p>You are not currently using polls. Why not <a href="<?php echo "$cmodule.php?action=new"; ?>">add one</a> now?</p>
+	<p><?php echo gettext("You are not currently using polls."); ?> <a href="<?php echo "$cmodule.php?action=new"; ?>"><?php echo gettext("Add Poll Question."); ?></a></p>
 <?php } ?>
 
 <?php get_cm_footer(); ?>

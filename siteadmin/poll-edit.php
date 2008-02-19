@@ -129,10 +129,10 @@ get_cm_header();
 
 ?>
 
-<h2><a href="<?php echo "$pmodule.php"; ?>">Poll Manager</a></h2>
+<h2><a href="<?php echo "$pmodule.php"; ?>"><?php echo gettext("Poll Manager"); ?></a></h2>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Question Editor</legend>
+  <legend><?php echo gettext("Question Editor"); ?></legend>
   <div class="sidebar">
     <p>
       <label for="article"><?php echo gettext("Related Article ID"); ?></label>
@@ -141,7 +141,7 @@ get_cm_header();
     </p>
 <?php if ($mode == "edit") { ?>
 	<h4><?php echo gettext("Audit"); ?></h4>
-	<p><?php cm_poll_cleanup($id) ?></p>
+	<p style="width:200px:"><?php cm_poll_cleanup($id) ?></p>
 	<h4><?php echo gettext("Current Results"); ?></h4>
 	<?php cm_poll_results($id); ?>
 <?php } ?>
