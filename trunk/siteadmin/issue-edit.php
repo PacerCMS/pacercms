@@ -40,11 +40,11 @@ if ($mode == "edit") {
 			header("Location: $pmodule.php?msg=updated");
 			exit;
 		} else {
-			cm_error("Error in 'cm_edit_issue' function.");
+			cm_error(gettext("Error in 'cm_edit_issue' function."));
 			exit;
 		}
 	} elseif (!empty($_POST)) {
-		cm_error("Did not have a issue to load.");
+		cm_error(gettext("Did not have a issue to load."));
 		exit;
 	}
 }
@@ -67,7 +67,7 @@ if ($mode == "new" && $_POST['volume'] != "")
 		header("Location: $pmodule.php?msg=added");
 		exit;
 	} else {
-		cm_error("Error in 'cm_add_issue' function.");
+		cm_error(gettext("Error in 'cm_add_issue' function."));
 		exit;
 	}
 }
@@ -85,7 +85,7 @@ if ($mode == "edit" && is_numeric($id))
 	
 	if ($result->RecordCount() != 1)
 	{
-		cm_error("Could not load issue.");
+		cm_error(gettext("Could not load issue."));
 	}	
 	$id = $result->Fields('id');
 	$issue_day =  $result->Fields('issue_day');
@@ -107,10 +107,10 @@ get_cm_header();
 ?>
 
 
-<h2><a href="<?php echo "$pmodule.php"; ?>">Issue Manager</a></h2>
+<h2><a href="<?php echo "$pmodule.php"; ?>"><?php echo gettext("Issue Manager"); ?></a></h2>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Issue Editor</legend>
+  <legend><?php echo gettext("Issue Editor"); ?></legend>
   <div class="sidebar">
     <?
 	// Build Calendar
@@ -122,7 +122,7 @@ get_cm_header();
 ?>
   </div>
   <p>
-    <label for="date">Publication Date</label>
+    <label for="date"><?php echo gettext("Publication Date"); ?></label>
     <br />
     <select name="issue-month" id="issue-month">
       <option value="01" <?php if ($issue_month == "01") { echo "selected"; } ?>>January</option>
@@ -165,38 +165,38 @@ while ($year <= $year_stop)
     </select>
   </p>
   <p>
-    <label for="volume">Volume</label>
+    <label for="volume"><?php echo gettext("Volume"); ?></label>
     <br />
     <input type="text" name="volume" id="volume" value="<?php echo $volume; ?>" class="text" />
   </p>
   <p>
-    <label for="number">Issue Number</label>
+    <label for="number"><?php echo gettext("Issue Number"); ?></label>
     <br />
     <input type="text" name="number" id="number" value="<?php echo $number; ?>" class="text" />
   </p>
   <p>
-    <label for="circulation">Circulation</label>
+    <label for="circulation"><?php echo gettext("Circulation"); ?></label>
     <br />
     <input type="text" name="circulation" id="circulation" value="<?php echo $circulation; ?>" class="text" />
   </p>
   <p>
-    <label for="online_only">Online Only?</label>
+    <label for="online_only"><?php echo gettext("Online Only?"); ?></label>
     <br />
     <input type="radio" name="online_only" id="online_only_yes" value="1" class="radio" <?php if ($online_only == '1') { echo "checked"; } ?> />
-    <label for="online_only_yes">Yes</label>
+    <label for="online_only_yes"><?php echo gettext("Yes"); ?></label>
     <br />
     <input type="radio" name="online_only" id="online_only_no" value="0" class="radio" <?php if ($online_only == '0') { echo "checked"; } ?> />
-    <label for="online_only_no">No</label>
+    <label for="online_only_no"><?php echo gettext("No"); ?></label>
     <br />
   </p>
   <p>
     <?php if ($mode == "new") { ?>
-    <input type="submit" value="Add Issue" name="submit" id="submit" class="button" />
+    <input type="submit" value="<?php echo gettext("Add Issue"); ?>" name="submit" id="submit" class="button" />
     <?php } if ($mode == "edit") { ?>
-    <input type="submit" value="Update Issue" name="update" id="update" class="button" />
+    <input type="submit" value="<?php echo gettext("Update Issue"); ?>" name="update" id="update" class="button" />
     <input name="id" type="hidden" id="id" value="<?php echo $id; ?>" />
     <?php } ?>
-    <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
+    <input type="button" value="<?php echo gettext("Cancel"); ?>" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
   </p>
   </fieldset>
 </form>

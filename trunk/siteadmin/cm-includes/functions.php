@@ -19,9 +19,9 @@ function get_cm_menu() { include_once('menu.php'); }
 function cm_error($msg)
 {
     get_cm_header();
-    echo "<h2>Error!</h2>";
+    echo "<h2>" . gettext("Error!") . "</h2>";
     echo "<p class=\"alertMessage\">$msg</p>";
-    echo "<p><a href=\"javascript:history.back();\">Go Back</a>";
+    echo "<p><a href=\"javascript:history.back();\">" . gettext("Go Back") . "</a>";
     get_cm_footer();
     exit;
 }
@@ -392,7 +392,7 @@ function cm_issue_list($module, $sel)
         $volume = $record['issue_volume'];
         $number = $record['issue_number'];
         if ($sel == $id) { $selected = " selected=\"selected\""; }
-        print "\t<option value=\"$id\" $selected\">$date (Vol. $volume, No. $number)</option>\n";
+        print "\t<option value=\"$id\" $selected\">$date (" . gettext("Volume") . " $volume, " . gettext("Issue") . " $number)</option>\n";
         unset($selected);
     }
 }
@@ -421,7 +421,7 @@ function cm_volume_list($module, $sel=1)
         switch ($module)
         {
             default:   
-                print "\t<option value=\"$volume\" $selected>Volume $volume</option>\n";
+                print "\t<option value=\"$volume\" $selected>" . gettext("Volume") . " $volume</option>\n";
                 unset($selected);
                 break;
         }
@@ -455,11 +455,11 @@ function cm_list_media($sel,$display=false)
                 print "<p>";
                 cm_display_media($src,$type,$title);
                 print "</p>\n";
-                print "<p class=\"systemMessage\"><a href=\"article-media.php?id=$id\">Edit '$title' ($type)</a> | <a href=\"article-media.php?id=$id#delete\">Delete</a></p>\n";
+                print "<p class=\"systemMessage\"><a href=\"article-media.php?id=$id\">" . gettext("Edit") . " '$title' ($type)</a> | <a href=\"article-media.php?id=$id#delete\">" . gettext("Delete") . "</a></p>\n";
             }
-            print "<p><strong><a href=\"article-media.php?action=new&amp;article_id=$sel\">Add a file</a></strong></p>";
+            print "<p><strong><a href=\"article-media.php?action=new&amp;article_id=$sel\">" . gettext("Add a file") . "</a></strong></p>";
         } else {
-            echo "<p><em>No linked files. <a href=\"article-media.php?action=new&amp;article_id=$sel\">Add a file</a></em></p>";
+            echo "<p><em>" . gettext("No linked files.") . " <a href=\"article-media.php?action=new&amp;article_id=$sel\">" . gettext("Add a file") . "</a></em></p>";
         }
     } else {    
         if ($result->RecordCount() > 0) {
@@ -470,7 +470,7 @@ function cm_list_media($sel,$display=false)
                 print "<li><a href=\"article-media.php?id=$id\">#$id: $title</a> ($type)</li>\n";
             }
         } else {
-            print "<li><em>No linked files.</em></li>";
+            print "<li><em>" . gettext("No linked files.") . "</em></li>";
         }
     }
 }
@@ -519,10 +519,10 @@ function cm_display_media($src,$type,$title='')
         print "<img src=\"$src\" alt=\"$type\" />";
     }
     if ($type == "pdf" || $type == "doc") {
-        print "Related Document: <a href=\"$src\">Dowload '$title' ($type)</a>.";
+        print "Related Document: <a href=\"$src\">" . gettext("Dowload") . " '$title' ($type)</a>.";
     }
     if ($type == "wav" || $type == "mp3") {
-        print "Media File: <a href=\"$src\">Play '$title' ($type)</a>.";
+        print "Media File: <a href=\"$src\">" . gettext("Play") . " '$title' ($type)</a>.";
     }
     if ($type == "swf") {
         print "<object type=\"application/x-shockwave-flash\" data=\"$src\" width=\"300\" height=\"250\">\n";
@@ -530,7 +530,7 @@ function cm_display_media($src,$type,$title='')
         print "</object>\n";
     }
     if ($type == "url") {
-        print "Related: <a href=\"$src\">Open related link</a>.";
+        print "Related: <a href=\"$src\">" . gettext("Open related link") . "</a>.";
     }
 }
 
@@ -1072,7 +1072,7 @@ function cm_move_articles($sel,$move)
     // Prevent deleting last section
     if (!is_numeric($move))
     {
-        cm_error("Section does not exist. Hint: You cannot delete the last section.");
+        cm_error(gettext("Section does not exist. Hint: You cannot delete the last section."));
         exit;
     }
     
@@ -1381,12 +1381,12 @@ function cm_poll_results($sel)
             $votes = $record['votes'];
             $percent = (100 * ($votes / $total));
             $percent = number_format($percent, 2, '.', '');
-            print "<li><strong>Option $response:</strong> $votes votes ($percent%)</li>\n";    
+            print "<li><strong>" . gettext("Option") . " $response:</strong> $votes " . gettext("votes") . " ($percent%)</li>\n";    
         }
         print "</ul>";
-        print "<p><strong>Total votes:</strong> $total</p>";
+        print "<p><strong>" . gettext("Total votes:") . "</strong> $total</p>";
     } else {
-        print "<p>No one has voted yet.</p>";
+        print "<p>" . gettext("No one has voted yet.") . "</p>";
     }
 }
 
@@ -1416,9 +1416,9 @@ function cm_poll_cleanup($sel)
             $ipad = $record['ballot_ip_address'];
             cm_poll_delete_ballots($sel,$ipad);
         }
-        print "This poll had $result_row_count multiple voter(s).<br /> All have been cleared.";
+        print gettext("This poll had ") . $result_row_count . gettext("multiple voter(s). All have been cleared.");
     } else {
-        print "Poll audit successful.<br /> No multiple-voters detected.";
+        print gettext("Poll audit successful. No multiple-voters detected.");
     }
 }
 

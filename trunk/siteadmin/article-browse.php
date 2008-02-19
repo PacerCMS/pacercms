@@ -27,7 +27,7 @@ if ($_GET['section'] != "") {
 	$section = $_GET['section'];
 	if (!is_numeric(cm_section_info("id",$section)))
 	{
-		cm_error("The selected section could not be loaded.");
+		cm_error(gettext("The selected section could not be loaded."));
 		exit;
 	}
 	setcookie("$module-section", $section);
@@ -40,7 +40,7 @@ if (is_numeric($_GET['issue'])) {
 	$issue = $_GET['issue'];
 	if (!is_numeric(cm_issue_info("id",$issue)))
 	{
-		cm_error("The selected issue could not be loaded.");
+		cm_error(gettext("The selected issue could not be loaded."));
 		exit;
 	}	
 	setcookie("$module-issue", $issue);
@@ -103,17 +103,17 @@ get_cm_header();
 
 ?>
 
-<h2>Article Manager</h2>
+<h2><?php echo gettext("Article Manager"); ?></h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"infoMessage\">Article added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"infoMessage\">Article updated.</p>"; }
-if ($msg == "deleted") { echo "<p class=\"alertMessage\">Article deleted.</p>"; }
-if ($msg == "media-added") { echo "<p class=\"infoMessage\">Media added.</p>"; }
-if ($msg == "media-updated") { echo "<p class=\"infoMessage\">Media updated.</p>"; }
-if ($msg == "media-deleted") { echo "<p class=\"alertMessage\">Media deleted.</p>"; }
-if ($msg == "pub-reset") { echo "<p class=\"alertMessage\">Publication dates set to match issue.</p>"; }
-if ($msg == "pub-error") { echo "<p class=\"alertMessage\">Error setting publication dates.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">" . gettext("Article added.") . "</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">" . gettext("Article updated.") . "</p>"; }
+if ($msg == "deleted") { echo "<p class=\"alertMessage\">" . gettext("Article deleted.") . "</p>"; }
+if ($msg == "media-added") { echo "<p class=\"infoMessage\">" . gettext("Media added.") . "</p>"; }
+if ($msg == "media-updated") { echo "<p class=\"infoMessage\">" . gettext("Media updated.") . "</p>"; }
+if ($msg == "media-deleted") { echo "<p class=\"alertMessage\">" . gettext("Media deleted.") . "</p>"; }
+if ($msg == "pub-reset") { echo "<p class=\"alertMessage\">" . gettext("Publication dates set to match issue.") . "</p>"; }
+if ($msg == "pub-error") { echo "<p class=\"alertMessage\">" . gettext("Error setting publication dates.") . "</p>"; }
 ?>
 <?php
 // Begin Restrict Issue
@@ -122,18 +122,18 @@ if (cm_auth_restrict('restrict_issue') != "next" && cm_auth_restrict('restrict_i
 ?>
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Select Issue</legend>
+  <legend><?php echo gettext("Select Issue"); ?></legend>
   <div class="actionMenu">
     <ul>
       <li>
-        <label>Select Issue:</label>
+        <label><?php echo gettext("Select Issue:"); ?></label>
         <select name="issue" id="issue">
           <?php cm_issue_list($module, $issue); ?>
         </select>
         <input type="submit" name="submit" id="submit" value="Open" class="button" />
       </li>
-      <li><a href="<?php echo "$module.php?issue=" . cm_current_issue('id');?>" <?php if ($issue == cm_current_issue('id')) {	echo " class=\"selected\""; } ?>><strong>Current:</strong> <?php echo cm_current_issue('date'); ?></a></li>
-      <li><a href="<?php echo "$module.php?issue=" . cm_next_issue('id');?>" <?php if ($issue == cm_next_issue('id')) {	echo " class=\"selected\""; } ?>><strong>Next:</strong> <?php echo cm_next_issue('date'); ?></a></li>
+      <li><a href="<?php echo "$module.php?issue=" . cm_current_issue('id');?>" <?php if ($issue == cm_current_issue('id')) {	echo " class=\"selected\""; } ?>><strong><?php echo gettext("Current:"); ?></strong> <?php echo cm_current_issue('date'); ?></a></li>
+      <li><a href="<?php echo "$module.php?issue=" . cm_next_issue('id');?>" <?php if ($issue == cm_next_issue('id')) {	echo " class=\"selected\""; } ?>><strong><?php echo gettext("Next:"); ?></strong> <?php echo cm_next_issue('date'); ?></a></li>
     </ul>
   </div>
   </fieldset>
@@ -141,25 +141,25 @@ if (cm_auth_restrict('restrict_issue') != "next" && cm_auth_restrict('restrict_i
 <?php } // End Restrict Issue ?>
 <form action="article-edit.php" method="get" name="QuickEdit" id="QuickEdit">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend><?php echo "Viewing: " . cm_issue_info("issue_date", $issue) . " (Volume " . cm_issue_info("issue_volume", $issue) . ", No. " . cm_issue_info("issue_number", $issue) . ")"; ?></legend>
+  <legend><?php echo gettext("Viewing: ") . cm_issue_info("issue_date", $issue) . gettext(" (Volume ") . cm_issue_info("issue_volume", $issue) . gettext(", No. ") . cm_issue_info("issue_number", $issue) . ")"; ?></legend>
   <?php if (cm_auth_restrict('restrict_section') == "false") { // Begin Restrict Section ?>
   <div class="actionMenu">
     <ul>
-      <li><strong>Section:</strong></li>
+      <li><strong><?php echo gettext("Section:"); ?></strong></li>
       <?php cm_section_list($module, $section); ?>
     </ul>
   </div>
   <?php } else {  ?>
-  <p><strong>Viewing:</strong> <?php echo cm_section_info('section_name', $section); ?></p>
+  <p><strong><?php echo gettext("Viewing:"); ?></strong> <?php echo cm_section_info('section_name', $section); ?></p>
   <?php } // End Restrict Section  ?>
   <?php if (!empty($records)) { ?>
 
   <table class="<?php echo $module; ?>-table">
     <tr>
-      <th><acronym title="Assigned Priority">AP</acronym></th>
-      <th>Headline</th>
+      <th><acronym title="<?php echo gettext("Assigned Priority"); ?>"><?php echo gettext("AP"); ?></acronym></th>
+      <th><?php echo gettext("Headline"); ?></th>
       <?php if (cm_auth_restrict('article-edit') == "true") { ?>
-      <th>Tools</th>
+      <th><?php echo gettext("Tools"); ?></th>
       <?php } ?>
     </tr>
     <?php
@@ -176,7 +176,7 @@ foreach ($records as $article)
 	$issue_id = $article['issue_id'];
 	$issue_date = cm_issue_info("issue_date",$issue_id) . " 00:00:00";
 	if ($published > $issue_date) { $is_breaking = "true"; } else { unset($is_breaking); }
-	if ($is_breaking == "true") { $flag = "<small style=\"color:red;font-weight:bold;\">[ BREAKING NEWS ]</small> "; } else { unset($flag); }
+	if ($is_breaking == "true") { $flag = "<small style=\"color:red;font-weight:bold;\">[ " . gettext("Breaking News") . " ]</small> "; } else { unset($flag); }
 ?>
     <tr>
       <td class="center"><?php echo $priority; ?></td>
@@ -184,15 +184,15 @@ foreach ($records as $article)
         <?php if ($_COOKIE["$module-summary"] == true) { ?>
         <?php echo autop($summary); ?>
         <?php if (cm_auth_restrict('article-media') == "true") { cm_list_media($id,true); } ?>
-        <p><strong>Keywords:</strong> <em><?php echo $keywords; ?></em></p>
+        <p><strong><?php echo gettext("Keywords:"); ?></strong> <em><?php echo $keywords; ?></em></p>
         <?php	} // End Summary Row ?>
       </td>
       <?php if (cm_auth_restrict('article-edit') == "true") { ?>
       <td nowrap class="actionMenu">
         <ul class="center">
-          <li class="command-preview"><a href="article-edit.php?id=<?php echo $id; ?>#preview">Preview</a></li>
-          <li class="command-edit"><a href="article-edit.php?id=<?php echo $id; ?>">Edit</a></li>
-          <li class="command-delete"><a href="article-edit.php?id=<?php echo $id; ?>#delete">Delete</a></li>
+          <li class="command-preview"><a href="article-edit.php?id=<?php echo $id; ?>#preview"><?php echo gettext("Preview"); ?></a></li>
+          <li class="command-edit"><a href="article-edit.php?id=<?php echo $id; ?>"><?php echo gettext("Edit"); ?></a></li>
+          <li class="command-delete"><a href="article-edit.php?id=<?php echo $id; ?>#delete"><?php echo gettext("Delete"); ?></a></li>
         </ul>
         <?php } ?>
       </td>
@@ -201,8 +201,7 @@ foreach ($records as $article)
     <?php if (cm_auth_restrict('article-edit') == "true") { ?>
     <tr>
       <td>&nbsp;</td>
-      <td class="center"><strong><a href="article-edit.php?action=new">Add an
-            Article</a></strong></td>
+      <td class="center"><strong><a href="article-edit.php?action=new"><?php echo gettext("Add an Article"); ?></a></strong></td>
       <td nowrap class="center">
         <?php if (cm_auth_restrict('restrict_section') == "false" && cm_auth_restrict('restrict_issue') == "false") { // Hide Quick Edit ?>
         <input type="text" name="id" id="id" size="4" maxlength="11" />
@@ -214,20 +213,20 @@ foreach ($records as $article)
   </table>
   <div class="actionMenu">
     <ul>
-      <li><strong>Summaries:</strong></li>
+      <li><strong><?php echo gettext("Summaries:"); ?></strong></li>
       <?php if ($_COOKIE["$module-summary"] == false) { ?>
-      <li><a href="<?php echo $module; ?>.php?summary=show">Show Summaries</a></li>
+      <li><a href="<?php echo $module; ?>.php?summary=show"><?php echo gettext("Show Summaries"); ?></a></li>
       <?php } else { ?>
-      <li><a href="<?php echo $module; ?>.php?summary=hide">Hide Summaries</a></li>
+      <li><a href="<?php echo $module; ?>.php?summary=hide"><?php echo gettext("Hide Summaries"); ?></a></li>
       <?php } ?>
-	  <li><strong>Reset Dates:</strong></li>
-      <li><a href="<?php echo $module; ?>.php?reset=publish">Publication Dates</a></li>
+	  <li><strong><?php echo gettext("Reset Dates:"); ?></strong></li>
+      <li><a href="<?php echo $module; ?>.php?reset=publish"><?php echo gettext("Publication Dates"); ?></a></li>
     </ul>
   </div>
   <?php } else { ?>
-  <p>This selected section is empty.
+  <p><?php echo gettext("This selected section is empty."); ?>
     <?php if (cm_auth_restrict('article-edit') == "true") { ?>
-    <a href="article-edit.php?action=new">Add an Article</a>.
+    <a href="article-edit.php?action=new"><?php echo gettext("Add an Article"); ?></a>.
     <?php } ?>
   </p>
   <?php } ?>

@@ -22,10 +22,10 @@ if (is_numeric($_POST['id'])) {
 	// Run function
 	$stat = cm_edit_publish_settings($current_issue,$next_issue,$id);
 	if ($stat) {
-		header("Location: $module.php?msg=publish-updated");
+		header(gettext("Location: $module.php?msg=publish-updated"));
 		exit;
 	} else {
-		cm_error("Error in 'cm_edit_publish_settings' function.");
+		cm_error(gettext("Error in 'cm_edit_publish_settings' function."));
 		exit;
 	}
 }
@@ -42,16 +42,16 @@ get_cm_header();
 
 ?>
 
-<h2>Issue Manager</h2>
+<h2><?php echo gettext("Issue Manager"); ?></h2>
 <?php
 $msg = $_GET['msg'];
-if ($msg == "added") { echo "<p class=\"infoMessage\">Issue added.</p>"; }
-if ($msg == "updated") { echo "<p class=\"infoMessage\">Issue updated.</p>"; }
-if ($msg == "publish-updated") { echo "<p class=\"infoMessage\">Publish settings updated.</p>"; }
+if ($msg == "added") { echo "<p class=\"infoMessage\">" . gettext("Issue added.") . "</p>"; }
+if ($msg == "updated") { echo "<p class=\"infoMessage\">" . gettext("Issue updated.") . "</p>"; }
+if ($msg == "publish-updated") { echo "<p class=\"infoMessage\">" . gettext("Publish settings updated.") . "</p>"; }
 ?>
 <form action="<?php echo "$module.php"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Publication Settings</legend>
+  <legend><?php echo gettext("Publication Settings"); ?></legend>
   <div class="sidebar">
     <?
 	if ($_GET['month'] == "") { $month = date('m'); } else { $month = $_GET['month']; }
@@ -61,31 +61,31 @@ if ($msg == "publish-updated") { echo "<p class=\"infoMessage\">Publish settings
 ?>
   </div>
   <p>
-    <label for="current_issue">Current Issue</label>
+    <label for="current_issue"><?php echo gettext("Current Issue"); ?></label>
     <br />
     <select name="current_issue" id="current_issue">
       <?php cm_issue_list($module, cm_current_issue('id')); ?>
     </select>
-    <strong>Stored: <?php echo cm_current_issue('date'); ?></strong> </p>
+    <strong><?php echo gettext("Stored:"); ?> <?php echo cm_current_issue('date'); ?></strong> </p>
   <p>
-    <label for="next_issue">Next Issue</label>
+    <label for="next_issue"><?php echo gettext("Next Issue"); ?></label>
     <br />
     <select name="next_issue" id="next_issue">
       <?php cm_issue_list($module, cm_next_issue('id')); ?>
     </select>
-    <strong>Stored: <?php echo cm_next_issue('date'); ?></strong> </p>
+    <strong><?php echo gettext("Stored:"); ?> <?php echo cm_next_issue('date'); ?></strong> </p>
   <p>
-    <input type="submit" value="Update Settings" name="update" id="update" class="button" />
+    <input type="submit" value="<?php echo gettext("Update Settings"); ?>" name="update" id="update" class="button" />
     <input name="id" type="hidden" id="id" value="<?php echo cm_get_settings('id'); ?>" />
-    <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
+    <input type="button" value="<?php echo gettext("Cancel"); ?>" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
   </p>
   </fieldset>
 </form>
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Browse Issue Archive</legend>
+  <legend><?php echo gettext("Browse Issue Archive"); ?></legend>
   <p>
-    <label for="volume">Select Volume</label>
+    <label for="volume"><?php echo gettext("Select Volume"); ?></label>
     <select name="volume" id="volume">
       <?php cm_volume_list($module, $volume); ?>
     </select>
@@ -110,10 +110,10 @@ if ($result->RecordCount() > 0) {
 ?>
   <table class="<?php echo $module; ?>-table">
     <tr>
-      <th>Issue Date</th>
-      <th>Issue Number</th>
-      <th>Circulation</th>
-      <th>Tools</th>
+      <th><?php echo gettext("Issue Date"); ?></th>
+      <th><?php echo gettext("Issue Number"); ?></th>
+      <th><?php echo gettext("Circulation"); ?></th>
+      <th><?php echo gettext("Tools"); ?></th>
     </tr>
 <?php
 
@@ -121,7 +121,7 @@ foreach ($records as $record)
 {
 
 	$id = $record['id'];
-	$date = $record['issue_date'];
+	$date = date('F j, Y', strtotime($record['issue_date']));
 	$volume = $record['issue_volume'];
 	$number = $record['issue_number'];
 	$circulation = $record['issue_circulation'];
@@ -133,9 +133,8 @@ foreach ($records as $record)
       <td><?php echo $circulation; ?></td>
       <td class="actionMenu">
         <ul class="center">
-          <li class="command-edit"><a href="issue-edit.php?id=<?php echo $id; ?>">Edit</a></li>
-          <li class="command-edit"><a href="article-browse.php?issue=<?php echo $id; ?>">Browse
-              Articles</a></li>
+          <li class="command-edit"><a href="issue-edit.php?id=<?php echo $id; ?>"><?php echo gettext("Edit"); ?></a></li>
+          <li class="command-edit"><a href="article-browse.php?issue=<?php echo $id; ?>"><?php echo gettext("Browse Articles"); ?></a></li>
         </ul>
       </td>
     </tr>
@@ -143,15 +142,13 @@ foreach ($records as $record)
 <?php } ?>
 
     <tr>
-      <td class="center" colspan="3"><strong><a href="issue-edit.php?action=new">Add
-            an Issue</a></strong></td>
+      <td class="center" colspan="3"><strong><a href="issue-edit.php?action=new"><?php echo gettext("Add Issue"); ?></a></strong></td>
       <td></td>
     </tr>
   </table>
   </fieldset>
 </form>
 <?php } else { ?>
-<p>This selected volume is empty. <a href="issue-edit.php?action=new">Add an
-    issue</a>.</p>
+<p><?php echo gettext("The selected volume is empty."); ?> <a href="issue-edit.php?action=new"><?php echo gettext("Add an issue"); ?></a>.</p>
 <?php } ?>
 <?php get_cm_footer(); ?>

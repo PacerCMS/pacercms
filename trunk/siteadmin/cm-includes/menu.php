@@ -34,7 +34,7 @@
   <h3>Profile</h3>
   <ul>
     <?php if ($show_profile == "true") {; echo "<li><a href=\"profile.php\">Edit My Profile</a></li>"; } ?>
-	<li><a href="logout.php" onClick="return confirmLink(this, 'logout of PacerCMS')">Logout</a></li>
+	<li><a href="login.php?action=logout" onClick="return confirmLink(this, 'logout of PacerCMS')">Logout</a></li>
   </ul>
 <?php } ?>
 

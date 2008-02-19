@@ -17,7 +17,7 @@ if ($_GET['action'] == "delete" && $_POST['delete-id'] != "") {
 		header("Location: $pmodule.php?msg=media-deleted");
 		exit;
 	} else {
-		cm_error("Error in 'cm_delete_media' function.");
+		cm_error(gettext("Error in 'cm_delete_media' function."));
 		exit;
 	}
 }
@@ -48,11 +48,11 @@ if ($_GET['action'] == "edit") {
 			header("Location: $pmodule.php?msg=media-updated");
 			exit;
 		} else {
-			cm_error("Error in 'cm_edit_media' function.");
+			cm_error(gettext("Error in 'cm_edit_media' function."));
 			exit;
 		}
 	} else {
-		cm_error("Did not have a section to load.");
+		cm_error(gettext("Did not have media to load."));
 		exit;
 	}
 }
@@ -72,7 +72,7 @@ if ($_GET['action'] == "new" && !empty($_POST['article_id'])) {
 		header("Location: $pmodule.php?msg=media-added");
 		exit;
 	} else {
-		cm_error("Error in 'cm_add_media' function.");
+		cm_error(gettext("Error in 'cm_add_media' function."));
 		exit;
 	}
 }
@@ -82,7 +82,7 @@ get_cm_header();
 
 ?>
 
-<h2><a href="<?php echo "$pmodule.php"; ?>">Media Manager</a></h2>
+<h2><a href="<?php echo "$pmodule.php"; ?>"><?php echo gettext("Media Manager"); ?></a></h2>
 <?php
 
 if ($mode == 'edit')
@@ -106,48 +106,48 @@ if ($mode == 'edit')
 ?>
 <form action="<?php echo "$module.php?action=$mode"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
-  <legend>Media Editor</legend>
+  <legend><?php echo gettext("Media Editor"); ?></legend>
   <p>
-    <label for="title">Title / Description</label>
+    <label for="title"><?php echo gettext("Title / Description"); ?></label>
     <br />
     <input type="text" name="title" id="title" value="<?php echo $title; ?>" class="text" />
   </p>
   <p>
-    <label for="src">Media URL</label>
+    <label for="src"><?php echo gettext("Media URL"); ?></label>
     <br />
     <input type="text" name="src" id="src" value="<?php echo $src; ?>" class="text" />
   </p>
   <p>
-    <label for="type">Type of Media</label>
+    <label for="type"><?php echo gettext("Type of Media"); ?></label>
     <br />
     <select name="type" id="type">
-      <option value="jpg" <?php if ($type == 'jpg') { echo "SELECTED"; } ?> >JPEG Image</option>
-      <option value="png" <?php if ($type == 'png') { echo "SELECTED"; } ?> >PNG Image</option>
-      <option value="gif" <?php if ($type == 'gif') { echo "SELECTED"; } ?> >GIF Image</option>
-      <option value="doc" <?php if ($type == 'doc') { echo "SELECTED"; } ?> >Word or RTF Document</option>
-      <option value="pdf" <?php if ($type == 'pdf') { echo "SELECTED"; } ?> >PDF Document</option>
-      <option value="swf" <?php if ($type == 'swf') { echo "SELECTED"; } ?> >Flash (SWF)</option>
-      <option value="url" <?php if ($type == 'url') { echo "SELECTED"; } ?> >Related Link</option>
-	</select> <strong>Determines display method.</strong>
+      <option value="jpg" <?php if ($type == 'jpg') { echo "SELECTED"; } ?> ><?php echo gettext("JPEG Image"); ?></option>
+      <option value="png" <?php if ($type == 'png') { echo "SELECTED"; } ?> ><?php echo gettext("PNG Image"); ?></option>
+      <option value="gif" <?php if ($type == 'gif') { echo "SELECTED"; } ?> ><?php echo gettext("GIF Image"); ?></option>
+      <option value="doc" <?php if ($type == 'doc') { echo "SELECTED"; } ?> ><?php echo gettext("Word or RTF Document"); ?></option>
+      <option value="pdf" <?php if ($type == 'pdf') { echo "SELECTED"; } ?> ><?php echo gettext("PDF Document"); ?></option>
+      <option value="swf" <?php if ($type == 'swf') { echo "SELECTED"; } ?> ><?php echo gettext("Flash (SWF)"); ?></option>
+      <option value="url" <?php if ($type == 'url') { echo "SELECTED"; } ?> ><?php echo gettext("Related Link"); ?></option>
+	</select> <strong><?php echo gettext("Determines display method."); ?></strong>
   </p>
   <p>
-    <label for="caption">Caption</label>
+    <label for="caption"><?php echo gettext("Caption"); ?></label>
     <br />
     <textarea name="caption" id="caption"><?php echo $caption; ?></textarea>
   </p>
   <p>
-    <label for="type">Credit / Source</label>
+    <label for="type"><?php echo gettext("Credit / Source"); ?></label>
     <br />
     <input type="text" name="credit" id="credit" value="<?php echo $credit; ?>" class="text" />
   </p>
   <p>
     <?php if ($mode == "new") { ?>
-    <input type="submit" value="Add Media" name="submit" id="submit" class="button" />
+    <input type="submit" value="<?php echo gettext("Add Media"); ?>" name="submit" id="submit" class="button" />
     <?php } if ($mode == "edit") { ?>
-    <input type="submit" value="Update Media" name="update" id="update" class="button" />
+    <input type="submit" value="<?php echo gettext("Update Media"); ?>" name="update" id="update" class="button" />
     <input name="id" type="hidden" id="id" value="<?php echo $id; ?>" />
     <?php } ?>
-    <input type="button" value="Cancel" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
+    <input type="button" value="<?php echo gettext("Cancel"); ?>" name="cancel_modify" id="cancel_modify" class="button" onClick="javascript:history.back();" />
     <input type="hidden" name="article_id" id="article_id" value="<?php echo $article_id; ?>" />
   </p>
   </fieldset>
@@ -155,21 +155,21 @@ if ($mode == 'edit')
 <?php
 // Show preview if not an add form
 if ($mode != "new") { ?>
-<h2><a name="preview"></a>Preview Media</h2>
+<h2><a name="preview"></a><?php echo gettext("Preview Media"); ?></h2>
 <fieldset class="<?php echo "$module-preview" ?>">
-<legend>Media Preview</legend>
+<legend><?php echo gettext("Media Preview"); ?></legend>
 <p><?php cm_display_media($src,$type,$title); ?></p>
 <p><?php echo $caption; ?></p>
 <p><?php echo $credit; ?></p>
 </fieldset>
-<h2>Delete Media <a href="javascript:toggleLayer('deleteRecord');" title="Show Delete Button" name="delete">&raquo;&raquo;</a></h2>
+<h2><?php echo gettext("Delete Media"); ?> <a href="javascript:toggleLayer('deleteRecord');" name="delete">&raquo;&raquo;</a></h2>
 <div id="deleteRecord">
   <form action="<?php echo "$module.php?action=delete"; ?>" method="post">
     <fieldset class="<?php echo "$module-delete" ?>">
-    <legend>Confirm Delete</legend>
-    <p>Are you sure you want to delete this media item?</p>
-    <input type="submit" name="submit_delete" id="submit_delete" value="Yes" class="button" />
-    <input type="button" name="cancel_delete" id="cancel_delete" value="Cancel" onClick="javascript:toggleLayer('deleteMedia');" class="button" />
+    <legend><?php echo gettext("Confirm Delete"); ?></legend>
+    <p><?php echo gettext("Are you sure you want to delete this media item?"); ?></p>
+    <input type="submit" name="submit_delete" id="submit_delete" value="<?php echo gettext("Delete"); ?>" class="button" />
+    <input type="button" name="cancel_delete" id="cancel_delete" value="<?php echo gettext("Cancel"); ?>" onClick="toggleLayer('deleteRecord');" class="button" />
     <input type="hidden" name="delete-id" id="delete-id" value="<?php echo $id; ?>" />
     </fieldset>
   </form>
