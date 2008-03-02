@@ -19,6 +19,13 @@ $submitted_articles = $result->GetArray();
 
 get_cm_header();
 
+// Notify for need of database upgrade
+if ($needs_db_upgrade == true)
+{
+    print '<p class="alertMessage">Your database needs to be <a href="upgrade.php">upgraded</a>.';
+} 
+
+
 ?>
 
 <h2><?php echo gettext("Welcome"); ?> <?php echo $_SESSION['user_data']['user_first_name'] . ' ' . $_SESSION['user_data']['user_last_name']; ?></h2>
