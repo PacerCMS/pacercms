@@ -2,7 +2,6 @@
 
 // The Version of PacerCMS You Are Running
 define('CM_VERSION', "0.7-alpha");
-define('DB_VERSION', "65");
 
 // Make sure the config file exists
 if ( file_exists('includes/config.php') )
