@@ -25,8 +25,14 @@ if ($_POST['username'] != "" && $_POST['password'] != "") {
 	$password = md5($_POST['password']);
 	$status = cm_auth_user($username,$password);
 	if ($status == true) {
-		header("Location: $dest");
-		exit; 
+        // Check for need to update PacerCMS
+        if ($_SESSION['setting_data']['database_version'] != DB_VERSION) {
+            header("Location: upgrade.php");
+            exit;
+        } else {  
+    		header("Location: $dest");
+    		exit;
+        }
 	} else {
 		header("Location: " . $PHP_SELF . "?msg=login-failed");
 		exit;

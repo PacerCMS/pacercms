@@ -1,7 +1,5 @@
 <?php
 
-$is_upgrade_page = true;
-
 // Loads everyting needed to run PacerCMS
 include('cm-includes/cm-header.php');
 
@@ -54,9 +52,13 @@ switch($_REQUEST['step'])
         $result = $cm_db->Execute($query) or die(upgrade_pre());
         $db_version = $result->Fields('database_version');
         
+        // This assigns old database version numbers
+        if ($db_version == '0.4') { $db_version = 34; }
+        if ($db_version == '0.5') { $db_version = 64; }
+        
         // Run these checks for each current version
         if ($db_version == DB_VERSION ) { cm_error('Your database is already up to date.'); exit; }
-        if ($db_version < 34) { upgrade_34(); $db_version = 34; }
+        if ($db_version < 34 ) { upgrade_34(); $db_version = 34; }
         if ($db_version < 65) { upgrade_65(); $db_version = 65; }
         
         // Set new version in settings variable
@@ -72,9 +74,17 @@ switch($_REQUEST['step'])
     default:
         // Show start of upgrade
         get_cm_header();
+        
+        $existing = $_SESSION['setting_data']['database_version'];
+        $updated = DB_VERSION;
+        
         print "<h2>Your database needs to be upgraded</h2>\n";
         print "<p>This should only take a few moments to complete.</p>\n";
-        print "<h4><a href=\"?step=2\">Begin Upgrade</a></h4>\n";
+        print "<ul>\n";
+        print "  <li><strong>Existing Version:</strong> $existing</li>\n";
+        print "  <li><strong>Updated Version:</strong> $updated</li>\n";
+        print "</ul>\n";
+        print "<input type=\"button\" class=\"button\" onclick=\"window.location='?step=2';\" value=\"Begin Update\" />\n";
         get_cm_footer();       
         break;
 }

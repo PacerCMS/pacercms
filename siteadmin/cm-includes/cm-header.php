@@ -31,11 +31,3 @@ if (!empty($config_file))
     header('Location: ../INSTALL/cm-config.php');
     exit;
 }
-
-// Check if database upgrade is needed
-if ( $_SESSION['setting_data']['database_version'] != DB_VERSION && $is_upgrade_page != true)
-{
-    header("Location: upgrade.php");
-    exit;
-}
-    
