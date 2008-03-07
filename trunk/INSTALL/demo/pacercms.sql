@@ -1,11 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 2.7.0-pl2
--- http://www.phpmyadmin.net
--- 
--- Host: localhost
--- Generation Time: Jun 30, 2006 at 05:52 PM
--- Server version: 5.0.18
--- PHP Version: 5.1.2
 -- 
 -- Database: `pacercms`
 -- 
@@ -262,7 +254,7 @@ CREATE TABLE `cm_settings` (
 -- Dumping data for table `cm_settings`
 -- 
 
-INSERT INTO `cm_settings` VALUES (1, 'The Pacer', 'http://localhost/pacercms', 'user@example.com', '', '', '', '', '', '', 'Customize this message under the "Settings" menu item. It is displayed for every user that logs into the system.','Your student newspaper.', 1, 2, 1, '0.5');
+INSERT INTO `cm_settings` VALUES (1, 'The Pacer', 'http://localhost/pacercms', 'user@example.com', '', '', '', '', '', '', 'Customize this message under the "Settings" menu item. It is displayed for every user that logs into the system.','Your student newspaper.', 1, 2, 1, '65');
 
 -- --------------------------------------------------------
 
