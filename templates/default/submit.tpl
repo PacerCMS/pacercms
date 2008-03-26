@@ -74,7 +74,7 @@
       <div class="biggerCol">
       <h3>{t}Step 3: Your Submission{/t}</h3>
       <p>
-        <label for="title"{t}>Headline{/t}</label> <span style="font-weight:bold;color:red;">*</span>
+        <label for="title">{t}Headline{/t}</label> <span style="font-weight:bold;color:red;">*</span>
         <br />
         <input type="text" id="title" name="title" style="width: 300px;" />
       </p>
