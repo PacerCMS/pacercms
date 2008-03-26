@@ -12,15 +12,15 @@ if (is_numeric($_GET['id']))
 	exit;
 }
 
-$next_issue_id = next_issue("id");
-$current_issue_id = current_issue("id");
+$current_issue_id = current_issue('id');
+$next_issue_date = next_issue('date');
 
 /*=======================
     Selected Article
 =======================*/
 $query = "SELECT * ";
 $query .= " FROM cm_articles ";
-$query .= " WHERE id = $article_id AND issue_id < $next_issue_id;";
+$query .= " WHERE id = $article_id AND article_publish < '$next_issue_date'; ";
 
 // Run query
 $result = run_query($query);
@@ -144,8 +144,8 @@ $smarty->assign("article_related", $article_related );
 foreach ( section_list('array') as $section_info )
 {
     $id = $section_info[id];
-    $smarty->assign("section_name_$id", section_info('name', $id) );
-    $smarty->assign("section_url_$id", section_info('url', $id) );
+    $smarty->assign("section_name_$id", $section_info['section_name'] );
+    $smarty->assign("section_url_$id", $section_info['section_url'] );
     $smarty->assign("section_summary_$id", section_headlines($id, $current_issue_id) );
 }
 
