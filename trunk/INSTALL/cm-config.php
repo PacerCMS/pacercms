@@ -116,12 +116,17 @@ switch($step) {
     <tr> 
       <th scope="row">Template Folder</th> 
       <td><input name="tplfld" type="text" size="25" value="default" /></td>
-      <td>Use "local" if you plan to modify the template.</td> 
+      <td>Type the name of your template folder. Use "<tt>default</tt>" for basic template.</td> 
     </tr>
     <tr> 
       <th scope="row">Language</th> 
-      <td><input name="locale" type="text" size="25" value="en_US.UTF8" /></td>
-      <td>Type the name of your language file if other than US English.</td> 
+      <td>
+        <select name="locale" type="text">
+          <option value="en_US.UTF8">English (United States)</option>
+          <option value="fr_FR.UTF8">French (France)</option>
+        </select>
+      </td>
+      <td>Choose the default language for your site.</td> 
     </tr>
   </table>
   <h2 class="step">
