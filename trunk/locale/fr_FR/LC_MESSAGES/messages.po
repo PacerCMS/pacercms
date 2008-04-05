@@ -1,12 +1,12 @@
 # Copyright (C) 2008 PacerCMS
 # This file is distributed under the same license as PacerCMS.
-# First Translation: FIRST AUTHOR <EMAIL@ADDRESS>, YEAR
+# First Translation: Eric Lemoine, 2008 
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PacerCMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-05 00:34+0000\n"
+"POT-Creation-Date: 2008-04-04 18:18+0000\n"
 "PO-Revision-Date: 2008-04-04 21:05-0600\n"
 "Last-Translator: Stephen Yeargin <stephen dot yeargin at gmail dot com>\n"
 "Language-Team:  <pacercms-discuss@googlegroups.com>\n"
@@ -17,112 +17,112 @@ msgstr ""
 
 #: article-browse.php:30
 msgid "The selected section could not be loaded."
-msgstr ""
+msgstr "La section choisie n'a pas pu être chargée."
 
 #: article-browse.php:43
 #: submitted-browse.php:22
 msgid "The selected issue could not be loaded."
-msgstr ""
+msgstr "L'édition choisie n'a pas pu être chargée."
 
 #: article-browse.php:106
 #: article-edit.php:190
 #: staff-access.php:151
 msgid "Article Manager"
-msgstr ""
+msgstr "Gestion des articles"
 
 #: article-browse.php:109
 msgid "Article added."
-msgstr ""
+msgstr "Article ajouté."
 
 #: article-browse.php:110
 msgid "Article updated."
-msgstr ""
+msgstr "Article mis à jour."
 
 #: article-browse.php:111
 msgid "Article deleted."
-msgstr ""
+msgstr "Article supprimé."
 
 #: article-browse.php:112
 msgid "Media added."
-msgstr ""
+msgstr "Média ajouté."
 
 #: article-browse.php:113
 msgid "Media updated."
-msgstr ""
+msgstr "Média mis à jour."
 
 #: article-browse.php:114
 msgid "Media deleted."
-msgstr ""
+msgstr "Média supprimé."
 
 #: article-browse.php:115
 msgid "Publication dates set to match issue."
-msgstr ""
+msgstr "Dates de publication fixées en accord avec l'édition."
 
 #: article-browse.php:116
 msgid "Error setting publication dates."
-msgstr ""
+msgstr "Erreur en fixant les dates de publication."
 
 #: article-browse.php:125
 #: submitted-browse.php:70
 msgid "Select Issue"
-msgstr ""
+msgstr "Choisir une édition"
 
 #: article-browse.php:129
 #: submitted-browse.php:74
 msgid "Select Issue:"
-msgstr ""
+msgstr "Choisir une édition&nbsp;:"
 
 #: article-browse.php:135
 #: submitted-browse.php:80
 msgid "Current:"
-msgstr ""
+msgstr "Courante&nbsp;:"
 
 #: article-browse.php:136
 #: submitted-browse.php:81
 msgid "Next:"
-msgstr ""
+msgstr "Suivante&nbsp;"
 
 #: article-browse.php:144
 msgid "Viewing: "
-msgstr ""
+msgstr "Visualiser&nbsp;:"
 
 #: article-browse.php:144
 #: index.php:50
 #: submitted-browse.php:88
 msgid " (Volume "
-msgstr ""
+msgstr " (Volume "
 
 #: article-browse.php:144
 #: index.php:50
 #: submitted-browse.php:88
 msgid ", No. "
-msgstr ""
+msgstr ", No. "
 
 #: article-browse.php:148
 msgid "Section:"
-msgstr ""
+msgstr "Section&nbsp;:"
 
 #: article-browse.php:153
 msgid "Viewing:"
-msgstr ""
+msgstr "Visualiser&nbsp;:"
 
 #: article-browse.php:159
 #: article-edit.php:236
 #: section-browse.php:32
 msgid "Assigned Priority"
-msgstr ""
+msgstr "Priorité assignée"
 
 #: article-browse.php:159
 #: section-browse.php:32
 msgid "AP"
-msgstr ""
+msgstr "PA"
 
 #: article-browse.php:160
 #: smarty.c:14
 #: smarty.c:242
 #: smarty.c:431
 msgid "Headline"
-msgstr ""
+msgstr "En-tête"
 
 #: article-browse.php:162
 #: index.php:59
@@ -133,16 +133,16 @@ msgstr ""
 #: staff-browse.php:28
 #: submitted-browse.php:100
 msgid "Tools"
-msgstr ""
+msgstr "Outils"
 
 #: article-browse.php:179
 #: smarty.c:176
 msgid "Breaking News"
-msgstr ""
+msgstr "Dernières nouvelles"
 
 #: article-browse.php:187
 msgid "Keywords:"
-msgstr ""
+msgstr "Mots-clés&nbsp;:"
 
 #: article-browse.php:193
 #: index.php:78
@@ -150,7 +150,7 @@ msgstr ""
 #: section-browse.php:61
 #: submitted-browse.php:125
 msgid "Preview"
-msgstr ""
+msgstr "Prévisualiser"
 
 #: article-browse.php:194
 #: issue-browse.php:136
@@ -165,7 +165,7 @@ msgstr ""
 #: staff-access.php:257
 #: staff-browse.php:51
 msgid "Edit"
-msgstr ""
+msgstr "Modifier"
 
 #: article-browse.php:195
 #: article-edit.php:331
@@ -185,70 +185,70 @@ msgstr ""
 #: submitted-edit.php:72
 #: submitted-edit.php:103
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: article-browse.php:204
 #: article-browse.php:229
 #: index.php:32
 msgid "Add an Article"
-msgstr ""
+msgstr "Ajouter un article"
 
 #: article-browse.php:216
 msgid "Summaries:"
-msgstr ""
+msgstr "Résumés&nbsp;:"
 
 #: article-browse.php:218
 msgid "Show Summaries"
-msgstr ""
+msgstr "Montrer les résumés&nbsp;:"
 
 #: article-browse.php:220
 msgid "Hide Summaries"
-msgstr ""
+msgstr "Cacher les résumés"
 
 #: article-browse.php:222
 msgid "Reset Dates:"
-msgstr ""
+msgstr "Réinitialiser les dates&nbsp;:"
 
 #: article-browse.php:223
 msgid "Publication Dates"
-msgstr ""
+msgstr "Dates de publication"
 
 #: article-browse.php:227
 msgid "This selected section is empty."
-msgstr ""
+msgstr "La section sélectionnée est vide."
 
 #: article-edit.php:37
 msgid "You must enter a number."
-msgstr ""
+msgstr "Vous devez saisir un nombre."
 
 #: article-edit.php:51
 msgid "Error in 'cm_delete_article' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_delete_article'."
 
 #: article-edit.php:79
 msgid "Error in 'cm_edit_article' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_edit_article'."
 
 #: article-edit.php:83
 msgid "Did not have an article to load."
-msgstr ""
+msgstr "Aucun article à charger."
 
 #: article-edit.php:109
 msgid "Error in 'cm_add_article' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_add_article'."
 
 #: article-edit.php:142
 #: article-edit.php:174
 msgid "Article doesn't exist, or you do not have permission to edit it."
-msgstr ""
+msgstr "L'article n'existe pas, ou vous n'avez pas les droits pour le modifier."
 
 #: article-edit.php:193
 msgid "Article Editor"
-msgstr ""
+msgstr "Rédacteur de l'article"
 
 #: article-edit.php:196
 msgid "Keywords"
-msgstr ""
+msgstr "Mots-clés"
 
 #: article-edit.php:202
 #: section-browse.php:33
@@ -256,7 +256,7 @@ msgstr ""
 #: smarty.c:20
 #: smarty.c:251
 msgid "Section"
-msgstr ""
+msgstr "Section"
 
 #: article-edit.php:213
 #: staff-access.php:182
@@ -264,77 +264,77 @@ msgstr ""
 #: smarty.c:29
 #: smarty.c:35
 msgid "Issue"
-msgstr ""
+msgstr "Édition"
 
 #: article-edit.php:223
 #: page-edit.php:121
 msgid "Last Edited"
-msgstr ""
+msgstr "Dernière modification"
 
 #: article-edit.php:228
 msgid "Publish Timestamp"
-msgstr ""
+msgstr "Heure de publication"
 
 #: article-edit.php:239
 msgid "Highest"
-msgstr ""
+msgstr "La plus haute"
 
 #: article-edit.php:253
 msgid "Lowest"
-msgstr ""
+msgstr "La plus basse"
 
 #: article-edit.php:256
 msgid "Linked Media"
-msgstr ""
+msgstr "Média lié"
 
 #: article-edit.php:260
 msgid "leave this page and lose all changes"
-msgstr ""
+msgstr "quitter cette page et perdre toutes les modifications"
 
 #: article-edit.php:260
 msgid "Add New Media"
-msgstr ""
+msgstr "Ajouter un nouveau média"
 
 #: article-edit.php:262
 msgid "You must first publish the article before adding linked media."
-msgstr ""
+msgstr "Vous devez d'abord publier l'article avant d'attacher des médias."
 
 #: article-edit.php:267
 #: page-browse.php:42
 #: page-edit.php:128
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: article-edit.php:272
 msgid "Subtitle"
-msgstr ""
+msgstr "Sous-titre"
 
 #: article-edit.php:277
 #: smarty.c:17
 #: smarty.c:248
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: article-edit.php:282
 msgid "Author Title"
-msgstr ""
+msgstr "Titre de l'auteur"
 
 #: article-edit.php:287
 msgid "Summary"
-msgstr ""
+msgstr "Résumé"
 
 #: article-edit.php:292
 #: page-edit.php:138
 msgid "Text"
-msgstr ""
+msgstr "Texte"
 
 #: article-edit.php:302
 msgid "Submit Article"
-msgstr ""
+msgstr "Soumettre l'article"
 
 #: article-edit.php:307
 msgid "Update Article"
-msgstr ""
+msgstr "Mettre à jour l'article"
 
 #: article-edit.php:310
 #: article-edit.php:332
@@ -356,21 +356,21 @@ msgstr ""
 #: staff-edit.php:320
 #: submitted-edit.php:104
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: article-edit.php:317
 msgid "Preview Article"
-msgstr ""
+msgstr "Prévisualiser l'article"
 
 #: article-edit.php:319
 #: submitted-edit.php:77
 msgid "Story Preview"
-msgstr ""
+msgstr "Prévisualisation du message"
 
 #: article-edit.php:325
 #: section-edit.php:175
 msgid "Delete Article"
-msgstr ""
+msgstr "Supprimer l'article"
 
 #: article-edit.php:329
 #: article-media.php:169
@@ -380,338 +380,338 @@ msgstr ""
 #: staff-edit.php:317
 #: submitted-edit.php:101
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Comfirmer la suppression"
 
 #: article-edit.php:330
 msgid "Are you sure you want to delete this article?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cet article?"
 
 #: article-media.php:20
 msgid "Error in 'cm_delete_media' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_delete_media'."
 
 #: article-media.php:51
 msgid "Error in 'cm_edit_media' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_edit_media'"
 
 #: article-media.php:55
 msgid "Did not have media to load."
-msgstr ""
+msgstr "Aucun média à charger."
 
 #: article-media.php:75
 msgid "Error in 'cm_add_media' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_add_media'."
 
 #: article-media.php:85
 msgid "Media Manager"
-msgstr ""
+msgstr "Gestion des médias"
 
 #: article-media.php:109
 msgid "Media Editor"
-msgstr ""
+msgstr "Modification des médias"
 
 #: article-media.php:111
 msgid "Title / Description"
-msgstr ""
+msgstr "Titre / Description"
 
 #: article-media.php:116
 msgid "Media URL"
-msgstr ""
+msgstr "Adresse URL du média"
 
 #: article-media.php:121
 msgid "Type of Media"
-msgstr ""
+msgstr "Type de média"
 
 #: article-media.php:124
 msgid "JPEG Image"
-msgstr ""
+msgstr "Image JPEG"
 
 #: article-media.php:125
 msgid "PNG Image"
-msgstr ""
+msgstr "Image PNG"
 
 #: article-media.php:126
 msgid "GIF Image"
-msgstr ""
+msgstr "Image GIF"
 
 #: article-media.php:127
 msgid "Word or RTF Document"
-msgstr ""
+msgstr "Document Word ou RTF"
 
 #: article-media.php:128
 msgid "PDF Document"
-msgstr ""
+msgstr "Document PDF"
 
 #: article-media.php:129
 msgid "Flash (SWF)"
-msgstr ""
+msgstr "Flash (SWF)"
 
 #: article-media.php:130
 msgid "Related Link"
-msgstr ""
+msgstr "Lien connexe"
 
 #: article-media.php:131
 msgid "Determines display method."
-msgstr ""
+msgstr "Détermine la méthode d'affichage."
 
 #: article-media.php:134
 msgid "Caption"
-msgstr ""
+msgstr "Légende"
 
 #: article-media.php:139
 msgid "Credit / Source"
-msgstr ""
+msgstr "Crédits / source"
 
 #: article-media.php:145
 msgid "Add Media"
-msgstr ""
+msgstr "Ajouter un média"
 
 #: article-media.php:147
 msgid "Update Media"
-msgstr ""
+msgstr "Mettre à jour le média"
 
 #: article-media.php:158
 msgid "Preview Media"
-msgstr ""
+msgstr "Prévisualiser le média"
 
 #: article-media.php:160
 msgid "Media Preview"
-msgstr ""
+msgstr "Prévisualisation du média"
 
 #: article-media.php:165
 msgid "Delete Media"
-msgstr ""
+msgstr "Supprimer le média"
 
 #: article-media.php:170
 msgid "Are you sure you want to delete this media item?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer ce média&nbsp;?"
 
 #: index.php:24
 msgid "Welcome"
-msgstr ""
+msgstr "Bienvenue"
 
 #: index.php:26
 msgid "Quick Links"
-msgstr ""
+msgstr "Liens rapides"
 
 #: index.php:29
 msgid "Manage Articles"
-msgstr ""
+msgstr "Gérer les articles"
 
 #: index.php:35
 msgid "Manage Poll Questions"
-msgstr ""
+msgstr "Gérer les questions des sondages"
 
 #: index.php:38
 msgid "Add a Poll Question"
-msgstr ""
+msgstr "Ajouter un sondage"
 
 #: index.php:42
 msgid "Announcements"
-msgstr ""
+msgstr "Annonces"
 
 #: index.php:50
 msgid "Submitted Articles"
-msgstr ""
+msgstr "Articles soumis"
 
 #: index.php:50
 msgid " for"
-msgstr ""
+msgstr " pour"
 
 #: index.php:56
 #: submitted-browse.php:96
 msgid "Sent"
-msgstr ""
+msgstr "Envoyé"
 
 #: index.php:57
 #: submitted-browse.php:97
 msgid "From"
-msgstr ""
+msgstr "Par"
 
 #: index.php:58
 #: submitted-browse.php:98
 msgid "Subject"
-msgstr ""
+msgstr "Objet"
 
 #: index.php:79
 #: submitted-browse.php:126
 msgid "Post"
-msgstr ""
+msgstr "Message"
 
 #: index.php:93
 #: submitted-browse.php:142
 msgid "There are no submitted articles for this issue."
-msgstr ""
+msgstr "Il n'y a pas d'articles soumis pour cette édition."
 
 #: issue-browse.php:28
 msgid "Error in 'cm_edit_publish_settings' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_edit_publish_settings'."
 
 #: issue-browse.php:45
 #: issue-edit.php:110
 #: staff-access.php:212
 msgid "Issue Manager"
-msgstr ""
+msgstr "Gestion des éditions"
 
 #: issue-browse.php:48
 msgid "Issue added."
-msgstr ""
+msgstr "Édition ajoutée."
 
 #: issue-browse.php:49
 msgid "Issue updated."
-msgstr ""
+msgstr "Édition mise à jour."
 
 #: issue-browse.php:50
 msgid "Publish settings updated."
-msgstr ""
+msgstr "Paramètres de publication mis à jour."
 
 #: issue-browse.php:54
 msgid "Publication Settings"
-msgstr ""
+msgstr "Paramètres de mise à jour"
 
 #: issue-browse.php:64
 msgid "Current Issue"
-msgstr ""
+msgstr "Édtion courante"
 
 #: issue-browse.php:69
 #: issue-browse.php:76
 msgid "Stored:"
-msgstr ""
+msgstr "Enregistrée&nbsp;:"
 
 #: issue-browse.php:71
 msgid "Next Issue"
-msgstr ""
+msgstr "Prochaine édition"
 
 #: issue-browse.php:78
 #: settings.php:127
 #: staff-access.php:272
 msgid "Update Settings"
-msgstr ""
+msgstr "Mise à jour des paramètres"
 
 #: issue-browse.php:86
 msgid "Browse Issue Archive"
-msgstr ""
+msgstr "Parcourir les archives des éditions"
 
 #: issue-browse.php:88
 msgid "Select Volume"
-msgstr ""
+msgstr "Choisir le volume"
 
 #: issue-browse.php:113
 msgid "Issue Date"
-msgstr ""
+msgstr "Date d'édition"
 
 #: issue-browse.php:114
 #: issue-edit.php:173
 msgid "Issue Number"
-msgstr ""
+msgstr "Numéro d'édition"
 
 #: issue-browse.php:115
 #: issue-edit.php:178
 msgid "Circulation"
-msgstr ""
+msgstr "Diffusion"
 
 #: issue-browse.php:137
 msgid "Browse Articles"
-msgstr ""
+msgstr "Parcourir les articles"
 
 #: issue-browse.php:145
 #: issue-edit.php:194
 msgid "Add Issue"
-msgstr ""
+msgstr "Ajouter une édition"
 
 #: issue-browse.php:152
 msgid "The selected volume is empty."
-msgstr ""
+msgstr "The volume choisi est vide."
 
 #: issue-browse.php:152
 msgid "Add an issue"
-msgstr ""
+msgstr "Ajouter une édition"
 
 #: issue-edit.php:43
 msgid "Error in 'cm_edit_issue' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_edit_issue'"
 
 #: issue-edit.php:47
 msgid "Did not have a issue to load."
-msgstr ""
+msgstr "Aucune édition à charger."
 
 #: issue-edit.php:70
 msgid "Error in 'cm_add_issue' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_add_issue'."
 
 #: issue-edit.php:88
 msgid "Could not load issue."
-msgstr ""
+msgstr "Impossible de charger l'édition."
 
 #: issue-edit.php:113
 msgid "Issue Editor"
-msgstr ""
+msgstr "Rédacteur de l'édition"
 
 #: issue-edit.php:125
 msgid "Publication Date"
-msgstr ""
+msgstr "Date de publication"
 
 #: issue-edit.php:168
 #: smarty.c:8
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: issue-edit.php:183
 msgid "Online Only?"
-msgstr ""
+msgstr "En ligne maintenant&nbsp;?"
 
 #: issue-edit.php:186
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: issue-edit.php:189
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: issue-edit.php:196
 msgid "Update Issue"
-msgstr ""
+msgstr "Mettre à jour l'édition"
 
 #: login.php:90
 msgid "Your username or password were incorrect."
-msgstr ""
+msgstr "Votre nom d'utilisateur ou mot de passe sont incorrects."
 
 #: login.php:91
 msgid "You new password has been e-mailed."
-msgstr ""
+msgstr "Votre nouveau mot de passe a été envoyé par e-mail."
 
 #: login.php:92
 msgid "Could not find matching username and e-mail address."
-msgstr ""
+msgstr "Impossible de trouver un nom d'utilisateur ou une adresse e-mail correspondants."
 
 #: login.php:93
 msgid "Your session has ended."
-msgstr ""
+msgstr "Votre session a été fermée."
 
 #: login.php:95
 #: login.php:111
 msgid "Username"
-msgstr ""
+msgstr "Nom d'utilisateur"
 
 #: login.php:96
 #: profile.php:108
 #: staff-edit.php:188
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #: login.php:99
 #: staff-edit.php:181
 msgid "Login"
-msgstr ""
+msgstr "Identifiant"
 
 #: login.php:100
 msgid "Reset My Password"
-msgstr ""
+msgstr "Réinitialiser mon mot de passe"
 
 #: login.php:100
 #: login.php:115
 msgid "Request Login"
-msgstr ""
+msgstr "Demander un identifiant"
 
 #: login.php:112
 #: profile.php:166
@@ -721,657 +721,657 @@ msgstr ""
 #: smarty.c:125
 #: smarty.c:413
 msgid "E-mail"
-msgstr ""
+msgstr "E-mail"
 
 #: login.php:114
 msgid "Reset Password"
-msgstr ""
+msgstr "Réinitialiser le mot de passe"
 
 #: login.php:115
 msgid "Back to Login"
-msgstr ""
+msgstr "Retour à l'identification"
 
 #: page-browse.php:23
 msgid "Page added."
-msgstr ""
+msgstr "Page ajoutée."
 
 #: page-browse.php:24
 msgid "Page updated."
-msgstr ""
+msgstr "Page mise à jour."
 
 #: page-browse.php:25
 msgid "Page deleted."
-msgstr ""
+msgstr "Page supprimée."
 
 #: page-browse.php:35
 msgid "Page Browser"
-msgstr ""
+msgstr "Parcourir les pages"
 
 #: page-browse.php:37
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #: page-browse.php:38
 msgid "Add New Page"
-msgstr ""
+msgstr "Ajouter une nouvelle page"
 
 #: page-browse.php:43
 msgid "Edited"
-msgstr ""
+msgstr "Modifiée"
 
 #: page-browse.php:72
 msgid "You are not currently using pages."
-msgstr ""
+msgstr "Vous n'utilisez pas encore de page."
 
 #: page-browse.php:72
 msgid "Add a Page"
-msgstr ""
+msgstr "Ajouter une page"
 
 #: page-edit.php:31
 msgid "Error in 'cm_delete_page' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_delete_page'."
 
 #: page-edit.php:54
 msgid "Error in 'cm_edit_page' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_edit_page'."
 
 #: page-edit.php:58
 msgid "Did not have a page to load."
-msgstr ""
+msgstr "Aucune page à charger."
 
 #: page-edit.php:78
 msgid "Error in 'cm_add_page' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_add_page'."
 
 #: page-edit.php:92
 msgid "Page does not exist, or you do not have permission to edit it."
-msgstr ""
+msgstr "La page n'existe pas, ou vous n'avez pas les droits pour la modifier."
 
 #: page-edit.php:110
 #: staff-access.php:223
 msgid "Page Manager"
-msgstr ""
+msgstr "Gestion des pages"
 
 #: page-edit.php:113
 msgid "Page Editor"
-msgstr ""
+msgstr "Rédacteur de la page"
 
 #: page-edit.php:116
 msgid "Page Slug"
-msgstr ""
+msgstr "Titre de rappel"
 
 #: page-edit.php:123
 msgid "Entry"
-msgstr ""
+msgstr "Article"
 
 #: page-edit.php:133
 msgid "Short Title"
-msgstr ""
+msgstr "Titre court"
 
 #: page-edit.php:145
 msgid "Side Text"
-msgstr ""
+msgstr "Texte en marge"
 
 #: page-edit.php:155
 msgid "Submit Page"
-msgstr ""
+msgstr "Soumette la page"
 
 #: page-edit.php:160
 msgid "Update Page"
-msgstr ""
+msgstr "Mettre à jour la page"
 
 #: page-edit.php:170
 msgid "Preview Page"
-msgstr ""
+msgstr "Prévisualiser la page"
 
 #: page-edit.php:172
 msgid "Page Preview"
-msgstr ""
+msgstr "Prévisualisation de la page"
 
 #: page-edit.php:179
 msgid "Delete Page"
-msgstr ""
+msgstr "Supprimer la page"
 
 #: page-edit.php:184
 msgid "Are you sure you want to delete this page?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette page&nbsp;?"
 
 #: poll-browse.php:21
 msgid "You have an error in the cm_edit_poll_settings function."
-msgstr ""
+msgstr "Vous avez une erreur dans la fonction cm_edit_poll_settings."
 
 #: poll-browse.php:39
 #: poll-edit.php:132
 #: staff-access.php:201
 msgid "Poll Manager"
-msgstr ""
+msgstr "Gestion des sondages"
 
 #: poll-browse.php:41
 msgid "Poll question added."
-msgstr ""
+msgstr "Sondage ajouté."
 
 #: poll-browse.php:42
 msgid "Poll question updated."
-msgstr ""
+msgstr "Sondage mis à jour."
 
 #: poll-browse.php:43
 msgid "Poll question and ballots deleted."
-msgstr ""
+msgstr "Sondage et résultats supprimés."
 
 #: poll-browse.php:44
 msgid "Active poll setting changed."
-msgstr ""
+msgstr "Paramètre du sondage actif modifiés."
 
 #: poll-browse.php:49
 #: poll-browse.php:65
 msgid "Active Poll"
-msgstr ""
+msgstr "Sondage actif"
 
 #: poll-browse.php:51
 msgid "Current Poll Question"
-msgstr ""
+msgstr "Sondage en cours"
 
 #: poll-browse.php:53
 msgid "Polls Disabled"
-msgstr ""
+msgstr "Sondages désactivés"
 
 #: poll-browse.php:56
 msgid "Change Active Poll"
-msgstr ""
+msgstr "Changer le sondage actif"
 
 #: poll-browse.php:67
 msgid "Poll Options:"
-msgstr ""
+msgstr "Options du sondage&nbsp;:"
 
 #: poll-browse.php:68
 msgid "Add New Poll"
-msgstr ""
+msgstr "Ajouter un nouveau sondage"
 
 #: poll-browse.php:72
 msgid "Question"
-msgstr ""
+msgstr "Question"
 
 #: poll-browse.php:73
 msgid "Created"
-msgstr ""
+msgstr "Créé"
 
 #: poll-browse.php:88
 msgid "Current"
-msgstr ""
+msgstr "En cours"
 
 #: poll-browse.php:94
 msgid "Results"
-msgstr ""
+msgstr "Résultats"
 
 #: poll-browse.php:105
 msgid "You are not currently using polls."
-msgstr ""
+msgstr "Vous n'utilisez pas de sondages pour l'instant."
 
 #: poll-browse.php:105
 msgid "Add Poll Question."
-msgstr ""
+msgstr "Ajouter un sondage."
 
 #: poll-edit.php:30
 msgid "Error in 'cm_delete_poll' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_delete_poll'."
 
 #: poll-edit.php:64
 msgid "Error in 'cm_edit_poll' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_edit_poll'."
 
 #: poll-edit.php:68
 msgid "Did not have a poll question to load."
-msgstr ""
+msgstr "Aucun sondage à charger."
 
 #: poll-edit.php:95
 msgid "Error in 'cm_add_poll' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_add_poll'."
 
 #: poll-edit.php:108
 msgid "That poll question cannot be loaded."
-msgstr ""
+msgstr "Ce sondage n'a pas pu être chargé."
 
 #: poll-edit.php:135
 msgid "Question Editor"
-msgstr ""
+msgstr "Rédaction des questions"
 
 #: poll-edit.php:138
 msgid "Related Article ID"
-msgstr ""
+msgstr "Identifiant de l'article lié"
 
 #: poll-edit.php:143
 msgid "Audit"
-msgstr ""
+msgstr "Audit"
 
 #: poll-edit.php:145
 msgid "Current Results"
-msgstr ""
+msgstr "Résultats actuels"
 
 #: poll-edit.php:150
 msgid "Poll Question"
-msgstr ""
+msgstr "Question du sondage"
 
 #: poll-edit.php:155
 msgid "Option 1"
-msgstr ""
+msgstr "Choix 1"
 
 #: poll-edit.php:160
 msgid "Option 2"
-msgstr ""
+msgstr "Choix 2"
 
 #: poll-edit.php:165
 msgid "Option 3"
-msgstr ""
+msgstr "Choix 3"
 
 #: poll-edit.php:170
 msgid "Option 4"
-msgstr ""
+msgstr "Choix 4"
 
 #: poll-edit.php:175
 msgid "Option 5"
-msgstr ""
+msgstr "Choix 5"
 
 #: poll-edit.php:180
 msgid "Option 6"
-msgstr ""
+msgstr "Choix 6"
 
 #: poll-edit.php:185
 msgid "Option 7"
-msgstr ""
+msgstr "Choix 7"
 
 #: poll-edit.php:190
 msgid "Option 8"
-msgstr ""
+msgstr "Choix 8"
 
 #: poll-edit.php:195
 msgid "Option 9"
-msgstr ""
+msgstr "Choix 9"
 
 #: poll-edit.php:200
 msgid "Option 10"
-msgstr ""
+msgstr "Choix 10"
 
 #: poll-edit.php:206
 msgid "Add Poll"
-msgstr ""
+msgstr "Ajouter le sondage"
 
 #: poll-edit.php:208
 msgid "Update Poll"
-msgstr ""
+msgstr "Mettre à jour le sondage"
 
 #: poll-edit.php:215
 msgid "Delete Poll"
-msgstr ""
+msgstr "Supprimer le sondage"
 
 #: poll-edit.php:220
 msgid "Are you sure you want to delete this poll and associated ballots?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer ce sondage et les résultats associés&nbsp;?"
 
 #: profile.php:43
 #: staff-edit.php:70
 msgid "Passwords did not match."
-msgstr ""
+msgstr "Les mots de passe ne correspondent pas."
 
 #: profile.php:53
 msgid "Error in 'cm_edit_profile' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_edit_profile'."
 
 #: profile.php:64
 #: staff-edit.php:141
 msgid "User does not exist."
-msgstr ""
+msgstr "L'utilisateur n'existe pas."
 
 #: profile.php:96
 msgid "Your user profile has been updated."
-msgstr ""
+msgstr "Votre profil utilisateur a été mis à jour."
 
 #: profile.php:98
 msgid "You cannot change your name or job title. Please contact an administrator to correct any errors."
-msgstr ""
+msgstr "Vous ne pouvez pas changer votre nom ou votre qualification. Veuillez contacter un administrateur pour corriger toute erreur."
 
 #: profile.php:103
 #: staff-edit.php:175
 msgid "Basic Profile"
-msgstr ""
+msgstr "Profil de base"
 
 #: profile.php:105
 #: staff-edit.php:186
 msgid "Passwords must match."
-msgstr ""
+msgstr "Les mots de passe doivent correspondre."
 
 #: profile.php:106
 msgid "It is recommended that your password be longer than 6 characters, and a mix of letters and numbers."
-msgstr ""
+msgstr "Il est recommandé que votre mot de passe fasse plus de 6 caractères, et soit un mélange de lettre et de nombres."
 
 #: profile.php:113
 #: staff-edit.php:193
 msgid "Confirm Password"
-msgstr ""
+msgstr "Confirmer le mot de passe"
 
 #: profile.php:117
 msgid "Leave blank if you do not wish to change your password."
-msgstr ""
+msgstr "Laisser vide si vous ne souhaitez pas changer votre mot de passe."
 
 #: profile.php:120
 #: staff-edit.php:204
 msgid "First Name"
-msgstr ""
+msgstr "Prénom"
 
 #: profile.php:125
 #: staff-edit.php:209
 msgid "Middle Name"
-msgstr ""
+msgstr "Second prénom"
 
 #: profile.php:130
 #: staff-edit.php:214
 msgid "Last Name"
-msgstr ""
+msgstr "Nom"
 
 #: profile.php:135
 #: staff-browse.php:26
 #: staff-edit.php:219
 msgid "Job Title"
-msgstr ""
+msgstr "Qualification"
 
 #: profile.php:141
 #: staff-edit.php:225
 #: submitted-edit.php:81
 msgid "Contact Information"
-msgstr ""
+msgstr "Coordonnées"
 
 #: profile.php:143
 #: staff-edit.php:227
 msgid "Internet Messengers"
-msgstr ""
+msgstr "Messageries instantanées"
 
 #: profile.php:145
 #: staff-edit.php:229
 msgid "AOL Instant Messenger"
-msgstr ""
+msgstr "AOL Instant Messenger"
 
 #: profile.php:150
 #: staff-edit.php:234
 msgid "Microsoft Messenger"
-msgstr ""
+msgstr "Microsoft Messenger"
 
 #: profile.php:155
 #: staff-edit.php:239
 msgid "Yahoo! Messenger"
-msgstr ""
+msgstr "Yahoo! Messenger"
 
 #: profile.php:160
 #: staff-edit.php:244
 msgid "Jabber Services"
-msgstr ""
+msgstr "Services Jabber"
 
 #: profile.php:171
 #: staff-edit.php:255
 msgid "Telephone (Local)"
-msgstr ""
+msgstr "Téléphone (local)"
 
 #: profile.php:176
 #: staff-edit.php:260
 msgid "Mobile"
-msgstr ""
+msgstr "Portable"
 
 #: profile.php:181
 #: settings.php:92
 #: staff-edit.php:265
 msgid "Address"
-msgstr ""
+msgstr "Adresse"
 
 #: profile.php:186
 #: settings.php:97
 #: staff-edit.php:270
 msgid "City"
-msgstr ""
+msgstr "Ville"
 
 #: profile.php:191
 #: settings.php:102
 #: staff-edit.php:275
 msgid "State"
-msgstr ""
+msgstr "Région"
 
 #: profile.php:196
 #: settings.php:107
 #: staff-edit.php:280
 msgid "Zip Code"
-msgstr ""
+msgstr "Code postal"
 
 #: profile.php:202
 #: staff-edit.php:286
 msgid "Additional Information"
-msgstr ""
+msgstr "Informations complémentaires"
 
 #: profile.php:204
 #: staff-edit.php:288
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: profile.php:209
 #: staff-edit.php:305
 msgid "Update Profile"
-msgstr ""
+msgstr "Mettre à jour le profil"
 
 #: section-browse.php:18
 msgid "Section updated."
-msgstr ""
+msgstr "Section mise à jour."
 
 #: section-browse.php:19
 msgid "Section added."
-msgstr ""
+msgstr "Section ajoutée."
 
 #: section-browse.php:20
 msgid "Section deleted."
-msgstr ""
+msgstr "Section supprimée."
 
 #: section-browse.php:24
 msgid "Browse Sections"
-msgstr ""
+msgstr "Parcourir les sections"
 
 #: section-browse.php:26
 msgid "Section Options:"
-msgstr ""
+msgstr "Options de la section:"
 
 #: section-browse.php:27
 msgid "Add New Section"
-msgstr ""
+msgstr "Ajouter une nouvelle section"
 
 #: section-browse.php:34
 msgid "Editor"
-msgstr ""
+msgstr "Rédacteur"
 
 #: section-edit.php:42
 msgid "Error in 'cm_edit_section' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_edit_section"
 
 #: section-edit.php:46
 msgid "Did not have a section to load."
-msgstr ""
+msgstr "Aucune section à charger."
 
 #: section-edit.php:70
 msgid "Error in 'cm_add_section' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_add_section'."
 
 #: section-edit.php:86
 msgid "Error in 'cm_delete_section' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_deleter_section'."
 
 #: section-edit.php:114
 msgid "Section Manager"
-msgstr ""
+msgstr "Gestion des sections"
 
 #: section-edit.php:117
 msgid "Section Editor"
-msgstr ""
+msgstr "Rédacteur de la section"
 
 #: section-edit.php:119
 msgid "Section Name"
-msgstr ""
+msgstr "Nom de la section"
 
 #: section-edit.php:124
 msgid "URL"
-msgstr ""
+msgstr "Adresse URL"
 
 #: section-edit.php:129
 msgid "Editor Name"
-msgstr ""
+msgstr "Nom du rédacteur"
 
 #: section-edit.php:134
 msgid "Editor Title"
-msgstr ""
+msgstr "Titre de l'éditeur"
 
 #: section-edit.php:139
 msgid "Editor Email"
-msgstr ""
+msgstr "E-mail du rédacteur"
 
 #: section-edit.php:144
 msgid "Feed Image URL"
-msgstr ""
+msgstr "Adresse URL de l'image du fil RSS"
 
 #: section-edit.php:149
 msgid "Sidebar Content"
-msgstr ""
+msgstr "Contenu de la barre latérale"
 
 #: section-edit.php:156
 msgid "Section Priority"
-msgstr ""
+msgstr "Priorité de la section"
 
 #: section-edit.php:163
 msgid "Add Section"
-msgstr ""
+msgstr "Ajouter une section"
 
 #: section-edit.php:165
 msgid "Update Section"
-msgstr ""
+msgstr "Mettre à jour la section"
 
 #: section-edit.php:180
 msgid "Move affected articles to"
-msgstr ""
+msgstr "Déplacer les articles sélectionnés vers"
 
 #: section-edit.php:183
 msgid "Are you sure you want to delete this section?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette section&nbsp;?"
 
 #: server-info.php:12
 msgid "Session Variables Set by Server"
-msgstr ""
+msgstr "Variables de session fixées par le serveur"
 
 #: server-info.php:13
 msgid "These are set when you login. Updates do not occur until you login again."
-msgstr ""
+msgstr "Ces paramètres sont fixés à l'identification. Les mises à jour se feront à la reconnexion."
 
 #: server-info.php:17
 msgid "User Data:"
-msgstr ""
+msgstr "Données utilisateur&nbsp;:"
 
 #: server-info.php:19
 msgid "Access Data:"
-msgstr ""
+msgstr "Données d'accès&nbsp;:"
 
 #: server-info.php:21
 msgid "Setting Data:"
-msgstr ""
+msgstr "Paramétrage&nbsp;:"
 
 #: server-info.php:23
 msgid "Issue Data:"
-msgstr ""
+msgstr "Données d'édition&nbsp;:"
 
 #: server-info.php:27
 msgid "Cookies Set by Server"
-msgstr ""
+msgstr "Cookies fixés par le serveur"
 
 #: server-info.php:28
 msgid "Modules set cookies to keep everything easy to get to."
-msgstr ""
+msgstr "Les modules mettent des cookies pour simplifier les choses."
 
 #: server-info.php:39
 #: staff-access.php:264
 msgid "Server Information"
-msgstr ""
+msgstr "Informations du serveur"
 
 #: server-info.php:40
 msgid "A phpinfo() instance. Might be helpful in debugging server errors."
-msgstr ""
+msgstr "Une instance de phpinfo(). Peut être utile pour débugguer les erreurs serveur."
 
 #: settings.php:31
 msgid "Error in 'cm_edit_settings' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_edit_settings'."
 
 #: settings.php:44
 msgid "Site settings updated."
-msgstr ""
+msgstr "Paramètres du site mis à jour."
 
 #: settings.php:70
 msgid "Other Site Settings"
-msgstr ""
+msgstr "Autres paramètres du site."
 
 #: settings.php:72
 msgid "Publication Name"
-msgstr ""
+msgstr "Nom de la publication"
 
 #: settings.php:77
 msgid "Tagline"
-msgstr ""
+msgstr "Slogan"
 
 #: settings.php:82
 msgid "Web Site URL"
-msgstr ""
+msgstr "Adresse URL du site"
 
 #: settings.php:87
 msgid "Primary Email Address"
-msgstr ""
+msgstr "Adresse e-mail principale"
 
 #: settings.php:112
 #: smarty.c:422
 msgid "Telephone"
-msgstr ""
+msgstr "Téléphone"
 
 #: settings.php:117
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #: settings.php:122
 msgid "Announcement"
-msgstr ""
+msgstr "Annonce"
 
 #: staff-access.php:50
 msgid "Error in 'cm_clear_access' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_clear_access'."
 
 #: staff-access.php:83
 msgid "Error in 'cm_add_access' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_add_access'."
 
 #: staff-access.php:130
 #: staff-browse.php:15
 #: staff-edit.php:172
 msgid "Staff Manager"
-msgstr ""
+msgstr "Gestion des utilisateurs"
 
 #: staff-access.php:131
 msgid "Setting user access for"
-msgstr ""
+msgstr "Sélection des droits d'accès utilisateur pour"
 
 #: staff-access.php:134
 msgid "Note: As this is your account, changes will be effective at next login."
-msgstr ""
+msgstr "Note&nbsp;: comme c'est le compte avec lequel vous être identifiés, les changements seront effectifs à votre prochaine identification."
 
 #: staff-access.php:139
 msgid "Module Access"
-msgstr ""
+msgstr "Accès au module"
 
 #: staff-access.php:143
 msgid "Home Page"
-msgstr ""
+msgstr "Page d'accueil"
 
 #: staff-access.php:147
 msgid "User Profile"
-msgstr ""
+msgstr "Profil utilisateur"
 
 #: staff-access.php:149
 msgid "Manage"
-msgstr ""
+msgstr "Gerér"
 
 #: staff-access.php:154
 #: staff-access.php:189
@@ -1381,628 +1381,630 @@ msgstr ""
 #: staff-access.php:238
 #: staff-access.php:253
 msgid "Browse"
-msgstr ""
+msgstr "Parcourir"
 
 #: staff-access.php:162
 msgid "Media"
-msgstr ""
+msgstr "Média"
 
 #: staff-access.php:166
 msgid "Restrict User"
-msgstr ""
+msgstr "Restreindre l'utilisateur"
 
 #: staff-access.php:169
 #: staff-access.php:176
 msgid "No Restrictions"
-msgstr ""
+msgstr "Pas de restrictions"
 
 #: staff-access.php:177
 msgid ""
 "Next\r\n"
 "        Issue Only"
 msgstr ""
+"Prochaine\r\n"
+"        édition seulement"
 
 #: staff-access.php:179
 msgid ""
 "Current\r\n"
 "        Issue Only"
-msgstr ""
+msgstr "Actuelle        édition seulement\r\n"
 
 #: staff-access.php:186
 #: submitted-browse.php:59
 #: submitted-edit.php:66
 msgid "Submitted Article Manager"
-msgstr ""
+msgstr "Gestion des articles soumis"
 
 #: staff-access.php:193
 msgid "View"
-msgstr ""
+msgstr "Visualiser"
 
 #: staff-access.php:233
 msgid "Configuration"
-msgstr ""
+msgstr "Configuration"
 
 #: staff-access.php:235
 msgid "Users"
-msgstr ""
+msgstr "Utilisateurs"
 
 #: staff-access.php:242
 #: staff-browse.php:52
 msgid "Access"
-msgstr ""
+msgstr "Accès"
 
 #: staff-access.php:250
 msgid "Sections"
-msgstr ""
+msgstr "Sections"
 
 #: staff-access.php:268
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: staff-browse.php:18
 msgid "User added."
-msgstr ""
+msgstr "Utilisateur ajouté."
 
 #: staff-browse.php:19
 msgid "User updated."
-msgstr ""
+msgstr "Utilisateur mis à jour."
 
 #: staff-browse.php:20
 msgid "User deleted."
-msgstr ""
+msgstr "Utilisateur supprimé."
 
 #: staff-browse.php:21
 msgid "User access updated."
-msgstr ""
+msgstr "Droits de l'utilisateur mis à jour."
 
 #: staff-browse.php:25
 #: smarty.c:299
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: staff-browse.php:61
 msgid "Add a User"
-msgstr ""
+msgstr "Ajouter un utilisateur"
 
 #: staff-edit.php:29
 msgid "Error in 'cm_delete_user' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_delete_user'."
 
 #: staff-edit.php:81
 msgid "Error in 'cm_edit_user' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_edit_user'."
 
 #: staff-edit.php:85
 msgid "Did not have a user to load."
-msgstr ""
+msgstr "Aucun utilisateur à charger."
 
 #: staff-edit.php:117
 msgid "Passwords did not match, or left blank."
-msgstr ""
+msgstr "Les mots de passe ne correspondent pas, ou sont vides."
 
 #: staff-edit.php:126
 msgid "Error in 'cm_add_user' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_add_user'."
 
 #: staff-edit.php:200
 msgid "Leave blank if you do not wish to change the password."
-msgstr ""
+msgstr "Laisser vide si vous ne souhaitez pas changer le mot de passe."
 
 #: staff-edit.php:297
 msgid "Add User"
-msgstr ""
+msgstr "Ajouter utilisateur"
 
 #: staff-edit.php:313
 msgid "Delete User"
-msgstr ""
+msgstr "Supprimer utilisateur"
 
 #: staff-edit.php:318
 msgid "Are you sure you want to delete this user?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cet utilisateur&nbsp;?"
 
 #: submitted-browse.php:41
 msgid "There was an error in the 'cm_delete_submitted' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_delete_submitted'."
 
 #: submitted-browse.php:62
 msgid "Submitted article added."
-msgstr ""
+msgstr "Article soumis ajouté."
 
 #: submitted-browse.php:63
 msgid "Submitted updated."
-msgstr ""
+msgstr "Submission mise à jour."
 
 #: submitted-browse.php:64
 msgid "Submitted article deleted."
-msgstr ""
+msgstr "Article soumis supprimé."
 
 #: submitted-browse.php:65
 msgid "Submitted article(s) deleted."
-msgstr ""
+msgstr "Article(s) soumis supprimé(s)."
 
 #: submitted-browse.php:78
 msgid "Open"
-msgstr ""
+msgstr "Ouvrir"
 
 #: submitted-browse.php:94
 msgid "ID"
-msgstr ""
+msgstr "Identifiant"
 
 #: submitted-browse.php:138
 msgid "Clear Selection"
-msgstr ""
+msgstr "Vider la sélection"
 
 #: submitted-edit.php:30
 msgid "Error in 'cm_delete_submitted' function."
-msgstr ""
+msgstr "Erreur dans la fonction 'cm_delete_submitted'."
 
 #: submitted-edit.php:43
 msgid "Submitted article does not exist."
-msgstr ""
+msgstr "L'article soumis n'existe pas."
 
 #: submitted-edit.php:70
 msgid "Post to Article Manager"
-msgstr ""
+msgstr "Poster dans la gestion d'article"
 
 #: submitted-edit.php:79
 msgid "By"
-msgstr ""
+msgstr "Par"
 
 #: submitted-edit.php:91
 #: smarty.c:341
 #: smarty.c:437
 msgid "Word Count:"
-msgstr ""
+msgstr "Compte de mots&nbsp;:"
 
 #: submitted-edit.php:92
 msgid "Keyword:"
-msgstr ""
+msgstr "Mot-clé:"
 
 #: submitted-edit.php:97
 msgid "Delete Submitted Article"
-msgstr ""
+msgstr "Supprimer l'article soumis"
 
 #: submitted-edit.php:102
 msgid "Are you sure you want to delete this submitted article?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer l'article soumis&nbsp;?"
 
 #: smarty.c:2
 msgid "Advertisement"
-msgstr ""
+msgstr "Publicités"
 
 #: smarty.c:5
 #: smarty.c:224
 msgid "Archives"
-msgstr ""
+msgstr "Archives"
 
 #: smarty.c:23
 #: smarty.c:254
 msgid "Words"
-msgstr ""
+msgstr "Mots"
 
 #: smarty.c:26
 msgid "No articles were uploaded to this issue."
-msgstr ""
+msgstr "Aucun article n'a été chargé dans cette édition."
 
 #: smarty.c:32
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: smarty.c:38
 msgid "That volume does not exist in our archives. Select a valid entry from the list below."
-msgstr ""
+msgstr "Ce volume n'existe pas dans nos archives. Choisissez une entrée valide dans la liste ci-dessous."
 
 #: smarty.c:41
 msgid "Volumes in our Internet Archives"
-msgstr ""
+msgstr "Volumes dans nos archives internet."
 
 #: smarty.c:44
 msgid "Print"
-msgstr ""
+msgstr "Imprimer"
 
 #: smarty.c:50
 msgid "Share This Article"
-msgstr ""
+msgstr "Partager cet article"
 
 #: smarty.c:53
 msgid "More"
-msgstr ""
+msgstr "Plus"
 
 #: smarty.c:56
 msgid "Headlines"
-msgstr ""
+msgstr "En-têtes"
 
 #: smarty.c:59
 msgid "Error:"
-msgstr ""
+msgstr "Erreur&nbsp;:"
 
 #: smarty.c:62
 msgid "Our site has experienced an error. If the problem continues, please contact us about this error."
-msgstr ""
+msgstr "Notre site vient de générer une erreur. Si le problème persiste, merci de nous contacter à propos de cette erreur."
 
 #: smarty.c:65
 msgid "Name:"
-msgstr ""
+msgstr "Nom&nbsp;:"
 
 #: smarty.c:68
 #: smarty.c:347
 msgid "E-mail:"
-msgstr ""
+msgstr "E-mail&nbsp;:"
 
 #: smarty.c:71
 #: smarty.c:362
 msgid "Sent:"
-msgstr ""
+msgstr "Envoyé&nbsp;:"
 
 #: smarty.c:74
 #: smarty.c:365
 msgid "Form:"
-msgstr ""
+msgstr "Formulaire&nbsp;:"
 
 #: smarty.c:77
 msgid "Feedback"
-msgstr ""
+msgstr "Réaction"
 
 #: smarty.c:80
 #: smarty.c:371
 msgid "Your submission has been sent to our editors."
-msgstr ""
+msgstr "Votre article a été soumis à nos rédacteurs."
 
 #: smarty.c:83
 #: smarty.c:374
 msgid "You must complete the required fields."
-msgstr ""
+msgstr "Vous devez compléter les champs requis."
 
 #: smarty.c:86
 #: smarty.c:377
 msgid "Submission failed for some reason. Please try again."
-msgstr ""
+msgstr "La soumission d'article a échoué pour une raison inconnue. Merci d'essayer à nouveau."
 
 #: smarty.c:89
 #: smarty.c:380
 msgid "Content submissions are disabled at this time."
-msgstr ""
+msgstr "Les soumissions d'articles sont désactivées pour l'instant."
 
 #: smarty.c:92
 msgid "Mailing Address"
-msgstr ""
+msgstr "Adresse postale"
 
 #: smarty.c:95
 msgid "Contacting Us"
-msgstr ""
+msgstr "Nous contacter"
 
 #: smarty.c:98
 #: smarty.c:359
 msgid "Telephone:"
-msgstr ""
+msgstr "Téléphone"
 
 #: smarty.c:101
 msgid "Fax:"
-msgstr ""
+msgstr "Fax:"
 
 #: smarty.c:104
 msgid "Primary E-mail:"
-msgstr ""
+msgstr "E-mail principal&nbsp;:"
 
 #: smarty.c:107
 msgid "Before you complete this form"
-msgstr ""
+msgstr "Avant de compléter ce formulaire"
 
 #: smarty.c:110
 #: smarty.c:389
 msgid "Letter to the Editor"
-msgstr ""
+msgstr "Lettre à la rédaction"
 
 #: smarty.c:113
 msgid "Story or Press Release"
-msgstr ""
+msgstr "Article ou communiqué de presse"
 
 #: smarty.c:116
 #: smarty.c:395
 msgid "Bulletin Board Item"
-msgstr ""
+msgstr "Annonce d'événement"
 
 #: smarty.c:119
 msgid "Step 1: Contact Information"
-msgstr ""
+msgstr "Étape 1: Coordonnées"
 
 #: smarty.c:122
 #: smarty.c:410
 msgid "Your Name"
-msgstr ""
+msgstr "Votre nom"
 
 #: smarty.c:128
 msgid "Your Feedback"
-msgstr ""
+msgstr "Votre réaction"
 
 #: smarty.c:131
 msgid "Denotes required information"
-msgstr ""
+msgstr "Signifie un champ requis"
 
 #: smarty.c:134
 msgid "Submit Feedback"
-msgstr ""
+msgstr "Soumettre la réaction"
 
 #: smarty.c:137
 #: smarty.c:233
 #: smarty.c:308
 #: smarty.c:449
 msgid "Reset"
-msgstr ""
+msgstr "Réinitialiser"
 
 #: smarty.c:140
 msgid "Advertising"
-msgstr ""
+msgstr "Annonces publicitaires"
 
 #: smarty.c:143
 #: smarty.c:335
 msgid "Contact Us"
-msgstr ""
+msgstr "Nous contacter"
 
 #: smarty.c:146
 msgid "Copyright"
-msgstr ""
+msgstr "Copyright"
 
 #: smarty.c:149
 #: smarty.c:167
 msgid "Online Edition"
-msgstr ""
+msgstr "Édition en ligne"
 
 #: smarty.c:152
 msgid "Powered by"
-msgstr ""
+msgstr "Propulsé par"
 
 #: smarty.c:155
 msgid "Headlines (RSS)"
-msgstr ""
+msgstr "En-têtes (RSS)"
 
 #: smarty.c:158
 msgid "Last Edition:"
-msgstr ""
+msgstr "Dernière modification&nbsp;:"
 
 #: smarty.c:161
 msgid "Published:"
-msgstr ""
+msgstr "Publié&nbsp;:"
 
 #: smarty.c:164
 msgid "Updated:"
-msgstr ""
+msgstr "Mis à jour&nbsp;:"
 
 #: smarty.c:170
 #: smarty.c:173
 #: smarty.c:230
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 #: smarty.c:179
 msgid "Top Story"
-msgstr ""
+msgstr "Article en vedette"
 
 #: smarty.c:182
 #: smarty.c:185
 #: smarty.c:260
 #: smarty.c:263
 msgid "Read More"
-msgstr ""
+msgstr "Lire la suite"
 
 #: smarty.c:188
 msgid "Top Stories"
-msgstr ""
+msgstr "Articles en vedette"
 
 #: smarty.c:191
 msgid "Web Poll"
-msgstr ""
+msgstr "Sondage"
 
 #: smarty.c:194
 msgid "Cast Vote"
-msgstr ""
+msgstr "Voter!"
 
 #: smarty.c:197
 msgid "Poll Results"
-msgstr ""
+msgstr "Résultats du sondage"
 
 #: smarty.c:200
 msgid "Your vote was counted."
-msgstr ""
+msgstr "Votre vote a bien été comptabilisé."
 
 #: smarty.c:203
 msgid "Something was wrong with your ballot."
-msgstr ""
+msgstr "Votre vote n'a pas été pris en compte."
 
 #: smarty.c:206
 msgid "Poll Response"
-msgstr ""
+msgstr "Réponses au sondage"
 
 #: smarty.c:209
 msgid "Result"
-msgstr ""
+msgstr "Résultat"
 
 #: smarty.c:212
 msgid "No one has participated in this Web poll yet."
-msgstr ""
+msgstr "Personne n'a encore participé au sondage."
 
 #: smarty.c:215
 msgid "Please go back to the home page to cast your ballot."
-msgstr ""
+msgstr "Merci de retourner à la page d'accueil pour voter."
 
 #: smarty.c:218
 msgid "Related Article:"
-msgstr ""
+msgstr "Article connexe&nbsp;:"
 
 #: smarty.c:221
 msgid "Web polls are currently unavailable."
-msgstr ""
+msgstr "Les sondages sont actuellement indisponibles."
 
 #: smarty.c:227
 msgid "Search for:"
-msgstr ""
+msgstr "Chercher le terme&nbsp;:"
 
 #: smarty.c:236
 msgid "Search within:"
-msgstr ""
+msgstr "Chercher parmi&nbsp;:"
 
 #: smarty.c:239
 msgid "Sort by:"
-msgstr ""
+msgstr "Trier par&nbsp;:"
 
 #: smarty.c:245
 msgid "Publish Date"
-msgstr ""
+msgstr "Date de publication"
 
 #: smarty.c:257
 msgid "Your search did not return any articles."
-msgstr ""
+msgstr "Votre recherche n'a retourné aucun article."
 
 #: smarty.c:266
 #: smarty.c:269
 msgid "Message From:"
-msgstr ""
+msgstr "Message de&nbsp;:"
 
 #: smarty.c:272
 #: smarty.c:317
 msgid "Link:"
-msgstr ""
+msgstr "Lien&nbsp;:"
 
 #: smarty.c:275
 msgid "NOTE:"
-msgstr ""
+msgstr "NOTE&nbsp;:"
 
 #: smarty.c:278
 msgid "E-mail Article"
-msgstr ""
+msgstr "Envoyer l'article par e-mail"
 
 #: smarty.c:281
 msgid "Article was e-mailed."
-msgstr ""
+msgstr "L'article a été envoyé par e-mail."
 
 #: smarty.c:284
 msgid "Mailing failed. Check your recipient's e-mail address."
-msgstr ""
+msgstr "L'envoi par e-mail a échoué. Vérifiez l'adresse e-mail de votre destinataire."
 
 #: smarty.c:287
 msgid "Required Information"
-msgstr ""
+msgstr "Informations requises"
 
 #: smarty.c:290
 msgid "Recipient Information"
-msgstr ""
+msgstr "Coordonnées du destinataire"
 
 #: smarty.c:293
 #: smarty.c:302
 msgid "E-mail Address"
-msgstr ""
+msgstr "Adresse e-mail"
 
 #: smarty.c:296
 msgid "Your Information"
-msgstr ""
+msgstr "Vos coordonnées"
 
 #: smarty.c:305
 msgid "Send"
-msgstr ""
+msgstr "Envoyer"
 
 #: smarty.c:311
 msgid "Share Article"
-msgstr ""
+msgstr "Partage l'article"
 
 #: smarty.c:314
 msgid "Select a service from the list below to post this article to an Internet community."
-msgstr ""
+msgstr "Choisissez un service parmi la liste ci-dessous pour poster cet article dans une communauté internet."
 
 #: smarty.c:320
 msgid "Write a Letter"
-msgstr ""
+msgstr "Écrire une lettre"
 
 #: smarty.c:323
 msgid "Archived Issues"
-msgstr ""
+msgstr "Éditions archivées"
 
 #: smarty.c:326
 msgid "Submit a Story"
-msgstr ""
+msgstr "Soumettre un article"
 
 #: smarty.c:329
 msgid "About"
-msgstr ""
+msgstr "À propos"
 
 #: smarty.c:332
 msgid "Advertising Rates"
-msgstr ""
+msgstr "Tarifs annonceurs"
 
 #: smarty.c:338
 msgid "Type:"
-msgstr ""
+msgstr "Type&nbsp;:"
 
 #: smarty.c:344
 msgid "Author:"
-msgstr ""
+msgstr "Auteur&nbsp;:"
 
 #: smarty.c:350
 msgid "Classification:"
-msgstr ""
+msgstr "Classe&nbsp;:"
 
 #: smarty.c:353
 msgid "Major:"
-msgstr ""
+msgstr "Spécialité&nbsp;:"
 
 #: smarty.c:356
 msgid "Hometown:"
-msgstr ""
+msgstr "Lieu de résidence&nbsp;:"
 
 #: smarty.c:368
 msgid "Write for"
-msgstr ""
+msgstr "Écrire pour"
 
 #: smarty.c:383
 msgid "Step 1: Submission Type"
-msgstr ""
+msgstr "Étape 1&nbsp;: Type de soumission"
 
 #: smarty.c:386
 msgid "Choose your submission type"
-msgstr ""
+msgstr "Choisir votre type de soumission"
 
 #: smarty.c:392
 msgid "Article or Press Release"
-msgstr ""
+msgstr "Article ou communiqué de presse"
 
 #: smarty.c:398
 #: smarty.c:401
 #: smarty.c:404
 msgid "Submission Guidelines:"
-msgstr ""
+msgstr "Conseils de soumission&nbsp;:"
 
 #: smarty.c:407
 msgid "Step 2: Contact Information"
-msgstr ""
+msgstr "Étape 2&nbsp;: Coordonnées"
 
 #: smarty.c:416
 msgid "Classification"
-msgstr ""
+msgstr "Classement"
 
 #: smarty.c:419
 msgid "Major / Department"
-msgstr ""
+msgstr "Spécialité / Département"
 
 #: smarty.c:425
 msgid "Hometown"
-msgstr ""
+msgstr "Lieu de résidence"
 
 #: smarty.c:428
 msgid "Step 3: Your Submission"
-msgstr ""
+msgstr "Étape 3&nbsp;: Votre soumission"
 
 #: smarty.c:434
 msgid "Copy and paste from your word processor"
-msgstr ""
+msgstr "Copiez et collez depuis votre traitement de texte"
 
 #: smarty.c:440
 msgid "Count Words"
-msgstr ""
+msgstr "Compte de mots"
 
 #: smarty.c:443
 msgid "Denotes required information."
-msgstr ""
+msgstr "Indique des informations requises"
 
 #: smarty.c:446
 msgid "Send Your Submission"
-msgstr ""
+msgstr "Envoyer votre soumission"
 
