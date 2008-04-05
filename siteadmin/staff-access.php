@@ -174,10 +174,8 @@ get_cm_header();
     <p>
       <select name="restrict-issue" id="restrict-issue">
         <option value="false" <?php if ($access['restrict_issue'] == "false") { echo "selected"; } ?>>-- <?php echo gettext("No Restrictions"); ?> --</option>
-        <option value="next" <?php if ($access['restrict_issue'] == "next") { echo "selected"; } ?>><?php echo gettext("Next
-        Issue Only"); ?></option>
-        <option value="current" <?php if ($access['restrict_issue'] == "current") { echo "selected"; } ?>><?php echo gettext("Current
-        Issue Only"); ?></option>
+        <option value="next" <?php if ($access['restrict_issue'] == "next") { echo "selected"; } ?>><?php echo gettext("Next Issue Only"); ?></option>
+        <option value="current" <?php if ($access['restrict_issue'] == "current") { echo "selected"; } ?>><?php echo gettext("Current Issue Only"); ?></option>
       </select>
       <label for="restrict-issue"><?php echo gettext("Issue"); ?></label>
     </p>
