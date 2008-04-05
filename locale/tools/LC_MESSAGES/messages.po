@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PacerCMS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-05 00:34+0000\n"
-"PO-Revision-Date: 2008-04-04 21:05-0600\n"
+"PO-Revision-Date: 2008-04-05 07:45-0600\n"
 "Last-Translator: Stephen Yeargin <stephen dot yeargin at gmail dot com>\n"
 "Language-Team:  <pacercms-discuss@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1397,15 +1397,11 @@ msgid "No Restrictions"
 msgstr ""
 
 #: staff-access.php:177
-msgid ""
-"Next\r\n"
-"        Issue Only"
+msgid "Next Issue Only"
 msgstr ""
 
 #: staff-access.php:179
-msgid ""
-"Current\r\n"
-"        Issue Only"
+msgid "Current Issue Only"
 msgstr ""
 
 #: staff-access.php:186

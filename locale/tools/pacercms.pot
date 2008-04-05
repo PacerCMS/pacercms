@@ -1,19 +1,19 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) 2008 PacerCMS
+# This file is distributed under the same license as PacerCMS.
+# First Translation: FIRST AUTHOR <EMAIL@ADDRESS>, YEAR
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: PacerCMS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-05 00:34+0000\n"
-"PO-Revision-Date: 2008-04-05 07:44-0600\n"
+"PO-Revision-Date: 2008-04-05 06:41-0600\n"
 "Last-Translator: Stephen Yeargin <stephen dot yeargin at gmail dot com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team:  <pacercms-discuss@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: article-browse.php:30
 msgid "The selected section could not be loaded."
@@ -90,13 +90,13 @@ msgstr ""
 #: index.php:50
 #: submitted-browse.php:88
 msgid " (Volume "
-msgstr " (Volume "
+msgstr ""
 
 #: article-browse.php:144
 #: index.php:50
 #: submitted-browse.php:88
 msgid ", No. "
-msgstr ", Numero "
+msgstr ""
 
 #: article-browse.php:148
 msgid "Section:"
@@ -133,12 +133,12 @@ msgstr ""
 #: staff-browse.php:28
 #: submitted-browse.php:100
 msgid "Tools"
-msgstr "Strumenti"
+msgstr ""
 
 #: article-browse.php:179
 #: smarty.c:176
 msgid "Breaking News"
-msgstr "Ultime notizie"
+msgstr ""
 
 #: article-browse.php:187
 msgid "Keywords:"
@@ -150,7 +150,7 @@ msgstr ""
 #: section-browse.php:61
 #: submitted-browse.php:125
 msgid "Preview"
-msgstr "Anteprima"
+msgstr ""
 
 #: article-browse.php:194
 #: issue-browse.php:136
@@ -185,13 +185,13 @@ msgstr ""
 #: submitted-edit.php:72
 #: submitted-edit.php:103
 msgid "Delete"
-msgstr "Elimina"
+msgstr ""
 
 #: article-browse.php:204
 #: article-browse.php:229
 #: index.php:32
 msgid "Add an Article"
-msgstr "Aggiungi Articolo"
+msgstr ""
 
 #: article-browse.php:216
 msgid "Summaries:"
@@ -268,9 +268,8 @@ msgstr ""
 
 #: article-edit.php:223
 #: page-edit.php:121
-#, fuzzy
 msgid "Last Edited"
-msgstr "Ultima Edizione:"
+msgstr ""
 
 #: article-edit.php:228
 msgid "Publish Timestamp"
@@ -281,9 +280,8 @@ msgid "Highest"
 msgstr ""
 
 #: article-edit.php:253
-#, fuzzy
 msgid "Lowest"
-msgstr "Invia"
+msgstr ""
 
 #: article-edit.php:256
 msgid "Linked Media"
@@ -331,14 +329,12 @@ msgid "Text"
 msgstr ""
 
 #: article-edit.php:302
-#, fuzzy
 msgid "Submit Article"
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: article-edit.php:307
-#, fuzzy
 msgid "Update Article"
-msgstr "Aggiungi Articolo"
+msgstr ""
 
 #: article-edit.php:310
 #: article-edit.php:332
@@ -363,21 +359,18 @@ msgid "Cancel"
 msgstr ""
 
 #: article-edit.php:317
-#, fuzzy
 msgid "Preview Article"
-msgstr "Anteprima"
+msgstr ""
 
 #: article-edit.php:319
 #: submitted-edit.php:77
-#, fuzzy
 msgid "Story Preview"
-msgstr "Anteprima"
+msgstr ""
 
 #: article-edit.php:325
 #: section-edit.php:175
-#, fuzzy
 msgid "Delete Article"
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: article-edit.php:329
 #: article-media.php:169
@@ -386,9 +379,8 @@ msgstr "Articoli Presentati"
 #: section-edit.php:179
 #: staff-edit.php:317
 #: submitted-edit.php:101
-#, fuzzy
 msgid "Confirm Delete"
-msgstr "Elimina"
+msgstr ""
 
 #: article-edit.php:330
 msgid "Are you sure you want to delete this article?"
@@ -475,24 +467,20 @@ msgid "Add Media"
 msgstr ""
 
 #: article-media.php:147
-#, fuzzy
 msgid "Update Media"
-msgstr "Aggiornato:"
+msgstr ""
 
 #: article-media.php:158
-#, fuzzy
 msgid "Preview Media"
-msgstr "Anteprima"
+msgstr ""
 
 #: article-media.php:160
-#, fuzzy
 msgid "Media Preview"
-msgstr "Anteprima"
+msgstr ""
 
 #: article-media.php:165
-#, fuzzy
 msgid "Delete Media"
-msgstr "Elimina"
+msgstr ""
 
 #: article-media.php:170
 msgid "Are you sure you want to delete this media item?"
@@ -500,60 +488,60 @@ msgstr ""
 
 #: index.php:24
 msgid "Welcome"
-msgstr "Benvenuto"
+msgstr ""
 
 #: index.php:26
 msgid "Quick Links"
-msgstr "Link Rapidi"
+msgstr ""
 
 #: index.php:29
 msgid "Manage Articles"
-msgstr "Gestisci Articoli"
+msgstr ""
 
 #: index.php:35
 msgid "Manage Poll Questions"
-msgstr "Gestisci Sondaggi"
+msgstr ""
 
 #: index.php:38
 msgid "Add a Poll Question"
-msgstr "Aggiungi Sondaggio"
+msgstr ""
 
 #: index.php:42
 msgid "Announcements"
-msgstr "Annunci"
+msgstr ""
 
 #: index.php:50
 msgid "Submitted Articles"
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: index.php:50
 msgid " for"
-msgstr " il"
+msgstr ""
 
 #: index.php:56
 #: submitted-browse.php:96
 msgid "Sent"
-msgstr "Inviato"
+msgstr ""
 
 #: index.php:57
 #: submitted-browse.php:97
 msgid "From"
-msgstr "Da"
+msgstr ""
 
 #: index.php:58
 #: submitted-browse.php:98
 msgid "Subject"
-msgstr "Soggetto"
+msgstr ""
 
 #: index.php:79
 #: submitted-browse.php:126
 msgid "Post"
-msgstr "Invia"
+msgstr ""
 
 #: index.php:93
 #: submitted-browse.php:142
 msgid "There are no submitted articles for this issue."
-msgstr "Non ci sono articoli in questa edizione"
+msgstr ""
 
 #: issue-browse.php:28
 msgid "Error in 'cm_edit_publish_settings' function."
@@ -605,9 +593,8 @@ msgid "Browse Issue Archive"
 msgstr ""
 
 #: issue-browse.php:88
-#, fuzzy
 msgid "Select Volume"
-msgstr " (Volume "
+msgstr ""
 
 #: issue-browse.php:113
 msgid "Issue Date"
@@ -624,9 +611,8 @@ msgid "Circulation"
 msgstr ""
 
 #: issue-browse.php:137
-#, fuzzy
 msgid "Browse Articles"
-msgstr "Gestisci Articoli"
+msgstr ""
 
 #: issue-browse.php:145
 #: issue-edit.php:194
@@ -638,9 +624,8 @@ msgid "The selected volume is empty."
 msgstr ""
 
 #: issue-browse.php:152
-#, fuzzy
 msgid "Add an issue"
-msgstr "Aggiungi Articolo"
+msgstr ""
 
 #: issue-edit.php:43
 msgid "Error in 'cm_edit_issue' function."
@@ -668,9 +653,8 @@ msgstr ""
 
 #: issue-edit.php:168
 #: smarty.c:8
-#, fuzzy
 msgid "Volume"
-msgstr " (Volume "
+msgstr ""
 
 #: issue-edit.php:183
 msgid "Online Only?"
@@ -685,9 +669,8 @@ msgid "No"
 msgstr ""
 
 #: issue-edit.php:196
-#, fuzzy
 msgid "Update Issue"
-msgstr "Aggiornato:"
+msgstr ""
 
 #: login.php:90
 msgid "Your username or password were incorrect."
@@ -834,24 +817,20 @@ msgid "Submit Page"
 msgstr ""
 
 #: page-edit.php:160
-#, fuzzy
 msgid "Update Page"
-msgstr "Aggiornato:"
+msgstr ""
 
 #: page-edit.php:170
-#, fuzzy
 msgid "Preview Page"
-msgstr "Anteprima"
+msgstr ""
 
 #: page-edit.php:172
-#, fuzzy
 msgid "Page Preview"
-msgstr "Anteprima"
+msgstr ""
 
 #: page-edit.php:179
-#, fuzzy
 msgid "Delete Page"
-msgstr "Elimina"
+msgstr ""
 
 #: page-edit.php:184
 msgid "Are you sure you want to delete this page?"
@@ -868,9 +847,8 @@ msgid "Poll Manager"
 msgstr ""
 
 #: poll-browse.php:41
-#, fuzzy
 msgid "Poll question added."
-msgstr "Aggiungi Sondaggio"
+msgstr ""
 
 #: poll-browse.php:42
 msgid "Poll question updated."
@@ -890,9 +868,8 @@ msgid "Active Poll"
 msgstr ""
 
 #: poll-browse.php:51
-#, fuzzy
 msgid "Current Poll Question"
-msgstr "Gestisci Sondaggi"
+msgstr ""
 
 #: poll-browse.php:53
 msgid "Polls Disabled"
@@ -931,9 +908,8 @@ msgid "You are not currently using polls."
 msgstr ""
 
 #: poll-browse.php:105
-#, fuzzy
 msgid "Add Poll Question."
-msgstr "Aggiungi Sondaggio"
+msgstr ""
 
 #: poll-edit.php:30
 msgid "Error in 'cm_delete_poll' function."
@@ -960,9 +936,8 @@ msgid "Question Editor"
 msgstr ""
 
 #: poll-edit.php:138
-#, fuzzy
 msgid "Related Article ID"
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: poll-edit.php:143
 msgid "Audit"
@@ -973,9 +948,8 @@ msgid "Current Results"
 msgstr ""
 
 #: poll-edit.php:150
-#, fuzzy
 msgid "Poll Question"
-msgstr "Aggiungi Sondaggio"
+msgstr ""
 
 #: poll-edit.php:155
 msgid "Option 1"
@@ -1022,14 +996,12 @@ msgid "Add Poll"
 msgstr ""
 
 #: poll-edit.php:208
-#, fuzzy
 msgid "Update Poll"
-msgstr "Aggiornato:"
+msgstr ""
 
 #: poll-edit.php:215
-#, fuzzy
 msgid "Delete Poll"
-msgstr "Elimina"
+msgstr ""
 
 #: poll-edit.php:220
 msgid "Are you sure you want to delete this poll and associated ballots?"
@@ -1266,9 +1238,8 @@ msgid "Section Priority"
 msgstr ""
 
 #: section-edit.php:163
-#, fuzzy
 msgid "Add Section"
-msgstr "Aggiungi Sondaggio"
+msgstr ""
 
 #: section-edit.php:165
 msgid "Update Section"
@@ -1361,9 +1332,8 @@ msgid "Fax"
 msgstr ""
 
 #: settings.php:122
-#, fuzzy
 msgid "Announcement"
-msgstr "Annunci"
+msgstr ""
 
 #: staff-access.php:50
 msgid "Error in 'cm_clear_access' function."
@@ -1437,9 +1407,8 @@ msgstr ""
 #: staff-access.php:186
 #: submitted-browse.php:59
 #: submitted-edit.php:66
-#, fuzzy
 msgid "Submitted Article Manager"
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: staff-access.php:193
 msgid "View"
@@ -1471,9 +1440,8 @@ msgid "User added."
 msgstr ""
 
 #: staff-browse.php:19
-#, fuzzy
 msgid "User updated."
-msgstr "Aggiornato:"
+msgstr ""
 
 #: staff-browse.php:20
 msgid "User deleted."
@@ -1521,9 +1489,8 @@ msgid "Add User"
 msgstr ""
 
 #: staff-edit.php:313
-#, fuzzy
 msgid "Delete User"
-msgstr "Elimina"
+msgstr ""
 
 #: staff-edit.php:318
 msgid "Are you sure you want to delete this user?"
@@ -1534,24 +1501,20 @@ msgid "There was an error in the 'cm_delete_submitted' function."
 msgstr ""
 
 #: submitted-browse.php:62
-#, fuzzy
 msgid "Submitted article added."
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: submitted-browse.php:63
-#, fuzzy
 msgid "Submitted updated."
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: submitted-browse.php:64
-#, fuzzy
 msgid "Submitted article deleted."
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: submitted-browse.php:65
-#, fuzzy
 msgid "Submitted article(s) deleted."
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: submitted-browse.php:78
 msgid "Open"
@@ -1570,9 +1533,8 @@ msgid "Error in 'cm_delete_submitted' function."
 msgstr ""
 
 #: submitted-edit.php:43
-#, fuzzy
 msgid "Submitted article does not exist."
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: submitted-edit.php:70
 msgid "Post to Article Manager"
@@ -1593,9 +1555,8 @@ msgid "Keyword:"
 msgstr ""
 
 #: submitted-edit.php:97
-#, fuzzy
 msgid "Delete Submitted Article"
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: submitted-edit.php:102
 msgid "Are you sure you want to delete this submitted article?"
@@ -1620,9 +1581,8 @@ msgid "No articles were uploaded to this issue."
 msgstr ""
 
 #: smarty.c:32
-#, fuzzy
 msgid "Date"
-msgstr "Elimina"
+msgstr ""
 
 #: smarty.c:38
 msgid "That volume does not exist in our archives. Select a valid entry from the list below."
@@ -1637,14 +1597,12 @@ msgid "Print"
 msgstr ""
 
 #: smarty.c:50
-#, fuzzy
 msgid "Share This Article"
-msgstr "Gestisci Articoli"
+msgstr ""
 
 #: smarty.c:53
-#, fuzzy
 msgid "More"
-msgstr "Dettagli"
+msgstr ""
 
 #: smarty.c:56
 msgid "Headlines"
@@ -1669,15 +1627,13 @@ msgstr ""
 
 #: smarty.c:71
 #: smarty.c:362
-#, fuzzy
 msgid "Sent:"
-msgstr "Inviato"
+msgstr ""
 
 #: smarty.c:74
 #: smarty.c:365
-#, fuzzy
 msgid "Form:"
-msgstr "Da"
+msgstr ""
 
 #: smarty.c:77
 msgid "Feedback"
@@ -1704,9 +1660,8 @@ msgid "Content submissions are disabled at this time."
 msgstr ""
 
 #: smarty.c:92
-#, fuzzy
 msgid "Mailing Address"
-msgstr "Gestisci Articoli"
+msgstr ""
 
 #: smarty.c:95
 msgid "Contacting Us"
@@ -1786,9 +1741,8 @@ msgstr ""
 
 #: smarty.c:149
 #: smarty.c:167
-#, fuzzy
 msgid "Online Edition"
-msgstr " Edizione Online"
+msgstr ""
 
 #: smarty.c:152
 msgid "Powered by"
@@ -1800,37 +1754,36 @@ msgstr ""
 
 #: smarty.c:158
 msgid "Last Edition:"
-msgstr "Ultima Edizione:"
+msgstr ""
 
 #: smarty.c:161
 msgid "Published:"
-msgstr "Pubblicato:"
+msgstr ""
 
 #: smarty.c:164
 msgid "Updated:"
-msgstr "Aggiornato:"
+msgstr ""
 
 #: smarty.c:170
 #: smarty.c:173
 #: smarty.c:230
 msgid "Search"
-msgstr "Cerca"
+msgstr ""
 
 #: smarty.c:179
-#, fuzzy
 msgid "Top Story"
-msgstr "Importanti"
+msgstr ""
 
 #: smarty.c:182
 #: smarty.c:185
 #: smarty.c:260
 #: smarty.c:263
 msgid "Read More"
-msgstr "Dettagli"
+msgstr ""
 
 #: smarty.c:188
 msgid "Top Stories"
-msgstr "Importanti"
+msgstr ""
 
 #: smarty.c:191
 msgid "Web Poll"
@@ -1869,32 +1822,28 @@ msgid "Please go back to the home page to cast your ballot."
 msgstr ""
 
 #: smarty.c:218
-#, fuzzy
 msgid "Related Article:"
-msgstr "Articoli Presentati"
+msgstr ""
 
 #: smarty.c:221
 msgid "Web polls are currently unavailable."
 msgstr ""
 
 #: smarty.c:227
-#, fuzzy
 msgid "Search for:"
-msgstr "Cerca"
+msgstr ""
 
 #: smarty.c:236
-#, fuzzy
 msgid "Search within:"
-msgstr "Cerca"
+msgstr ""
 
 #: smarty.c:239
 msgid "Sort by:"
 msgstr ""
 
 #: smarty.c:245
-#, fuzzy
 msgid "Publish Date"
-msgstr "Pubblicato:"
+msgstr ""
 
 #: smarty.c:257
 msgid "Your search did not return any articles."
@@ -1915,9 +1864,8 @@ msgid "NOTE:"
 msgstr ""
 
 #: smarty.c:278
-#, fuzzy
 msgid "E-mail Article"
-msgstr "Aggiungi Articolo"
+msgstr ""
 
 #: smarty.c:281
 msgid "Article was e-mailed."
@@ -1945,14 +1893,12 @@ msgid "Your Information"
 msgstr ""
 
 #: smarty.c:305
-#, fuzzy
 msgid "Send"
-msgstr "Inviato"
+msgstr ""
 
 #: smarty.c:311
-#, fuzzy
 msgid "Share Article"
-msgstr "Gestisci Articoli"
+msgstr ""
 
 #: smarty.c:314
 msgid "Select a service from the list below to post this article to an Internet community."
@@ -1999,9 +1945,8 @@ msgid "Hometown:"
 msgstr ""
 
 #: smarty.c:368
-#, fuzzy
 msgid "Write for"
-msgstr " il"
+msgstr ""
 
 #: smarty.c:383
 msgid "Step 1: Submission Type"
@@ -2056,7 +2001,4 @@ msgstr ""
 #: smarty.c:446
 msgid "Send Your Submission"
 msgstr ""
-
-#~ msgid "&mdash; TOP STORY &mdash;"
-#~ msgstr "&mdash; PRIMA PAGINA &mdash;"
 

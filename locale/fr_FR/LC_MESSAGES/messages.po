@@ -1,13 +1,13 @@
 # Copyright (C) 2008 PacerCMS
 # This file is distributed under the same license as PacerCMS.
-# First Translation: Eric Lemoine, 2008 
+# First Translation: Eric Lemoine, 2008
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PacerCMS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-04 18:18+0000\n"
-"PO-Revision-Date: 2008-04-04 21:05-0600\n"
+"PO-Revision-Date: 2008-04-05 07:45-0600\n"
 "Last-Translator: Stephen Yeargin <stephen dot yeargin at gmail dot com>\n"
 "Language-Team:  <pacercms-discuss@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -70,21 +70,21 @@ msgstr "Choisir une édition"
 #: article-browse.php:129
 #: submitted-browse.php:74
 msgid "Select Issue:"
-msgstr "Choisir une édition&nbsp;:"
+msgstr "Choisir une édition :"
 
 #: article-browse.php:135
 #: submitted-browse.php:80
 msgid "Current:"
-msgstr "Courante&nbsp;:"
+msgstr "Courante :"
 
 #: article-browse.php:136
 #: submitted-browse.php:81
 msgid "Next:"
-msgstr "Suivante&nbsp;"
+msgstr "Suivante "
 
 #: article-browse.php:144
 msgid "Viewing: "
-msgstr "Visualiser&nbsp;:"
+msgstr "Visualiser :"
 
 #: article-browse.php:144
 #: index.php:50
@@ -100,11 +100,11 @@ msgstr ", No. "
 
 #: article-browse.php:148
 msgid "Section:"
-msgstr "Section&nbsp;:"
+msgstr "Section :"
 
 #: article-browse.php:153
 msgid "Viewing:"
-msgstr "Visualiser&nbsp;:"
+msgstr "Visualiser :"
 
 #: article-browse.php:159
 #: article-edit.php:236
@@ -142,7 +142,7 @@ msgstr "Dernières nouvelles"
 
 #: article-browse.php:187
 msgid "Keywords:"
-msgstr "Mots-clés&nbsp;:"
+msgstr "Mots-clés :"
 
 #: article-browse.php:193
 #: index.php:78
@@ -195,11 +195,11 @@ msgstr "Ajouter un article"
 
 #: article-browse.php:216
 msgid "Summaries:"
-msgstr "Résumés&nbsp;:"
+msgstr "Résumés :"
 
 #: article-browse.php:218
 msgid "Show Summaries"
-msgstr "Montrer les résumés&nbsp;:"
+msgstr "Montrer les résumés :"
 
 #: article-browse.php:220
 msgid "Hide Summaries"
@@ -207,7 +207,7 @@ msgstr "Cacher les résumés"
 
 #: article-browse.php:222
 msgid "Reset Dates:"
-msgstr "Réinitialiser les dates&nbsp;:"
+msgstr "Réinitialiser les dates :"
 
 #: article-browse.php:223
 msgid "Publication Dates"
@@ -484,7 +484,7 @@ msgstr "Supprimer le média"
 
 #: article-media.php:170
 msgid "Are you sure you want to delete this media item?"
-msgstr "Êtes-vous sûr de vouloir supprimer ce média&nbsp;?"
+msgstr "Êtes-vous sûr de vouloir supprimer ce média ?"
 
 #: index.php:24
 msgid "Welcome"
@@ -576,7 +576,7 @@ msgstr "Édtion courante"
 #: issue-browse.php:69
 #: issue-browse.php:76
 msgid "Stored:"
-msgstr "Enregistrée&nbsp;:"
+msgstr "Enregistrée :"
 
 #: issue-browse.php:71
 msgid "Next Issue"
@@ -658,7 +658,7 @@ msgstr "Volume"
 
 #: issue-edit.php:183
 msgid "Online Only?"
-msgstr "En ligne maintenant&nbsp;?"
+msgstr "En ligne maintenant ?"
 
 #: issue-edit.php:186
 msgid "Yes"
@@ -834,7 +834,7 @@ msgstr "Supprimer la page"
 
 #: page-edit.php:184
 msgid "Are you sure you want to delete this page?"
-msgstr "Êtes-vous sûr de vouloir supprimer cette page&nbsp;?"
+msgstr "Êtes-vous sûr de vouloir supprimer cette page ?"
 
 #: poll-browse.php:21
 msgid "You have an error in the cm_edit_poll_settings function."
@@ -881,7 +881,7 @@ msgstr "Changer le sondage actif"
 
 #: poll-browse.php:67
 msgid "Poll Options:"
-msgstr "Options du sondage&nbsp;:"
+msgstr "Options du sondage :"
 
 #: poll-browse.php:68
 msgid "Add New Poll"
@@ -1005,7 +1005,7 @@ msgstr "Supprimer le sondage"
 
 #: poll-edit.php:220
 msgid "Are you sure you want to delete this poll and associated ballots?"
-msgstr "Êtes-vous sûr de vouloir supprimer ce sondage et les résultats associés&nbsp;?"
+msgstr "Êtes-vous sûr de vouloir supprimer ce sondage et les résultats associés ?"
 
 #: profile.php:43
 #: staff-edit.php:70
@@ -1251,7 +1251,7 @@ msgstr "Déplacer les articles sélectionnés vers"
 
 #: section-edit.php:183
 msgid "Are you sure you want to delete this section?"
-msgstr "Êtes-vous sûr de vouloir supprimer cette section&nbsp;?"
+msgstr "Êtes-vous sûr de vouloir supprimer cette section ?"
 
 #: server-info.php:12
 msgid "Session Variables Set by Server"
@@ -1263,19 +1263,19 @@ msgstr "Ces paramètres sont fixés à l'identification. Les mises à jour se fe
 
 #: server-info.php:17
 msgid "User Data:"
-msgstr "Données utilisateur&nbsp;:"
+msgstr "Données utilisateur :"
 
 #: server-info.php:19
 msgid "Access Data:"
-msgstr "Données d'accès&nbsp;:"
+msgstr "Données d'accès :"
 
 #: server-info.php:21
 msgid "Setting Data:"
-msgstr "Paramétrage&nbsp;:"
+msgstr "Paramétrage :"
 
 #: server-info.php:23
 msgid "Issue Data:"
-msgstr "Données d'édition&nbsp;:"
+msgstr "Données d'édition :"
 
 #: server-info.php:27
 msgid "Cookies Set by Server"
@@ -1355,7 +1355,7 @@ msgstr "Sélection des droits d'accès utilisateur pour"
 
 #: staff-access.php:134
 msgid "Note: As this is your account, changes will be effective at next login."
-msgstr "Note&nbsp;: comme c'est le compte avec lequel vous être identifiés, les changements seront effectifs à votre prochaine identification."
+msgstr "Note : comme c'est le compte avec lequel vous être identifiés, les changements seront effectifs à votre prochaine identification."
 
 #: staff-access.php:139
 msgid "Module Access"
@@ -1397,18 +1397,12 @@ msgid "No Restrictions"
 msgstr "Pas de restrictions"
 
 #: staff-access.php:177
-msgid ""
-"Next\r\n"
-"        Issue Only"
-msgstr ""
-"Prochaine\r\n"
-"        édition seulement"
+msgid "Next Issue Only"
+msgstr "Prochaine édition seulement"
 
 #: staff-access.php:179
-msgid ""
-"Current\r\n"
-"        Issue Only"
-msgstr "Actuelle        édition seulement\r\n"
+msgid "Current Issue Only"
+msgstr "Actuelle édition seulement\r\n"
 
 #: staff-access.php:186
 #: submitted-browse.php:59
@@ -1500,7 +1494,7 @@ msgstr "Supprimer utilisateur"
 
 #: staff-edit.php:318
 msgid "Are you sure you want to delete this user?"
-msgstr "Êtes-vous sûr de vouloir supprimer cet utilisateur&nbsp;?"
+msgstr "Êtes-vous sûr de vouloir supprimer cet utilisateur ?"
 
 #: submitted-browse.php:41
 msgid "There was an error in the 'cm_delete_submitted' function."
@@ -1554,7 +1548,7 @@ msgstr "Par"
 #: smarty.c:341
 #: smarty.c:437
 msgid "Word Count:"
-msgstr "Compte de mots&nbsp;:"
+msgstr "Compte de mots :"
 
 #: submitted-edit.php:92
 msgid "Keyword:"
@@ -1566,7 +1560,7 @@ msgstr "Supprimer l'article soumis"
 
 #: submitted-edit.php:102
 msgid "Are you sure you want to delete this submitted article?"
-msgstr "Êtes-vous sûr de vouloir supprimer l'article soumis&nbsp;?"
+msgstr "Êtes-vous sûr de vouloir supprimer l'article soumis ?"
 
 #: smarty.c:2
 msgid "Advertisement"
@@ -1616,7 +1610,7 @@ msgstr "En-têtes"
 
 #: smarty.c:59
 msgid "Error:"
-msgstr "Erreur&nbsp;:"
+msgstr "Erreur :"
 
 #: smarty.c:62
 msgid "Our site has experienced an error. If the problem continues, please contact us about this error."
@@ -1624,22 +1618,22 @@ msgstr "Notre site vient de générer une erreur. Si le problème persiste, merc
 
 #: smarty.c:65
 msgid "Name:"
-msgstr "Nom&nbsp;:"
+msgstr "Nom :"
 
 #: smarty.c:68
 #: smarty.c:347
 msgid "E-mail:"
-msgstr "E-mail&nbsp;:"
+msgstr "E-mail :"
 
 #: smarty.c:71
 #: smarty.c:362
 msgid "Sent:"
-msgstr "Envoyé&nbsp;:"
+msgstr "Envoyé :"
 
 #: smarty.c:74
 #: smarty.c:365
 msgid "Form:"
-msgstr "Formulaire&nbsp;:"
+msgstr "Formulaire :"
 
 #: smarty.c:77
 msgid "Feedback"
@@ -1684,7 +1678,7 @@ msgstr "Fax:"
 
 #: smarty.c:104
 msgid "Primary E-mail:"
-msgstr "E-mail principal&nbsp;:"
+msgstr "E-mail principal :"
 
 #: smarty.c:107
 msgid "Before you complete this form"
@@ -1760,15 +1754,15 @@ msgstr "En-têtes (RSS)"
 
 #: smarty.c:158
 msgid "Last Edition:"
-msgstr "Dernière modification&nbsp;:"
+msgstr "Dernière modification :"
 
 #: smarty.c:161
 msgid "Published:"
-msgstr "Publié&nbsp;:"
+msgstr "Publié :"
 
 #: smarty.c:164
 msgid "Updated:"
-msgstr "Mis à jour&nbsp;:"
+msgstr "Mis à jour :"
 
 #: smarty.c:170
 #: smarty.c:173
@@ -1829,7 +1823,7 @@ msgstr "Merci de retourner à la page d'accueil pour voter."
 
 #: smarty.c:218
 msgid "Related Article:"
-msgstr "Article connexe&nbsp;:"
+msgstr "Article connexe :"
 
 #: smarty.c:221
 msgid "Web polls are currently unavailable."
@@ -1837,15 +1831,15 @@ msgstr "Les sondages sont actuellement indisponibles."
 
 #: smarty.c:227
 msgid "Search for:"
-msgstr "Chercher le terme&nbsp;:"
+msgstr "Chercher le terme :"
 
 #: smarty.c:236
 msgid "Search within:"
-msgstr "Chercher parmi&nbsp;:"
+msgstr "Chercher parmi :"
 
 #: smarty.c:239
 msgid "Sort by:"
-msgstr "Trier par&nbsp;:"
+msgstr "Trier par :"
 
 #: smarty.c:245
 msgid "Publish Date"
@@ -1858,16 +1852,16 @@ msgstr "Votre recherche n'a retourné aucun article."
 #: smarty.c:266
 #: smarty.c:269
 msgid "Message From:"
-msgstr "Message de&nbsp;:"
+msgstr "Message de :"
 
 #: smarty.c:272
 #: smarty.c:317
 msgid "Link:"
-msgstr "Lien&nbsp;:"
+msgstr "Lien :"
 
 #: smarty.c:275
 msgid "NOTE:"
-msgstr "NOTE&nbsp;:"
+msgstr "NOTE :"
 
 #: smarty.c:278
 msgid "E-mail Article"
@@ -1932,23 +1926,23 @@ msgstr "Tarifs annonceurs"
 
 #: smarty.c:338
 msgid "Type:"
-msgstr "Type&nbsp;:"
+msgstr "Type :"
 
 #: smarty.c:344
 msgid "Author:"
-msgstr "Auteur&nbsp;:"
+msgstr "Auteur :"
 
 #: smarty.c:350
 msgid "Classification:"
-msgstr "Classe&nbsp;:"
+msgstr "Classe :"
 
 #: smarty.c:353
 msgid "Major:"
-msgstr "Spécialité&nbsp;:"
+msgstr "Spécialité :"
 
 #: smarty.c:356
 msgid "Hometown:"
-msgstr "Lieu de résidence&nbsp;:"
+msgstr "Lieu de résidence :"
 
 #: smarty.c:368
 msgid "Write for"
@@ -1956,7 +1950,7 @@ msgstr "Écrire pour"
 
 #: smarty.c:383
 msgid "Step 1: Submission Type"
-msgstr "Étape 1&nbsp;: Type de soumission"
+msgstr "Étape 1 : Type de soumission"
 
 #: smarty.c:386
 msgid "Choose your submission type"
@@ -1970,11 +1964,11 @@ msgstr "Article ou communiqué de presse"
 #: smarty.c:401
 #: smarty.c:404
 msgid "Submission Guidelines:"
-msgstr "Conseils de soumission&nbsp;:"
+msgstr "Conseils de soumission :"
 
 #: smarty.c:407
 msgid "Step 2: Contact Information"
-msgstr "Étape 2&nbsp;: Coordonnées"
+msgstr "Étape 2 : Coordonnées"
 
 #: smarty.c:416
 msgid "Classification"
@@ -1990,7 +1984,7 @@ msgstr "Lieu de résidence"
 
 #: smarty.c:428
 msgid "Step 3: Your Submission"
-msgstr "Étape 3&nbsp;: Votre soumission"
+msgstr "Étape 3 : Votre soumission"
 
 #: smarty.c:434
 msgid "Copy and paste from your word processor"
