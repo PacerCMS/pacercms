@@ -134,7 +134,8 @@ function _setlocale($category, $locale) {
     } else {
         $ret = 0;
         if (function_exists('setlocale')) // I don't know if this ever happens ;)
-           $ret = setlocale($category, $locale);
+            if (!defined($category)) $ret = setlocale(LC_ALL, $locale);
+                else $ret = setlocale(constant($category), $locale); //passing strings is deprecated as per PHP >= 4.2.0
         if (($ret and $locale == '') or ($ret == $locale)) {
             $EMULATEGETTEXT = 0;
             $CURRENTLOCALE = $ret;
