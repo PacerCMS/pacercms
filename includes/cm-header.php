@@ -9,6 +9,9 @@ if ( file_exists('includes/config.php') )
     // Load configuration file
     include_once('config.php');
 
+    // Start Sessions
+    session_start();
+
     // If platform constant is undefined, assume MySQL
     if (!defined('DB_PLATFORM')) { define('DB_PLATFORM', 'mysql'); }
 

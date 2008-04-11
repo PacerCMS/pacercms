@@ -11,8 +11,17 @@ if (is_numeric($_GET['id'])) {
 	exit;
 };
 
-$current_issue_id = current_issue('id');
-$current_issue_date = current_issue('date');
+// Switch if in preview mode
+if (!is_numeric(preview_mode()))
+{
+    $current_issue_id = current_issue('id');
+    $current_issue_date = current_issue('date');
+} else {
+    $preview = preview_mode();
+    $current_issue_id = $preview;
+    $current_issue_date = issue_info('date', $preview); 
+}
+
 
 $smarty->assign("current_issue_date", $current_issue_date);
 $smarty->assign("section_name", section_info('name', $section_id) );

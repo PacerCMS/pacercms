@@ -22,12 +22,21 @@ if (is_numeric($_POST['id'])) {
 	// Run function
 	$stat = cm_edit_publish_settings($current_issue,$next_issue,$id);
 	if ($stat) {
-		header(gettext("Location: $module.php?msg=publish-updated"));
+		header("Location: $module.php?msg=publish-updated");
 		exit;
 	} else {
 		cm_error(gettext("Error in 'cm_edit_publish_settings' function."));
 		exit;
 	}
+}
+
+// If previewing an issue on public site
+if (is_numeric($_REQUEST['preview']))
+{
+    unset($_SESSION['cm_preview_issue']);
+    $_SESSION['cm_preview_issue'] = $_REQUEST['preview'];
+	header("Location: $module.php?msg=preview-issue&id=" . $_REQUEST['preview']);
+	exit;    
 }
 
 // Volume for display
@@ -48,6 +57,7 @@ $msg = $_GET['msg'];
 if ($msg == "added") { echo "<p class=\"infoMessage\">" . gettext("Issue added.") . "</p>"; }
 if ($msg == "updated") { echo "<p class=\"infoMessage\">" . gettext("Issue updated.") . "</p>"; }
 if ($msg == "publish-updated") { echo "<p class=\"infoMessage\">" . gettext("Publish settings updated.") . "</p>"; }
+if ($msg == "preview-issue") { echo "<p class=\"infoMessage\">" . gettext("Issue preview mode enabled.") . "</p>"; }
 ?>
 <form action="<?php echo "$module.php"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">
@@ -135,6 +145,7 @@ foreach ($records as $record)
         <ul class="center">
           <li class="command-edit"><a href="issue-edit.php?id=<?php echo $id; ?>"><?php echo gettext("Edit"); ?></a></li>
           <li class="command-edit"><a href="article-browse.php?issue=<?php echo $id; ?>"><?php echo gettext("Browse Articles"); ?></a></li>
+          <li class="command-edit"><a href="?preview=<?php echo $id; ?>"><?php echo gettext("Live Preview"); ?></a></li>
         </ul>
       </td>
     </tr>

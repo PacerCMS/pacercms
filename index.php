@@ -2,8 +2,16 @@
 // Loads everything needed to run PacerCMS
 include_once('includes/cm-header.php');
 
-$current_issue_id = current_issue('id');
-$current_issue_date = current_issue('date') . " 00:00:01";
+// Switch if in preview mode
+if (!is_numeric(preview_mode()))
+{
+    $current_issue_id = current_issue('id');
+    $current_issue_date = current_issue('date');
+} else {
+    $preview = preview_mode();
+    $current_issue_id = $preview;
+    $current_issue_date = issue_info('date', $preview) . " 00:00:01"; 
+}
 
 $smarty->assign("current_issue_date", $current_issue_date);
 $smarty->assign("section_sidebar", section_info('sidebar', 1) );

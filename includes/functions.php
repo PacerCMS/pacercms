@@ -383,6 +383,22 @@ function poll_delete_ballots($sel,$ipad)
 
 
 /**
+ * Check if in preview mode
+ *
+ * Return preview issue number for use in select statements
+ */
+function preview_mode()
+{
+    if (is_numeric($_SESSION['cm_preview_issue']))
+    {
+        return $_SESSION['cm_preview_issue'];
+    } else {
+        return false;
+    }
+}
+    
+
+/**
  * Count words in string
  *
  * Returns approximate count of words in a string
