@@ -12,8 +12,16 @@ if (is_numeric($_GET['id']))
 	exit;
 }
 
-$current_issue_id = current_issue('id');
-$next_issue_date = next_issue('date');
+// Switch if in preview mode
+if (!is_numeric(preview_mode()))
+{
+    $current_issue_id = current_issue('id');
+    $next_issue_date = next_issue('date');
+} else {
+    $preview = preview_mode();
+    $current_issue_id = $preview;
+    $next_issue_date = '2099-12-31'; 
+}
 
 /*=======================
     Selected Article
