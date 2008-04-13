@@ -14,6 +14,9 @@ if (!empty($config_file))
     // Determine which configuration file to  use
     include_once($config_file);
 
+    // Starting sessions
+    session_start();
+
     // If platform constant is undefined, assume MySQL
     if (!defined('DB_PLATFORM')) { define('DB_PLATFORM', 'mysql'); }
 

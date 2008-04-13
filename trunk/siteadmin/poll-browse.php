@@ -62,17 +62,20 @@ if ($msg == "active-updated") { echo "<p class=\"infoMessage\">" . gettext("Acti
 
 <form action="<?php echo "$module.php"; ?>" method="get">
   <fieldset class="<?php echo "$module-table"; ?>">
-  <legend><?php echo gettext("Active Poll"); ?></legend>
+  <legend><?php echo gettext("Browe Polls"); ?></legend>
   <div class="actionMenu"><ul>
   <li><strong><?php echo gettext("Poll Options:"); ?></strong></li>
   <li><a href="<?php echo "$cmodule.php?action=new"; ?>"><?php echo gettext("Add New Poll"); ?></a></li> 
   </ul></div>
   <table>
+  <thead>
     <tr>
       <th><?php echo gettext("Question"); ?></th>
       <th><?php echo gettext("Created"); ?></th>
       <th><?php echo gettext("Tools"); ?></th>
     </tr>
+  </thead>
+  <tbody>
 <?php
 
 // To mark active in table
@@ -83,8 +86,11 @@ foreach ($records as $record)
 	$id = $record['id'];
 	$question = $record['poll_question'];
 	$created = date('m/d/Y h:i a', strtotime($record['poll_created']));
+
+    if ($rowclass == 'even') { $rowclass = 'odd'; } else { $rowclass = 'even'; }
+	
 ?>
-    <tr>
+    <tr class="<?php echo $rowclass; ?>">
       <td><?php if ($active_poll == $id) { echo "<strong>" . gettext("Current") . " &raquo;&raquo;</strong> "; } ?><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $question; ?></a></p>
 	  
 	  </td>
@@ -97,6 +103,7 @@ foreach ($records as $record)
       </td>
     </tr>
 <?php } ?>
+  </tbody>
   </table>
   </fieldset>
 </form>

@@ -1,8 +1,5 @@
 <?php
 
-// Starting sessions
-session_start();
-
 // File handling for templates
 function get_cm_header() { include_once('header.php'); }
 function get_cm_footer() { include_once('footer.php'); }

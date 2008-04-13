@@ -38,11 +38,14 @@ if ($result->RecordCount() > 0)
   <li><a href="<?php echo "$cmodule.php?action=add"; ?>"><?php echo gettext("Add New Page"); ?></a></li> 
   </ul></div>
   <table>
+  <thead>
     <tr>
       <th><?php echo gettext("Title"); ?></th>
       <th><?php echo gettext("Edited"); ?></th>
       <th><?php echo gettext("Tools"); ?></th>
     </tr>
+  </thead>
+  <tbody>
 <?php
 
 foreach ($records as $record)
@@ -50,8 +53,11 @@ foreach ($records as $record)
 	$id = $record['id'];
 	$title = $record['page_title'];
 	$edited = date('m/d/Y h:i a', strtotime($record['page_edited']));
+	
+    if ($rowclass == 'even') { $rowclass = 'odd'; } else { $rowclass = 'even'; }
+
 ?>
-    <tr>
+    <tr class="<?php echo $rowclass; ?>">
       <td><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $title; ?></a></p>
 	  
 	  </td>
@@ -64,6 +70,7 @@ foreach ($records as $record)
       </td>
     </tr>
 <?php }  ?>
+</tbody>
   </table> 
   </fieldset>
 </form>

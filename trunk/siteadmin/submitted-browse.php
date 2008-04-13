@@ -89,18 +89,21 @@ if ($msg == "moderate") { echo "<p class=\"alertMessage\">". gettext("Submitted 
 <?php if ($result->RecordCount() > 0) { ?>
 
 <table class="<?php echo $module; ?>-table">
+<thead>
   <tr>
   <?php if (cm_auth_restrict('submitted-edit') == "true") { ?>
-    <th><?php echo gettext("ID"); ?></td>
+    <th style="width:25px;">&nbsp;</td>
   <?php } ?>  
     <th><?php echo gettext("Sent"); ?></th>
     <th><?php echo gettext("From"); ?></th>
     <th><?php echo gettext("Subject"); ?></th>
     <?php if (cm_auth_restrict('submitted-edit') == "true") { ?>
-    <th><?php echo gettext("Tools"); ?></th>
+    <th style="width:200px;"><?php echo gettext("Tools"); ?></th>
     <?php } ?>
   </tr>
-  <?php
+</thead>  
+<tbody>
+<?php
 
 foreach ($records as $record) {
 
@@ -110,9 +113,12 @@ foreach ($records as $record) {
 	$author = $record['submitted_author'];
 	$email = $record['submitted_author_email'];
 	$sent = $record['sent'];
+	
+    if ($rowclass == 'even') { $rowclass = 'odd'; } else { $rowclass = 'even'; }
+
   
 ?>
-  <tr>
+  <tr class="<?php echo $rowclass; ?>">
   <?php if (cm_auth_restrict('submitted-edit') == "true") { ?>
     <td><input type="checkbox" name="moderate[]" id="moderate-<?php echo $id; ?>" value="<?php echo $id; ?>" /></td>
   <?php } ?>
@@ -131,11 +137,14 @@ foreach ($records as $record) {
     </td>
   </tr>
 <? } ?>
+</thead>
 </table>
 <?php if (cm_auth_restrict('submitted-edit') == "true") { ?>
 <div style="text-align:right;">
+<p>
     <input type="submit" value="<?php echo gettext("Delete"); ?>" />
     <input type="reset" value="<?php echo gettext("Clear Selection"); ?>" />
+</p>
 </div>
 <?php } ?>
   <?php } else { ?>
