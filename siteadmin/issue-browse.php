@@ -119,12 +119,15 @@ if ($result->RecordCount() > 0) {
 
 ?>
   <table class="<?php echo $module; ?>-table">
+  <thead>
     <tr>
       <th><?php echo gettext("Issue Date"); ?></th>
       <th><?php echo gettext("Issue Number"); ?></th>
       <th><?php echo gettext("Circulation"); ?></th>
       <th><?php echo gettext("Tools"); ?></th>
     </tr>
+  </thead>
+  <tbody>
 <?php
 
 foreach ($records as $record)
@@ -135,9 +138,11 @@ foreach ($records as $record)
 	$volume = $record['issue_volume'];
 	$number = $record['issue_number'];
 	$circulation = $record['issue_circulation'];
+
+    if ($rowclass == 'even') { $rowclass = 'odd'; } else { $rowclass = 'even'; }
   
 ?>
-    <tr>
+    <tr class="<?php echo $rowclass; ?>">
       <td><a href="issue-edit.php?id=<?php echo $id; ?>"><?php echo $date; ?></a></td>
       <td><?php echo $number; ?></td>
       <td><?php echo $circulation; ?></td>
@@ -151,11 +156,13 @@ foreach ($records as $record)
     </tr>
 
 <?php } ?>
-
+  </tbody>
+  <tfoot>
     <tr>
       <td class="center" colspan="3"><strong><a href="issue-edit.php?action=new"><?php echo gettext("Add Issue"); ?></a></strong></td>
       <td></td>
     </tr>
+  </tfoot>
   </table>
   </fieldset>
 </form>

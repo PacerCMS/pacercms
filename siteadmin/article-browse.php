@@ -152,17 +152,21 @@ if (cm_auth_restrict('restrict_issue') != "next" && cm_auth_restrict('restrict_i
   <?php } else {  ?>
   <p><strong><?php echo gettext("Viewing:"); ?></strong> <?php echo cm_section_info('section_name', $section); ?></p>
   <?php } // End Restrict Section  ?>
-  <?php if (!empty($records)) { ?>
 
   <table class="<?php echo $module; ?>-table">
+  <thead>
     <tr>
-      <th><acronym title="<?php echo gettext("Assigned Priority"); ?>"><?php echo gettext("AP"); ?></acronym></th>
+      <th style="width:25px;"><acronym title="<?php echo gettext("Assigned Priority"); ?>"><?php echo gettext("AP"); ?></acronym></th>
       <th><?php echo gettext("Headline"); ?></th>
       <?php if (cm_auth_restrict('article-edit') == "true") { ?>
-      <th><?php echo gettext("Tools"); ?></th>
+      <th style="width:200px;"><?php echo gettext("Tools"); ?></th>
       <?php } ?>
     </tr>
-    <?php
+    </thead>
+<?php
+
+if (!empty($records))
+{
 
 foreach ($records as $article)
 {
@@ -175,10 +179,14 @@ foreach ($records as $article)
 	$priority = $article['article_priority'];
 	$issue_id = $article['issue_id'];
 	$issue_date = cm_issue_info("issue_date",$issue_id) . " 00:00:00";
+	
 	if ($published > $issue_date) { $is_breaking = "true"; } else { unset($is_breaking); }
 	if ($is_breaking == "true") { $flag = "<small style=\"color:red;font-weight:bold;\">[ " . gettext("Breaking News") . " ]</small> "; } else { unset($flag); }
+	
+	if ($rowclass == 'even') { $rowclass = 'odd'; } else { $rowclass = 'even'; }
+	
 ?>
-    <tr>
+    <tr class="<?php echo $rowclass; ?>">
       <td class="center"><?php echo $priority; ?></td>
       <td><p><?php echo $flag; ?><a href="article-edit.php?id=<?php echo $id; ?>#preview"><strong><?php echo $title; ?></strong></a><small> - <?php echo $author; ?></small></p>
         <?php if ($_COOKIE["$module-summary"] == true) { ?>
@@ -188,7 +196,7 @@ foreach ($records as $article)
         <?php	} // End Summary Row ?>
       </td>
       <?php if (cm_auth_restrict('article-edit') == "true") { ?>
-      <td nowrap class="actionMenu">
+      <td nowrap="nowrap" class="actionMenu">
         <ul class="center">
           <li class="command-preview"><a href="article-edit.php?id=<?php echo $id; ?>#preview"><?php echo gettext("Preview"); ?></a></li>
           <li class="command-edit"><a href="article-edit.php?id=<?php echo $id; ?>"><?php echo gettext("Edit"); ?></a></li>
@@ -198,7 +206,21 @@ foreach ($records as $article)
       </td>
     </tr>
 <?php } ?>
+  <?php } else { ?>
+  <tr>
+  <td>&nbsp;</td>
+  <td><p><?php echo gettext("This selected section is empty."); ?></p></td>
+  <td nowrap="nowrap" class="actionMenu">
     <?php if (cm_auth_restrict('article-edit') == "true") { ?>
+    <ul class="center">
+      <li class="command-add"><a href="article-edit.php?action=new"><?php echo gettext("Add an Article"); ?></a></li>
+    </ul>
+    <?php } ?>  
+  </td>
+  </tr>
+  <?php } ?>
+  <?php if (cm_auth_restrict('article-edit') == "true") { ?>
+  <tfoot>
     <tr>
       <td>&nbsp;</td>
       <td class="center"><strong><a href="article-edit.php?action=new"><?php echo gettext("Add an Article"); ?></a></strong></td>
@@ -209,8 +231,11 @@ foreach ($records as $article)
         <?php } // End Hide Quick Edit?>
       </td>
     </tr>
+    </tfoot>
     <?php } ?>
+
   </table>
+  
   <div class="actionMenu">
     <ul>
       <li><strong><?php echo gettext("Summaries:"); ?></strong></li>
@@ -223,13 +248,7 @@ foreach ($records as $article)
       <li><a href="<?php echo $module; ?>.php?reset=publish"><?php echo gettext("Publication Dates"); ?></a></li>
     </ul>
   </div>
-  <?php } else { ?>
-  <p><?php echo gettext("This selected section is empty."); ?>
-    <?php if (cm_auth_restrict('article-edit') == "true") { ?>
-    <a href="article-edit.php?action=new"><?php echo gettext("Add an Article"); ?></a>.
-    <?php } ?>
-  </p>
-  <?php } ?>
+
   </fieldset>
 </form>
 <?php get_cm_footer(); ?>

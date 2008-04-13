@@ -28,13 +28,16 @@ if ($msg == "deleted") { echo "<p class=\"infoMessage\">" . gettext("Section del
     </ul></div>
 
   <table class="<?php echo "$module-table"; ?>">
+  <thead>
     <tr>
       <th><acronym title="<?php echo gettext("Assigned Priority"); ?>"><?php echo gettext("AP"); ?></acronym></th>
       <th><?php echo gettext("Section"); ?></th>
       <th><?php echo gettext("Editor"); ?></th>
       <th><?php echo gettext("Tools"); ?></th>
     </tr>
-    <?php
+  </thead>
+  <tbody>
+  <?php
 
 // Database Query
 $query = "SELECT * FROM cm_sections ORDER BY section_priority;";
@@ -51,8 +54,11 @@ foreach ($records as $record)
     $section_editor = $record['section_editor'];
     $section_editor_title = $record['section_editor_title'];
     $section_priority = $record['section_priority'];
+
+    if ($rowclass == 'even') { $rowclass = 'odd'; } else { $rowclass = 'even'; }
+
 ?>
-    <tr>
+    <tr class="<?php echo $rowclass; ?>">
       <td><?php echo $section_priority; ?></td>
       <td><a href="<?php echo "$cmodule.php?id=$id"; ?>"><?php echo $section_name; ?></a></td>
       <td><?php echo $section_editor; ?><br>
@@ -65,6 +71,7 @@ foreach ($records as $record)
       </td>
     </tr>
 <?php } ?>
+  </tbody>
   </table>
   </fieldset>
 </form>
