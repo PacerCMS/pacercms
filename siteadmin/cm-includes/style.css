@@ -21,7 +21,7 @@ label {font-weight:bold;}
 .actionMenu {margin-bottom: 15px; margin-top: 10px;}
 .actionMenu ul {margin:0; padding:0; list-style-type: none;}
 .actionMenu ul li {display: inline;}
-.actionMenu ul li a {border: solid 1px #000; padding: 5px; margin-right: 3px;}
+.actionMenu ul li a {border: solid 1px #000; padding: 5px; margin-right: 3px; background-color:#fff;}
 .actionMenu ul li a:hover {color: #fff; border: 1px outset #CCCCCC; background-color: #0B8193;}
 .actionMenu .selected {color: #fff; border: 1px outset #CCCCCC; background-color: #0B8193;}
 .sidebar {float:right;}

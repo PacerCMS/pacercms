@@ -91,7 +91,7 @@ $smarty->assign("issue_list", $issue_list);
 /*=======================
     Article List
 =======================*/
-$query = "SELECT cm_articles.id AS article_id, ";
+$query = "SELECT cm_articles.id, cm_articles.id AS article_id, "; // article_id depreciated
 $query .= " article_title, article_summary, article_author, article_word_count, section_name, issue_volume, issue_number ";
 $query .= " FROM cm_articles INNER JOIN (cm_sections, cm_issues) ";
 $query .= " ON (cm_sections.id = cm_articles.section_id AND cm_issues.id = cm_articles.issue_id)";

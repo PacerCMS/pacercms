@@ -42,7 +42,7 @@
 	{if $section_headlines ne ''}	  <div class="sectionHeadlines">	    <h4><a href="{$section_url}" title="{$section_name|escape:'html'}">{t}More{/t} {$section_name|escape:'html'} {t}Headlines{/t}</a></h4>
         <ul>
         {section name="items" loop=$section_headlines}
-            <li><a href="{$site_url}/article.php?id={$section_headlines[items].id}">{$section_headlines[items].article_title|escape:'html'}</a></li>
+            <li><a href="{article_link article=$section_headlines[items]}">{$section_headlines[items].article_title|escape:'html'}</a></li>
         {/section}
         </ul>
     </div>

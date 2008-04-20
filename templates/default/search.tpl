@@ -46,7 +46,7 @@
             </tr>
             {section name="items" loop=$article_list}
             <tr>
-                <td><a href="{$site_url}/article.php?id={$article_list[items].article_id}">{$article_list[items].article_title}</a></td>
+                <td><a href="{article_link article=$article_list[items]}">{$article_list[items].article_title}</a></td>
                 <td>{$article_list[items].article_publish|date_format:"%m/%e/%Y"}</td>
                 <td>{$article_list[items].article_author|escape:'html'}</td>
                 <td>{$article_list[items].section_name|escape:'html'}</td>

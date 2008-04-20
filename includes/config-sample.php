@@ -18,6 +18,14 @@ define("COMPILE_CHECK", true);
 define("LOCALE", "en_US.UTF8");
 
 
+/* Use a custom URL structure (Advanced and generally unsupported) */
+// Note: Requires familiarity with mod_rewrite or similar configuration
+// %article_id% -- ID of the article
+// %article_date% -- Date of article publication
+// %article_slug% -- Sanitized version of the article title
+define("REWRITE_RULE", "/article.php?id=%article_id%");
+
+
 /* Below this line should work without customization */
 $cm_path = substr(dirname(__FILE__),0,-9); // removes '/includes/'
 define("SITE_ROOT", $cm_path);

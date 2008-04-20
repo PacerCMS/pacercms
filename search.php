@@ -25,7 +25,8 @@ if ($_GET['s_by'] == "keyword")
 $next_issue_id = next_issue("id");
 $current_issue_id = current_issue("id");
 
-// Set search modeif ($index == "article") { $field = "article_text,article_title,article_subtitle"; }if ($index == "author") { $field = "article_author"; }if ($index == "keyword") { $field = "article_keywords"; }	$query = "SELECT cm_articles.id AS article_id, article_title, article_summary, article_author, article_word_count, article_publish, section_name ";$query .= " FROM cm_articles INNER JOIN cm_sections ON cm_articles.section_id = cm_sections.id ";
+// Set search modeif ($index == "article") { $field = "article_text,article_title,article_subtitle"; }if ($index == "author") { $field = "article_author"; }if ($index == "keyword") { $field = "article_keywords"; }	$query = "SELECT cm_articles.id, cm_articles.id AS article_id, "; // article_id depreciated
+$query .= " article_title, article_summary, article_author, article_word_count, article_publish, section_name ";$query .= " FROM cm_articles INNER JOIN cm_sections ON cm_articles.section_id = cm_sections.id ";
 $query .= " WHERE MATCH ($field) AGAINST ('$string' IN BOOLEAN MODE) AND issue_id < $next_issue_id ";
 $query .= " ORDER BY $sort_by $sort_dir;";
 

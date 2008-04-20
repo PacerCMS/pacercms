@@ -383,6 +383,47 @@ function poll_delete_ballots($sel,$ipad)
 
 
 /**
+ * Article Link
+ *
+ * Create link to an article using rewrite rules
+ *
+ * @param   array   Parameters from Smarty 
+ * @param   string  Smarty instance
+ */
+function article_link($params, &$smarty)
+{   
+    $article_id = $params['article']['id'];
+    $article_slug = sanitize_for_url($params['article']['article_title']);
+    $article_date = date('Y-m-d', strtotime($params['article']['article_publish']));
+    
+    // Set in the config.php file.
+    if (defined('REWRITE_RULE')) {
+        $rewrite_rule = $smarty->get_template_vars('site_url') . REWRITE_RULE;
+    } else {
+        $rewrite_rule = $smarty->get_template_vars('site_url') . "/article.php?id=%article_id%";
+    }
+    
+    $output = str_replace(array('%article_id%', '%article_slug%','%article_date%'),
+                            array($article_id, $article_slug, $article_date), $rewrite_rule);
+    return $output;   
+}
+
+
+/**
+ * Sanitize for URL
+ *
+ * Cleans a string to appear in a URL
+ *
+ * @param   string  String to sanitize
+ */
+function sanitize_for_url($string) {
+    $string = preg_replace("/[^a-zA-Z0-9]/", "_", $string);
+    $string = substr(strtolower($string),0,75);
+    return $string;
+}
+
+    
+/**
  * Check if in preview mode
  *
  * Return preview issue number for use in select statements
