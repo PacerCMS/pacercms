@@ -40,6 +40,9 @@ class Smarty_PacerCMS extends Smarty
 	    }
         		
 		$this->assign('site_cm_version', CM_VERSION);
+		
+		// Custom Functions and Filters for Smarty
+		$this->register_function('article_link', 'article_link');
 
 	   }}
 

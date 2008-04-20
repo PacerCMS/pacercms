@@ -9,10 +9,10 @@
     <h5>&mdash; {t}Top Story{/t} &mdash;</h5>
     {/if}
 
-	<h2><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}">{$cover_articles[items].article_title|escape:'html'}</a></h2>
+	<h2><a href="{article_link article=$cover_articles[items]}" title="{$cover_articles[items].article_title|escape:'html'}">{$cover_articles[items].article_title|escape:'html'}</a></h2>
 	<p class="byline"><a href="{$site_url}/search.php?s={$cover_articles[items].article_author|escape:'url'}&amp;s_by=author"><strong>{$cover_articles[items].article_author|escape:'html'}</strong></a>{if $cover_articles[items].article_author_title ne ''}, <em>{$cover_articles[items].article_author_title|escape:'html'}</em>{/if}</p>
 	<p class="summary">{$cover_articles[items].article_summary}</p>
-	<p class="moreLink"><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}"><strong>{t}Read More{/t}</strong></a></p>
+	<p class="moreLink"><a href="{article_link article=$cover_articles[items]}" title="{$cover_articles[items].article_title|escape:'html'}"><strong>{t}Read More{/t}</strong></a></p>
     {/section}
     </div>
     <div class="smallerCol">
@@ -50,9 +50,9 @@
 
 	    {section name="items" loop=$cover_articles start=1}
 	    <div class="otherStory">
-		<h3><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}">{$cover_articles[items].article_title|escape:'html'}</a></h3>
+		<h3><a href="{article_link article=$cover_articles[items]}" title="{$cover_articles[items].article_title|escape:'html'}">{$cover_articles[items].article_title|escape:'html'}</a></h3>
 		<p class="summary">{$cover_articles[items].article_summary|escape:'html'}</p>
-		<p class="moreLink"><a href="{$site_url}/article.php?id={$cover_articles[items].id}" title="{$cover_articles[items].article_title|escape:'html'}">{t}Read More{/t}</a></p>
+		<p class="moreLink"><a href="{article_link article=$cover_articles[items]}" title="{$cover_articles[items].article_title|escape:'html'}">{t}Read More{/t}</a></p>
 	    </div>
         {/section}
 	  

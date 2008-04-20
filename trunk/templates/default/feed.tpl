@@ -21,7 +21,7 @@
   <item>
     <title><![CDATA[ {$feed_items[items].article_title} ]]></title>
     <category><![CDATA[ {$feed_items[items].section_name} ]]></category>
-    <link>{$site_url}/article.php?id={$feed_items[items].id}</link>
+    <link>{article_link article=$feed_items[items]}</link>
     <description><![CDATA[ {$feed_items[items].article_summary} ]]></description>
     <pubDate>{$feed_items[items].article_publish}</pubDate>
   </item>
