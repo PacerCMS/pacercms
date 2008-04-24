@@ -57,7 +57,7 @@ $msg = $_GET['msg'];
 if ($msg == "added") { echo "<p class=\"infoMessage\">" . gettext("Issue added.") . "</p>"; }
 if ($msg == "updated") { echo "<p class=\"infoMessage\">" . gettext("Issue updated.") . "</p>"; }
 if ($msg == "publish-updated") { echo "<p class=\"infoMessage\">" . gettext("Publish settings updated.") . "</p>"; }
-if ($msg == "preview-issue") { echo "<p class=\"infoMessage\">" . gettext("Issue preview mode enabled.") . "</p>"; }
+if ($msg == "preview-issue") { echo "<p class=\"infoMessage\">" . gettext("Issue preview mode enabled.") . " <a href=\"" . cm_get_settings('site_url') . "\" class=\"icon_window_new\" target=\"_blank\">". gettext("Open") . "</a></p>"; }
 ?>
 <form action="<?php echo "$module.php"; ?>" method="post">
   <fieldset class="<?php echo "$module-form"; ?>">

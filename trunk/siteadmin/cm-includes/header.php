@@ -6,9 +6,14 @@
 <title>PacerCMS for <?php echo cm_get_settings('site_name'); ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="cm-includes/style.css" rel="stylesheet" type="text/css" />
-<script src="cm-includes/functions.js" type="text/javascript"></script>
-<script src="cm-includes/prototype.js" type="text/javascript"></script>
-<script src="cm-includes/js_quicktags.js" type="text/javascript"></script>
+<script src="cm-includes/functions.js" type="text/javascript"> </script>
+<script src="cm-includes/prototype.js" type="text/javascript"> </script>
+<script src="cm-includes/js_quicktags.js" type="text/javascript"> </script>
+<?php if ($_REQUEST['msg'] == 'preview-issue' && is_numeric($_REQUEST['id']) ) { ?>
+<script type="text/javascript">
+    window.open('<?php echo cm_get_settings('site_url'); ?>?preview=<?php echo $_REQUEST['id']; ?>');
+</script>
+<?php } ?>
 </head>
 <body>
 <div id="header">
