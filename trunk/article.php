@@ -95,56 +95,42 @@ $smarty->assign("section_headlines", $section_headlines );
 
 
 /*=======================
-    Article Images
+    Article Media
 =======================*/
 $query = "SELECT * FROM cm_media ";	
-$query .= " WHERE article_id = '$article_id' ";
-$query .= " AND (media_type = 'jpg' OR media_type = 'png' OR media_type = 'gif') ";
+$query .= " WHERE article_id = $article_id ";
 $query .= " ORDER BY id ASC; ";
 
 // Run query
 $result = run_query($query);
-if (!empty($result)) {    while ($array = $result->GetArray()) {        $article_images = $array;    }
+if (!empty($result)) {    while ($array = $result->GetArray()) {        $article_media = $array;    }
 }
 
-// Assign variables
-$smarty->assign("article_images", $article_images );
 
-/*=======================
-    Article SWFs
-=======================*/
-$query = "SELECT * FROM cm_media ";	
-$query .= " WHERE article_id = '$article_id' ";
-$query .= " AND (media_type = 'swf') ";
-$query .= " ORDER BY id ASC; ";
+// Parse Media by Type
+$article_images = array();
+$article_swfs = array();
+$article_related = array();
 
-// Run query
-$result = run_query($query);
-if (!empty($result)) {    while ($array = $result->GetArray()) {        $article_swfs = $array;
+if (count($article_media) > 0)
+{
+    foreach ($article_media as $item) {
+        if ($item['media_type'] == 'jpg' || $item['media_type'] == 'png' || $item['media_type'] == 'gif')
+        {
+            $article_images[] = $item;
+        } elseif ($item['media_type'] == 'swf') {
+            $article_swfs[] = $item;
+        } elseif ($item['media_type'] == 'pdf' || $item['media_type'] == 'doc' || $item['media_type'] == 'wav' || $item['url'] == 'url') {
+            $article_related[] = $item;
+        }
     }
 }
 
 // Assign variables
+$smarty->assign("article_images", $article_images );
 $smarty->assign("article_swfs", $article_swfs );
-
-
-/*=======================
-    Article Related
-=======================*/
-$query = "SELECT * FROM cm_media ";	
-$query .= " WHERE article_id = '$article_id' ";
-$query .= " AND (media_type = 'pdf' OR media_type = 'doc' OR media_type = 'wav' OR media_type = 'url') ";
-$query .= " ORDER BY id ASC; ";
-
-// Run query
-$result = run_query($query);
-if (!empty($result))
-{    while ($array = $result->GetArray())
-    {        $article_related = $array;    }
-}
-
-// Assign variables
 $smarty->assign("article_related", $article_related );
+
 
 /*=======================
     Section Summaries
