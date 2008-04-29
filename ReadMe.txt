@@ -12,6 +12,8 @@ Credits (on Google Code):
     jfreedman
     inner.ground
     georgiawebgurl
+    brivers
+    eric.p.lemoine
 
 
 == Install ==
