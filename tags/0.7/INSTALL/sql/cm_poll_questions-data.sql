@@ -1,0 +1,1 @@
+INSERT INTO `cm_poll_questions` VALUES (1, now(), 'What do you think of PacerCMS?', 'Just what I needed.', 'I like it.', 'It needs work.', 'I think I meant to download "Nestopia."', '', '', '', '', '', '', 1);

@@ -1,0 +1,20 @@
+CREATE TABLE `cm_articles` (
+  `id` int(11) NOT NULL auto_increment,
+  `issue_id` int(5) NOT NULL default '0',
+  `section_id` int(5) NOT NULL default '0',
+  `article_author` varchar(40) default NULL,
+  `article_author_title` varchar(40) default NULL,
+  `article_title` varchar(200) default NULL,
+  `article_subtitle` varchar(200) default NULL,
+  `article_summary` text,
+  `article_text` text,
+  `article_priority` int(2) default '0',
+  `article_keywords` tinytext,
+  `article_publish` datetime NOT NULL default '0000-00-00 00:00:00',
+  `article_edit` datetime NOT NULL default '0000-00-00 00:00:00',
+  `article_word_count` int(7) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  FULLTEXT KEY `article_author` (`article_author`),
+  FULLTEXT KEY `article_keywords` (`article_keywords`),
+  FULLTEXT KEY `article_text` (`article_text`,`article_title`,`article_subtitle`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Principle article database';

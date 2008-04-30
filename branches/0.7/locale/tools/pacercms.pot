@@ -1,0 +1,2004 @@
+# Copyright (C) 2008 PacerCMS
+# This file is distributed under the same license as PacerCMS.
+# First Translation: FIRST AUTHOR <EMAIL@ADDRESS>, YEAR
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PacerCMS\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-03-05 00:34+0000\n"
+"PO-Revision-Date: 2008-04-05 06:41-0600\n"
+"Last-Translator: Stephen Yeargin <stephen dot yeargin at gmail dot com>\n"
+"Language-Team:  <pacercms-discuss@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: article-browse.php:30
+msgid "The selected section could not be loaded."
+msgstr ""
+
+#: article-browse.php:43
+#: submitted-browse.php:22
+msgid "The selected issue could not be loaded."
+msgstr ""
+
+#: article-browse.php:106
+#: article-edit.php:190
+#: staff-access.php:151
+msgid "Article Manager"
+msgstr ""
+
+#: article-browse.php:109
+msgid "Article added."
+msgstr ""
+
+#: article-browse.php:110
+msgid "Article updated."
+msgstr ""
+
+#: article-browse.php:111
+msgid "Article deleted."
+msgstr ""
+
+#: article-browse.php:112
+msgid "Media added."
+msgstr ""
+
+#: article-browse.php:113
+msgid "Media updated."
+msgstr ""
+
+#: article-browse.php:114
+msgid "Media deleted."
+msgstr ""
+
+#: article-browse.php:115
+msgid "Publication dates set to match issue."
+msgstr ""
+
+#: article-browse.php:116
+msgid "Error setting publication dates."
+msgstr ""
+
+#: article-browse.php:125
+#: submitted-browse.php:70
+msgid "Select Issue"
+msgstr ""
+
+#: article-browse.php:129
+#: submitted-browse.php:74
+msgid "Select Issue:"
+msgstr ""
+
+#: article-browse.php:135
+#: submitted-browse.php:80
+msgid "Current:"
+msgstr ""
+
+#: article-browse.php:136
+#: submitted-browse.php:81
+msgid "Next:"
+msgstr ""
+
+#: article-browse.php:144
+msgid "Viewing: "
+msgstr ""
+
+#: article-browse.php:144
+#: index.php:50
+#: submitted-browse.php:88
+msgid " (Volume "
+msgstr ""
+
+#: article-browse.php:144
+#: index.php:50
+#: submitted-browse.php:88
+msgid ", No. "
+msgstr ""
+
+#: article-browse.php:148
+msgid "Section:"
+msgstr ""
+
+#: article-browse.php:153
+msgid "Viewing:"
+msgstr ""
+
+#: article-browse.php:159
+#: article-edit.php:236
+#: section-browse.php:32
+msgid "Assigned Priority"
+msgstr ""
+
+#: article-browse.php:159
+#: section-browse.php:32
+msgid "AP"
+msgstr ""
+
+#: article-browse.php:160
+#: smarty.c:14
+#: smarty.c:242
+#: smarty.c:431
+msgid "Headline"
+msgstr ""
+
+#: article-browse.php:162
+#: index.php:59
+#: issue-browse.php:116
+#: page-browse.php:44
+#: poll-browse.php:74
+#: section-browse.php:35
+#: staff-browse.php:28
+#: submitted-browse.php:100
+msgid "Tools"
+msgstr ""
+
+#: article-browse.php:179
+#: smarty.c:176
+msgid "Breaking News"
+msgstr ""
+
+#: article-browse.php:187
+msgid "Keywords:"
+msgstr ""
+
+#: article-browse.php:193
+#: index.php:78
+#: page-browse.php:60
+#: section-browse.php:61
+#: submitted-browse.php:125
+msgid "Preview"
+msgstr ""
+
+#: article-browse.php:194
+#: issue-browse.php:136
+#: page-browse.php:61
+#: poll-browse.php:93
+#: section-browse.php:62
+#: staff-access.php:158
+#: staff-access.php:208
+#: staff-access.php:219
+#: staff-access.php:230
+#: staff-access.php:246
+#: staff-access.php:257
+#: staff-browse.php:51
+msgid "Edit"
+msgstr ""
+
+#: article-browse.php:195
+#: article-edit.php:331
+#: article-media.php:171
+#: index.php:81
+#: page-browse.php:62
+#: page-edit.php:185
+#: poll-browse.php:95
+#: poll-edit.php:221
+#: section-browse.php:63
+#: section-edit.php:184
+#: staff-access.php:197
+#: staff-browse.php:54
+#: staff-edit.php:319
+#: submitted-browse.php:128
+#: submitted-browse.php:137
+#: submitted-edit.php:72
+#: submitted-edit.php:103
+msgid "Delete"
+msgstr ""
+
+#: article-browse.php:204
+#: article-browse.php:229
+#: index.php:32
+msgid "Add an Article"
+msgstr ""
+
+#: article-browse.php:216
+msgid "Summaries:"
+msgstr ""
+
+#: article-browse.php:218
+msgid "Show Summaries"
+msgstr ""
+
+#: article-browse.php:220
+msgid "Hide Summaries"
+msgstr ""
+
+#: article-browse.php:222
+msgid "Reset Dates:"
+msgstr ""
+
+#: article-browse.php:223
+msgid "Publication Dates"
+msgstr ""
+
+#: article-browse.php:227
+msgid "This selected section is empty."
+msgstr ""
+
+#: article-edit.php:37
+msgid "You must enter a number."
+msgstr ""
+
+#: article-edit.php:51
+msgid "Error in 'cm_delete_article' function."
+msgstr ""
+
+#: article-edit.php:79
+msgid "Error in 'cm_edit_article' function."
+msgstr ""
+
+#: article-edit.php:83
+msgid "Did not have an article to load."
+msgstr ""
+
+#: article-edit.php:109
+msgid "Error in 'cm_add_article' function."
+msgstr ""
+
+#: article-edit.php:142
+#: article-edit.php:174
+msgid "Article doesn't exist, or you do not have permission to edit it."
+msgstr ""
+
+#: article-edit.php:193
+msgid "Article Editor"
+msgstr ""
+
+#: article-edit.php:196
+msgid "Keywords"
+msgstr ""
+
+#: article-edit.php:202
+#: section-browse.php:33
+#: staff-access.php:172
+#: smarty.c:20
+#: smarty.c:251
+msgid "Section"
+msgstr ""
+
+#: article-edit.php:213
+#: staff-access.php:182
+#: smarty.c:11
+#: smarty.c:29
+#: smarty.c:35
+msgid "Issue"
+msgstr ""
+
+#: article-edit.php:223
+#: page-edit.php:121
+msgid "Last Edited"
+msgstr ""
+
+#: article-edit.php:228
+msgid "Publish Timestamp"
+msgstr ""
+
+#: article-edit.php:239
+msgid "Highest"
+msgstr ""
+
+#: article-edit.php:253
+msgid "Lowest"
+msgstr ""
+
+#: article-edit.php:256
+msgid "Linked Media"
+msgstr ""
+
+#: article-edit.php:260
+msgid "leave this page and lose all changes"
+msgstr ""
+
+#: article-edit.php:260
+msgid "Add New Media"
+msgstr ""
+
+#: article-edit.php:262
+msgid "You must first publish the article before adding linked media."
+msgstr ""
+
+#: article-edit.php:267
+#: page-browse.php:42
+#: page-edit.php:128
+msgid "Title"
+msgstr ""
+
+#: article-edit.php:272
+msgid "Subtitle"
+msgstr ""
+
+#: article-edit.php:277
+#: smarty.c:17
+#: smarty.c:248
+msgid "Author"
+msgstr ""
+
+#: article-edit.php:282
+msgid "Author Title"
+msgstr ""
+
+#: article-edit.php:287
+msgid "Summary"
+msgstr ""
+
+#: article-edit.php:292
+#: page-edit.php:138
+msgid "Text"
+msgstr ""
+
+#: article-edit.php:302
+msgid "Submit Article"
+msgstr ""
+
+#: article-edit.php:307
+msgid "Update Article"
+msgstr ""
+
+#: article-edit.php:310
+#: article-edit.php:332
+#: article-media.php:150
+#: article-media.php:172
+#: issue-browse.php:80
+#: issue-edit.php:199
+#: page-edit.php:163
+#: page-edit.php:186
+#: poll-edit.php:211
+#: poll-edit.php:222
+#: profile.php:212
+#: section-edit.php:169
+#: section-edit.php:185
+#: settings.php:129
+#: staff-access.php:274
+#: staff-edit.php:298
+#: staff-edit.php:309
+#: staff-edit.php:320
+#: submitted-edit.php:104
+msgid "Cancel"
+msgstr ""
+
+#: article-edit.php:317
+msgid "Preview Article"
+msgstr ""
+
+#: article-edit.php:319
+#: submitted-edit.php:77
+msgid "Story Preview"
+msgstr ""
+
+#: article-edit.php:325
+#: section-edit.php:175
+msgid "Delete Article"
+msgstr ""
+
+#: article-edit.php:329
+#: article-media.php:169
+#: page-edit.php:183
+#: poll-edit.php:219
+#: section-edit.php:179
+#: staff-edit.php:317
+#: submitted-edit.php:101
+msgid "Confirm Delete"
+msgstr ""
+
+#: article-edit.php:330
+msgid "Are you sure you want to delete this article?"
+msgstr ""
+
+#: article-media.php:20
+msgid "Error in 'cm_delete_media' function."
+msgstr ""
+
+#: article-media.php:51
+msgid "Error in 'cm_edit_media' function."
+msgstr ""
+
+#: article-media.php:55
+msgid "Did not have media to load."
+msgstr ""
+
+#: article-media.php:75
+msgid "Error in 'cm_add_media' function."
+msgstr ""
+
+#: article-media.php:85
+msgid "Media Manager"
+msgstr ""
+
+#: article-media.php:109
+msgid "Media Editor"
+msgstr ""
+
+#: article-media.php:111
+msgid "Title / Description"
+msgstr ""
+
+#: article-media.php:116
+msgid "Media URL"
+msgstr ""
+
+#: article-media.php:121
+msgid "Type of Media"
+msgstr ""
+
+#: article-media.php:124
+msgid "JPEG Image"
+msgstr ""
+
+#: article-media.php:125
+msgid "PNG Image"
+msgstr ""
+
+#: article-media.php:126
+msgid "GIF Image"
+msgstr ""
+
+#: article-media.php:127
+msgid "Word or RTF Document"
+msgstr ""
+
+#: article-media.php:128
+msgid "PDF Document"
+msgstr ""
+
+#: article-media.php:129
+msgid "Flash (SWF)"
+msgstr ""
+
+#: article-media.php:130
+msgid "Related Link"
+msgstr ""
+
+#: article-media.php:131
+msgid "Determines display method."
+msgstr ""
+
+#: article-media.php:134
+msgid "Caption"
+msgstr ""
+
+#: article-media.php:139
+msgid "Credit / Source"
+msgstr ""
+
+#: article-media.php:145
+msgid "Add Media"
+msgstr ""
+
+#: article-media.php:147
+msgid "Update Media"
+msgstr ""
+
+#: article-media.php:158
+msgid "Preview Media"
+msgstr ""
+
+#: article-media.php:160
+msgid "Media Preview"
+msgstr ""
+
+#: article-media.php:165
+msgid "Delete Media"
+msgstr ""
+
+#: article-media.php:170
+msgid "Are you sure you want to delete this media item?"
+msgstr ""
+
+#: index.php:24
+msgid "Welcome"
+msgstr ""
+
+#: index.php:26
+msgid "Quick Links"
+msgstr ""
+
+#: index.php:29
+msgid "Manage Articles"
+msgstr ""
+
+#: index.php:35
+msgid "Manage Poll Questions"
+msgstr ""
+
+#: index.php:38
+msgid "Add a Poll Question"
+msgstr ""
+
+#: index.php:42
+msgid "Announcements"
+msgstr ""
+
+#: index.php:50
+msgid "Submitted Articles"
+msgstr ""
+
+#: index.php:50
+msgid " for"
+msgstr ""
+
+#: index.php:56
+#: submitted-browse.php:96
+msgid "Sent"
+msgstr ""
+
+#: index.php:57
+#: submitted-browse.php:97
+msgid "From"
+msgstr ""
+
+#: index.php:58
+#: submitted-browse.php:98
+msgid "Subject"
+msgstr ""
+
+#: index.php:79
+#: submitted-browse.php:126
+msgid "Post"
+msgstr ""
+
+#: index.php:93
+#: submitted-browse.php:142
+msgid "There are no submitted articles for this issue."
+msgstr ""
+
+#: issue-browse.php:28
+msgid "Error in 'cm_edit_publish_settings' function."
+msgstr ""
+
+#: issue-browse.php:45
+#: issue-edit.php:110
+#: staff-access.php:212
+msgid "Issue Manager"
+msgstr ""
+
+#: issue-browse.php:48
+msgid "Issue added."
+msgstr ""
+
+#: issue-browse.php:49
+msgid "Issue updated."
+msgstr ""
+
+#: issue-browse.php:50
+msgid "Publish settings updated."
+msgstr ""
+
+#: issue-browse.php:54
+msgid "Publication Settings"
+msgstr ""
+
+#: issue-browse.php:64
+msgid "Current Issue"
+msgstr ""
+
+#: issue-browse.php:69
+#: issue-browse.php:76
+msgid "Stored:"
+msgstr ""
+
+#: issue-browse.php:71
+msgid "Next Issue"
+msgstr ""
+
+#: issue-browse.php:78
+#: settings.php:127
+#: staff-access.php:272
+msgid "Update Settings"
+msgstr ""
+
+#: issue-browse.php:86
+msgid "Browse Issue Archive"
+msgstr ""
+
+#: issue-browse.php:88
+msgid "Select Volume"
+msgstr ""
+
+#: issue-browse.php:113
+msgid "Issue Date"
+msgstr ""
+
+#: issue-browse.php:114
+#: issue-edit.php:173
+msgid "Issue Number"
+msgstr ""
+
+#: issue-browse.php:115
+#: issue-edit.php:178
+msgid "Circulation"
+msgstr ""
+
+#: issue-browse.php:137
+msgid "Browse Articles"
+msgstr ""
+
+#: issue-browse.php:145
+#: issue-edit.php:194
+msgid "Add Issue"
+msgstr ""
+
+#: issue-browse.php:152
+msgid "The selected volume is empty."
+msgstr ""
+
+#: issue-browse.php:152
+msgid "Add an issue"
+msgstr ""
+
+#: issue-edit.php:43
+msgid "Error in 'cm_edit_issue' function."
+msgstr ""
+
+#: issue-edit.php:47
+msgid "Did not have a issue to load."
+msgstr ""
+
+#: issue-edit.php:70
+msgid "Error in 'cm_add_issue' function."
+msgstr ""
+
+#: issue-edit.php:88
+msgid "Could not load issue."
+msgstr ""
+
+#: issue-edit.php:113
+msgid "Issue Editor"
+msgstr ""
+
+#: issue-edit.php:125
+msgid "Publication Date"
+msgstr ""
+
+#: issue-edit.php:168
+#: smarty.c:8
+msgid "Volume"
+msgstr ""
+
+#: issue-edit.php:183
+msgid "Online Only?"
+msgstr ""
+
+#: issue-edit.php:186
+msgid "Yes"
+msgstr ""
+
+#: issue-edit.php:189
+msgid "No"
+msgstr ""
+
+#: issue-edit.php:196
+msgid "Update Issue"
+msgstr ""
+
+#: login.php:90
+msgid "Your username or password were incorrect."
+msgstr ""
+
+#: login.php:91
+msgid "You new password has been e-mailed."
+msgstr ""
+
+#: login.php:92
+msgid "Could not find matching username and e-mail address."
+msgstr ""
+
+#: login.php:93
+msgid "Your session has ended."
+msgstr ""
+
+#: login.php:95
+#: login.php:111
+msgid "Username"
+msgstr ""
+
+#: login.php:96
+#: profile.php:108
+#: staff-edit.php:188
+msgid "Password"
+msgstr ""
+
+#: login.php:99
+#: staff-edit.php:181
+msgid "Login"
+msgstr ""
+
+#: login.php:100
+msgid "Reset My Password"
+msgstr ""
+
+#: login.php:100
+#: login.php:115
+msgid "Request Login"
+msgstr ""
+
+#: login.php:112
+#: profile.php:166
+#: staff-browse.php:27
+#: staff-edit.php:250
+#: smarty.c:47
+#: smarty.c:125
+#: smarty.c:413
+msgid "E-mail"
+msgstr ""
+
+#: login.php:114
+msgid "Reset Password"
+msgstr ""
+
+#: login.php:115
+msgid "Back to Login"
+msgstr ""
+
+#: page-browse.php:23
+msgid "Page added."
+msgstr ""
+
+#: page-browse.php:24
+msgid "Page updated."
+msgstr ""
+
+#: page-browse.php:25
+msgid "Page deleted."
+msgstr ""
+
+#: page-browse.php:35
+msgid "Page Browser"
+msgstr ""
+
+#: page-browse.php:37
+msgid "Actions"
+msgstr ""
+
+#: page-browse.php:38
+msgid "Add New Page"
+msgstr ""
+
+#: page-browse.php:43
+msgid "Edited"
+msgstr ""
+
+#: page-browse.php:72
+msgid "You are not currently using pages."
+msgstr ""
+
+#: page-browse.php:72
+msgid "Add a Page"
+msgstr ""
+
+#: page-edit.php:31
+msgid "Error in 'cm_delete_page' function."
+msgstr ""
+
+#: page-edit.php:54
+msgid "Error in 'cm_edit_page' function."
+msgstr ""
+
+#: page-edit.php:58
+msgid "Did not have a page to load."
+msgstr ""
+
+#: page-edit.php:78
+msgid "Error in 'cm_add_page' function."
+msgstr ""
+
+#: page-edit.php:92
+msgid "Page does not exist, or you do not have permission to edit it."
+msgstr ""
+
+#: page-edit.php:110
+#: staff-access.php:223
+msgid "Page Manager"
+msgstr ""
+
+#: page-edit.php:113
+msgid "Page Editor"
+msgstr ""
+
+#: page-edit.php:116
+msgid "Page Slug"
+msgstr ""
+
+#: page-edit.php:123
+msgid "Entry"
+msgstr ""
+
+#: page-edit.php:133
+msgid "Short Title"
+msgstr ""
+
+#: page-edit.php:145
+msgid "Side Text"
+msgstr ""
+
+#: page-edit.php:155
+msgid "Submit Page"
+msgstr ""
+
+#: page-edit.php:160
+msgid "Update Page"
+msgstr ""
+
+#: page-edit.php:170
+msgid "Preview Page"
+msgstr ""
+
+#: page-edit.php:172
+msgid "Page Preview"
+msgstr ""
+
+#: page-edit.php:179
+msgid "Delete Page"
+msgstr ""
+
+#: page-edit.php:184
+msgid "Are you sure you want to delete this page?"
+msgstr ""
+
+#: poll-browse.php:21
+msgid "You have an error in the cm_edit_poll_settings function."
+msgstr ""
+
+#: poll-browse.php:39
+#: poll-edit.php:132
+#: staff-access.php:201
+msgid "Poll Manager"
+msgstr ""
+
+#: poll-browse.php:41
+msgid "Poll question added."
+msgstr ""
+
+#: poll-browse.php:42
+msgid "Poll question updated."
+msgstr ""
+
+#: poll-browse.php:43
+msgid "Poll question and ballots deleted."
+msgstr ""
+
+#: poll-browse.php:44
+msgid "Active poll setting changed."
+msgstr ""
+
+#: poll-browse.php:49
+#: poll-browse.php:65
+msgid "Active Poll"
+msgstr ""
+
+#: poll-browse.php:51
+msgid "Current Poll Question"
+msgstr ""
+
+#: poll-browse.php:53
+msgid "Polls Disabled"
+msgstr ""
+
+#: poll-browse.php:56
+msgid "Change Active Poll"
+msgstr ""
+
+#: poll-browse.php:67
+msgid "Poll Options:"
+msgstr ""
+
+#: poll-browse.php:68
+msgid "Add New Poll"
+msgstr ""
+
+#: poll-browse.php:72
+msgid "Question"
+msgstr ""
+
+#: poll-browse.php:73
+msgid "Created"
+msgstr ""
+
+#: poll-browse.php:88
+msgid "Current"
+msgstr ""
+
+#: poll-browse.php:94
+msgid "Results"
+msgstr ""
+
+#: poll-browse.php:105
+msgid "You are not currently using polls."
+msgstr ""
+
+#: poll-browse.php:105
+msgid "Add Poll Question."
+msgstr ""
+
+#: poll-edit.php:30
+msgid "Error in 'cm_delete_poll' function."
+msgstr ""
+
+#: poll-edit.php:64
+msgid "Error in 'cm_edit_poll' function."
+msgstr ""
+
+#: poll-edit.php:68
+msgid "Did not have a poll question to load."
+msgstr ""
+
+#: poll-edit.php:95
+msgid "Error in 'cm_add_poll' function."
+msgstr ""
+
+#: poll-edit.php:108
+msgid "That poll question cannot be loaded."
+msgstr ""
+
+#: poll-edit.php:135
+msgid "Question Editor"
+msgstr ""
+
+#: poll-edit.php:138
+msgid "Related Article ID"
+msgstr ""
+
+#: poll-edit.php:143
+msgid "Audit"
+msgstr ""
+
+#: poll-edit.php:145
+msgid "Current Results"
+msgstr ""
+
+#: poll-edit.php:150
+msgid "Poll Question"
+msgstr ""
+
+#: poll-edit.php:155
+msgid "Option 1"
+msgstr ""
+
+#: poll-edit.php:160
+msgid "Option 2"
+msgstr ""
+
+#: poll-edit.php:165
+msgid "Option 3"
+msgstr ""
+
+#: poll-edit.php:170
+msgid "Option 4"
+msgstr ""
+
+#: poll-edit.php:175
+msgid "Option 5"
+msgstr ""
+
+#: poll-edit.php:180
+msgid "Option 6"
+msgstr ""
+
+#: poll-edit.php:185
+msgid "Option 7"
+msgstr ""
+
+#: poll-edit.php:190
+msgid "Option 8"
+msgstr ""
+
+#: poll-edit.php:195
+msgid "Option 9"
+msgstr ""
+
+#: poll-edit.php:200
+msgid "Option 10"
+msgstr ""
+
+#: poll-edit.php:206
+msgid "Add Poll"
+msgstr ""
+
+#: poll-edit.php:208
+msgid "Update Poll"
+msgstr ""
+
+#: poll-edit.php:215
+msgid "Delete Poll"
+msgstr ""
+
+#: poll-edit.php:220
+msgid "Are you sure you want to delete this poll and associated ballots?"
+msgstr ""
+
+#: profile.php:43
+#: staff-edit.php:70
+msgid "Passwords did not match."
+msgstr ""
+
+#: profile.php:53
+msgid "Error in 'cm_edit_profile' function."
+msgstr ""
+
+#: profile.php:64
+#: staff-edit.php:141
+msgid "User does not exist."
+msgstr ""
+
+#: profile.php:96
+msgid "Your user profile has been updated."
+msgstr ""
+
+#: profile.php:98
+msgid "You cannot change your name or job title. Please contact an administrator to correct any errors."
+msgstr ""
+
+#: profile.php:103
+#: staff-edit.php:175
+msgid "Basic Profile"
+msgstr ""
+
+#: profile.php:105
+#: staff-edit.php:186
+msgid "Passwords must match."
+msgstr ""
+
+#: profile.php:106
+msgid "It is recommended that your password be longer than 6 characters, and a mix of letters and numbers."
+msgstr ""
+
+#: profile.php:113
+#: staff-edit.php:193
+msgid "Confirm Password"
+msgstr ""
+
+#: profile.php:117
+msgid "Leave blank if you do not wish to change your password."
+msgstr ""
+
+#: profile.php:120
+#: staff-edit.php:204
+msgid "First Name"
+msgstr ""
+
+#: profile.php:125
+#: staff-edit.php:209
+msgid "Middle Name"
+msgstr ""
+
+#: profile.php:130
+#: staff-edit.php:214
+msgid "Last Name"
+msgstr ""
+
+#: profile.php:135
+#: staff-browse.php:26
+#: staff-edit.php:219
+msgid "Job Title"
+msgstr ""
+
+#: profile.php:141
+#: staff-edit.php:225
+#: submitted-edit.php:81
+msgid "Contact Information"
+msgstr ""
+
+#: profile.php:143
+#: staff-edit.php:227
+msgid "Internet Messengers"
+msgstr ""
+
+#: profile.php:145
+#: staff-edit.php:229
+msgid "AOL Instant Messenger"
+msgstr ""
+
+#: profile.php:150
+#: staff-edit.php:234
+msgid "Microsoft Messenger"
+msgstr ""
+
+#: profile.php:155
+#: staff-edit.php:239
+msgid "Yahoo! Messenger"
+msgstr ""
+
+#: profile.php:160
+#: staff-edit.php:244
+msgid "Jabber Services"
+msgstr ""
+
+#: profile.php:171
+#: staff-edit.php:255
+msgid "Telephone (Local)"
+msgstr ""
+
+#: profile.php:176
+#: staff-edit.php:260
+msgid "Mobile"
+msgstr ""
+
+#: profile.php:181
+#: settings.php:92
+#: staff-edit.php:265
+msgid "Address"
+msgstr ""
+
+#: profile.php:186
+#: settings.php:97
+#: staff-edit.php:270
+msgid "City"
+msgstr ""
+
+#: profile.php:191
+#: settings.php:102
+#: staff-edit.php:275
+msgid "State"
+msgstr ""
+
+#: profile.php:196
+#: settings.php:107
+#: staff-edit.php:280
+msgid "Zip Code"
+msgstr ""
+
+#: profile.php:202
+#: staff-edit.php:286
+msgid "Additional Information"
+msgstr ""
+
+#: profile.php:204
+#: staff-edit.php:288
+msgid "Profile"
+msgstr ""
+
+#: profile.php:209
+#: staff-edit.php:305
+msgid "Update Profile"
+msgstr ""
+
+#: section-browse.php:18
+msgid "Section updated."
+msgstr ""
+
+#: section-browse.php:19
+msgid "Section added."
+msgstr ""
+
+#: section-browse.php:20
+msgid "Section deleted."
+msgstr ""
+
+#: section-browse.php:24
+msgid "Browse Sections"
+msgstr ""
+
+#: section-browse.php:26
+msgid "Section Options:"
+msgstr ""
+
+#: section-browse.php:27
+msgid "Add New Section"
+msgstr ""
+
+#: section-browse.php:34
+msgid "Editor"
+msgstr ""
+
+#: section-edit.php:42
+msgid "Error in 'cm_edit_section' function."
+msgstr ""
+
+#: section-edit.php:46
+msgid "Did not have a section to load."
+msgstr ""
+
+#: section-edit.php:70
+msgid "Error in 'cm_add_section' function."
+msgstr ""
+
+#: section-edit.php:86
+msgid "Error in 'cm_delete_section' function."
+msgstr ""
+
+#: section-edit.php:114
+msgid "Section Manager"
+msgstr ""
+
+#: section-edit.php:117
+msgid "Section Editor"
+msgstr ""
+
+#: section-edit.php:119
+msgid "Section Name"
+msgstr ""
+
+#: section-edit.php:124
+msgid "URL"
+msgstr ""
+
+#: section-edit.php:129
+msgid "Editor Name"
+msgstr ""
+
+#: section-edit.php:134
+msgid "Editor Title"
+msgstr ""
+
+#: section-edit.php:139
+msgid "Editor Email"
+msgstr ""
+
+#: section-edit.php:144
+msgid "Feed Image URL"
+msgstr ""
+
+#: section-edit.php:149
+msgid "Sidebar Content"
+msgstr ""
+
+#: section-edit.php:156
+msgid "Section Priority"
+msgstr ""
+
+#: section-edit.php:163
+msgid "Add Section"
+msgstr ""
+
+#: section-edit.php:165
+msgid "Update Section"
+msgstr ""
+
+#: section-edit.php:180
+msgid "Move affected articles to"
+msgstr ""
+
+#: section-edit.php:183
+msgid "Are you sure you want to delete this section?"
+msgstr ""
+
+#: server-info.php:12
+msgid "Session Variables Set by Server"
+msgstr ""
+
+#: server-info.php:13
+msgid "These are set when you login. Updates do not occur until you login again."
+msgstr ""
+
+#: server-info.php:17
+msgid "User Data:"
+msgstr ""
+
+#: server-info.php:19
+msgid "Access Data:"
+msgstr ""
+
+#: server-info.php:21
+msgid "Setting Data:"
+msgstr ""
+
+#: server-info.php:23
+msgid "Issue Data:"
+msgstr ""
+
+#: server-info.php:27
+msgid "Cookies Set by Server"
+msgstr ""
+
+#: server-info.php:28
+msgid "Modules set cookies to keep everything easy to get to."
+msgstr ""
+
+#: server-info.php:39
+#: staff-access.php:264
+msgid "Server Information"
+msgstr ""
+
+#: server-info.php:40
+msgid "A phpinfo() instance. Might be helpful in debugging server errors."
+msgstr ""
+
+#: settings.php:31
+msgid "Error in 'cm_edit_settings' function."
+msgstr ""
+
+#: settings.php:44
+msgid "Site settings updated."
+msgstr ""
+
+#: settings.php:70
+msgid "Other Site Settings"
+msgstr ""
+
+#: settings.php:72
+msgid "Publication Name"
+msgstr ""
+
+#: settings.php:77
+msgid "Tagline"
+msgstr ""
+
+#: settings.php:82
+msgid "Web Site URL"
+msgstr ""
+
+#: settings.php:87
+msgid "Primary Email Address"
+msgstr ""
+
+#: settings.php:112
+#: smarty.c:422
+msgid "Telephone"
+msgstr ""
+
+#: settings.php:117
+msgid "Fax"
+msgstr ""
+
+#: settings.php:122
+msgid "Announcement"
+msgstr ""
+
+#: staff-access.php:50
+msgid "Error in 'cm_clear_access' function."
+msgstr ""
+
+#: staff-access.php:83
+msgid "Error in 'cm_add_access' function."
+msgstr ""
+
+#: staff-access.php:130
+#: staff-browse.php:15
+#: staff-edit.php:172
+msgid "Staff Manager"
+msgstr ""
+
+#: staff-access.php:131
+msgid "Setting user access for"
+msgstr ""
+
+#: staff-access.php:134
+msgid "Note: As this is your account, changes will be effective at next login."
+msgstr ""
+
+#: staff-access.php:139
+msgid "Module Access"
+msgstr ""
+
+#: staff-access.php:143
+msgid "Home Page"
+msgstr ""
+
+#: staff-access.php:147
+msgid "User Profile"
+msgstr ""
+
+#: staff-access.php:149
+msgid "Manage"
+msgstr ""
+
+#: staff-access.php:154
+#: staff-access.php:189
+#: staff-access.php:204
+#: staff-access.php:215
+#: staff-access.php:226
+#: staff-access.php:238
+#: staff-access.php:253
+msgid "Browse"
+msgstr ""
+
+#: staff-access.php:162
+msgid "Media"
+msgstr ""
+
+#: staff-access.php:166
+msgid "Restrict User"
+msgstr ""
+
+#: staff-access.php:169
+#: staff-access.php:176
+msgid "No Restrictions"
+msgstr ""
+
+#: staff-access.php:177
+msgid "Next Issue Only"
+msgstr ""
+
+#: staff-access.php:179
+msgid "Current Issue Only"
+msgstr ""
+
+#: staff-access.php:186
+#: submitted-browse.php:59
+#: submitted-edit.php:66
+msgid "Submitted Article Manager"
+msgstr ""
+
+#: staff-access.php:193
+msgid "View"
+msgstr ""
+
+#: staff-access.php:233
+msgid "Configuration"
+msgstr ""
+
+#: staff-access.php:235
+msgid "Users"
+msgstr ""
+
+#: staff-access.php:242
+#: staff-browse.php:52
+msgid "Access"
+msgstr ""
+
+#: staff-access.php:250
+msgid "Sections"
+msgstr ""
+
+#: staff-access.php:268
+msgid "Settings"
+msgstr ""
+
+#: staff-browse.php:18
+msgid "User added."
+msgstr ""
+
+#: staff-browse.php:19
+msgid "User updated."
+msgstr ""
+
+#: staff-browse.php:20
+msgid "User deleted."
+msgstr ""
+
+#: staff-browse.php:21
+msgid "User access updated."
+msgstr ""
+
+#: staff-browse.php:25
+#: smarty.c:299
+msgid "Name"
+msgstr ""
+
+#: staff-browse.php:61
+msgid "Add a User"
+msgstr ""
+
+#: staff-edit.php:29
+msgid "Error in 'cm_delete_user' function."
+msgstr ""
+
+#: staff-edit.php:81
+msgid "Error in 'cm_edit_user' function."
+msgstr ""
+
+#: staff-edit.php:85
+msgid "Did not have a user to load."
+msgstr ""
+
+#: staff-edit.php:117
+msgid "Passwords did not match, or left blank."
+msgstr ""
+
+#: staff-edit.php:126
+msgid "Error in 'cm_add_user' function."
+msgstr ""
+
+#: staff-edit.php:200
+msgid "Leave blank if you do not wish to change the password."
+msgstr ""
+
+#: staff-edit.php:297
+msgid "Add User"
+msgstr ""
+
+#: staff-edit.php:313
+msgid "Delete User"
+msgstr ""
+
+#: staff-edit.php:318
+msgid "Are you sure you want to delete this user?"
+msgstr ""
+
+#: submitted-browse.php:41
+msgid "There was an error in the 'cm_delete_submitted' function."
+msgstr ""
+
+#: submitted-browse.php:62
+msgid "Submitted article added."
+msgstr ""
+
+#: submitted-browse.php:63
+msgid "Submitted updated."
+msgstr ""
+
+#: submitted-browse.php:64
+msgid "Submitted article deleted."
+msgstr ""
+
+#: submitted-browse.php:65
+msgid "Submitted article(s) deleted."
+msgstr ""
+
+#: submitted-browse.php:78
+msgid "Open"
+msgstr ""
+
+#: submitted-browse.php:94
+msgid "ID"
+msgstr ""
+
+#: submitted-browse.php:138
+msgid "Clear Selection"
+msgstr ""
+
+#: submitted-edit.php:30
+msgid "Error in 'cm_delete_submitted' function."
+msgstr ""
+
+#: submitted-edit.php:43
+msgid "Submitted article does not exist."
+msgstr ""
+
+#: submitted-edit.php:70
+msgid "Post to Article Manager"
+msgstr ""
+
+#: submitted-edit.php:79
+msgid "By"
+msgstr ""
+
+#: submitted-edit.php:91
+#: smarty.c:341
+#: smarty.c:437
+msgid "Word Count:"
+msgstr ""
+
+#: submitted-edit.php:92
+msgid "Keyword:"
+msgstr ""
+
+#: submitted-edit.php:97
+msgid "Delete Submitted Article"
+msgstr ""
+
+#: submitted-edit.php:102
+msgid "Are you sure you want to delete this submitted article?"
+msgstr ""
+
+#: smarty.c:2
+msgid "Advertisement"
+msgstr ""
+
+#: smarty.c:5
+#: smarty.c:224
+msgid "Archives"
+msgstr ""
+
+#: smarty.c:23
+#: smarty.c:254
+msgid "Words"
+msgstr ""
+
+#: smarty.c:26
+msgid "No articles were uploaded to this issue."
+msgstr ""
+
+#: smarty.c:32
+msgid "Date"
+msgstr ""
+
+#: smarty.c:38
+msgid "That volume does not exist in our archives. Select a valid entry from the list below."
+msgstr ""
+
+#: smarty.c:41
+msgid "Volumes in our Internet Archives"
+msgstr ""
+
+#: smarty.c:44
+msgid "Print"
+msgstr ""
+
+#: smarty.c:50
+msgid "Share This Article"
+msgstr ""
+
+#: smarty.c:53
+msgid "More"
+msgstr ""
+
+#: smarty.c:56
+msgid "Headlines"
+msgstr ""
+
+#: smarty.c:59
+msgid "Error:"
+msgstr ""
+
+#: smarty.c:62
+msgid "Our site has experienced an error. If the problem continues, please contact us about this error."
+msgstr ""
+
+#: smarty.c:65
+msgid "Name:"
+msgstr ""
+
+#: smarty.c:68
+#: smarty.c:347
+msgid "E-mail:"
+msgstr ""
+
+#: smarty.c:71
+#: smarty.c:362
+msgid "Sent:"
+msgstr ""
+
+#: smarty.c:74
+#: smarty.c:365
+msgid "Form:"
+msgstr ""
+
+#: smarty.c:77
+msgid "Feedback"
+msgstr ""
+
+#: smarty.c:80
+#: smarty.c:371
+msgid "Your submission has been sent to our editors."
+msgstr ""
+
+#: smarty.c:83
+#: smarty.c:374
+msgid "You must complete the required fields."
+msgstr ""
+
+#: smarty.c:86
+#: smarty.c:377
+msgid "Submission failed for some reason. Please try again."
+msgstr ""
+
+#: smarty.c:89
+#: smarty.c:380
+msgid "Content submissions are disabled at this time."
+msgstr ""
+
+#: smarty.c:92
+msgid "Mailing Address"
+msgstr ""
+
+#: smarty.c:95
+msgid "Contacting Us"
+msgstr ""
+
+#: smarty.c:98
+#: smarty.c:359
+msgid "Telephone:"
+msgstr ""
+
+#: smarty.c:101
+msgid "Fax:"
+msgstr ""
+
+#: smarty.c:104
+msgid "Primary E-mail:"
+msgstr ""
+
+#: smarty.c:107
+msgid "Before you complete this form"
+msgstr ""
+
+#: smarty.c:110
+#: smarty.c:389
+msgid "Letter to the Editor"
+msgstr ""
+
+#: smarty.c:113
+msgid "Story or Press Release"
+msgstr ""
+
+#: smarty.c:116
+#: smarty.c:395
+msgid "Bulletin Board Item"
+msgstr ""
+
+#: smarty.c:119
+msgid "Step 1: Contact Information"
+msgstr ""
+
+#: smarty.c:122
+#: smarty.c:410
+msgid "Your Name"
+msgstr ""
+
+#: smarty.c:128
+msgid "Your Feedback"
+msgstr ""
+
+#: smarty.c:131
+msgid "Denotes required information"
+msgstr ""
+
+#: smarty.c:134
+msgid "Submit Feedback"
+msgstr ""
+
+#: smarty.c:137
+#: smarty.c:233
+#: smarty.c:308
+#: smarty.c:449
+msgid "Reset"
+msgstr ""
+
+#: smarty.c:140
+msgid "Advertising"
+msgstr ""
+
+#: smarty.c:143
+#: smarty.c:335
+msgid "Contact Us"
+msgstr ""
+
+#: smarty.c:146
+msgid "Copyright"
+msgstr ""
+
+#: smarty.c:149
+#: smarty.c:167
+msgid "Online Edition"
+msgstr ""
+
+#: smarty.c:152
+msgid "Powered by"
+msgstr ""
+
+#: smarty.c:155
+msgid "Headlines (RSS)"
+msgstr ""
+
+#: smarty.c:158
+msgid "Last Edition:"
+msgstr ""
+
+#: smarty.c:161
+msgid "Published:"
+msgstr ""
+
+#: smarty.c:164
+msgid "Updated:"
+msgstr ""
+
+#: smarty.c:170
+#: smarty.c:173
+#: smarty.c:230
+msgid "Search"
+msgstr ""
+
+#: smarty.c:179
+msgid "Top Story"
+msgstr ""
+
+#: smarty.c:182
+#: smarty.c:185
+#: smarty.c:260
+#: smarty.c:263
+msgid "Read More"
+msgstr ""
+
+#: smarty.c:188
+msgid "Top Stories"
+msgstr ""
+
+#: smarty.c:191
+msgid "Web Poll"
+msgstr ""
+
+#: smarty.c:194
+msgid "Cast Vote"
+msgstr ""
+
+#: smarty.c:197
+msgid "Poll Results"
+msgstr ""
+
+#: smarty.c:200
+msgid "Your vote was counted."
+msgstr ""
+
+#: smarty.c:203
+msgid "Something was wrong with your ballot."
+msgstr ""
+
+#: smarty.c:206
+msgid "Poll Response"
+msgstr ""
+
+#: smarty.c:209
+msgid "Result"
+msgstr ""
+
+#: smarty.c:212
+msgid "No one has participated in this Web poll yet."
+msgstr ""
+
+#: smarty.c:215
+msgid "Please go back to the home page to cast your ballot."
+msgstr ""
+
+#: smarty.c:218
+msgid "Related Article:"
+msgstr ""
+
+#: smarty.c:221
+msgid "Web polls are currently unavailable."
+msgstr ""
+
+#: smarty.c:227
+msgid "Search for:"
+msgstr ""
+
+#: smarty.c:236
+msgid "Search within:"
+msgstr ""
+
+#: smarty.c:239
+msgid "Sort by:"
+msgstr ""
+
+#: smarty.c:245
+msgid "Publish Date"
+msgstr ""
+
+#: smarty.c:257
+msgid "Your search did not return any articles."
+msgstr ""
+
+#: smarty.c:266
+#: smarty.c:269
+msgid "Message From:"
+msgstr ""
+
+#: smarty.c:272
+#: smarty.c:317
+msgid "Link:"
+msgstr ""
+
+#: smarty.c:275
+msgid "NOTE:"
+msgstr ""
+
+#: smarty.c:278
+msgid "E-mail Article"
+msgstr ""
+
+#: smarty.c:281
+msgid "Article was e-mailed."
+msgstr ""
+
+#: smarty.c:284
+msgid "Mailing failed. Check your recipient's e-mail address."
+msgstr ""
+
+#: smarty.c:287
+msgid "Required Information"
+msgstr ""
+
+#: smarty.c:290
+msgid "Recipient Information"
+msgstr ""
+
+#: smarty.c:293
+#: smarty.c:302
+msgid "E-mail Address"
+msgstr ""
+
+#: smarty.c:296
+msgid "Your Information"
+msgstr ""
+
+#: smarty.c:305
+msgid "Send"
+msgstr ""
+
+#: smarty.c:311
+msgid "Share Article"
+msgstr ""
+
+#: smarty.c:314
+msgid "Select a service from the list below to post this article to an Internet community."
+msgstr ""
+
+#: smarty.c:320
+msgid "Write a Letter"
+msgstr ""
+
+#: smarty.c:323
+msgid "Archived Issues"
+msgstr ""
+
+#: smarty.c:326
+msgid "Submit a Story"
+msgstr ""
+
+#: smarty.c:329
+msgid "About"
+msgstr ""
+
+#: smarty.c:332
+msgid "Advertising Rates"
+msgstr ""
+
+#: smarty.c:338
+msgid "Type:"
+msgstr ""
+
+#: smarty.c:344
+msgid "Author:"
+msgstr ""
+
+#: smarty.c:350
+msgid "Classification:"
+msgstr ""
+
+#: smarty.c:353
+msgid "Major:"
+msgstr ""
+
+#: smarty.c:356
+msgid "Hometown:"
+msgstr ""
+
+#: smarty.c:368
+msgid "Write for"
+msgstr ""
+
+#: smarty.c:383
+msgid "Step 1: Submission Type"
+msgstr ""
+
+#: smarty.c:386
+msgid "Choose your submission type"
+msgstr ""
+
+#: smarty.c:392
+msgid "Article or Press Release"
+msgstr ""
+
+#: smarty.c:398
+#: smarty.c:401
+#: smarty.c:404
+msgid "Submission Guidelines:"
+msgstr ""
+
+#: smarty.c:407
+msgid "Step 2: Contact Information"
+msgstr ""
+
+#: smarty.c:416
+msgid "Classification"
+msgstr ""
+
+#: smarty.c:419
+msgid "Major / Department"
+msgstr ""
+
+#: smarty.c:425
+msgid "Hometown"
+msgstr ""
+
+#: smarty.c:428
+msgid "Step 3: Your Submission"
+msgstr ""
+
+#: smarty.c:434
+msgid "Copy and paste from your word processor"
+msgstr ""
+
+#: smarty.c:440
+msgid "Count Words"
+msgstr ""
+
+#: smarty.c:443
+msgid "Denotes required information."
+msgstr ""
+
+#: smarty.c:446
+msgid "Send Your Submission"
+msgstr ""
+

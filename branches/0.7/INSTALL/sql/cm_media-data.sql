@@ -1,0 +1,2 @@
+INSERT INTO `cm_media` VALUES (1, 1, 'PacerCMS', 'http://pacercms.sourceforge.net/wp-content/uploads/2006/10/PacerCMS_300x213.png', 'png', 'Welcome to PacerCMS!', 'PacerCMS Development Team');
+INSERT INTO `cm_media` VALUES (2, 1, 'PacerCMS Official Web Site', 'http://pacercms.sourceforge.net/', 'url', 'This would be a good site to bookmark.', 'PacerCMS Development Team');

@@ -1,0 +1,2 @@
+INSERT INTO `cm_pages` VALUES (1, 'About Our Newspaper', 'About Us', 'This is where you would put a short blurb about your history or editorial policies', '<h4>Our Staff</h4>\r\n\r\nStaff list', now(), 'about-us');
+INSERT INTO `cm_pages` VALUES (2, 'Advertising Rates', 'Advertising', 'This is where you would post your rate card and advertising policies', '<h4>Contact Us</h4>\r\n\r\nAddress and phone numbers', now(), 'advertise');
