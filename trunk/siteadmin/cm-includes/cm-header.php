@@ -28,9 +28,12 @@ if (!empty($config_file))
     include_once('functions.php');
     include_once('classes.php');
 
+    // If locale constant is undefined, assume en_US.UTF8
+    if (!defined('LOCALE')) { define('LOCALE', 'en_US.UTF8'); }
+
     include_once('cm-l10n.php');
 
 } else {
-    header('Location: ../INSTALL/cm-config.php');
+    header('Location: ../../INSTALL/cm-config.php');
     exit;
 }
