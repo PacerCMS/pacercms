@@ -9,4 +9,4 @@ CREATE TABLE `cm_sections` (
   `section_feed_image` VARCHAR(225) NOT NULL,
   `section_priority` int(5) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Newspaper section-specific data';
+) ENGINE=MyISAM DEFAULT CHARSET={charset} COMMENT='Newspaper section-specific data';

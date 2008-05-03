@@ -13,4 +13,4 @@ CREATE TABLE `cm_submitted` (
   `submitted_words` int(5) NOT NULL default '0',
   `issue_id` int(11) NOT NULL default '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Contains submitted articles via web submission';
+) ENGINE=MyISAM DEFAULT CHARSET={charset} COMMENT='Contains submitted articles via web submission';

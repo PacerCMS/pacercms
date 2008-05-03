@@ -1,6 +1,7 @@
 <?php
 /* Database and Template Settings */
 define("DB_PLATFORM", "mysql");
+define("DB_CHARSET", 'utf8');
 define("DB_HOSTNAME", "localhost");
 define("DB_DATABASE", "pacercms");
 define("DB_USERNAME", "username");

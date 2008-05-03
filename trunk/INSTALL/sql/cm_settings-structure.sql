@@ -16,4 +16,4 @@ CREATE TABLE `cm_settings` (
   `active_poll` int(11) NOT NULL default '0',
   `database_version` varchar(25) NOT NULL default '0.04',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Sets publication issue and other settings';
+) ENGINE=MyISAM DEFAULT CHARSET={charset} COMMENT='Sets publication issue and other settings';
