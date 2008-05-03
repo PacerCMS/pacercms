@@ -15,4 +15,4 @@ CREATE TABLE `cm_poll_questions` (
   `article_id` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   FULLTEXT KEY `question` (`poll_question`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Contains the poll questions';
+) ENGINE=MyISAM DEFAULT CHARSET={charset} COMMENT='Contains the poll questions';

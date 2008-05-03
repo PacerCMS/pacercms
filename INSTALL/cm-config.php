@@ -94,6 +94,16 @@ switch($step) {
       <td>The type of database platform (Note: Only tested with MySQL). </td> 
     </tr> 
     <tr> 
+      <th scope="row">Character Set</th> 
+      <td>
+         <select name="dbcharset" type="text">
+           <option value="utf8">Unicode (UTF-8)</option>
+           <option value="latin1">ISO 8859-1 (Latin-1)</option>
+         </select>
+      </td>
+      <td>The charachter set for database storage. </td> 
+    </tr> 
+    <tr> 
       <th scope="row">Database Name</th> 
       <td><input name="dbname" type="text" size="25" value="pacercms" /></td>
       <td>The name of the database you want to run PacerCMS in. </td> 
@@ -138,6 +148,7 @@ switch($step) {
 
 	case 2:
 	$dbplatform = trim($_POST['dbplatform']);
+	$dbcharset  = trim($_POST['dbcharset']);
 	$dbname     = trim($_POST['dbname']);
     $uname      = trim($_POST['uname']);
     $passwrd    = trim($_POST['pwd']);
@@ -146,6 +157,7 @@ switch($step) {
     $locale     = trim($_POST['locale']);
     
     define('DB_PLATFORM', $dbplatform);
+    define('DB_CHARSET', $dbcharset);
     define('DB_DATABASE', $dbname);
     define('DB_USERNAME', $uname);
     define('DB_PASSWORD', $passwrd);
@@ -169,6 +181,11 @@ switch($step) {
         {
             case 'define("DB_PLATFORM':
                 $line = str_replace("mysql", $dbplatform, $line);
+                fwrite($handle, $line);
+                echo $line . "<br/>";
+                break;
+            case 'define("DB_CHARSET"':
+                $line = str_replace("utf8", $dbcharset, $line);
                 fwrite($handle, $line);
                 echo $line . "<br/>";
                 break;

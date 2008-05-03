@@ -19,4 +19,4 @@ CREATE TABLE `cm_users` (
   `user_im_jabber` varchar(40) NOT NULL default '',
   `user_profile` text NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Principle user table';
+) ENGINE=MyISAM DEFAULT CHARSET={charset} COMMENT='Principle user table';

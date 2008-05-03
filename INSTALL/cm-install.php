@@ -133,7 +133,10 @@ echo "<ul>";
 
 // Access table (structure)
 echo "  <li><strong>Creating cm_access</strong> ...";
-$sql = file_get_contents('sql/cm_access-structure.sql');
+$sql_tpl = file_get_contents('sql/cm_access-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {
@@ -144,7 +147,10 @@ if ($db->ErrorMsg())
 };
 
 // Articles table (structure)
-echo "  <li><strong>Creating cm_articles</strong> ...";$sql = file_get_contents('sql/cm_articles-structure.sql');
+echo "  <li><strong>Creating cm_articles</strong> ...";$sql_tpl = file_get_contents('sql/cm_articles-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {
@@ -155,7 +161,10 @@ if ($db->ErrorMsg())
 };
 
 // Issues table (structure)
-echo "  <li><strong>Creating cm_issues</strong> ...";$sql = file_get_contents('sql/cm_issues-structure.sql');
+echo "  <li><strong>Creating cm_issues</strong> ...";$sql_tpl = file_get_contents('sql/cm_issues-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {
@@ -166,7 +175,10 @@ if ($db->ErrorMsg())
 };
 
 // Media table (structure)
-echo "  <li><strong>Creating cm_media</strong> ...";$sql = file_get_contents('sql/cm_media-structure.sql');
+echo "  <li><strong>Creating cm_media</strong> ...";$sql_tpl = file_get_contents('sql/cm_media-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {
@@ -177,7 +189,10 @@ if ($db->ErrorMsg())
 };
 
 // Pages table (structure)
-echo "  <li><strong>Creating cm_pages</strong> ...";$sql = file_get_contents('sql/cm_pages-structure.sql');
+echo "  <li><strong>Creating cm_pages</strong> ...";$sql_tpl = file_get_contents('sql/cm_pages-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {
@@ -188,7 +203,10 @@ if ($db->ErrorMsg())
 };
 
 // Poll Ballot table (structure)
-echo "  <li><strong>Creating cm_poll_ballot</strong> ...";$sql = file_get_contents('sql/cm_poll_ballot-structure.sql');
+echo "  <li><strong>Creating cm_poll_ballot</strong> ...";$sql_tpl = file_get_contents('sql/cm_poll_ballot-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {
@@ -199,7 +217,10 @@ if ($db->ErrorMsg())
 };
 
 // Poll Questions table (structure)
-echo "  <li><strong>Creating cm_poll_questions</strong> ...";$sql = file_get_contents('sql/cm_poll_questions-structure.sql');
+echo "  <li><strong>Creating cm_poll_questions</strong> ...";$sql_tpl = file_get_contents('sql/cm_poll_questions-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {
@@ -210,7 +231,10 @@ if ($db->ErrorMsg())
 };
 
 // Sections table (structure)
-echo "  <li><strong>Creating cm_sections</strong> ...";$sql = file_get_contents('sql/cm_sections-structure.sql');
+echo "  <li><strong>Creating cm_sections</strong> ...";$sql_tpl = file_get_contents('sql/cm_sections-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {
@@ -221,7 +245,10 @@ if ($db->ErrorMsg())
 };
 
 // Settings table (structure)
-echo "  <li><strong>Creating cm_settings</strong> ...";$sql = file_get_contents('sql/cm_settings-structure.sql');
+echo "  <li><strong>Creating cm_settings</strong> ...";$sql_tpl = file_get_contents('sql/cm_settings-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {
@@ -232,7 +259,10 @@ if ($db->ErrorMsg())
 };
 
 // Submitted table (structure)
-echo "  <li><strong>Creating cm_submitted</strong> ...";$sql = file_get_contents('sql/cm_submitted-structure.sql');
+echo "  <li><strong>Creating cm_submitted</strong> ...";$sql_tpl = file_get_contents('sql/cm_submitted-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {
@@ -243,7 +273,10 @@ if ($db->ErrorMsg())
 };
 
 // Users table (structure)
-echo "  <li><strong>Creating cm_users</strong> ...";$sql = file_get_contents('sql/cm_users-structure.sql');
+echo "  <li><strong>Creating cm_users</strong> ...";$sql_tpl = file_get_contents('sql/cm_users-structure.sql');
+$search = '{charset}';
+$replace = DB_CHARSET;
+$sql = str_replace($search, $replace, $sql_tpl);
 $request = $db->Execute($sql);
 if ($db->ErrorMsg())
 {

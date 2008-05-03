@@ -7,4 +7,4 @@ CREATE TABLE `cm_media` (
   `media_caption` tinytext NOT NULL,
   `media_credit` varchar(100) NOT NULL default '',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Media attachments for articles';
+) ENGINE=MyISAM DEFAULT CHARSET={charset} COMMENT='Media attachments for articles';

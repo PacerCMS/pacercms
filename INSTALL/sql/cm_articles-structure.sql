@@ -17,4 +17,4 @@ CREATE TABLE `cm_articles` (
   FULLTEXT KEY `article_author` (`article_author`),
   FULLTEXT KEY `article_keywords` (`article_keywords`),
   FULLTEXT KEY `article_text` (`article_text`,`article_title`,`article_subtitle`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Principle article database';
+) ENGINE=MyISAM DEFAULT CHARSET={charset} COMMENT='Principle article database';

@@ -6,4 +6,4 @@ CREATE TABLE `cm_issues` (
   `issue_circulation` int(5) NOT NULL default '0',
   `online_only` set('0','1') NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Lists each issue with volume information';
+) ENGINE=MyISAM DEFAULT CHARSET={charset} COMMENT='Lists each issue with volume information';

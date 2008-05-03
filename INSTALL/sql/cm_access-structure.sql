@@ -5,4 +5,4 @@ CREATE TABLE `cm_access` (
   `access_option` varchar(100) NOT NULL default '',
   `access_value` varchar(100) NOT NULL default '',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Grants users access to each module';
+) ENGINE=MyISAM DEFAULT CHARSET={charset} COMMENT='Grants users access to each module';
