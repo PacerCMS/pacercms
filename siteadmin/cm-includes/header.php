@@ -26,6 +26,6 @@
 <?php
 /* Warn about configuration errors */
 if (strtotime(cm_next_issue('date')) <= strtotime(cm_current_issue('date'))) {
-    print '<p class="alertMessage">Warning: Your "Current Issue" date is set as the same or a later date than your "Next Issue"</p>';
+    print '<p class="alertMessage">' . gettext('Warning: Your "Current Issue" date is set as the same or a later date than your "Next Issue"') . '</p>';
 }
 ?>
