@@ -84,10 +84,10 @@ $query .= " WHERE section_id = $article_section_id AND issue_id = $current_issue
 
 // Run query
 $result = run_query($query);
-if (!empty($result))
-{
-    while ($array = $result->GetArray())
-    {        $section_headlines = $array;    }
+if (!empty($result)) {
+    while ($array = $result->GetArray()) {
+        $section_headlines = $array;
+    }
 }
 
 // Assign variables
@@ -103,7 +103,10 @@ $query .= " ORDER BY id ASC; ";
 
 // Run query
 $result = run_query($query);
-if (!empty($result)) {    while ($array = $result->GetArray()) {        $article_media = $array;    }
+if (!empty($result)) {
+    while ($array = $result->GetArray()) {
+        $article_media = $array;
+    }
 }
 
 
@@ -112,11 +115,9 @@ $article_images = array();
 $article_swfs = array();
 $article_related = array();
 
-if (count($article_media) > 0)
-{
+if (count($article_media) > 0) {
     foreach ($article_media as $item) {
-        if ($item['media_type'] == 'jpg' || $item['media_type'] == 'png' || $item['media_type'] == 'gif')
-        {
+        if ($item['media_type'] == 'jpg' || $item['media_type'] == 'png' || $item['media_type'] == 'gif') {
             $article_images[] = $item;
         } elseif ($item['media_type'] == 'swf') {
             $article_swfs[] = $item;
@@ -135,8 +136,7 @@ $smarty->assign("article_related", $article_related );
 /*=======================
     Section Summaries
 =======================*/
-foreach ( section_list('array') as $section_info )
-{
+foreach ( section_list('array') as $section_info ) {
     $id = $section_info[id];
     $smarty->assign("section_name_$id", $section_info['section_name'] );
     $smarty->assign("section_url_$id", $section_info['section_url'] );
