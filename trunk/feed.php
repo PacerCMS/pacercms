@@ -22,7 +22,7 @@ if (is_numeric($_GET['id']))
 /*=======================
     Feed Articles
 =======================*/
-$query = "SELECT a.id, a.article_title, a.article_summary, a.article_author, a.article_publish, s.section_name ";
+$query = "SELECT a.id, a.article_title, a.article_text, a.article_summary, a.article_author, a.article_publish, s.section_name ";
 $query .= " FROM cm_articles a INNER JOIN cm_sections s ON a.section_id = s.id ";	
 $query .= $feed_wc;
 $query .= " ORDER BY s.section_priority, a.article_priority ASC; ";
