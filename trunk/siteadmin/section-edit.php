@@ -61,7 +61,7 @@ if ($mode == "new" && $_POST['name'] != "")
 	$section['priority'] = $_POST['priority'];
 	$section['feed_image'] = $_POST['feed_image'];	
 
-	$stat = cm_add_section($name,$editor,$editor_title,$editor_email,$url,$sidebar,$feed_image,$priority);
+	$stat = cm_add_section($section);
 
 	if ($stat) {
 		header("Location: $pmodule.php?msg=added");
