@@ -994,10 +994,11 @@ function cm_add_section($section)
     $priority = $section['priority'];
     
     $query = "INSERT INTO cm_sections (section_name,section_editor,section_editor_title,section_editor_email,section_url,section_sidebar,section_feed_image,section_priority)";
-    $query .= " VALUES ('$name','$editor','$editor_title','$editor_email','$url','$sidebar','$feed_image','$priority');";
+    $query .= " VALUES ('$name','$editor','$editor_title','$editor_email','$url','$sidebar','$feed_image','$priority'); ";
 
     $stat = cm_run_query($query);
-    return $stat;
+    $stat = cm_run_query("SELECT LAST_INSERT_ID() AS id; ");
+    return $stat->fields('id');
 }
 
 /**
