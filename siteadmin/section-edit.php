@@ -19,39 +19,10 @@ if (!empty($_GET['action']))
 // These will be changed later if needed, set defaults.
 $id = $_GET["id"];
 
-// If action is edit, call edit function
-if ($mode == "edit") { 
-	if (is_numeric($_POST['id']))
-	{
-		$section['name'] = prep_string($_POST['name']);
-		$section['editor'] = prep_string($_POST['editor']);
-		$section['editor_title'] = prep_string($_POST['editor_title']);
-		$section['editor_email'] = prep_string($_POST['editor_email']);
-		$section['url'] = prep_string($_POST['url']);
-		$section['sidebar'] = prep_string($_POST['sidebar']);
-		$section['priority'] = $_POST['priority'];
-		$section['feed_image'] = $_POST['feed_image'];	
-		$id	= $_POST['id'];		
 
-		$stat = cm_edit_section($section,$id);
+// Process Add/Update/Delete if POST
+if (!empty($_POST)) {
 
-		if ($stat) {
-			header("Location: $pmodule.php?msg=updated");
-			exit;
-		} else {
-			cm_error(gettext("Error in 'cm_edit_section' function."));
-			exit;
-		}
-	} elseif (!empty($_POST)) {
-		cm_error(gettext("Did not have a section to load."));
-		exit;
-	}
-
-}
-
-// If action is new, call add function
-if ($mode == "new" && $_POST['name'] != "")
-{ 
 	$section['name'] = prep_string($_POST['name']);
 	$section['editor'] = prep_string($_POST['editor']);
 	$section['editor_title'] = prep_string($_POST['editor_title']);
@@ -60,33 +31,59 @@ if ($mode == "new" && $_POST['name'] != "")
 	$section['sidebar'] = prep_string($_POST['sidebar']);
 	$section['priority'] = $_POST['priority'];
 	$section['feed_image'] = $_POST['feed_image'];	
+	$id	= $_POST['id'];	
 
-	$stat = cm_add_section($section);
-
-	if ($stat) {
-		header("Location: $pmodule.php?msg=added");
-		exit;
-	} else {
-		cm_error(gettext("Error in 'cm_add_section' function."));
-		exit;
+	// If action is edit, call edit function
+	if ($mode == "edit") { 
+		if (is_numeric($id)) {	
+			$stat = cm_edit_section($section,$id);
+			if ($stat) {
+				header("Location: $pmodule.php?msg=updated");
+				exit;
+			} else {
+				cm_error(gettext("Error in 'cm_edit_section' function."));
+				exit;
+			}
+		} elseif (!empty($_POST)) {
+			cm_error(gettext("Did not have a section to load."));
+			exit;
+		}
+	
+	}
+	
+	// If action is new, call add function
+	if ($mode == "new" && $_POST['name'] != "")
+	{ 	
+		$stat = cm_add_section($section);
+	
+		if ($stat) {
+			// Default Section URL
+			$section_url = cm_get_settings('site_url') . "/section.php?id=$stat";	
+			$stat = cm_run_query("UPDATE cm_sections SET section_url = '$section_url'; ");
+			header("Location: $pmodule.php?msg=added");
+			exit;
+		} else {
+			cm_error(gettext("Error in 'cm_add_section' function."));
+			exit;
+		}
+	}
+	
+	// If action is delete, call delete function
+	if ($mode == "delete" && is_numeric($_POST['delete-id'])) { 
+		$id = $_POST['delete-id'];
+		$move = $_POST['move-id'];
+	
+		$stat = cm_delete_section($id,$move);
+		if ($stat) {
+			header("Location: $pmodule.php?msg=deleted");
+			exit;
+		} else {
+			cm_error(gettext("Error in 'cm_delete_section' function."));
+			exit;
+		}	
 	}
 }
 
-// If action is delete, call delete function
-if ($mode == "delete" && is_numeric($_POST['delete-id']))
-{ 
-	$id = $_POST['delete-id'];
-	$move = $_POST['move-id'];
-
-	$stat = cm_delete_section($id,$move);
-	if ($stat) {
-		header("Location: $pmodule.php?msg=deleted");
-		exit;
-	} else {
-		cm_error(gettext("Error in 'cm_delete_section' function."));
-		exit;
-	}	
-}
 
 // Only call database if in edit mode.
 if ($mode == "edit" && is_numeric($id))
@@ -120,11 +117,13 @@ get_cm_header();
     <br />
     <input type="text" name="name" id="name" value="<?php echo $name; ?>" class="text" />
   </p>
+<?php if ($mode != 'new') { ?>
   <p>
     <label for="url"><?php echo gettext("URL"); ?></label>
     <br />
     <input type="text" name="url" id="url" value="<?php echo $url; ?>" class="text" />
   </p>
+<?php } ?>
   <p>
     <label for="editor"><?php echo gettext("Editor Name"); ?></label>
     <br />
