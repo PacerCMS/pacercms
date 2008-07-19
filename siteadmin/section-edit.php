@@ -56,10 +56,11 @@ if (!empty($_POST)) {
 	{ 	
 		$stat = cm_add_section($section);
 	
-		if ($stat) {
+		if (is_numeric($stat)) {
 			// Default Section URL
-			$section_url = cm_get_settings('site_url') . "/section.php?id=$stat";	
-			$stat = cm_run_query("UPDATE cm_sections SET section_url = '$section_url'; ");
+			$id = $stat; // ID of the new section, if returned
+			$section_url = cm_get_settings('site_url') . "/section.php?id=$id";	
+			$stat = cm_run_query("UPDATE cm_sections SET section_url = '$section_url' WHERE id = $id; ");
 			header("Location: $pmodule.php?msg=added");
 			exit;
 		} else {
