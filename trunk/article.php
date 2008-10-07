@@ -121,7 +121,7 @@ if (count($article_media) > 0) {
             $article_images[] = $item;
         } elseif ($item['media_type'] == 'swf') {
             $article_swfs[] = $item;
-        } elseif ($item['media_type'] == 'pdf' || $item['media_type'] == 'doc' || $item['media_type'] == 'wav' || $item['url'] == 'url') {
+        } elseif ($item['media_type'] == 'pdf' || $item['media_type'] == 'doc' || $item['media_type'] == 'wav' || $item['media_type'] == 'url') {
             $article_related[] = $item;
         }
     }
