@@ -1,7 +1,7 @@
 <?php
 
 // The Version of PacerCMS You Are Running
-define('CM_VERSION', "0.7.1");
+define('CM_VERSION', "0.7.2-dev");
 define('DB_VERSION', "65");
 
 unset($config_file);
