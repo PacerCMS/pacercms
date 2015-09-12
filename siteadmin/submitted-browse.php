@@ -147,6 +147,7 @@ foreach ($records as $record) {
 </p>
 </div>
 <?php } ?>
+<?php } ?>
   <?php } else { ?>
   <p><?php echo gettext("There are no submitted articles for this issue."); ?></p>
   <?php } ?>
